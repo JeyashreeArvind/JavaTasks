@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks-Day 5</title>
+</head>
+<body>
+<h1>1.Create a function that prints "Hello, World!". </h1>
+<script>
+function printHello() {
+  console.log("Hello World");
+   document.write("Hello World");
+}
+printHello();
+</script>
+<h1>2.Write a function that takes a number and returns its cube.</h1>
+<script>
+let cube=function(a){
+return(a*a*a);
+};
+console.log(cube(5));
+document.write("Cube of 5 is : ",cube(5));
+</script>
+<h1>3.Write a function to check if a number is even or odd.</h1>
+<script>
+let num;
+function Check(num){
+    if(num%2==0){
+        return "Even Number";
+    }
+    else{
+        return "Odd Number";
+    }
+} 
+console.log(Check(79));
+document.write("The Given number 79 is an ", Check(79));
+</script>
+<h1>4.Write a function to find the factorial of a number.</h1>
+<script>
+function factorial(n)
+{
+if (n<0){
+    return "Factorial is not defined for negative integer.";
+  }
+ else if(n==0 || n==1){
+    return 1;
+  }
+  else{
+    factor=1;
+    for(i=2;i<=n;i++){
+        factor*=i;
+    }
+    return factor;
+  }
+}
+console.log("Factorial of given number 7 is " ,factorial(7));
+document.write("Factorial of given number 7 is " ,factorial(7));
+</script>
+<h1>5.Create a function to return the sum of two numbers. </h1>
+<script>
+let sum=function(a,b){
+    return a + b;
+}
+console.log(sum(10,15));
+document.write("Sum of the given numbers 10 and 15 is " , sum(10,15));
+</script>
+<h1>6.Write a function that returns the largest of three numbers. </h1>
+<script>
+function largest(n1,n2,n3){
+    if(n1>n2 && n1>n3){
+        return n1;
+    }
+    else if(n2>n1 && n2>n3){
+        return n2;
+    }
+    else{
+        return n3;
+    }
+}
+const Numbers=largest(345,785,467);
+console.log("The Largest Number among three numbers is ", Numbers);
+document.write("The Largest Number among three numbers is ", Numbers);
+</script>
+<h1>7.Write a function that checks if a string is a palindrome.</h1>
+<script>
+function isPalindrome(str) {
+    let m = str.length - 1
+    for (let i = 0; i < str.length / 2; i++) {
+        if (str[i] != str[m]) {
+            return "The Given String 'madam' is not a Palindrome";
+        }
+        m--;
+    }
+    return "The Given String 'madam' is a Palindrome";
+}
+console.log(isPalindrome("madam"));
+document.write(isPalindrome("madam"));
+</script>
+<h1>8.Create a function to convert Celsius to Fahrenheit.</h1>
+<script>
+function convert(celcius){
+   const farenheit=(celcius*9/5) + 32;
+    return farenheit;
+}
+console.log(convert(45));
+document.write("45 degree celcius is equal to "+ convert(45)+ "farenheit.");
+</script>
+<h1>9.Write a function to calculate the simple interest.</h1>
+<script>
+function simpleInterest(p,t,r){
+    const simpleInt=(p*t*r)/100;
+    return simpleInt;
+}
+console.log(simpleInterest(50000,2,5));
+document.write("Simple Interest of given principal amount, time and rate of interest is ",(simpleInterest(50000,2,5)));
+</script>
+<h1>10.Create a function that reverses an array.</h1>
+<script>
+function reversearray(array){
+    const reversearr=[];
+    for(i=array.length-1;i>=0;i--){
+     reversearr.push(array[i]);
+    }
+ return reversearr;
+}
+const arr=[38,46,42,27,83,74];
+console.log("The reverse of the array [ "+arr+ " ] is ",reversearray(arr));
+document.write("The reverse of the array [ "+arr+ " ] is ",reversearray(arr));
+</script>
+<h1>11.Write a function that counts the number of vowels in a string.</h1>
+<script>
+function countVowels(str) {
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str[i]=="a" || str[i]=="e" || str[i]=="o"|| str[i]=="u" || str[i]=="i" ) {
+      count++;
+    }
+  }
+  return count;
+}
+console.log(countVowels("Jeyashreearvind"));
+document.write("The Number of Vowels in string [Jeyashreearvind] is ",(countVowels("Jeyashreearvind")));
+</script>
+<h1>12.Write an arrow function that doubles each number in an array.</h1>
+<script>
+const d=[1,2,3,4,5];
+const doublednumbers = d.map(l => l * 2);
+console.log("Given Numbers : " ,d);
+console.log("Doubled Numbers : ",doublednumbers);
+document.write("Given Numbers : " ,d,"<br>");
+document.write("Doubled Numbers : ",doublednumbers);
+</script>
+<h1>13.Create a function that takes a callback and calls it.</h1>
+<script>
+function calc(a, b, callback) {
+    return callback(a, b);
+}
+function add(x, y) {
+    return x + y;
+}
+function mul(x, y) {
+    return x * y;
+}
+console.log(calc(5, 3, add));    
+console.log(calc(5, 3, mul));
+document.write("The sum of given numbers 3 and 5 using callback is ",calc(5, 3, add), "<br>");    
+document.write("The product of given numbers 3 and 5 using callback is ",calc(5, 3, mul));
+</script>
+<h1>14.Create a function to find the maximum of three numbers</h1>
+<script>
+function findMax(num1, num2, num3) {
+  if (num1 >= num2 && num1 >= num3) {
+    return num1;
+  } else if (num2 >= num1 && num2 >= num3) {
+    return num2;
+  } else {
+    return num3;
+  }
+}
+const max1 = findMax(10, 5, 8);
+console.log("Maximum of three numbers[10,5,8] is ", max1);
+document.write("Maximum of three numbers[10,5,8] is ", max1);
+</script>
+<h1>15.Write a function that checks if a string is a palindrome</h1>
+<script>
+function isPalindrome(str) {
+    let m = str.length - 1
+    for (let i = 0; i < str.length / 2; i++) {
+        if (str[i] != str[m]) {
+            return "The Given String 'JavaScript' is not a Palindrome";
+        }
+        m--;
+    }
+    return "The Given String 'JavaScript' is a Palindrome";
+}
+console.log(isPalindrome("JavaScript"));
+document.write(isPalindrome("JavaScript"))
+</script>
+<h1>16.Create a function to calculate the area of a circle</h1>
+<script>
+function areaCircle(r){
+const area=2*3.17*r*r;
+return area;
+}
+console.log(areaCircle(10));
+document.write("Area of circle of radius 10cm is ",areaCircle(10));
+</script>
+<h1>17.Write a function that capitalizes the first letter of each word in a sentence</h1>
+<script>
+function capitalizeWords(sentence) {
+  const words = sentence.split(" ");
+  const capitalizedWords = [];
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    if (word.length > 0) {
+      const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
+      capitalizedWords.push(capitalizedWord);
+    }
+    else{
+      capitalizedWords.push("");
+    }
+}
+  return capitalizedWords.join(" ");
+} 
+const mySentence = "javascript is a programing language";
+const capitalizedSentence = capitalizeWords(mySentence);
+console.log(capitalizedSentence);
+document.write("Original String is ",mySentence,"<br>");
+document.write("Capitalized String is ",capitalizedSentence);
+</script>
+<h1>18.Create a function that returns the reverse of a string</h1>
+<script>
+function reverseString(str) {
+  let reversed = "";
+  for (let char of str) {
+    reversed = char + reversed;
+  }
+  return reversed;
+}
+console.log(reverseString("JavaScript"));
+document.write("Reverse of the sring JavaScript is ",reverseString("JavaScript"));
+</script>
+<h1>19.Create a function that counts vowels and consonants in a string</h1>
+<script>
+function countVowelsAndConsonants(str) {
+  let vowels = "aeiouAEIOU";
+  let vowelCount = 0;
+  let consonantCount = 0;
+  for (let char of str) {
+    if (/[a-zA-Z]/.test(char)) {       
+      if (vowels.includes(char)) {
+        vowelCount++;
+      } else {
+        consonantCount++;
+      }
+    }
+  }
+  return {Vowels:vowelCount , Consonants:consonantCount}
+}
+const strings="JeyashreeArvind";
+console.log(countVowelsAndConsonants(strings));
+</script>
+<h1>20.Write a function to check if a number is prime or not</h1>
+<script>
+function isPrime(num) {
+  if (num <= 1) {
+    return "The number " +num+ " is not a prime number.";
+  }
+  if (num === 2) {
+    return "The number " +num+ " is a prime number.";
+  }
+  if (num % 2 === 0) {
+    return "The number "+num+" is not a prime number.";
+  }
+  for (let i = 3; i * i <= num; i += 2) {
+    if (num % i === 0) {
+      return "The number "+num+"is not a prime number"; 
+    }
+  }
+  return "The Number " +num+ " is a Prime number"; 
+}
+console.log(isPrime(7));
+document.write(isPrime(7));
+
+</script>
+</body>
+</html>

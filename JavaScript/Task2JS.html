@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Task- Day2</title>
+</head>
+<body>
+<h1>1.Write a program that calculates the total price of 3 products.</h1>  
+<script>
+let Apple=120;
+let Orange=80;
+let Banana=50;
+console.log("The total price of three products is ",Apple+Orange+Banana);
+document.write("The total price of three products is ",Apple+Orange+Banana);
+</script>
+<br><hr><br>
+<h1>2.Create a script that checks if a number is even or odd using the modulus operator.</h1>
+<script>
+let number=25;
+if (number % 2 === 0) {
+  console.log(`${number} is an even number.`);
+  document.write(`${number} is an even number.`);
+} else {
+  console.log(`${number} is an odd number.`);
+  document.write(`${number} is an odd number.`);
+}
+</script>
+<br><hr><br>
+<h1>3.Write a program that increments a number from 1 to 10 using ++. </h1>
+<script>
+let num=1;
+while(num<=10){
+console.log(num);
+document.write(num ,"<br>");
+    num++;
+}
+</script>
+<br><hr><br>
+<h1>4.Check if a user is eligible to vote using comparison operators.</h1>
+<script>
+let age = 21; 
+if (age >= 18) {
+    console.log("You are eligible to vote.");
+    document.write("You are eligible to vote.");
+} else {
+    console.log("You are not eligible to vote.");
+    document.write("You are not eligible to vote.");
+}
+</script>
+<br><hr><br>
+<h1>5.Write a program to compare two strings using == and ===. </h1>
+<script>
+let str1=5;
+let str2="5";
+document.write("For ''=='operator: <br>")
+if(str1==str2){
+    console.log("The given two strings are equal");
+    document.write("The given two strings are equal <br>");
+}
+else{
+    console.log("The given two strings are not equal");
+}
+document.write("For === operator:<br>")
+if(str1===str2){
+    console.log("The given two strings are equal");
+}
+else{
+    console.log("The given two strings are not equal");
+    document.write("The given two strings are not equal");
+}
+</script>
+<br><hr><br>
+<h1>6.Use && to check if a user has a valid email and password.</h1>
+<script>
+let userEmail = "test@example.com";
+let userPassword = "securepassword123";
+let providedEmail = "test@example.com";
+let providedPassword = "securepassword123";
+if (userEmail == providedEmail && userPassword == providedPassword){
+console.log("Email and Password valid.");
+document.write("Email and Password valid.");
+}
+else{
+    console.log("Enter a Valid Email and Password");
+    document.write("Enter a Valid Email and Password");
+}
+</script>
+<br><hr><br>
+<h1>7.Write a program to update wallet balance using assignment operators.</h1>
+<script>
+let wallet=1000;
+let deposit=200;
+wallet+= deposit;
+console.log(`Deposited ${deposit}. New Wallet Balance: ${wallet}`);
+document.write(`Deposited ${deposit}. New Wallet Balance: ${wallet}`,"<br>");
+let withdraw=300;
+wallet-=withdraw;
+console.log(`Withdrawed amount ${withdraw}. New Wallet Balance: ${wallet}`);
+document.write(`Withdrawed amount${withdraw}. New Wallet Balance: ${wallet}`);
+</script>
+<br><hr><br>
+<h1>8.Use a ternary operator to check if a product is available in stock. </h1>
+<script>
+const productstock=20;
+const productname="Layschips";
+const availability = productstock > 0 ? `${productname} is in stock.` : `${productname} is out of stock.`;
+console.log(availability);
+document.write(availability);
+</script>
+<br><hr><br>
+<h1>9.Create a simple "greater than" condition to compare two numbers.</h1>
+<script>
+let number1=100;
+let number2=50;
+if(number1>number2){
+    console.log("The First number",number1," is greater than second number",number2);
+    document.write("The First number ",number1," is greater than second number ",number2);
+}
+else{
+    console.log("The second number is greater than first number");
+    document.write("The second number ", number2," is greater than first number  ", number1);
+}
+</script>
+<br><hr><br>
+<h1>10.Write a JavaScript program to apply discounts if a cart total exceeds $50.</h1>
+<script>
+let cart=100;
+if(cart>50){
+    let Totalamount=5%cart + cart;
+    console.log(Totalamount);
+    document.write("Discounted cart value is ",Totalamount);   
+}
+else{
+    let Totalamount=cart;
+    console.log(Totalamount);
+    document.write("The cart value is ",Totalamount);
+}
+</script>
+<br><hr><br>
+<h1>11.Use || to allow login using email or phone number.</h1>
+<script>
+let email="abc@gmail.com";
+let phonenumber=1234567890;
+if(email == "abc@gmail.com" || phonenumber == 2345678901){
+    console.log("Logged in Successfully");
+    document.write("Logged in Successfully");
+}
+else{
+    console.log("Invalid email or phonenumber");
+}
+</script>
+<br><hr><br>
+<h1>12.Implement a "Buy 1 Get 1 Free" condition using if and &&.</h1>
+<script>
+let shoppingcart=2000;
+let ismember=true;
+if(shoppingcart>=2000 && ismember){
+    console.log("Buy 1 Get 1 Free on selected merchandise");
+    document.write("Buy 1 Get 1 Free on selected merchandise");
+}
+else{
+    console.log("Add amount to make your cart value 2000 or above and become a member to get-Buy 1 Get 1 Free offer");
+}
+</script>
+<br><hr><br>
+<h1>13.Check if a year is a leap year using the modulus operator.</h1>
+<script>
+let year=2025;
+if(year%4 == 0)
+{
+console.log(`${year} is a leap year`);
+document.write(`${year} is a leap year`);
+}
+else{
+console.log(`${year} is not a leap year`);
+document.write(`${year} is not a leap year`);
+}
+</script>
+<br><hr><br>
+<h1>14.Use arithmetic operators to calculate the area of a rectangle.</h1>
+<script>
+let length=35;
+let breadth=20;
+let area= 2*length*breadth;
+console.log("Area of Rectangle is ",area);
+document.write("Area of Rectangle is ",area);
+</script>
+<br><hr><br>
+<h1>15.Check if a year is a leap year using logical and comparison operators.</h1>
+<script>
+let Year=2000;
+if(Year%4 === 0 && Year%400 ===0)
+{
+    console.log(`${Year} is a leap year`);
+    document.write(`${Year} is a leap year`);
+}
+else{
+    console.log(`${Year} is not a leap year`);
+    document.write(`${Year} is not a leap year`);
+}
+</script>
+<br><hr><br>
+</body>
+</html>

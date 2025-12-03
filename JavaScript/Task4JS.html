@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Task-Day 4</title>
+</head>
+<body>
+<h1>1.Print numbers from 1 to 10 using a for loop.</h1>
+<script>
+document.write("The Numbers are:");
+for(let i=1;i<=10;i++)
+{
+    console.log(i);
+    document.write( "<br>" + i);
+}
+</script>
+<h1>2.Print even numbers from 2 to 20 using a for loop.</h1>
+<script>
+document.write("The Even Numbers from 2 to 20 are:");
+for(let i=2;i<=20; i+=2)
+{
+ console.log(i);
+ document.write( "<br>" + i);
+}
+</script>
+<h1>3.Print numbers from 10 to 1 using a while loop. </h1> 
+<script>
+let i=10;
+document.write("The Numbers are:");
+while(i>=1){
+console.log(i);
+document.write("<br>" +i);
+i--;
+}
+</script>
+<h1>4.Print "Hello World!" 5 times using a do-while loop.  </h1>
+<script>
+ let n=0;
+ do {
+ console.log("Hello World!");
+ document.write("Hello World! <br>");
+  n++;}
+  while (n<5);
+</script>
+<h1>5.Iterate over an array and print each element using a for...of loop. </h1>  
+<script>
+const marks=[96, 95, 100, 98, 99];
+for(const student of marks){
+  console.log("Marks:" , student); 
+  document.write("Marks:" , student,"<br>");    
+}
+</script>
+<h1>6.Iterate over an object and print its properties using a for...in loop. </h1>
+<script>
+let vegetables=["Onion", "Tomato" ,"Potato","cabbage","Beetroot"];
+document.write("Some of the vegetables are :")
+for(let vegetable in vegetables){
+    console.log(vegetables[vegetable]);
+    document.write(vegetables[vegetable], "<br>");
+}
+</script>
+<h1>7.Sum numbers from 1 to 10 using a for loop.  </h1>
+<script>
+let sum=0;
+for (let i = 1; i <= 10; i++) {
+  sum += i;
+} 
+console.log("The sum of numbers from 1 to 10 is:", sum);
+document.write("The sum of numbers from 1 to 10 is:", sum);
+</script>
+<h1>8.Find the first number greater than 50 in an array using break.  </h1>
+<script>
+const numbers = [10, 25, 60, 5, 75, 40];
+let firstnumber = null;
+for (let i = 0; i < numbers.length; i++) {
+  if (numbers[i] > 50) {
+    firstNumber = numbers[i];
+    break; 
+  }
+}
+if (firstNumber !== null) {
+  console.log("The first number greater than 50 in the array " +numbers+" is:", firstNumber);
+  document.write("The first number greater than 50 in the array " +numbers+" is:", firstNumber);
+} else {
+  console.log("No number greater than 50 was found in the array.");
+  document.write("No number greater than 50 was found in the array.");
+}
+</script>
+<h1>9.Skip printing numbers divisible by 3 using continue.</h1>
+<script>
+const printnumbers= [ 38, 57, 48, 99, 35, 76, 23, 29];
+document.write("The following numbers are not divisible by 3 in given array ["+ printnumbers+"] are:<br>");
+for(i=0;i<printnumbers.length;i++){
+    if(printnumbers[i]%3 == 0){
+        continue;
+    }
+    console.log(printnumbers[i]);
+    document.writeln(printnumbers[i]+"<br>")
+}
+</script>
+<h1>10.Create a multiplication table for 5 using a for loop.</h1>
+<script>
+document.write("Five Table:<br>")
+for(let i=1; i<=10; i++){
+  let fivetable=i*5;
+  console.log(i + "*" + "5 =",fivetable + "<br>"); 
+  document.write(i + "*" + "5 =",fivetable + "<br>");
+}
+</script>
+<h1>11.Reverse a string using a loop.</h1>
+<script>
+let string="Welcome";
+let reverse="";
+document.write("The Reversed string of " +string+ " is ");
+for(i=string.length-1; i>=0; i--){
+ reverse+=string[i];
+console.log(string[i]);
+document.write(string[i]);
+}
+</script>
+<h1>12.Count the number of vowels in a string using a loop.</h1>
+<script>
+let str="Jeyashree";
+let vowel="aeiouAEIOU";
+let count=0;
+for(let i=0;i<str.length;i++){
+    if(vowel.includes(str[i])){
+        count++;
+    }
+}
+console.log("The number of vowels in "+str +" is: " ,count);
+document.write("The number of vowels in " +str+ " is:" , count);
+</script>
+<h1>13.Find the largest number in an array using a loop</h1>
+<script>
+let Numbers=[10, 70, 210, 500 , 700, 100 ,435];
+largestNumber=Numbers[0];
+for(let i=1;i<Numbers.length;i++){
+    if(Numbers[i]>largestNumber){
+     largestNumber=Numbers[i];    }
+}
+console.log("The Largest Number in the array" + Numbers + " is ",largestNumber);
+document.write("The Largest Number in the array [" + Numbers + " ] is ",largestNumber);
+</script>
+<h1>14.Print all odd numbers between 1–50 using a for loop</h1>
+<script>
+document.write("All the odd numbers between 1-50 are:");
+for(let i=1; i<=50; i++){
+    if(!(i%2==0)){
+        console.log(i);
+        document.write(i+"<br>");
+    }
+}
+</script>
+<h1>15.Calculate and print the sum of even numbers between 1–100 </h1>
+<script>
+let Sum=0;
+for(let i=0;i<=100;i++){
+    if(i%2==0){
+        Sum+=i;
+    } 
+}
+console.log(Sum); 
+document.write("The Sum of even numbers between 1 and 100 is ",Sum); 
+
+
+</script>
+</body>
+</html>

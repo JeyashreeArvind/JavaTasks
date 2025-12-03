@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Task-Day 3</title>
+</head>
+<body>
+<h1>1.Write an if condition to check if a number is positive.</h1>
+<script>
+let num=-20;
+if(num>0){
+console.log(num + " is a positive number.");
+document.write(num + " is a positive number.");
+}
+console.log(num + " is a not a positive number.It is either negtive or zero");
+document.write(num + " is a not a positive number.It is either negtive or zero");
+</script>
+<br><hr><br>
+<h1>2.Use if-else to check if a person is an adult.</h1>
+<script>
+let age=15;
+if(age>=18)
+{
+console.log("The person is Adult");
+document.write("The person is Adult");
+}
+else{
+console.log("The person is not an adult" );
+document.write("The person is not an adult");
+}
+</script>
+<br><hr><br>
+<h1>3.Check if a number is even or odd using if-else. </h1>
+<script>
+let number=41;
+if(number%2==0){
+console.log("The Given Number"+number+ "is an Even number");
+document.write("The Given Number"+number+ "is an Even number");
+}
+else{
+console.log(("The given number " +number+" is an odd number"))
+document.write("The given number " +number+" is an odd number")
+}
+</script>
+<br><hr><br>
+<h1>4.Use if-else if-else to check grade categories.</h1>
+<script>
+let mark=95;
+if(mark>=90){
+console.log("Grade A");
+document.write("The given mark " +mark+ " is Grade A");
+}
+else if(mark>=70){
+console.log("Grade B");
+}
+else if(mark>=40){
+console.log("Grade C");
+}
+else{
+console.log("Fail")
+}
+</script>
+<br><hr><br>
+<h1>5.Check if a person is eligible for a driver's license. </h1>
+<script>
+let Age=36;
+if(Age>=18){
+console.log("The person of age " +Age+ " is eligible for driver's license.");
+document.write("The person of age " +Age+ " is eligible for driver's license.");
+}
+else{
+console.log("The person of age " +Age+ " is not eligible for driver's license.");
+document.write("The person of age " +Age+ " is not eligible for driver's license.");
+}
+</script>
+<br><hr><br>
+<h1>6.Create a nested if condition to check both login and admin status.</h1>
+<script>
+let isloggedIn= true;
+let isAdmin=false;
+if(isloggedIn){
+    if(isAdmin){
+        console.log("Welcome Admin");
+        document.write("Welcome Admin");
+    }
+    else{
+        console.log("Welcome User");
+        document.write("Welcome User");
+    }
+   }
+    else{
+        console.log("Log in");
+        document.write("Log in");
+    }
+</script>
+<br><hr><br>
+<h1>7.Use a switch statement to print messages for different days.</h1>
+<script>
+let day="Saturday";
+switch(day){
+    case "Monday":
+      console.log("Start of the Week");
+      break;
+    case "Friday":
+        console.log("Weekend is near");
+        break;
+    case "Saturday":
+        console.log("Weekend Starts on " +day);
+        document.write("Weekend Starts on " +day);
+        break;
+    case "Sunday":
+        console.log("Weekend");
+        break;
+    default:
+        console.log("It is a normal day");
+
+}
+</script>
+<br><hr><br>
+<h1>8.Use a ternary operator to check if a person is eligible for a senior citizen discount.</h1>
+<script>
+const personAge=56;
+const senior=personAge>=65? "Eligible for Senior Citizen Discount" : "Not eligible for senior citizen discount";
+console.log(senior);
+document.write(senior);
+</script>
+<br><hr><br>
+<h1>9.Check if a user is logged in using &&</h1>
+<script>
+islogged=true;
+isworking=true;
+if(islogged && isworking){
+ console.log("User is logged in");
+ document.write("User is logged in");
+}
+else{
+    console.log("User is not logged in.")
+}
+</script>
+<br><hr><br>
+<h1>10.Use || to check if a username or email is provided.</h1>
+<script>
+isuserid=true;
+isemail=false;
+if(isuserid || isemail){
+    console.log("Valid Username or Email");
+    document.write("Valid Username or Email");
+}
+else{
+    console.log("Invalid Username or Email");
+}
+</script>
+<br><hr><br>
+<h1>11.Use ! to negate a boolean variable.</h1>
+<script>
+myboolean=false;
+if(!myboolean)
+{
+    console.log("My boolean value is false");
+    document.write("My boolean value is false");
+}
+else{
+    console.log("My boolean value is true");
+    document.write("My boolean value is true");
+}
+</script>
+<br><hr><br>
+<h1>12.Check if the current year is a leap year. </h1>
+<script>
+currentYear=2025;
+if(currentYear%4 == 0){
+console.log("The current year is a leap year");
+document.write("The current year is a leap year");
+}
+else{
+console.log("The current year is not a leap year");
+document.write("The current year is not a leap year");
+}
+</script>
+<br><hr><br>
+<h1>13.Validate a password length using an if statement.</h1>
+<script>
+let password="Vetri";
+if(password.length < 8){
+console.log("Password is too short. It must be at least 8 characters long.");
+document.write("Password is too short. It must be at least 8 characters long.");
+}
+else{
+console.log("Password length is valid.");
+document.write("Password length is valid.");
+}
+</script>
+<br><hr><br>
+<h1>14.Check if a number is divisible by 3 and 5.</h1>
+<script>
+let Number=45;
+if(Number %3==0 && Number % 5==0){
+    console.log("The Number is divisible by 3 and 5");
+    document.write("The Number is divisible by 3 and 5");
+}
+else{
+    console.log("The Number is not divisible by 3 and 5");
+    document.write("The Number is not divisible by 3 and 5");
+}
+</script>
+<br><hr><br>
+<h1>15.Use nested if to check if a student passed and scored distinction (marks > 75).</h1>
+<script>
+let studentmark=70;
+if(studentmark>=40){
+    if(studentmark>=75){
+        console.log("The student passed and scored Distinction.");
+    }
+    else{
+        console.log("The student scored "+ studentmark);
+        console.log("The student passed and scored First class but not distinction.");
+        document.write("The student scored "+ studentmark + " marks.<br>");
+        document.write("The student passed and scored First class but not distinction");
+    }
+}
+    else{
+        console.log("The Student Failed.")
+    }   
+</script>
+<br><hr><br>
+</body>
+</html>

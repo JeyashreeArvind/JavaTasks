@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Task1</title>
+</head>
+<body>
+<h1>1.Write a JavaScript program to display "Hello, JavaScript!" using console.log().</h1>
+<script>
+console.log("Hello, JavaScript!");
+document.writeln("Hello, JavaScript!");
+</script>
+<br><hr><br>
+<h1>2.Create a variable using var, let, and const and print their values.</h1>
+<script>
+var myvar=10;
+let mylet=20;
+const myconst=30;
+console.log(myvar, mylet, myconst);
+document.writeln("The value of variable var,let and const is " ,myvar,",", mylet,",", myconst);
+</script>
+<br><hr><br>
+<h1>3.Demonstrate the difference between var, let, and const in terms of scope.</h1>
+<script>
+if (true) {
+    var x = 10;
+}
+console.log(x);
+document.writeln("The Value of Variable var is ",x);
+if (true) {
+    let y = 20; 
+    console.log(y);
+document.writeln("<br>The Value of Variable let(defined inside) is ",y);
+  }
+ console.log(y);
+document.writeln("The value of variable let (declared outside )is ",y);
+  if (true) {
+    const z = "5";
+}
+console.log(z);
+document.writeln("The value of variable const is " ,z);
+</script>
+<br><hr><br>
+<h1>4.Check the type of a variable using typeof for different data types.</h1>
+<h3>Age</h3>
+<script>
+let age = 25;
+console.log(typeof age);
+document.writeln("This type of variable is ", typeof age);
+</script>
+<h3>Name</h3>
+<script>
+let name="Thanya";
+console.log(typeof name);
+document.writeln("This type of variable is ", typeof name);
+</script>
+<h3>Object</h3>
+<script>
+let person = { firstName: "Alice", age: 30 };
+console.log(typeof person);
+console.log(typeof age);
+document.writeln("This type of variable is ", typeof person);
+</script>
+<h3>Array</h3>
+<script>
+let numbers = [1, 2, 3];
+console.log(typeof numbers);
+document.writeln("This array contains variable type as ", typeof numbers);
+</script>
+<h3>Function</h3>
+<script>
+function greet() {
+  return "Hello";
+}
+console.log(typeof greet);
+document.writeln("This is a type of ",typeof greet);
+</script>
+<h3>Boolean</h3>
+<script>
+let isboolean = true;
+console.log(typeof isboolean);
+document.writeln("This is a type of ", typeof isboolean);
+</script>
+<h3>Null</h3>
+<script>
+let y = null;
+console.log(typeof y);
+document.writeln("This is a type of ", typeof y);
+</script>
+<h3>Undefined</h3>
+<script>
+let X;
+console.log(typeof x); 
+document.writeln("This type is ", typeof X);
+</script>
+<br><hr><br>
+<h1>5.Create a user profile object containing name, age, and is Student properties.</h1>
+<script>
+const userProfile = {
+  Name: "Shree",
+  Age:20 ,
+  isStudent: true
+};
+console.log(userProfile);
+document.writeln("User Profile:<br>");
+document.writeln("Name: " + userProfile.Name + "<br>");
+document.writeln("Age: " + userProfile.Age + "<br>");
+document.writeln("Is Student: " + userProfile.isStudent + "<br>");
+</script>
+<br><hr><br>
+<h1>6.Store and display a list of favorite colors using an array.</h1>
+<script>
+const favoriteColors = ["Blue", "Green", "Purple", "Red", "Yellow"];
+console.log("My favorite colors are:");
+console.log(favoriteColors);
+document.writeln("My favorite colors are:");
+document.writeln(favoriteColors);
+</script>
+<br><hr><br>
+<h1>7.Perform type conversion: Convert a string "100" to a number and a number  100 to a string.</h1>
+<h2>String "100" to a number</h2>
+<script>
+let stringNumber = "100";
+let numberValue = Number(stringNumber);
+console.log("Converted string to number:", numberValue);
+console.log("Type of numberValue:", typeof numberValue);
+document.writeln("Converted string to number:", numberValue);
+document.writeln("<br>Type of numberValue:", typeof numberValue);
+</script>
+<h2>A number 100 to a string</h2>
+<script>
+let actualNumber = 100;
+let stringValue = String(actualNumber);
+console.log("Converted number to string:", stringValue);
+console.log("Type of stringValue:", typeof stringValue);
+document.writeln("Converted number to string:", stringValue);
+document.writeln("<br>Type of stringValue:", typeof stringValue);
+</script>
+<br><hr><br>
+<h1>8.Write a function that returns a Boolean value based on a condition.</h1>
+<script>
+function checkCondition(value) {
+    if (value > 10) {
+    return true;
+  } else {
+    return false;
+  }
+}
+console.log(checkCondition(12));
+document.writeln("The Boolean value for the given condition is " ,checkCondition(12));
+</script>
+<br><hr><br>
+<h1>9.Demonstrate null vs undefined by creating two different variables and checking their types.</h1>
+<h3>Null</h3>
+<script>
+let z = null;
+console.log(typeof z);
+document.writeln("This is is a type of ", typeof z);
+</script>
+<h3>Undefined</h3>
+<script>
+let U;
+console.log(typeof U); 
+document.writeln("This type is ", typeof U);
+</script>
+<br><hr><br>
+<h1>10.Use Symbol data type to create a unique ID and compare two symbols.  </h1>
+<script>
+const uniqueId1 = Symbol('user_id');
+const uniqueId2 = Symbol('user_id'); 
+const uniqueId3 = uniqueId1;
+document.writeln("The First symbol comparison is ",uniqueId1 === uniqueId2,"<br>"); 
+document.writeln("The Second symbol comparison is ",uniqueId1 === uniqueId3);
+</script>
+<br><hr><br>
+<h1>11.Use BigInt to store a large number and print its type using typeof. </h1>
+<script>
+const largeNumber = 90071992547409912345678901234567890n;
+console.log(typeof largeNumber);
+document.writeln("The Large Numer is a type of ",typeof largeNumber);
+</script>
+<br><hr><br>
+<h1>12.Write a function that accepts a number as an argument and returns "Even" or "Odd". </h1>
+<script>
+function checkEvenOrOdd(number) {
+  if (number % 2 === 0) {
+    return "Even";
+  } else {
+    return "Odd";
+  }
+}
+console.log(checkEvenOrOdd(10));
+document.writeln("The Given number is ",checkEvenOrOdd(10));
+</script>
+<br><hr><br>
+<h1>13.Create a temperature conversion program that converts Celsius to Fahrenheit using a variable.</h1>
+<script>
+let celsiusTemp = 25; 
+let fahrenheitTemp = (celsiusTemp * 9/5) + 32;
+console.log(`${celsiusTemp}°C is equal to ${fahrenheitTemp}°F`);
+document.writeln(`${celsiusTemp}°C is equal to ${fahrenheitTemp}°F`);
+</script>
+<br><hr><br>
+</body>
+</html>
