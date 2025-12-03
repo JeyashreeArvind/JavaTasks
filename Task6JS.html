@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks- Day 6</title>
+</head>
+<body>
+<h1>1.Create an array of 5 student names.  </h1>
+<script>
+let studentNames = ["Arvind","Jeyashree","Thanya","Kavinaya","Priya"];
+console.log(studentNames);
+document.write("The array of Studentnames [", studentNames," ]");
+</script> 
+<h1>2.Add a new student name to the array using push().</h1>  
+<script>
+let students = ["Priya", "Seetha ", "Geetha"];
+document.write("The students name list are ",students,"<br>");
+students.push("Selvi");
+console.log(students);
+document.write("The students name list after adding Selvi is ",students)
+</script>
+<h1>3.Remove the last student using pop()</h1>
+<script>
+let Students = ["Priya", "Seetha ", "Geetha","Selvi"];
+document.write("The students name list are ",Students,"<br>");
+Students.pop("Selvi");
+console.log(Students);
+document.write("The students name list after removing Selvi is ",Students)
+</script>
+<h1>4.Use map() to convert all names to uppercase.  </h1>
+<script>
+const names=["Arvind","Jeyashree","Thanya","Kavinaya"];
+const uppercasedNames = names.map(name => name.toUpperCase());
+console.log(uppercasedNames);
+document.write("The Uppercased Names are ", uppercasedNames);
+</script>
+<h1>5.Use filter() to get students whose names start with "A".</h1>
+<script>
+const Stud=["Arvind","Jeyashree","Thanya","Kavinaya","Atharva"];
+const stud=Stud.filter(studname=> studname.startsWith('A'));
+console.log(stud);
+document.write("The Students names starting with A are ",stud);
+</script>
+<h1>6.Use forEach() to print each student name. </h1>
+<script>
+const stud1=["Arvind","Jeyashree","Thanya","Kavinaya"];
+document.write("The student names printed are: <br>");
+stud1.forEach(studnt=>{
+    console.log(studnt);
+    document.write(studnt,"<br>");
+}
+)
+</script>
+<h1>7.Create an object for a book with properties (title, author, price).  </h1>
+<script>
+const book = {
+  title: "The Mastery Manual",
+  author: "Robin Sharma",
+  price: 249
+};
+console.log(book.title);    
+console.log(book.author);   
+console.log(book.price); 
+document.write("Book-title: ",book.title,"<br>");    
+document.write("Book-Author: ",book.author,"<br>");   
+document.write("Book-Price: ",book.price); 
+</script>
+<h1>8.Use Object.keys() to get all book properties.</h1>
+<script>
+const Book = {
+  title: "The Hobbit",
+  author: "J.R.R. Tolkien",
+  publicationYear: 1937,
+  genre: "Fantasy",
+  pages: 310
+};
+const bookProperties = Object.keys(Book);
+console.log(bookProperties);
+document.write("The Book Properties are ",bookProperties,)
+</script>
+<h1>9.Use Object.values() to get all book values. </h1>
+<script>
+const books = {
+  title: "The Hitchhiker's Guide to the Galaxy",
+  author: "Douglas Adams",
+  year: 1979
+};
+const bookValues = Object.values(books);
+console.log(bookValues);
+document.write("The Book Values are :",bookValues);
+</script>
+<h1>10.Add a new property genre to the book object. </h1>
+<script>
+const Books = {
+  title: "The Hitchhiker's Guide to the Galaxy",
+  author: "Douglas Adams",
+  year: 1979};
+  const genre={genre:"Science Fiction"};
+  const completebook = Object.assign("{}",Books,genre);
+  console.log(completebook);
+  document.write("The book object after adding new property genre is {",completebook.title,",", completebook.author,",",completebook.year,",", completebook.genre,"}" );
+ </script>
+ <h1>11.Use delete to remove price from the book.</h1>
+ <script>
+  const Books1 = {
+  title: "The Hitchhiker's Guide to the Galaxy",
+  author: "Douglas Adams",
+  price: 199, genre:"Science Fiction"};
+  delete(Books1.price);
+  console.log(Books1);
+  document.write("Book Details after deleting the price is:<br>");
+  document.write(Books1.title,"<br>");
+  document.write(Books1.author,"<br>");
+  document.write(Books1.genre,"<br>");
+ </script>
+<h1>12.Merge a publisher object into the book object. </h1>
+<script>
+const book1 = {
+    title: "The Great JavaScript Adventure",
+    author: "J.S. Developer",
+    year: 2023
+};
+const publisher = {
+    name: "Tech Books Inc.",
+    location: "Silicon Valley",
+    founded: 2000
+};
+const mergedbook=Object.assign(book1, publisher);
+console.log(mergedbook);
+document.write("<h1>Merged Book Object:</h1>");
+document.write("<pre>" + JSON.stringify(book1, null, 2) + "</pre>");
+</script>
+<h1>13.Convert the book object into an array of key-value pairs using  Object.entries().</h1>
+<script>
+    const book2 = {
+  title: "The Hitchhiker's Guide to the Galaxy",
+  author: "Douglas Adams",
+  year: 1979,
+  genre: "Science Fiction"
+};
+const bookEntries = Object.entries(book2);
+console.log(bookEntries);
+document.write("<h2>Book Details (Key-Value Pairs):</h2>");
+document.write("<pre>",JSON.stringify(bookEntries, null, 2),"</pre>");
+</script>
+<h1>14.Create an array of 10 numbers and print only the odd numbers using filter()</h1>
+<script>
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const oddNumbers = numbers.filter(number => number % 2 !== 0);
+console.log(oddNumbers);
+document.write("The odd numbers in the array are: ");
+document.write(oddNumbers.join(", "));
+</script>
+<h1>15.Sort an array of student scores in descending order using sort() </h1>
+<script>
+const studentScores = [85, 92, 78, 95, 88, 70];
+const decendingOrder=studentScores.sort((a, b) => b - a);
+console.log(decendingOrder);
+document.write("<h2>Student Scores (Descending Order):</h2>");
+document.write("<p>" + studentScores.join(", ") + "</p>");
+</script>
+</body>
+</html>
