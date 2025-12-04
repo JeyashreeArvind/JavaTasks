@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <script>
+localStorage.setItem("name", "Geetha");
+localStorage.setItem("age", "28");
+localStorage.setItem("name","Seetha");
+localStorage.setItem("age","25");
+let user=localStorage.getItem("name");
+console.log(user);
+ </script>
+ <h1>1.Convert "javascript" to uppercase.</h1>  
+ <script>
+let originalString = "javascript";
+let uppercaseString = originalString.toUpperCase();
+console.log(uppercaseString);
+document.write("The Original string is ", originalString);
+document.write("<br>The String converted to uppercase is ",uppercaseString);
+ </script> 
+ <h1>2.Convert "HELLO WORLD" to lowercase.</h1>
+ <script>
+ let String = "Hello World";
+let lowerCaseString = String.toLowerCase();
+console.log(lowerCaseString);
+document.write("The lowercase converted string is ",lowerCaseString);
+ </script>
+ <h1>3.Extract "Script" from "JavaScript" using slice().</h1>
+ <script>
+let extractedScript = originalString.slice(4, 10);
+console.log(extractedScript);
+document.write("The extracted string from Javascript is ",extractedScript);
+</script>
+<h1>4.Replace "bad" with "good" in "This is a bad day"</h1>
+<script>
+let String1 = "This is a bad day";
+let newString = String1.replace("bad", "good");
+console.log(newString);
+document.write("The String after replacing is ",newString);
+</script>
+<h1>5.Check if "Coding" is present in "I love Coding!". </h1>
+<script>
+const mainString = "I love Coding!";
+const subString = "Coding";
+const isPresent = mainString.includes(subString);
+console.log(isPresent);
+document.write(isPresent);
+</script>
+<h1>6.Find the position of "world" in "Hello world!". </h1>
+<script>
+const text = "Hello world!";
+const position = text.indexOf("world");
+console.log(position);
+document.write("The position of 'world' in 'Hello world' is ",position)
+</script>
+<h1>7.Remove spaces from " Trim me ". </h1>
+<script>
+let myString = "Trim me";
+let trimmedString = myString.replaceAll(' ', '');
+console.log(trimmedString);
+document.write("After removing spaces the string is ",trimmedString);
+</script>
+<h1>8.Count the number of characters in "Programming". </h1>
+<script>
+const String2 = "Programming";
+const characterCount = String2.length;
+console.log(characterCount);
+document.write("The number of characters in 'programming' is ", characterCount);
+</Script>
+<h1>9.Check if "apple" starts with "a".  </h1>
+<script>
+const word = "apple";
+console.log(word.startsWith("a"));
+document.write(word.startsWith("a"));
+</script>
+<h1>10.Split "banana,apple,orange" into an array.  </h1>
+<script>
+const fruitsString = "banana,apple,orange";
+const fruitsArray = fruitsString.split(',');
+console.log(fruitsArray);
+document.write("The array of splitted string is ",fruitsArray);
+</script>
+<h1>11.Repeat "JS " three times.  </h1>
+<script>
+const orgString = "js";
+const repeatedString = orgString.repeat(3);
+console.log(repeatedString); 
+document.write("The repeated string is ",repeatedString);   
+</script>
+<h1>12.Concatenate "Web" and " Development".  </h1>
+<script>
+const part1 = "Web";
+const part2 = " Development";
+const result = part1 + part2;
+console.log(result);
+document.write("The concatenated string is ",result);
+</script>
+<h1>13.Validate if "user123" has at least 5 characters.</h1>
+<script>
+const username = "user123";
+const minLength = 5;
+if (username.length >= minLength) {
+  console.log("Validation passed: The username has at least 5 characters.");
+  document.write("Validation passed: The username has at least 5 characters.");
+} else {
+  console.log("Validation failed: The username has less than 5 characters.");
+  document.write("Validation failed: The username has less than 5 characters.");
+}
+</script>
+<h1>14.Check if a string starts with a specific substring using .startsWith()</h1>
+<script>
+let mString = "Hello world, how are you?";
+document.write("The original string is ",mString);
+if(mString.startsWith("Hello")){
+    console.log("The String starts with 'hello'");
+    document.write("<br>The String starts with 'hello'");
+}
+else{
+    console.log("The String doesnt start with 'hello'");
+    document.write("The String doesnt start with 'hello'");
+}
+</script>
+<h1>15.Check if a string ends with a specific substring using .endsWith()</h1>
+<script>
+if(mString.endsWith("world")){
+    console.log("The String ends with 'world'");
+    document.write("The String ends with 'world'");
+}
+else{
+    console.log("The String does not end with 'world'");
+    document.write("The String does not end with 'world'");
+}
+</script>
+<h1>16.Use .includes() to check for a word in a sentence</h1>
+<script>
+let sentence = "Action speaks louder than words";
+document.write("The sentence is '",sentence,"'<br>");
+if (sentence.includes("louder")) {
+  console.log(`The sentence includes the word "louder".`);
+  document.write(`The sentence includes the word "louder".`);
+} else {
+  console.log(`The sentence does not include the word "louder}".`);
+  document.write(`The sentence does not include the word "louder}".`);
+}
+</script>
+<h1>17.Convert a full name to initials (e.g., "John Doe" → "J.D.")</h1>
+<script>
+function getInitials(fullName){
+const words = fullName.trim().split(/\s+/);
+const initials = words.map(word => word.charAt(0).toUpperCase()+ '.');
+return initials.filter(Boolean).join('');
+}
+console.log(getInitials("John Doe"));
+document.write(getInitials("John Doe"));
+</script>
+<h1>18.Count how many times a letter appears in a string</h1>
+<script>
+function countLetter(str, letter) {
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    if (str.charAt(i) === letter) {
+      count++;
+    }
+  }
+  return count;
+}
+const Strings = "hello world";
+const targetLetter = "l";
+const resultString = countLetter(Strings, targetLetter);
+console.log(resultString);
+document.write("The number of times letter 'l' appears in 'Hello World'is ", resultString)
+</script>
+<h1>19.Find the longest word in a sentence</h1>
+<script>
+function findLongestWord(sentence) {
+  const words = sentence.split(' '); 
+  let longestWord = '';
+  for (let i = 0; i < words.length; i++) {
+    if(words[i].length>longestWord.length){
+        longestWord=words[i];
+    }
+    return longestWord;
+}
+}
+console.log(findLongestWord("Honesty is the best policy"));
+document.write("The longest word in 'Honesty is the best policy' is ",findLongestWord("Honesty is the best policy") )
+</script>
+<h1>20.Capitalize the first letter of each word in a sentence</h1>
+<script>
+function capitalizeWords(sentence) {
+const words = sentence.split(' ');
+const capitalizedWords = words.map(word => {
+    if (word.length === 0) {
+      return '';
+ }
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  });
+  return capitalizedWords.join(' ');
+}
+const mySentence = "laughter is the best medicine";
+const resultCapitalize = capitalizeWords(mySentence);
+console.log(resultCapitalize);
+document.write("The original sentence is ", mySentence);
+document.write("<br>The Capitalized sentence is ", resultCapitalize);
+</script>
+</body>
+</html>
