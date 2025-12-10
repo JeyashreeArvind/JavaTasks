@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Task-8</title>
+<style>
+    .hovered-border {
+            border-color: red !important;
+            }
+             img {
+            border: 2px solid transparent; 
+            transition: border-color 0.3s ease; 
+            padding: 5px; 
+            cursor: pointer; 
+        }
+    body.light-mode {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+body.dark-mode {
+  background-color: #333333;
+  color: #ffffff;
+}
+</style>
+</head>
+<body>
+<h1>1.Change the background color of the page using a button click.</h1>
+<h1>Click the button to change the background color!</h1>
+    <button onclick="changeBackgroundColor()">Change Color</button>
+    <script>
+    function changeBackgroundColor() {
+    const colors = ["lightblue", "lightgreen", "lightcoral", "lightgoldenrodyellow", "lightpink"];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    document.body.style.backgroundColor = colors[randomIndex];
+}
+ </script>
+ <br><hr><br>
+ <h1>2.Change the text of a paragraph using a button.</h1>
+  <p id="myParagraph">This is the original text of the paragraph.</p>
+    <button onclick="changeParagraphText()">Change Text</button>
+    <script>
+        function changeParagraphText() {
+    const paragraph = document.getElementById("myParagraph");
+    paragraph.innerHTML = "The text of the paragraph has been changed!";
+}
+    </script>
+    <br><hr><br>
+<h1>3.Hide and show an element using a toggle button.</h1>
+<button id="toggleButton">Toggle Element</button>
+<div id="myElement">
+  This is the element that will be hidden and shown.
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const toggleButton = document.getElementById('toggleButton');
+  const myElement = document.getElementById('myElement');
+
+  toggleButton.addEventListener('click', function() {
+    if (myElement.style.display === 'none') {
+      myElement.style.display = 'block'; 
+    } else {
+      myElement.style.display = 'none';
+    }
+  });
+});
+</script>
+<br><hr><br>
+<h1>4.Create a new list item dynamically.</h1>
+ <h1>My Dynamic List</h1>
+    <ul id="myList">
+        <li>Existing Item 1</li>
+        <li>Existing Item 2</li>
+    </ul>
+    <button id="addItemButton">Add New Item</button>
+<script>
+    document.getElementById('addItemButton').addEventListener('click', function() {
+    const myList = document.getElementById('myList');
+    const newItem = document.createElement('li');
+    newItem.textContent = 'Dynamically Added Item ' + (myList.children.length + 1);
+    myList.appendChild(newItem);
+});
+</script>
+<br><hr><br>
+<h1>5.Remove a specific item from a list.</h1>
+<ul id="myList1">
+        <li id="item1">Item 1 </li>
+        <li id="item2">Item 2 </li>
+        <li id="item3">Item 3 </li>
+    </ul>
+<button onclick="removeItem()">Remove Last Item</button>
+<script>
+const List = document.getElementById('myList1');
+function removeItem(){
+if (List.lastElementChild){
+    List.lastElementChild.remove();
+}
+}
+</script>
+<br><hr><br>
+<h1>6.Change the font size of a paragraph when a button is clicked. </h1>
+<p id="myPara">This is a paragraph whose font size will be changed.</p>
+<button onclick="changeFontsize()">Increase Font Size</button>
+<script>
+function changeFontsize(){
+let P = document.getElementById('myPara');
+P.style.fontSize="24px";
+}
+</script>
+<br><hr><br>
+<h1>7.Change the text color of all paragraphs using querySelectorAll().</h1>
+<p>This is the first paragraph.</p>
+    <p>This is the second paragraph.</p>
+    <p>This is the third paragraph.</p>
+<button onclick="changeParagraphColor()">Change Paragraph Colors</button>
+<script>
+function changeParagraphColor() {
+    const paragraphs = document.querySelectorAll('p');
+    paragraphs.forEach(paragraph => {
+        paragraph.style.color = 'blue';
+    });
+}
+</script>
+<br><hr><br>
+<h1>8.Add a border to an image when hovered. </h1>
+<h2>Hover over the image below to see a border appear:</h2>
+<img src="bird.jpg" 
+         alt="Sample image" width="300px"
+         onmouseover="toggleBorder(this, true)" 
+         onmouseout="toggleBorder(this, false)">
+<script>
+    function toggleBorder(element, isHovering) {
+            if (isHovering) {
+                element.classList.add('hovered-border');
+            } else {
+                element.classList.remove('hovered-border');
+            }
+        }
+</script>
+<br><hr><br>
+<h1>9.Display an alert message when a button is clicked.</h1>
+<button onclick="showAlert()">Click Me!</button>
+
+    <script>
+        function showAlert() {
+            alert("Hello! You clicked the button.");
+        }
+    </script>
+<br><hr><br>
+<h1>10.Toggle between two different text contents. </h1>
+<p id="textToToggle">This is the initial text content.</p>
+    <button onclick="toggleText()">Toggle Content</button>
+    <script>
+        function toggleText() {
+    const textElement = document.getElementById('textToToggle');
+    const text1 = "This is the initial text content.";
+    const text2 = "This is the second text content that appears after clicking the button.";
+    if (textElement.textContent === text1) {
+        textElement.textContent = text2;
+    } else {
+        textElement.textContent = text1;
+    }
+}
+</script>
+<br><hr><br>
+<h1>11.Store and retrieve a username using LocalStorage</h1>
+<script>
+localStorage.setItem('name','JeyaShree');
+let user=localStorage.getItem('name');
+console.log(user);
+document.write("The username is ",user);
+</script>
+<br><hr><br>
+<h1>12.Save and load dark/light mode settings using LocalStorage. </h1>
+<button id="theme-toggle">Toggle Theme</button>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+  const storageKey = 'themePreference';
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      body.classList.add('dark-mode');
+      body.classList.remove('light-mode');
+    } else {
+      body.classList.add('light-mode');
+      body.classList.remove('dark-mode');
+    }
+  }
+
+   const savedTheme = localStorage.getItem(storageKey);
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme('light');
+  }
+  themeToggle.addEventListener('click', () => {
+    if (body.classList.contains('dark-mode')) {
+      applyTheme('light');
+      localStorage.setItem(storageKey, 'light');
+    } else {
+      applyTheme('dark');
+      localStorage.setItem(storageKey, 'dark');
+    }
+  });
+});
+</script>
+<br><hr><br>
+<h1>13.Implement a shopping cart that remembers selected items using  LocalStorage. </h1>
+<div id="products">
+    <button onclick="addItemToCart('Laptop', 1200)">Add Laptop</button>
+    <button onclick="addItemToCart('Mouse', 25, 2)">Add 2 Mice</button>
+</div>
+<div id="cart-container">
+    <h2>Your Shopping Cart</h2>
+    <div id="cart-items">
+    </div>
+    <p id="cart-total">Total: $0.00</p>
+</div>
+<script>
+let cart = []; 
+const CART_KEY = 'myShoppingCart'; 
+function loadCart() {
+    const storedCart = localStorage.getItem(CART_KEY);
+    if (storedCart) {
+        cart = JSON.parse(storedCart); 
+        displayCart();
+    }
+}
+
+function saveCart() {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart)); 
+}
+
+function addItemToCart(productName, price, quantity = 1) {
+        const existingItemIndex = cart.findIndex(item => item.name === productName);
+
+    if (existingItemIndex > -1) {
+        cart[existingItemIndex].quantity += quantity;
+        } else {
+        cart.push({ name: productName, price: price, quantity: quantity });
+    }
+    saveCart(); 
+    displayCart(); 
+}
+
+function removeItemFromCart(productName) {
+    cart = cart.filter(item => item.name !== productName);
+    saveCart();
+    displayCart();
+}
+
+function displayCart() {
+    const cartItemsElement = document.getElementById('cart-items'); 
+       cartItemsElement.innerHTML = '';  
+
+    if (cart.length === 0) {
+        cartItemsElement.innerHTML = '<p>Your cart is empty.</p>';
+        return;
+    }
+
+    cart.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.innerHTML = `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`;
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = () => removeItemFromCart(item.name);
+        itemElement.appendChild(removeButton);
+        cartItemsElement.appendChild(itemElement);
+    });
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    document.getElementById('cart-total').textContent = `Total: $${total.toFixed(2)}`;
+}
+
+document.addEventListener('DOMContentLoaded', loadCart);
+ </script>  
+ <br><hr><br>
+ <h1>14.Store and retrieve session-based login status using SessionStorage.</h1>   
+  <h1>Login Page</h1>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <div id="statusArea">
+        <h2>Login Status:</h2>
+        <p id="loginStatus"></p>
+        <button id="logoutButton" style="display: none;">Logout</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const loginStatusElement = document.getElementById('loginStatus');
+    const logoutButton = document.getElementById('logoutButton');
+    const statusArea = document.getElementById('statusArea');
+    function updateLoginStatusUI() {
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if (isLoggedIn === 'true') {
+            loginStatusElement.textContent = 'Logged In';
+            logoutButton.style.display = 'block';
+            loginForm.style.display = 'none'; 
+        } else {
+            loginStatusElement.textContent = 'Logged Out';
+            logoutButton.style.display = 'none';
+            loginForm.style.display = 'block'; 
+        }
+    }
+    loginForm.addEventListener('submit', (event) => {
+        event.preventDefault(); 
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (name === 'username' && password === 'pass') { 
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('username', name); 
+            alert('Login successful!');
+        } else {
+            alert('Invalid credentials!');
+        }
+        updateLoginStatusUI();
+    });
+    logoutButton.addEventListener('click', () => {
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('username'); 
+        alert('Logged out successfully!');
+        updateLoginStatusUI();
+    });
+    updateLoginStatusUI();
+});
+    </script> 
+<hr><br><hr>
+<h1>15.Save form input values temporarily in SessionStorage and restore on page reload.</h1> 
+<form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('myForm');
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        const storedValue = sessionStorage.getItem(input.id);
+        if (storedValue) {
+            input.value = storedValue;
+        }
+    });
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            sessionStorage.setItem(input.id, input.value);
+        });
+    });
+    form.addEventListener('submit', () => {
+        inputs.forEach(input => {
+            sessionStorage.removeItem(input.id);
+        });
+        
+    });
+});
+    </script>
+<br><hr><br>
+<h1>16.Store last visited page in LocalStorage and display it on the next visit.</h1>
+<h1>Welcome to the Home Page</h1>
+    <p>Navigate to another page:</p>
+    <ul>
+        <li><a href="page2.html">Visit Page 2</a></li>
+    </ul>
+    <hr>
+    <div id="last-visited"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    const lastVisitedEl = document.getElementById('last-visited');
+    const localStorageKey = 'lastVisitedPage';
+    const lastVisitedUrl = localStorage.getItem(localStorageKey);
+    if (lastVisitedUrl) {
+        const link = document.createElement('a');
+        link.href = lastVisitedUrl;
+        link.textContent = `You last visited: ${lastVisitedUrl}`;
+        lastVisitedEl.appendChild(link);
+    } else {
+        lastVisitedEl.textContent = 'This is your first visit to any page.';
+    }
+    localStorage.setItem(localStorageKey, window.location.href);
+});
+</script>
+<br><hr><br>
+<h1>17.Implement a simple click counter using LocalStorage.</h1>
+<h1>Simple Click Counter</h1>
+    <p>You have clicked the button <span id="clickCountDisplay">0</span> time(s).</p>
+    <button id="clickButton">Click me!</button>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const clickButton = document.getElementById('clickButton');
+    const clickCountDisplay = document.getElementById('clickCountDisplay');
+
+    let clickCount = parseInt(localStorage.getItem('clickCount')) || 0;
+    clickCountDisplay.textContent = clickCount;
+    clickButton.addEventListener('click', () => {
+        clickCount++; 
+        localStorage.setItem('clickCount', clickCount); 
+        clickCountDisplay.textContent = clickCount; 
+    });
+});
+</script>
+<br><hr><br>
+<h1>18.Save and retrieve a to-do list using LocalStorage with JSON.</h1>
+<h1>My To-Do List</h1>
+    <input type="text" id="todoInput" placeholder="Add a new to-do">
+    <button id="addTodoBtn">Add To-Do</button>
+    <ul id="todoList"></ul>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const todoInput = document.getElementById('todoInput');
+    const addTodoBtn = document.getElementById('addTodoBtn');
+    const todoList = document.getElementById('todoList');
+
+    let todos = [];
+
+    // Function to save todos to LocalStorage
+    function saveTodos() {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    // Function to load todos from LocalStorage
+    function loadTodos() {
+        const storedTodos = localStorage.getItem('todos');
+        if (storedTodos) {
+            todos = JSON.parse(storedTodos);
+            renderTodos();
+        }
+    }
+
+    // Function to render todos in the UI
+    function renderTodos() {
+        todoList.innerHTML = ''; // Clear existing list
+        todos.forEach((todo, index) => {
+            const li = document.createElement('li');
+            li.textContent = todo;
+            
+            // Add a delete button (optional)
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.onclick = () => deleteTodo(index);
+            li.appendChild(deleteBtn);
+
+            todoList.appendChild(li);
+        });
+    }
+
+    // Function to add a new todo
+    addTodoBtn.addEventListener('click', () => {
+        const newTodo = todoInput.value.trim();
+        if (newTodo) {
+            todos.push(newTodo);
+            todoInput.value = ''; // Clear input field
+            saveTodos();
+            renderTodos();
+        }
+    });
+
+    // Function to delete a todo
+    function deleteTodo(index) {
+        todos.splice(index, 1); // Remove from array
+        saveTodos();
+        renderTodos();
+    }
+
+    // Load todos when the page loads
+    loadTodos();
+});
+</script>
+<br><hr><br>
+<h1>19.Convert a JavaScript object to a JSON string using JSON.stringify() and store it. </h1>
+<h1>Converting JavaScript Object to JSON String</h1>
+       <div id="output"></div>
+<script>
+const myObject = {
+               name: "Alice",
+               age: 30,
+               city: "New York",
+               hobbies: ["reading", "hiking", "cooking"]
+           };
+           const jsonString = JSON.stringify(myObject, null, 2);
+           const outputDiv = document.getElementById('output');
+           outputDiv.textContent = jsonString;
+</script>
+<br><hr><br>
+<h1>20.Convert a JSON string back to a JavaScript object using JSON.parse() and use it.</h1>
+<h1>JSON Parse Example</h1>
+        <div id="output1"></div>
+        <script>
+         const jsonStrings = '{"name": "Jeyashree", "age": 30, "city": "Chennai"}';
+    const jsObject = JSON.parse(jsonStrings);
+    const outputDivs = document.getElementById('output1');
+    outputDiv.innerHTML = `
+        <p>Name: ${jsObject.name}</p>
+        <p>Age: ${jsObject.age}</p>
+        <p>City: ${jsObject.city}</p>
+    `;
+    console.log(jsObject);
+ </script>
+</body>
+</html>
