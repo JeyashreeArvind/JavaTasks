@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks- Day 9</title>
+<style>
+    
+loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+}
+
+
+.spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.content-hidden {
+    display: none; /
+}
+
+.content-visible {
+    display: block; 
+}
+
+.loader-hidden {
+    display: none !important; 
+}
+#myImage {
+    width: 300px; 
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
+    border: 2px solid black;
+}
+</style>
+</head>
+<body>
+<h1>1.Change the text of a button when clicked. </h1>    
+<button id="myButton">Click me to see new text</button>
+<script>
+    const button = document.getElementById('myButton');
+button.addEventListener('click', function() {
+    this.textContent = 'Text has been changed!';
+});
+</script>
+<br><hr><br>
+<h1>2.Show an alert when the mouse enters a specific area.  </h1>
+<div id="hoverArea">
+  Hover over me!
+</div>
+<script>
+        const hoverArea = document.getElementById('hoverArea');
+
+        hoverArea.addEventListener('mouseenter', function() {
+            alert('You entered the specific area!');
+        });
+    </script>
+<br><hr><br>
+<h1>3.Detect when the user presses the "Enter" key.  </h1>
+<input type="text" id="myInput" placeholder="Type something and press Enter">
+<p id="outputArea"></p>
+
+<script>
+  var input = document.getElementById("myInput");
+  var output = document.getElementById("outputArea");
+
+  input.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      output.textContent = "Enter key detected! You typed: " + input.value;
+      console.log("Enter key was pressed.");
+    }
+  });
+</script>
+<br><hr><br>
+<h1>4.Change the background color of a page when a button is clicked.</h1>
+<button id="colorButton">Change Background Color</button>
+
+    <script>
+        const colorButton = document.getElementById('colorButton');
+        function changeBackgroundColor() {
+            const colors = ['#ff5733', '#33ff57', '#3357ff', '#f0f0f0', '#c733ff'];
+            
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            const newColor = colors[randomIndex];
+        
+            document.body.style.backgroundColor = newColor;
+        }
+        colorButton.addEventListener('click', changeBackgroundColor);
+    </script>
+    <br><hr><br>
+<h1>5.Toggle a password field between text and password.</h1>
+<label for="passwordInput">Password:</label>
+<input type="password" id="passwordInput">
+<button type="button" onclick="togglePasswordVisibility()">Show Password</button>
+<script>
+function togglePasswordVisibility() {
+  var passwordField = document.getElementById("passwordInput");
+  var toggleButton = document.querySelector("button");
+
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    toggleButton.textContent = "Hide Password";
+  } else {
+    passwordField.type = "password";
+    toggleButton.textContent = "Show Password";
+  }
+}
+</script>
+<br><hr><br>
+<h1>6.Display the coordinates of the mouse pointer when moved. </h1>
+<div class="coords-box">
+        <p>X Coordinate: <span id="x-coord" class="coord">0</span></p>
+        <p>Y Coordinate: <span id="y-coord" class="coord">0</span></p>
+    </div>
+
+    <script>
+        const xCoordSpan = document.getElementById('x-coord');
+        const yCoordSpan = document.getElementById('y-coord');
+
+        document.addEventListener('mousemove', function(event) {
+            xCoordSpan.textContent = event.clientX;
+            yCoordSpan.textContent = event.clientY;
+        });
+    </script>
+    <br><hr><br>
+    <h1>7.Prevent the default behavior of a form submission. </h1>
+    <form id="myForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <button type="submit">Submit</button>
+</form>
+<script>
+    const form = document.getElementById('myForm');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); 
+        console.log('Form submission intercepted. Default behavior prevented.');
+        const formData = new FormData(form);
+        const nameValue = formData.get('name');
+        console.log('Collected data:', nameValue);
+    });
+</script>
+<br><hr><br>
+<h1>8.Count the number of times a button is clicked.</h1>
+<div class="container">
+        <h1>Button Click Counter</h1>
+        <p>Clicks recorded:</p>
+        <div id="countDisplay">0</div>
+        <button id="clickButton">Click Me!</button>
+    </div>
+    <script>
+        let clickCount = 0;
+        const button1 = document.getElementById('clickButton');
+        const display = document.getElementById('countDisplay');
+        function handleButtonClick() {
+            clickCount++;
+            display.textContent = clickCount;
+        }
+        button1.addEventListener('click', handleButtonClick);
+    </script>
+    <br><hr><br>
+<h1>9.Create a button that disappears when clicked.</h1>
+<div class="container1">
+        <button id="myButton1">Click Me to Disappear</button>
+    </div>
+    <script>
+    var button2 = document.getElementById("myButton1");
+button2.addEventListener("click", function() {
+    button2.style.display = "none";
+});
+</script>
+<br><hr><br>
+<h1>10.Toggle an element's visibility when another element is clicked.</h1>
+<button id="toggleButtonInline">Toggle Visibility</button>
+<div id="toggledElementInline" style="display: none;">
+  This element starts hidden via inline style.
+</div>
+<script>
+toggleButtonInline.addEventListener('click', function() {
+  if (toggledElementInline.style.display === 'none') {
+    toggledElementInline.style.display = 'block';
+  } else {
+    toggledElementInline.style.display = 'none';
+  }
+});
+</script>
+<br><hr><br>
+<h1>11.Play a sound when a button is clicked.  </h1>
+<audio id="myAudio">
+  <source src="singapenne.mp3.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<button onclick="playSound()">
+  Play Sound
+</button>
+<script>
+function playSound() {
+  var audio = document.getElementById("myAudio");
+  audio.play();
+}
+</script>
+<br><hr><br>
+<h1>12.Display a loading animation when the page is load</h1>
+ <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+    </div>
+    <div id="content" class="content-hidden">
+        <h1>Welcome to the Website!</h1>
+        <p>This content is displayed only after the page has finished loading all assets.</p>
+    </div>
+<script>
+function hideLoadingAnimation() {
+    const loader = document.getElementById('loader');
+    const content = document.getElementById('content');
+
+    
+    setTimeout(() => {
+        loader.classList.add('loader-hidden');
+        content.classList.remove('content-hidden');
+        content.classList.add('content-visible');
+    }, 300); 
+}
+
+
+window.addEventListener('load', hideLoadingAnimation);
+</script>
+<br><hr><br>
+<h1>13.Change an image when a button is clicked.</h1>
+<img id="myImage" src="bird.jpg" alt="Initial Image">
+    <button onclick="changeImage()"> Change Image </button>
+<script>
+    let isFirstImage = true;
+
+function changeImage() {
+    const imageElement = document.getElementById("myImage"); 
+
+    if (isFirstImage) {
+       
+        imageElement.src = "Peacock.jpg"; 
+    } else {
+        
+        imageElement.src = "bird.jpg"; 
+    }
+    
+    
+    isFirstImage = !isFirstImage; 
+}
+</script>
+<br><hr><br>
+<h1>14.Handle double-click on a button to change background color.</h1>
+<button id="colorButton1">Double Click Me</button>
+<script>
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+const colorButton1 = document.getElementById('colorButton1');
+colorButton1.addEventListener('dblclick', function() {
+  this.style.backgroundColor = getRandomColor();
+  console.log("Background color changed on double click!");
+});
+</script>
+<br><hr><br>
+<h1>15.Detect when the user presses the Enter key in an input field.</h1>
+<input type="text" id="myInput1" placeholder="Type something and press Enter">
+<p id="output">Status: Waiting for Enter key press...</p>
+<script>
+    const inputField = document.getElementById('myInput1');
+const outputParagraph = document.getElementById('output');
+inputField.addEventListener('keyup', function(event) {
+    
+    if (event.key === 'Enter') {
+        
+        event.preventDefault();
+        const inputValue = inputField.value;
+        outputParagraph.textContent = `Enter key pressed! Input value: "${inputValue}"`;
+        console.log("Enter key pressed!");
+        
+    }
+});
+</script>
+<br><hr><br>
+<h1>16.Display a message when the mouse enters and leaves a box.</h1>
+<div id="myBox">Hover Me!</div>
+<p id="messageDisplay"></p>
+<script>
+    const myBox = document.getElementById('myBox');
+const messageDisplay = document.getElementById('messageDisplay');
+myBox.addEventListener('mouseenter', function() {
+  alert('Mouse entered the box!');
+});
+
+myBox.addEventListener('mouseleave', function() {
+  alert('Mouse left the box!');
+});
+</script>
+<br><hr><br>
+<h1>17.Create a keylogger that prints every key pressed on the keyboard.</h1>
+<script>
+const outputArea = document.getElementById('keyloggerOutput'); 
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+    console.log('Key Pressed:', key); 
+    if (outputArea) {
+        outputArea.value += key; 
+    }
+});
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'Shift' || event.key === 'Control' || event.key === 'Alt') {
+        console.log(`Key Up: ${event.key}`);
+    }
+});
+</script>
+<br><hr><br>
+<h1>18.Show an alert when the user right-clicks anywhere on the page.</h1>
+<p>Right-click anywhere on this page.</p>
+<script>
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+            alert("You right-clicked on the page!");
+        });
+    </script>
+<br><hr><br>
+<h1>19.Disable a form submission using event.preventDefault().</h1>
+<form id="myForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <button type="submit">Submit</button>
+</form>
+<p id="output">Form submission status will appear here.</p>
+<script>
+const myForm = document.getElementById('myForm');
+const output = document.getElementById('output');
+myForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    console.log('Form submission disabled via preventDefault().');
+    output.textContent = 'Form was not submitted to a server. Default behavior prevented.';
+    const formData = new FormData(myForm);
+    for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+    }
+});
+</script>
+<br><hr><br>
+<h1>20.Create a form that validates input only when a field loses focus (blur).</h1>
+<form id="validationForm">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" data-validate-type="username" required>
+        <span id="usernameError" class="error"></span>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" data-validate-type="email" required>
+        <span id="emailError" class="error"></span>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+<script>
+    
+    const validationRules = {
+        username: /^[a-zA-Z0-9]{4,16}$/, 
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ 
+    };
+
+    function validateField(event) {
+        const input = event.target;
+        const value = input.value;
+        const type = input.getAttribute('data-validate-type');
+        const errorElementId = input.id + 'Error';
+        const errorElement = document.getElementById(errorElementId);
+
+        
+        if (validationRules[type] && validationRules[type].test(value)) {
+        
+            errorElement.textContent = '';
+            input.classList.remove('invalid');
+        } else {
+            
+            if (type === 'username') {
+                errorElement.textContent = 'Username must be 4-16 alphanumeric characters.';
+            } else if (type === 'email') {
+                errorElement.textContent = 'Please enter a valid email address.';
+            }
+            input.classList.add('invalid');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+
+        usernameInput.addEventListener('blur', validateField);
+        emailInput.addEventListener('blur', validateField);
+        
+        
+        document.getElementById('validationForm').addEventListener('submit', function(event) {
+            
+            if (document.querySelectorAll('.invalid').length > 0) {
+                alert('Please fix the errors before submitting.');
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
