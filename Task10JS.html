@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks- Day 10</title>
+</head>
+<body>
+<h1>1.Create an array of employees with name, age, and position.  </h1>
+<script>
+    const employees = [
+    {
+        name: "Alice Johnson",
+        age: 30,
+        position: "Software Engineer"
+    },
+    {
+        name: "Bob Smith",
+        age: 45,
+        position: "Project Manager"
+    },
+    {
+        name: "Charlie Brown",
+        age: 28,
+        position: "UX Designer"
+    }
+];
+const jsonString = JSON.stringify(employees, null, 2);
+console.log(jsonString);
+document.write("Employees: " ,jsonString);
+</script>
+<br><hr><br>
+<h1>2.Fetch and display a list of products from an API.  </h1>
+<h1>Our Products</h1>
+    <ul id="product-list">
+    </ul>
+<script>
+async function fetchProducts() {
+    try {
+        const response = await fetch('https://fakestoreapi.com/products');
+
+    
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const products = await response.json();
+
+        const productList = document.getElementById('product-list');
+        products.forEach(product => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <strong>${product.title}</strong> - $${product.price}
+                <br>
+                <img src="${product.image}" alt="${product.title}" style="width: 50px; height: auto;">
+            `;
+            productList.appendChild(listItem);
+        })
+        } catch (error) {
+        console.error('Error fetching products:', error);
+        document.getElementById('product-list').innerHTML = '<li>Failed to load products. Please try again later.</li>';
+    }
+}
+document.addEventListener('DOMContentLoaded', fetchProducts);
+</script>
+<br><hr><br>
+<h1>3.Sort an array of objects by age in ascending order</h1>
+<script>
+    const people = [
+  { name: 'Will Riker', age: 29 },
+  { name: 'Jean-Luc Picard', age: 59 },
+  { name: 'Geordi La Forge', age: 29 },
+  { name: 'Beverly Crusher', age: 35 }
+];
+people.sort((a, b) => a.age - b.age);
+
+console.log(people);
+const persons=JSON.stringify(people, null, 3);
+document.write("Array of objects by age in ascending order are ",persons)
+
+</script>
+<br><hr><br>
+<h1>4.Filter an array to show only students with grade 'A'. </h1>
+<script>
+    const students = [
+    { name: 'Alice', grade: 'A' },
+    { name: 'Bob', grade: 'B' },
+    { name: 'Charlie', grade: 'A' },
+    { name: 'David', grade: 'C' },
+    { name: 'Eve', grade: 'A' }
+];
+const studentsWithAGrade = students.filter(function(student) {
+    return student.grade === 'A';
+});
+
+console.log(studentsWithAGrade);
+const gradeAStudents=JSON.stringify(studentsWithAGrade, null, 3);
+document.write("Students who scored Grade A are ",gradeAStudents)
+</script>
+<br><hr><br>
+<h1>5.Find a specific product in an array by name.  </h1>
+<script>
+const inventory = [
+    { name: "apples", quantity: 2 },
+    { name: "bananas", quantity: 0 },
+    { name: "cherries", quantity: 5 }
+];
+
+const productNameToFind = "cherries";
+const foundProduct = inventory.find(product => product.name === productNameToFind);
+
+console.log(foundProduct);
+const specific=JSON.stringify(foundProduct,null,2);
+document.write("The specific product in an array is ",specific);
+</script>
+<br><hr><br>
+<h1>6.Convert an array of objects to only an array of names.</h1>
+<script>
+const users = [
+    { name: 'Alan', age: 26 },
+    { name: 'Randy', age: 24 },
+    { name: 'Bogart', age: 20 }
+];
+
+const names = users.map(user => user.name);
+
+console.log(names);
+const username=JSON.stringify(names,null,2);
+document.write("The converted Array of objects are ", username);
+</script>
+<br><hr><br>
+<h1>7.Modify an object inside an array and update its value. </h1>
+<script>
+let studentsname = [
+    { id: 1, name: 'Alice', grade: 'A' },
+    { id: 2, name: 'Bob', grade: 'B' },
+    { id: 3, name: 'Charlie', grade: 'C' }
+];
+
+const studentIdToUpdate = 2;
+const newGrade = 'A+';
+
+studentsname.forEach(student => {
+    if (student.id === studentIdToUpdate) {
+        student.grade = newGrade; 
+    }
+});
+
+console.log(studentsname);
+const usernames=JSON.stringify(studentsname,null,2);
+document.write("The array with updated object is ", usernames);
+
+</script>
+<br><hr><br>
+<h1>8.Count how many objects meet a specific condition.</h1>
+<script>
+const myArray = [
+    { name: "Mary", status: true },
+    { name: "Mike", status: true },
+    { name: "John", status: false },
+    { name: "Mark", status: true },
+    { name: "Jane", status: false }
+];
+const count = myArray.filter(object => object.status === true).length;
+
+console.log(count);
+document.write("The count of objects is ", count);
+</script>
+<br><hr><br>
+<h1>9.Implement a search function to find objects dynamically. </h1>
+<script>
+const usersname = [
+    { id: 1, name: 'Alice Johnson', role: 'Admin' },
+    { id: 2, name: 'Bob Smith', role: 'User' },
+    { id: 3, name: 'Charlie Brown', role: 'User' },
+    { id: 4, name: 'David Lee', role: 'Admin' },
+    { id: 5, name: 'Eva Carter', role: 'User' },
+];
+function searchObjects(arr, key, query) {
+    const lowerCaseQuery = query.trim().toLowerCase();
+    if (!lowerCaseQuery) {
+        return arr; 
+    }
+    return arr.filter(item => {
+        const itemValue = item[key];
+        if (typeof itemValue === 'string') {
+            return itemValue.toLowerCase().includes(lowerCaseQuery);
+        }
+        return false; 
+    });
+}
+const userRoleMatches = searchObjects(usersname, 'role', 'User');
+console.log('Users with role "User":', userRoleMatches);
+const dynamicObjects=JSON.stringify(userRoleMatches,null,4);
+document.write("The objects with role as user are ",dynamicObjects);
+</script>
+<br><hr><br>
+<h1>10.Group objects based on a property value. 
+</h1>
+<script>
+const products = [
+  { name: 'apples', category: 'fruits' },
+  { name: 'oranges', category: 'fruits' },
+  { name: 'potatoes', category: 'vegetables' },
+  { name: 'carrots', category: 'vegetables' }
+];
+
+const groupedByCategory = Object.groupBy(products, (product) => {
+  return product.category;
+});
+
+console.log(groupedByCategory);
+const group=JSON.stringify(groupedByCategory,null,3);
+document.write("The grouped objects are ", group);
+</script>
+<br><hr><br>
+<h1>11.Remove a specific object from an array by property</h1>
+<script>
+const initialArray = [
+    { id: 1, name: 'Apple' },
+    { id: 2, name: 'Banana' },
+    { id: 3, name: 'Cherry' }
+];
+
+const propertyName = 'id';
+const valueToRemove = 2;
+
+const filteredArray = initialArray.filter(item => item[propertyName] !== valueToRemove);
+
+console.log(filteredArray);
+console.log(initialArray);
+const rem=JSON.stringify(filteredArray,null,2);
+document.write("The array after removing of object is ",rem);
+</script>
+<br><hr><br>
+<h1>12.Add new objects dynamically to an array. </h1>
+<script>
+let myArrayOfObjects = [];
+function addObjectDynamically(name, age) {
+    let newObject = {
+    name: name,
+    age: age
+  };
+  myArrayOfObjects.push(newObject);
+}
+addObjectDynamically("Alice", 30);
+addObjectDynamically("Bob", 25);
+addObjectDynamically("Charlie", 35);
+console.log(myArrayOfObjects);
+const arr=JSON.stringify(myArrayOfObjects,null,2);
+document.write("The added new objects are ",arr);
+</script>
+<br><hr><br>
+<h1>13.Merge two arrays of objects.</h1>
+<script>
+const array1 = [{ id: 1, value: 'a' }, { id: 2, value: 'b' }];
+const array2 = [{ id: 3, value: 'c' }, { id: 4, value: 'd' }];
+const mergedArray = [...array1, ...array2];
+
+console.log(mergedArray);
+const mergeArray=JSON.stringify(mergedArray,null,1);
+document.write(mergeArray , " is the merged array.")
+</script>
+<br><hr><br>
+<h1>14.Clone an array of objects without affecting the original.</h1>
+<script>
+const originalArray = [
+    { id: 1, name: 'Apple' },
+    { id: 2, name: 'Banana', details: { color: 'Yellow' } }
+];
+
+const clonedArray = structuredClone(originalArray);
+clonedArray[0].name = 'Orange';
+clonedArray[1].details.color = 'Green';
+
+console.log('Original Array:', originalArray);
+console.log('Cloned Array:', clonedArray);
+const org=JSON.stringify(originalArray,null,1);
+const clone=JSON.stringify(clonedArray,null, 1);
+document.write("The Original array is ",org);
+document.write("the cloned array is ", clone);
+</script>
+<br><hr><br>
+<h1>15.Create a function to calculate the total stock in an inventory.</h1>
+<script>
+const inventories = [
+  { item: 'Laptop', quantity: 5, price: 1200 },
+  { item: 'Mouse', quantity: 20, price: 25 },
+  { item: 'Keyboard', quantity: 15, price: 75 },
+  { item: 'Monitor', quantity: 8, price: 300 }
+];
+
+function calculateTotalStock(items) {
+  let totalQuantity = items.reduce((accumulator, currentItem) => {
+    return accumulator + currentItem.quantity;
+  }, 0); 
+
+  return totalQuantity;
+}
+
+const totalStock = calculateTotalStock(inventory);
+
+console.log(`Total items in stock: ${totalStock}`); 
+document.write("Total items in Stock : " , totalStock);
+
+</script>
+</body>
+</html>
