@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScriptscript Tasks- Day 11</title>
+</head>
+<body>
+<h1>1.Write a function to add two numbers and return the result.</h1>
+<script>
+ function add(a, b) {
+  return a + b;
+}
+const num1 = 5;
+const num2 = 10;
+const sum = add(num1, num2);
+console.log(sum); 
+document.write("The sum of 5 and 10 is: ",sum);
+</script>  
+<br><hr><br>
+<h1>2.Create a program that checks if a number is positive, negative, or zero.</h1> 
+<script>
+function checkNumberSign(num) {
+  if (num > 0) {
+    console.log(`${num} is positive.`);
+    document.write(`${num} is positive.`);
+  } else if (num < 0) {
+    console.log(`${num} is negative.`);
+    document.write(`The Number ${num} is negative.`);
+  } else {
+    console.log(`${num} is zero.`);
+    document.write(`${num} is zero.`);
+  }
+}
+console.log(checkNumberSign(-10));
+</script>
+<br><hr><br>
+<h1>3.Use a for loop to print numbers from 1 to 10.</h1>
+<script>
+document.write("The Numbers are:<br> ");
+for (let i = 1; i <= 10; i++) {
+  console.log(i);
+  document.write(i ,"<br>");
+}
+</script>
+<br><hr><br>
+<h1>4.Use a while loop to count down from 5 to 1.</h1>
+<script>
+    let count = 5;
+document.write("The Count Down from 5 to 1: <br>")
+while (count >= 1) {
+  console.log(count);
+  document.write(count,"<br>");
+  count--;
+}
+</script>
+<br><hr><br>
+<h1>
+5.Create an object representing a car (model, year, color), and display its properties.</h1>
+<script>
+  const car = {
+  model: 'Civic',
+  year: 2024,
+  color: 'Blue'
+};
+console.log("Car Object Properties:");
+console.log("Model: " + car.model);
+console.log("Year: " + car.year);
+console.log("Color: " + car.color);
+document.write("The Car Object Properties are ",JSON.stringify(car));
+</script>
+<br><hr><br>
+<h1>6.Add and remove elements from an array of fruits.</h1>
+<script>
+const fruits = ["Apple", "Banana"];
+console.log("Before Adding:",fruits);
+document.write("Before Adding: ",fruits,"<br>");
+fruits.push("Orange"); 
+document.write("After Adding: ",fruits,"<br>");
+fruits.pop();
+document.write("After Removing: ",fruits,"<br>");
+</script>
+<br><hr><br>
+<h1>7.Write a function to check if a number is prime.</h1>
+<script>
+function isPrime(num) {
+    if(num<=1){
+        return false;
+    }
+    if(num<=3)
+    {
+        return true;
+    }
+    if(num%2==0 || num%3 ==0){
+        return false;
+    }
+    for(i=5;i*i<=num;i+=6){
+        if(num%i==0 || num%(i+2)==0){
+            return false;
+        }
+    }
+    return true;
+    }
+    console.log(`Is 7 prime? ${isPrime(7)}`);
+    document.write(`Is 7 prime? ${isPrime(7)}`);
+</script>
+<br><hr><br>
+<h1>8.Create a program that calculates the factorial of a number.</h1>
+<script>
+function calculateFactorial(n) {
+  if (n < 0) {
+    return "Error: Factorial is undefined for negative numbers.";
+  } 
+  else if (n === 0) {
+    return 1;
+  } 
+  else {
+    let result = 1;
+    for (let i = 1; i <= n; i++) {
+      result *= i;
+    }
+    return result;
+  }
+}
+const number1 = 5;
+const factorial1 = calculateFactorial(number1);
+console.log(`The factorial of ${number1} is: ${factorial1}`);
+document.write(`The factorial of ${number1} is: ${factorial1}`);
+</script>
+<br><hr><br>
+<h1>9.Create a function that returns the largest number in an array.</h1>
+<script>
+function findLargestNumber(arr) {
+  return Math.max(...arr);
+}
+const numbers = [10, 5, 2, 45, 8, 1];
+const maxNumber = findLargestNumber(numbers);
+console.log(`The largest number is: ${maxNumber}`);
+document.write(`The largest number in the array [`,numbers,`] is: ${maxNumber}`);
+</script>
+<br><hr><br>
+<h1>10.Create a nested object, and access inner values.</h1>
+<script>
+const userProfile = {
+  username: "jsuser123",
+  details: {
+    firstName: "John",
+    lastName: "Doe",
+    location: {
+      city: "San Francisco",
+      country: "USA"
+    }
+  },
+  isActive: true
+};
+console.log("First Name:", userProfile.details.firstName);
+document.write("First Name:", userProfile.details.firstName);
+document.write("<br>Country:", userProfile.details.location.country);
+</script>
+<br><hr><br>
+<h1>11.Use switch to display the day of the week based on a number (1–7).</h1>
+<script>
+function displayDayOfWeek(dayNumber) {
+    let dayName;
+
+    switch (dayNumber) {
+        case 1:
+            dayName = "Sunday";
+            break;
+        case 2:
+            dayName = "Monday";
+            break;
+        case 3:
+            dayName = "Tuesday";
+            break;
+        case 4:
+            dayName = "Wednesday";
+            break;
+        case 5:
+            dayName = "Thursday";
+            break;
+        case 6:
+            dayName = "Friday";
+            break;
+        case 7:
+            dayName = "Saturday";
+            break;
+        default:
+            dayName = "Invalid day number. Please enter a number between 1 and 7";
+    }
+    console.log(dayName);
+    document.write("The 4th day is ",dayName);
+}
+displayDayOfWeek(4);
+</script>
+<br><hr><br>
+<h1>12.Use Math.random() to simulate a dice roll (1 to 6).</h1>
+<script>
+function rollDiceConcise() {
+    return Math.floor(Math.random() * 6) + 1;
+}
+console.log(rollDiceConcise());
+document.write("The number simulated ina dice roll is: ",rollDiceConcise());
+</script>
+<br><hr><br>
+<h1>13.Create a function that reverses a string and prints it.</h1>
+<script>
+function reverseStringAndPrint(str) {
+  const reversedStr = str.split('').reverse().join('');
+
+  console.log("Original string:", str);
+  document.write("Original string:", str);
+  console.log("<Reversed string:", reversedStr);
+  document.write("<br>Reversed string:", reversedStr);
+  
+}
+reverseStringAndPrint("JavaScript");
+</script>
+<h1>14.Use increment (++) and decrement (--) operators on a variable</h1>
+<script>
+let num = 5;
+document.write("Original value:", num);
+console.log("Original value:", num);
+num++;
+console.log("After incrementing:", num); 
+document.write("<br>After incrementing:", num);
+num--; 
+console.log("After decrementing:", num); 
+document.write("<br>After decrementing:", num);
+
+</script>
+<br><hr><br>
+<h1>15.Write a program to swap two numbers using a third variable.</h1>
+<script>
+function swapNumbers(num1, num2) {
+  console.log(`\nBefore swap inside function: num1 = ${num1}, num2 = ${num2}`);
+  document.write(`\nBefore swap inside function: num1 = ${num1}, num2 = ${num2}`);
+  let temporaryVariable = num1;
+  num1 = num2;
+  num2 = temporaryVariable;
+  console.log(`After swap inside function: num1 = ${num1}, num2 = ${num2}`);
+  document.write(`<br>After swap inside function: num1 = ${num1}, num2 = ${num2}`);
+  }
+
+let x = 20;
+let y = 30;
+swapNumbers(x, y);
+console.log(`\nOutside function: x = ${x}, y = ${y}`);
+document.write(`<br>Outside function: x = ${x}, y = ${y}`);
+</script>
+<br><hr><br>
+<h1>16.Write a program to find the largest of 3 numbers using logical operators.</h1>
+<script>
+function findLargest(num1, num2, num3) {
+  if (num1 >= num2 && num1 >= num3) {
+    return num1;
+  } else if (num2 >= num1 && num2 >= num3) {
+    return num2;
+  } else {
+    return num3;
+  }
+}
+
+const numbers1 = 10;
+const number2 = 25;
+const number3 = 15;
+const largestNumber = findLargest(numbers1, number2, number3);
+console.log("The largest number is: " + largestNumber);
+document.write("The numbers are: " ,numbers1,", " ,number2," ,", number3);
+document.write("<br>The largest number is: " + largestNumber);
+</script>
+<br><hr><br>
+<h1>17.Create a calculator that supports +, -, *, /, and % operators using if-else.</h1>
+<script>
+function calculator(num1, num2, operator) {
+    let result;
+    if (operator === '+') {
+        result = num1 + num2;
+    } else if (operator === '-') {
+        result = num1 - num2;
+    } else if (operator === '*') {
+        result = num1 * num2;
+    } else if (operator === '/') {
+        if (num2 === 0) {
+            return "Error: Division by zero is not allowed.";
+        }
+        result = num1 / num2;
+    } else if (operator === '%') {
+        if (num2 === 0) {
+            return "Error: Modulo by zero is not allowed.";
+        }
+        result = num1 % num2;
+    } else {
+        return "Error: Invalid operator. Use +, -, *, /, or %.";
+    }
+
+    return result;
+}
+console.log(`4 + 2 = ${calculator(4, 2, '+')}`); 
+document.write(`4 + 2 = ${calculator(4, 2, '+')}<br>`);
+console.log(`5 - 3 = ${calculator(5, 3, '-')}`); 
+document.write(`5 - 3 = ${calculator(5, 3, '-')}<br>`);
+console.log(`6 * 3 = ${calculator(6, 3, '*')}`); 
+document.write(`6 * 3 = ${calculator(6, 3, '*')}<br>`)
+console.log(`10 / 2 = ${calculator(10, 2, '/')}`); 
+document.write(`10 / 2 = ${calculator(10, 2, '/')}`); 
+</script>
+<br><hr><br>
+<h1>18.Check whether a number is even or odd using modulus operator.</h1>
+<script>
+    function checkEvenOrOdd(num) {
+    if (num % 2 === 0) {
+        return 'Even';
+    } else {
+        return 'Odd';
+    }
+}
+const numbers2 = 45;
+console.log(`${numbers2} is ${checkEvenOrOdd(numbers2)}.`);
+document.write(`The number ${numbers2} is ${checkEvenOrOdd(numbers2)}.`);
+</script>
+<br><hr><br>
+<h1>19.Use ternary operator to check if age >= 18 (Eligible for vote).</h1>
+<script>
+
+const age = 20; 
+const canVote = (age >= 18) ? "Eligible to vote" : "Not eligible to vote";
+
+console.log(canVote);
+const age2 = 16;
+const canVote2 = (age2 >= 18) ? "Eligible to vote" : "Not eligible to vote";
+console.log(canVote2);
+document.write("The age ",age2," is " ,canVote2);
+</script>
+<br><hr><br>
+<h1>20.Demonstrate the difference between == and === operators.</h1>
+<script>
+    const numberValue = 10;
+const stringValue = "10";
+const booleanTrue = true;
+const stringTrue = "true";
+
+console.log("== Comparisons:");
+document.write("== Comparisons:");
+console.log(`10 == "10": ${numberValue == stringValue}`);  
+console.log(`true == "true": ${booleanTrue == stringTrue}`)
+console.log(`1 == true: ${1 == true}`); 
+document.write(`<br>10 == "10": ${numberValue == stringValue}`);  
+document.write(`<br>true == "true": ${booleanTrue == stringTrue}`)
+document.write(`<br>1 == true: ${1 == true}`);                 
+
+console.log("\n=== Comparisons:");
+console.log(`10 === "10": ${numberValue === stringValue}`);  
+console.log(`true === "true": ${booleanTrue === stringTrue}`); 
+console.log(`1 === true: ${1 === true}`); 
+document.write("<br>=== Comparisons:");
+document.write(`<br>10 === "10": ${numberValue === stringValue}`);  
+document.write(`<br>true === "true": ${booleanTrue === stringTrue}`); 
+document.write(`<br>1 === true: ${1 === true}`); 
+</script>
+<br><hr><br>
+<h1>21.Create a program to check if a number is divisible by both 3 and 5.</h1>
+<script>
+const isDivisibleConcise = num => num % 3 === 0 && num % 5 === 0;
+const numbers3 = 15;
+console.log(`Is ${numbers3} divisible ? ${isDivisibleConcise(numbers3)}`);
+document.write(`Is ${numbers3} divisible ? ${isDivisibleConcise(numbers3)}`);
+</script>
+<br><hr><br>
+<h1>22.Use assignment operators (+=, -=) to modify values inside a loop.</h1>
+<script>
+document.write("For += operator:")
+let total = 0; 
+for (let i = 1; i <= 5; i++) {
+  total += i; 
+  console.log(`After adding ${i}, the total is: ${total}`);
+  document.write(`<br>After adding ${i}, the total is: ${total}`);
+}
+
+console.log(`\nFinal total: ${total}`);
+document.write(`<br>Final total: ${total}`);
+document.write("<br>For -= operator:");
+let remainingItems = 15; 
+for (let j = 0; remainingItems > 0; j++) {
+  const itemsShipped = 3; 
+  remainingItems -= itemsShipped;   
+  if (remainingItems >= 0) {
+    console.log(`Shipped ${itemsShipped} items. Remaining items: ${remainingItems}`);
+    document.write(`<br>Shipped ${itemsShipped} items. Remaining items: ${remainingItems}`);
+  } else {
+    console.log(`Shipped the last ${itemsShipped + remainingItems} items.`);
+    document.write(`<br>Shipped the last ${itemsShipped + remainingItems} items.`);
+    remainingItems = 0;
+  }
+}
+
+console.log(`\nFinal remaining items: ${remainingItems}`);
+document.write(`<br>Final remaining items: ${remainingItems}`);
+
+</script>
+<br><hr><br>
+<h1>23.Find the square and cube of a number using the ** operator.</h1>
+<script>
+const number = 4;
+const square = number ** 2;
+const cube = number ** 3;
+console.log('Square of 4', square);
+console.log('Cube of 4 is ', cube); 
+document.write('Square of 4 is ', square);
+document.write('<br>Cube of 4 is ', cube); 
+</script>
+<br><hr><br>
+<h1>24.Check if a given year is a century year (ends with 00 and divisible by 400).</h1>
+<script>
+function isLeapCenturyYear(year) {
+  return year % 100 === 0 && year % 400 === 0;
+}
+console.log(`Is 2000 a leap century year? ${isLeapCenturyYear(2000)}`);
+document.write(`Is 2000 a leap century year? ${isLeapCenturyYear(2000)}`);
+</script>
+<br><hr><br>
+<h1>25.Write a program to check if a character is a vowel or consonant.</h1>
+<script>
+function checkCharacter(char) {
+    const vowels = "aeiouAEIOU";
+    
+    if (vowels.includes(char)) {
+        console.log(char + " is a Vowel.");
+        document.write(char + " is a Vowel.");
+    } else {
+        console.log(char + " is a Consonant.");
+        document.write(char + " is a Consonant.");
+    }
+}
+checkCharacter("I");
+
+</script>
+<br><hr><br>
+<h1>26.Use if-else to check if a number is a multiple of 10.</h1>
+<script>
+let numb = 20;
+ if (numb % 10 === 0){
+ console.log(numb + " is a multiple of 10.");
+ document.write(numb + " is a multiple of 10.");
+ }
+ else {
+    console.log(numb + " is not a multiple of 10.");
+    document.write(numb + " is not a multiple of 10.");  
+     }
+</script>
+<br><hr><br>
+<h1>27.Compare two numbers and print the greater one.</h1>
+<script>
+function printGreaterNumber(num1, num2) {
+  document.write("The Numbers are: ",num1,", ",num2,"<br>")
+  if (num1 > num2) {
+    console.log("The greater number is:", num1);
+    document.write("The greater number is:", num1);
+
+  } else if (num2 > num1) {
+    console.log("The greater number is:", num2);
+    document.write("The greater number is:", num2);}
+  else {
+    console.log("Both numbers are equal:", num1);
+    document.write("Both numbers are equal:", num1);
+  }
+}
+printGreaterNumber(200,350);
+</script>
+<br><hr><br>
+<h1>28.Use switch to build a simple calculator (+, -, *, /).</h1>
+<script>
+function simpleCalculator(num1, num2, operator) {
+    let result;
+
+    switch (operator) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            if (num2 === 0) {
+                return "Error: Cannot divide by zero";
+            }
+            result = num1 / num2;
+            break;
+        default:
+            return "Error: Invalid operator. Please use +, -, *, or /";
+    }
+    return `The result is: ${result}`;
+}
+document.write("The Numbers are 10 and 15.")
+console.log(`Addition: ${simpleCalculator(10, 5, '+')}`);
+document.write(`Addition: ${simpleCalculator(10, 5, '+')}`);
+console.log(`Subtraction: ${simpleCalculator(10, 5, '-')}`);
+document.write(`<br>Subtraction: ${simpleCalculator(10, 5, '-')}`);
+console.log(`Multiplication: ${simpleCalculator(10, 5, '*')}`);
+document.write(`<br>Multiplication: ${simpleCalculator(10, 5, '*')}`);
+console.log(`Division: ${simpleCalculator(10, 5, '/')}`);
+document.write(`<br>Division: ${simpleCalculator(10, 5, '/')}`);
+</script>
+<br><hr><br>
+<h1>29.Use ternary operator to determine if a number is negative or not.</h1>
+<script>
+function isNegative(number) {
+    return (number < 0) ? "negative" : "not negative";
+}
+console.log(`-5 is ${isNegative(-5)}`); 
+document.write(`-5 is ${isNegative(-5)}`); 
+</script>
+<br><hr><br>
+<h1>30.Create a program to categorize age:</h1>
+<script>
+function categorizeAge(age) {
+    if (age < 13) {
+        return 'child';
+    } else if (age >= 13 && age <= 19) {
+        return 'teen';
+    } else if (age >= 20 && age <= 59) {
+        return 'adult';
+    } else if (age >= 60) {
+        return 'Senior ';
+    } else {
+        return 'Invalid age';
+    }
+}
+
+console.log(`Age 70 is a ${categorizeAge(70)}.`);
+document.write(`Age 70 is a ${categorizeAge(70)}.`);
+</script>
+<br><hr><br>
+<h1>31.Check if a string is empty using if statement.</h1>
+<script>
+let myString = "Hai";
+
+if (myString.length === 0) {
+    console.log("The string is empty.");
+    document.write("The given string ",myString,"is empty.");
+} else {
+console.log("The string is not empty.");
+document.write("The given string ",myString," is not empty.");
+}
+</script>
+<br><hr><br>
+<h1>32.Use switch to determine the number of days in a given month (by name).</h1>
+<script>
+let month = "october"; 
+let days;
+
+switch (month.toLowerCase()) {
+  case "january":
+  case "march":
+  case "may":
+  case "july":
+  case "august":
+  case "october":
+  case "december":
+    days = 31;
+    break;
+  case "april":
+  case "june":
+  case "september":
+  case "november":
+    days = 30;
+    break;
+  case "february":
+    days = 28; 
+    break;
+  default:
+    days = "Invalid month";
+}
+
+console.log(`${month} has ${days} days.`);
+document.write(`The month ${month} has ${days} days.`);
+
+</script>
+<br><hr><br>
+<h1>33.Use if-else to check whether a triangle is valid (sum of 3 angles = 180).</h1>
+<script>
+function isValidTriangle(angleA, angleB, angleC) {
+  const sumOfAngles = angleA + angleB + angleC;
+  if (sumOfAngles === 180) {
+    if (angleA > 0 && angleB > 0 && angleC > 0) {
+      console.log(`Angles ${angleA}, ${angleB}, and ${angleC} form a valid triangle.`);
+      document.write(`Angles ${angleA}, ${angleB}, and ${angleC} form a valid triangle.`);
+      return true;
+    } else {
+      console.log("A valid triangle must have positive angle values.");
+      document.write("A valid triangle must have positive angle values.");
+      return false;
+    }
+  } else {
+    console.log(`Angles ${angleA}, ${angleB}, and ${angleC} do not form a valid triangle (sum is ${sumOfAngles}, not 180).`);
+    document.write(`Angles ${angleA}, ${angleB}, and ${angleC} do not form a valid triangle (sum is ${sumOfAngles}, not 180).`);
+    return false;
+  }
+}
+
+isValidTriangle(90, 50, 40);
+</script>
+<br><hr><br>
+<h1>34.Print the first 10 multiples of 3</h1>
+<script>
+document.write("The First 10 Multiples of 3 are:<br>")
+for (let i = 1; i <= 10; i++) {
+  console.log(i * 3);
+  document.write((i * 3),"<br>");
+}
+</script>
+<br><hr><br>
+<h1>35.Create a countdown timer (from 10 to 1 using while loop)</h1>
+<h1>Countdown Timer (10 to 1)</h1>
+    <button onclick="startCountdown()">Start Timer</button>
+    <div id="timerDisplay" style="font-size: 24px; margin-top: 20px;">
+        Click "Start Timer" to begin.
+    </div>
+<script>
+  function startCountdown() {
+    let count1 = 10;
+    const displayElement = document.getElementById('timerDisplay');
+    const startButton = document.querySelector('button');
+    startButton.disabled = true;
+    const countdownInterval = setInterval(function() {
+        if (count1 >= 1) {
+            
+            let i = count;
+            while (i === count1) {
+                displayElement.textContent = 'Time remaining: ' + count1;
+                i--; 
+            }
+            count1--; 
+        } else {
+  
+            clearInterval(countdownInterval);
+            displayElement.textContent = 'Countdown finished!';
+            startButton.disabled = false; 
+        }
+    }, 1000); 
+}
+</script>
+<br><hr><br>
+    
+
+</body>
+</html>
