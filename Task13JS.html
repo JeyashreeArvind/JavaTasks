@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks -Day13</title>
+</head>
+<body>
+ <h1>1.Check whether a number is positive, negative, or zero.</h1> 
+ <script>  
+ function checkNumber(num) {
+  if (num > 0) {
+    return "The number is positive.";
+  } else if (num < 0) {
+    return "The number is negative.";
+  } else {
+    return "The number is zero.";
+  }
+}
+console.log(checkNumber(-10));
+document.write("-10:" ,JSON.stringify(checkNumber(-10)));
+</script>
+<br><hr><br>
+<h1>2.Find if a given number is even or odd.</h1>
+<script>
+function checkEvenOrOdd(number) {
+  if (number % 2 === 0) {
+    return number + " is an even number.";
+  } else {
+    return number + " is an odd number.";
+  }
+}
+console.log(checkEvenOrOdd(25));
+document.write(JSON.stringify(checkEvenOrOdd(25)));
+</script>
+<br><hr><br>
+<h1>3.Check if a person is eligible to vote based on age.</h1>
+<script>
+    function checkVotingEligibility(age) {
+    const MINIMUM_VOTING_AGE = 18;
+
+    if (age >= MINIMUM_VOTING_AGE) {
+        return "You are eligible to vote.";
+    } else {
+        return "You are not eligible to vote yet.";
+    }
+}
+const personAge1 = 16;
+const eligibilityStatus1 = checkVotingEligibility(personAge1);
+console.log(`At age ${personAge1}: ${eligibilityStatus1}`); 
+document.write(`At age ${personAge1}: ${eligibilityStatus1}`); 
+</script>
+<h1>4.Compare two numbers and print the greater one.</h1>
+<script>
+    function compareNumbersIfElse(num1, num2) {
+  if (num1 > num2) {
+    console.log(num1 + " is the greater number.");
+    document.write(num1 + " is the greater number.");
+  } else if (num2 > num1) {
+    console.log(num2 + " is the greater number.");
+     document.write(num2 + " is the greater number.");
+  } else {
+    console.log("Both numbers are equal.");
+    document.write("Both numbers are equal.");
+  }
+}
+compareNumbersIfElse(255, 333);
+</script>
+<br><hr><br>
+<h1>5.Check whether a year is a leap year.</h1>
+<script>
+    function isLeapYear(year) {
+         if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+const year2 = 1900;
+console.log(`${year2} is a leap year: ${isLeapYear(year2)}`);
+document.write(`${year2} is a leap year: ${isLeapYear(year2)}`);
+</script>
+<br><hr><br>
+<h1>6.Validate username length (minimum 5 characters).</h1>
+<script>
+function validateUsername(username) {
+  if (username.trim().length < 5) {
+    console.log("Username must be at least 5 characters long.");
+    return false;
+  }
+  console.log("Username is valid!");
+  document.write("Username is valid!");
+  return true;
+}
+validateUsername("shree"); 
+</script>
+<br><hr><br>
+<h1>7.Check if a given character is a vowel or consonant.</h1>
+<script>
+    let char = "e"; // Change this to test other characters
+
+// Convert to lowercase to simplify the check
+let lowerChar = char.toLowerCase();
+
+if (lowerChar === 'a' || lowerChar === 'e' || lowerChar === 'i' || lowerChar === 'o' || lowerChar === 'u') {
+    console.log(char + " is a vowel.");
+    document.write(char + " is a vowel.");
+} else if (lowerChar >= 'a' && lowerChar <= 'z') {
+    console.log(char + " is a consonant.");
+    document.write(char + " is a consonant.");
+} else {
+    console.log("Invalid input (not an alphabetic character).");
+    document.write("Invalid input (not an alphabetic character).");
+}
+</script>
+<br><hr><br>
+<h1>8.Print grade based on marks using conditions.</h1>
+<script>
+    const marks = 85; 
+        if (marks >= 90) {
+            document.write("The student scored " + marks + " marks, which is an A grade.");
+        } else if (marks >= 80) {
+            document.write("The student scored " + marks + " marks, which is a B grade.");
+        } else if (marks >= 70) {
+            document.write("The student scored " + marks + " marks, which is a C grade.");
+        } else if (marks >= 60) {
+            document.write("The student scored " + marks + " marks, which is a D grade.");
+        } else {
+            document.write("The student scored " + marks + " marks, which is an F grade (Fail).");
+        }
+</script>
+<br><hr><br>
+<h1>9.Check if a number is divisible by both 3 and 5.</h1>
+<script>
+const numbers = 15; 
+    if (numbers % 3 === 0 && numbers % 5 === 0) {
+        document.write("The number " + numbers + " is divisible by both 3 and 5.");
+    } else {
+        document.write("The number " + numbers + " is not divisible by both 3 and 5.");
+    }
+    </script>
+    <br><hr><br>
+    <h1>10.Display "AM" or "PM" based on hour value.</h1>
+    <script>
+        const hour = 14; 
+    let amPM;
+
+    if (hour < 12) {
+        amPM = "AM";
+    } else {
+        amPM = "PM";
+    }
+
+    // Output to the console
+    console.log("The hour is " + hour);
+    console.log("The time is " + amPM); 
+
+    // Output to the document
+    document.write("<p>The hour is <strong>" + hour + "</strong>.</p>");
+    document.write("<p>The time is <strong>" + amPM + "</strong>.</p>");
+    </script>
+    <br><hr><br>
+    <h1>11.Print numbers from 1 to 10 using a loop.</h1>
+    <script>
+        document.write("The numbers are :<br> " );
+        for (let i = 1; i <= 10; i++) {
+
+            console.log(i);
+            document.write(i,"<br>");
+        }
+    </script>
+    <br><hr><br>
+    <h1>
+        12.Print all even numbers between 1 and 50.
+    </h1>
+    <script>
+        document.write("The even numbers between 1 and 50 are: <br>")
+        for (let i = 2; i <= 50; i += 2) {
+    console.log(i); 
+    document.write(i + "<br>"); 
+        }
+    </script>
+    <br><hr><br>
+    <h1>13.Calculate the sum of numbers from 1 to n.</h1>
+    <script>
+
+        let n=9;
+
+        if (isNaN(n) || n <= 0) {
+            document.write("<p style='color:red;'>Please enter a valid positive integer.</p>");
+            console.log("Error: Invalid input. Please enter a positive integer.");
+        } else {
+            let sum = 0;
+
+            for (let i = 1; i <= n; i++) {
+                sum += i; 
+            }
+            document.write("<p>The sum of numbers from 1 to " + n + " is: <strong>" + sum + "</strong></p>");
+            console.log("The sum of numbers from 1 to " + n + " is: " + sum);
+        }
+        </script>
+        <br><hr><br>
+<h1>14.Print multiplication table of a given number.</h1>
+<script>
+       
+        const number = 5;
+        const limit = 10;
+
+        document.write(`<h2>Table of ${number}</h2>`);
+
+        for (let i = 1; i <= limit; i++) {
+            
+            const result = number * i;
+            document.write(`<p>${number} x ${i} = ${result}</p>`);
+
+            console.log(`${number} x ${i} = ${result}`);
+        }
+    </script>
+    <br><hr><br>
+    <h1>15.Reverse a number using a loop.</h1>
+    <script>
+        function reverseNumber(num) {
+    let originalNumber = num;
+    let reversedNumber = 0;
+    let remainder;
+
+    
+    while (num !== 0) {
+        
+        remainder = num % 10;
+        reversedNumber = (reversedNumber * 10) + remainder;
+        num = Math.floor(num / 10);
+    }
+
+   console.log("Original number: " + originalNumber);
+    console.log("Reversed number: " + reversedNumber);
+
+    document.write("<h3>Number Reversal using a While Loop</h3>");
+    document.write("<p>Original number: <strong>" + originalNumber + "</strong></p>");
+    document.write("<p>Reversed number: <strong>" + reversedNumber + "</strong></p>");
+}
+
+reverseNumber(12345);
+    </script>
+    <br><hr><br>
+    <h1>16.Count digits in a given number.</h1>
+    <div id="result"></div>
+
+    <script>
+       
+        const number1 = 12345;
+        const digitCount = String(number1).length;
+        
+        console.log("The number is:", number1);
+        console.log("The number of digits is:", digitCount); 
+        document.getElementById('result').innerText = "The number of digits in "+number1+" is: " + digitCount;
+    </script>
+    <br><hr><br>
+    <h1>17.Print all elements of an array using a loop.</h1>
+    <script>
+        
+        const fruits = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+        const outputDiv = document.getElementById("output");   
+        for (let i = 0; i < fruits.length; i++) {
+            
+            const currentElement = fruits[i]; 
+            console.log("Element at index " + i + ": " + currentElement); 
+            document.write("<div>" + currentElement + "</div>");
+
+            
+        }
+    </script>
+    <br><hr><br>
+    <h1>18.Find factorial of a number using a loop.</h1>
+    <script>
+        function calculateFactorial(n) {
+            if (n < 0) {
+                return "Undefined (number must be non-negative)";
+            }
+            // 0! and 1! are 1
+            if (n === 0 || n === 1) {
+                return 1;
+            }
+
+            let result = 1;
+            for (let i = 1; i <= n; i++) {
+                result *= i; 
+            }
+            return result;
+        }
+
+       
+        const num1 = 5; 
+        const factorial = calculateFactorial(num1);
+        console.log(`The factorial of ${num1} is: ${factorial}`);
+        document.write(`The factorial of ${num1} is <strong>${factorial}</strong>.`);
+        </script>
+        <br><hr><br>
+        <h1>19.Print Fibonacci series up to n terms.</h1>
+        <script>
+       
+       const n1=10;
+        let a = 0, b = 1, nextTerm;
+
+        
+        console.log('--- Fibonacci Series');
+        console.log(`Up to ${n1} terms:`);
+
+        
+        document.write("--- Fibonacci Series ---<br>");
+        document.write(`Up to ${n1} terms:<br>`);
+
+       
+        for (let i = 1; i <= n; i++) {
+            
+            console.log(a);
+            document.write(a + "<br>");
+            nextTerm = a + b;
+            a = b;
+            b = nextTerm;
+        }
+    </script>
+    <br><hr><br>
+    <h1>20.Find the largest number in an array using a loop.</h1>
+    <script>
+        const numbers1 = [12, 45, 6, 78, 23, 100, 5, 88]
+        function findLargestNumber(arr) {
+            if (arr.length === 0) {
+                return "Array is empty";
+            }
+
+            let largest = arr[0]; 
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] > largest) {
+                    largest = arr[i];
+                }
+            }
+
+            return largest;
+        }
+        const maxNumber = findLargestNumber(numbers1);
+        console.log("The array is:", numbers1);
+        console.log("The largest number in the array is:", maxNumber);
+        document.write("<p>The array is: [" + numbers1.join(", ") + "]</p>");
+        document.write("<p><strong>The largest number in the array is: " + maxNumber + "</strong></p>");
+
+    </script>
+    <br><hr><br>
+    <h1>21.Find the length of a given string.</h1>
+    <script>
+    var myString = "Hello JavaScript";
+    var stringLength = myString.length;
+
+    console.log("The length of the string is: " + stringLength);
+    
+    document.write("The length of the string \"" + myString + "\" is: " + stringLength);
+</script>
+<br><hr><br>
+<h1>
+    22.Convert a string to uppercase.
+</h1>
+<script>
+    
+        let originalString = "Hello World! These are the JavaScript Tasks.";
+
+        let uppercaseString = originalString.toUpperCase();
+
+        console.log("Original String:", originalString);
+        console.log("Uppercase String:", uppercaseString);
+
+        document.write("<h1>String Conversion Results</h1>");
+        document.write("<p><strong>Original String:</strong> " + originalString + "</p>");
+        document.write("<p><strong>Uppercase String:</strong> " + uppercaseString + "</p>");
+    </script>
+    <br><hr><br>
+    <h1>23.Check whether a string contains the word "JavaScript".</h1>
+    <script>
+        const myString1 = "I am learning JavaScript programming.";
+        const searchTerm = "JavaScript";
+        document.write("The original string is:",myString1);
+        if (myString1.includes(searchTerm)) {
+            console.log("Console: The string contains the word 'JavaScript'.");
+            document.write("<br>The string contains the word 'JavaScript'.");
+        } else {
+            console.log("Console: The string does not contain the word 'JavaScript'.");
+            document.write("<p><br>The string does not contain the word 'JavaScript'.</p>");
+        }
+    </script>
+    <br><hr><br>
+    <h1>24.Reverse a given string.</h1>
+    <script>
+        function reverseString(str) {
+  const arr = str.split('');
+
+  arr.reverse(); 
+
+  const reversedStr = arr.join('');
+  return reversedStr;
+        }
+const originalStrings = "Reverse me!";
+
+const results = reverseString(originalStrings);
+
+console.log("Original String:", originalStrings);
+console.log("Reversed String:", results);
+
+
+document.write("<h1>String Reversal Example</h1>");
+document.write("<p>Original String: <strong>" + originalStrings + "</strong></p>");
+document.write("<p>Reversed String: <strong>" + results + "</strong></p>");
+    </script>
+    <br><hr><br>
+    <h1>25.Count number of vowels in a string.</h1>
+    <script>
+        
+        function countVowels(str) {
+            
+            const lowerCaseStr = str.toLowerCase();
+    
+            const vowels = "aeiou";
+            let count = 0;
+
+            
+            for (let i = 0; i < lowerCaseStr.length; i++) {
+            
+                if (vowels.includes(lowerCaseStr[i])) {
+                    count++;
+                }
+            }
+            return count;
+        }
+        const myStrings = "Hello! This is my Javascript program.";
+        const vowelCount = countVowels(myStrings);
+        console.log("Original string: " + myStrings);
+        console.log("Number of vowels: " + vowelCount);
+        document.write("<p>Original string: <strong>" + myStrings + "</strong></p>");
+        document.write("<p>Number of vowels: <strong>" + vowelCount + "</strong></p>");
+    </script>
+    <br><hr><br>
+    <h1>26.Replace all spaces in a string with hyphens.</h1>
+    <script>
+        let originalString1 = "The quick brown fox jumps";
+let hyphenatedString = originalString1.replace(/ /g, "-");
+
+console.log("Original string: " + originalString1);
+console.log("Hyphenated string: " + hyphenatedString);
+
+document.write("<p>Original string: " + originalString1 + "</p>");
+document.write("<p>Hyphenated string: " + hyphenatedString + "</p>");
+    </script>
+    <br><hr><br>
+    <h1>27.Check if a string is a palindrome.</h1>
+    <script>
+        function checkPalindrome(str) {
+    let cleanStr = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+    let reversedStr = cleanStr.split('').reverse().join('');
+    
+    if (cleanStr === reversedStr) {
+        console.log('"' + str + '" is a palindrome.');
+        document.write('"' + str + '" is a palindrome.');
+    } else {
+        console.log('"' + str + '" is NOT a palindrome.');
+        document.write('"' + str + '" is NOT a palindrome.');
+    }
+}
+
+checkPalindrome("Racecar");
+    </script>
+    <br><hr><br>
+    <h1>28.Extract first 5 characters from a string.</h1>
+    <script>
+    const myString2 = "JavaScript";
+    const firstFiveConsole = myString2.substring(0, 5);
+    console.log("Original string:", myString2);
+    console.log("First 5 characters (console):", firstFiveConsole);
+    const firstFiveDoc = myString2.substring(0, 5);
+    document.write("<p>Original string: " + myString2 + "</p>");
+    document.write("<p>First 5 characters: " + firstFiveDoc + "</p>");
+</script>
+<br><hr><br>
+<h1>29.Remove extra spaces from a string.</h1>
+<script>
+        
+        const originalString3 = "   Hello    world,  how   are  you?   ";
+        let trimmedString = originalString3.trim();
+
+        let cleanStringRegex = trimmedString.replace(/\s+/g, ' ');
+
+        console.log("--- Method 1: trim() and replace() with Regex ---");
+        console.log("Original:", `'${originalString3}'`);
+        console.log("Cleaned:", `'${cleanStringRegex}'`);
+
+        document.write("<p><strong>Original:</strong> `" + originalString3 + "`</p>");
+        document.write("<p><strong>Cleaned:</strong> `" + cleanStringRegex + "`</p>");
+        const wordsArray = originalString3.split(/\s+/); 
+        const cleanStringSplitJoin = wordsArray.join(' ');
+
+        console.log("\n--- Method 2: split() and join() ---");
+        console.log("Original:", `'${originalString3}'`);
+        console.log("Cleaned:", `'${cleanStringSplitJoin}'`);
+
+        </script>
+        <br><hr><br>
+        <h1>30.Find the index of a specific character in a string.</h1>
+        <script>
+        const myStringi = "Today is Full Moon Day";
+        const targetChar = "o";
+        const firstIndex = myStringi.indexOf(targetChar);
+
+        const secondIndex = myStringi.indexOf(targetChar, firstIndex + 1);
+
+        console.log(`The string is: "${myStringi}"`);
+        console.log(`The target character is: "${targetChar}"`);
+        console.log(`The index of the first occurrence is: ${firstIndex}`);
+        console.log(`The index of the second occurrence is: ${secondIndex}`);
+
+        document.write(`<p>The string is: <b>"${myStringi}"</b></p>`);
+        document.write(`<p>The target character is: <b>"${targetChar}"</b></p>`);
+        if (firstIndex !== -1) {
+            document.write(`<p>The index of the first occurrence is: <b>${firstIndex}</b></p>`);
+        } else {
+            document.write(`<p>The character was not found.</p>`);
+        }
+
+        if (secondIndex !== -1) {
+            document.write(`<p>The index of the second occurrence is: <b>${secondIndex}</b></p>`);
+        }
+    </script>
+    <br><hr><br>
+    <h1>31.Add a new element to the end of an array.</h1>
+    <script>
+
+        let fruits1 = ['Apple', 'Banana', 'Cherry'];
+        console.log('Original Array:', fruits1);
+        document.write('Original Array: ' + fruits1.join(', ') + '<br>');
+        let newFruit = 'Dates';
+        fruits1.push(newFruit);
+        console.log('Updated Array:', fruits1);
+        document.write('Updated Array: ' + fruits1.join(', ') + '<br>');
+    </script>
+    <br><hr><br>
+    <h1>32.Remove the first element from an array.</h1>
+    <script>
+        let fruits2 = ['Apple', 'Banana', 'Cherry', 'Date'];
+        console.log("Original Array:", fruits2);
+        document.write("<p>Original Array: " + fruits2.join(', ') + "</p>");
+        let removedElement = fruits2.shift();
+        console.log("Removed Element:", removedElement);
+        console.log("Array after shift():", fruits2);
+        document.write("<p>Removed Element: " + removedElement + "</p>");
+        document.write("<p>Array after shift(): " + fruits2.join(', ') + "</p>");
+
+    </script>
+    <br><hr><br>
+    <h1>33.Find the length of an array.</h1>
+    <script>
+        const fruits3 = ["Apple", "Banana", "Cherry", "Date"];
+const arrayLength = fruits3.length;
+console.log("The length of the array is:", arrayLength);
+document.write("The length of the array is: " + arrayLength);
+    </script>
+    <br><hr><br>
+    <h1>34.Check if an element exists in an array.</h1>
+    <script>
+    const number5 = [10, 20, 30, 40, 50];
+const numberToCheck = 30;
+
+if (number5.indexOf(numberToCheck) !== -1) {
+    console.log(`Console: ${numberToCheck} found at index ${number5.indexOf(numberToCheck)}.`);
+    document.write(`<p>The number ${numberToCheck} found at index ${number5.indexOf(numberToCheck)}.</p>`);
+} else {
+    console.log(`Console: ${numberToCheck} not found.`);
+    document.write(`<p>The number ${numberToCheck} not found.</p>`);
+}
+</script>
+<br><hr><br>
+<h1>35.Sort an array of numbers in ascending order.</h1>
+<script>
+
+        const numbers5 = [45, 12, 6, 89, 2, 77, 34];
+
+        const compareNumbers5 = (a, b) => a - b;
+        numbers5.sort(compareNumbers5);
+        console.log('Original Array:', [45, 12, 6, 89, 2, 77, 34]);
+        console.log('Sorted Array (Ascending):', numbers5);
+        document.write('<h2>Results</h2>');
+        document.write('<p><strong>Original Array:</strong> [45, 12, 6, 89, 2, 77, 34]</p>');
+        document.write('<p><strong>Sorted Array (Ascending):</strong> ' + numbers5.join(', ') + '</p>');
+    </script>
+    <br><hr><br>
+    <h1>36.Reverse an array.</h1>
+    <script>
+        let originalArray = [10, 20, 30, 40, 50];
+        document.write('Original array:', originalArray);
+let reversedArray = originalArray.reverse();
+console.log('Reversed array (console):', reversedArray);
+document.write('<br>Reversed array: ' + reversedArray);
+document.write('<br>Original array after reversal ' + originalArray);
+
+    </script>
+    <br><hr><br>
+    <h1>37.Find the sum of all elements in an array.</h1>
+    <script>
+const numbers6 = [10, 20, 30, 40, 50];
+
+const sum = numbers6.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue;
+}, 0); 
+console.log("The sum of all elements is: " + sum);
+document.write("<h1>Sum of Array Elements</h1>");
+document.write("<p>The array is: [" + numbers6.join(', ') + "]</p>");
+document.write("<p>The sum of all elements is: <strong>" + sum + "</strong></p>");
+
+    </script>
+    <br><hr><br>
+    <h1>38.Find the smallest number in an array.</h1>
+    <script>
+        const numbers7 = [55, 23, 7, 89, 42, 10, 3, 64];
+       
+        let minNumber = numbers7[0];
+        for (let i = 1; i < numbers7.length; i++) {
+        
+            if (numbers7[i] < minNumber) {
+                minNumber = numbers7[i];
+            }
+        }
+        console.log("The original array is:", numbers7);
+        document.write("The original array is:", numbers7);
+        console.log("The smallest number in the array is:", minNumber);
+       
+        document.write("<p>The smallest number in the array is : <strong>" + minNumber + "</strong></p>");
+        
+        document.getElementById('output-paragraph').innerText = "The smallest number in the array is: " + minNumber;
+
+    </script>
+    <br><hr><br>
+    <h1>39.Merge two arrays into one.</h1>
+    <script>
+        const array3 = [10, 20, 30];
+const array4 = ['x', 'y', 'z'];
+
+const mergedArrayConcat = array3.concat(array4);
+console.log('Merged array (concat()):', mergedArrayConcat);
+
+document.write('<h2>Merged array (concat())</h2>');
+document.write('<p>' + mergedArrayConcat.join(', ') + '</p>');
+    </script>
+    <br><hr><br>
+    <h1>40.Remove duplicate values from an array.</h1>
+    <script>
+        const originalArray1 = [1, 2, 2, 3, 4, 4, 5, 'a', 'b', 'a'];
+const uniqueArray = [...new Set(originalArray1)];
+console.log('Original Array:', originalArray1);
+console.log('Array without duplicates:', uniqueArray);
+document.write('<p><b>Original Array:</b> ' + originalArray1.join(', ') + '</p>');
+document.write('<p><b>Array without duplicates:</b> ' + uniqueArray.join(', ') + '</p>');
+    </script>
+    <br><hr><br>
+    <h1>41.Store a username in localStorage.</h1>
+    <script>
+        const username = "johndoe123";
+        localStorage.setItem('currentUser', username);
+        console.log("Username stored in localStorage:", username);
+        const storedUsername = localStorage.getItem('currentUser');
+        console.log("Username retrieved from localStorage:", storedUsername);
+        document.write("<p>Username stored and retrieved successfully!</p>");
+        document.write("<p>Stored Username: <strong>" + storedUsername + "</strong></p>");
+         </script>
+         <br><hr><br>
+         <h1>42.Retrieve and display data from localStorage.</h1>
+         <script>
+            localStorage.setItem('usernames', 'Jeyashree');
+            const retrievedData = localStorage.getItem('usernames');
+            console.log('Data retrieved from localStorage:', retrievedData);
+            if (retrievedData) {
+    document.write('<h1>Displaying Data from localStorage:</h1>');
+    document.write('<p>The stored username is: <strong>' + retrievedData + '</strong></p>');
+} else {
+    document.write('<p>No data found in localStorage for the key "username".</p>');
+}
+         </script>
+         <br><hr><br>
+         <h1>43.Remove a specific item from localStorage.</h1>
+         <script>
+  
+  localStorage.setItem('username', 'JohnDoe');
+  console.log('Item "username" set:', localStorage.getItem('username'));
+  document.write('<p>Item "username" was set to: <strong>' + localStorage.getItem('username') + '</strong></p>');
+
+  localStorage.removeItem('username');
+  console.log('Item "username" has been removed.');
+  document.write('<p>Attempting to access the item after removal...</p>');
+  const itemAfterRemoval = localStorage.getItem('username');
+  console.log('Value of "username" after removal:', itemAfterRemoval);
+  document.write('<p>Value of "username" after removal is: <strong>' + itemAfterRemoval + '</strong></p>');
+
+  if (itemAfterRemoval === null) {
+    document.write('<p><strong>Success:</strong> The item was successfully removed from localStorage.</p>');
+  }
+</script>
+<br><hr><br>
+<h1>44.Clear all data from sessionStorage.</h1>
+<script>
+        
+        sessionStorage.setItem('username', 'JohnDoe');
+        sessionStorage.setItem('cartItemCount', '5');
+
+        console.log('--- Before Clearing ---');
+        console.log('Username:', sessionStorage.getItem('username')); 
+        console.log('Cart Items:', sessionStorage.getItem('cartItemCount'));
+
+        document.write('<p><b>Before clear:</b> Username is "' + sessionStorage.getItem('username') + '" and Cart items is "' + sessionStorage.getItem('cartItemCount') + '"</p>');
+        sessionStorage.clear();
+        console.log('--- After Clearing ---');
+        console.log('Username after clear:', sessionStorage.getItem('username'));
+        console.log('Cart Items after clear:', sessionStorage.getItem('cartItemCount'));
+
+        document.write('<p><b>After clear:</b> Username is "' + sessionStorage.getItem('username') + '" and Cart items is "' + sessionStorage.getItem('cartItemCount') + '" (which should both be null)</p>');
+
+    </script>
+    <br><hr><br>
+    <h1>45.Store an array in localStorage using JSON.</h1>
+    <script>
+        // 1. Define an array
+        const fruits5 = ["Apple", "Banana", "Cherry", "Date"];
+
+        console.log("Original array:", fruits5);
+    
+        const fruitsJSON = JSON.stringify(fruits5);
+        console.log("JSON string for localStorage:", fruitsJSON);
+
+        localStorage.setItem("myFruits", fruitsJSON);
+        console.log("Stored array in localStorage under key 'myFruits'.");
+
+        const storedFruitsJSON = localStorage.getItem("myFruits");
+        console.log("Retrieved JSON string:", storedFruitsJSON);
+
+        const retrievedFruits = JSON.parse(storedFruitsJSON);
+        console.log("Parsed array from localStorage:", retrievedFruits);
+
+        document.write("<h2>Results:</h2>");
+        document.write("<p>Original Array: " + fruits5.join(", ") + "</p>");
+        document.write("<p>Stored JSON String: " + fruitsJSON + "</p>");
+        document.write("<p>Retrieved and Parsed Array: " + retrievedFruits.join(", ") + "</p>");
+    </script>
+    <br><hr><br>
+    <h1>46.Convert a JavaScript object into JSON string.</h1>
+    <script>
+        const userObject = {
+            name: "Alice",
+            age: 30,
+            city: "New York",
+            isEmployee: true
+        };
+        const jsonString = JSON.stringify(userObject);
+        console.log("Original JavaScript Object:", userObject);
+        console.log("Converted JSON String:", jsonString);
+        document.write("<h3>Result written using document.write():</h3>");
+        document.write("<p>JSON String: <strong>" + jsonString + "</strong></p>");
+    </script>
+    <br><hr><br>
+    <h1>47.Convert a JSON string back to JavaScript object.</h1>
+    <div id="output"></div>
+    <script>
+        
+        const jsonString7 = '{"name": "Alice", "age": 30, "city": "New York"}';
+    
+        const jsObject = JSON.parse(jsonString7);
+        console.log("Original JSON String:", jsonString7);
+        console.log("Converted JavaScript Object:", jsObject);
+        console.log("Accessing a property (name):", jsObject.name);
+        const outputDivs = document.getElementById('output');
+        outputDivs.innerHTML += "<h2>Output in the document:</h2>";
+        outputDivs.innerHTML += "<p>Name: " + jsObject.name + "</p>";
+        outputDivs.innerHTML += "<p>Age: " + jsObject.age + "</p>";
+        outputDivs.innerHTML += "<p>City: " + jsObject.city + "</p>";
+
+    </script>
+    <br><hr><br>
+    <h1>48.Access a specific value from a JSON object.</h1>
+    <script>
+    const user = {
+        "name": "Alice",
+        "age": 30,
+        "city": "New York"
+    };
+    const userName = user.name;
+    const userAge = user.age;
+    const userCity = user['city'];
+
+    console.log("Name:", userName);
+    console.log("Age:", userAge);
+    console.log("City:", userCity);
+    document.write("<p>Name: " + userName + "</p>");
+    document.write("<p>Age: " + userAge + "</p>");
+    document.write("<p>City: " + userCity + "</p>");
+</script>
+<br><hr><br>
+<h1>49.Handle a division by zero error using try-catch.</h1>
+<script>
+        function divide(numerator, denominator) {
+            try {
+                if (denominator === 0) {
+                    throw new Error("Error: Cannot divide by zero.");
+                }
+
+                let result = numerator / denominator;
+            
+                document.write(`<p>Result of ${numerator} / ${denominator} = ${result}</p>`);
+                console.log(`Result: ${result}`);
+
+            } catch (error) {
+                document.write(`<p style="color: red;">${error.message}</p>`);
+                console.error(error.message);
+            } finally {
+            
+                document.write("<p>Division attempt finished.</p>");
+                console.log("Division attempt finished.");
+            }
+        }
+
+        divide(10, 2);
+        divide(10, 0);
+    </script>
+    <br><hr><br>
+    <h1>50.Display a custom error message when input is empty.</h1>
+    <h2>Input Field</h2>
+    <input type="text" id="myInput">
+    <button onclick="checkInput()">Submit</button>
+    <script>
+        function checkInput() {
+            let inputValue = document.getElementById("myInput").value;
+
+            if (inputValue === "") {
+                console.log("Error: The input field is empty!");
+                document.write("<h1>Error: The input field is empty!</h1>");
+                document.write("<p>Please go back and enter a value.</p>");
+
+            } else {
+            
+                console.log("Input received: " + inputValue);
+                document.write("<h1>Success!</h1>");
+                document.write("<p>You entered: " + inputValue + "</p>");
+            }
+        }
+    </script>
+</body>
+</html>
