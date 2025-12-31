@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks- Day 15</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #0056b3;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+        }
+        img {
+            max-width: 25%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+       .text-red {
+  color: red; /* Using a color name */
+}
+
+.text-blue {
+  color: #0000FF; /* Using a HEX value */
+}
+    .text-green {
+  color: rgb(0, 128, 0); /* Using an RGB value */
+}
+button{
+    padding: 20px 35px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: larger;
+}
+.hover-button {
+            padding: 15px 30px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: large;
+        }
+        .hover-button:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+<body>
+<h1>1.Create a web page with a heading, paragraph, and an image.</h1>
+<h1>Welcome to My First Web Page</h1>
+
+    <p>
+        This is a simple paragraph that describes the content of the page.
+         It demonstrates the basic structure of an HTML document, which includes a heading , a paragraph , and an image. 
+        This foundational code is the building block for all websites.
+    </p>
+    <img src="bird.jpg" alt="A Bird image">
+    <h1>Birds</h1>
+    <p>Birds are diverse, warm-blooded creatures characterized by feathers, wings, and beaks, playing vital roles in ecosystems as pollinators, seed dispersers, and pest controllers, while also offering humans inspiration, food (poultry, eggs), and beauty, despite facing threats from habitat loss and climate change that necessitate conservation efforts. </p>
+<br><hr><br>
+<h1>2.Create a form with name and email fields and a submit button.</h1>
+<form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br><br>
+    <button type="submit" value="Submit">Submit</button>
+</form>
+<br><hr><br>
+<h1>3.Write JavaScript to show an alert when a button is clicked.</h1>
+<script>
+    function showAlert() {
+        alert("Button clicked!");
+    }
+</script>
+<button onclick="showAlert()">Click Me!</button>
+<br><hr><br>
+<h1>4.Change the text of a paragraph using JavaScript.</h1>
+<script>
+    function changeText() {
+        document.getElementById("demo").innerHTML = "The text has been changed!";
+    }
+</script>
+<p id="demo">This is the original text.</p>
+<button onclick="changeText()">Change Text</button>
+<br><hr><br>
+<h1>5.Apply different text colors using a CSS class.</h1>
+<p class="text-red">This text is red.</p>
+    <p class="text-blue">This text is blue.</p>
+    <p class="text-green">This text is green.</p>
+    <p>This text is the default color.</p>
+ <br><hr><br>
+ <h1>6.Create a button that changes the background color of the page.</h1>   
+ <script>
+    function changeBackgroundColor() {
+        document.body.style.backgroundColor = "lightblue";
+    }
+</script>
+<button onclick="changeBackgroundColor()">Change Background Color</button>
+<br><hr><br>
+<h1>7.Create a simple login form using HTML and CSS.</h1>
+<form>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username"><br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password"><br><br>
+    <button type="submit" value="Login">Login</button>
+</form>
+<br><hr><br>
+<h1>8.Show the current date on the webpage using JavaScript.</h1>
+<script>
+    function showDate() {
+        document.getElementById("date").innerHTML = new Date();
+    }
+</script>
+<button onclick="showDate()">Show Current Date</button>
+<p id="date"></p>
+<br><hr><br>
+<h1>9.Hide and show a paragraph using a button.</h1>
+<script>
+    function toggleParagraph() {
+        var paragraph = document.getElementById("demo1");
+        if (paragraph.style.display === "none") {
+            paragraph.style.display = "block";
+        } else {
+            paragraph.style.display = "none";
+        }
+    }
+</script>
+<button onclick="toggleParagraph()">Toggle Paragraph</button>
+<p id="demo1">This is a paragraph that can be hidden or shown.</p>
+<br><hr><br>
+<h1>10.Create a table and apply basic CSS styling.</h1>
+<table border="1" style="width:50%; border-collapse: collapse;">
+    <tr style="background-color: #f2f2f2;">
+        <th>Name</th>
+        <th>Age</th>
+        <th>City</th>
+    </tr>
+    <tr>
+        <td>Alice</td>
+        <td>30</td>
+        <td>New York</td>
+    </tr>
+    <tr style="background-color: #f9f9f9;">
+        <td>Bob</td>
+        <td>25</td>
+        <td>Los Angeles</td>
+    </tr>
+    <tr>
+        <td>Charlie</td>
+        <td>35</td>
+        <td>Chicago</td>
+    </tr>
+    </table>
+    <br><hr><br>
+    <h1>11.Validate an input field to check if it is empty using JavaScript.</h1>
+    <script>
+        function validateInput() {
+            var inputField = document.getElementById("inputField").value;
+            if (inputField === "") {
+                alert("Input field cannot be empty!");
+            } else {
+                alert("Input is valid.");
+            }
+        }
+    </script>
+    <input type="text" id="inputField" name="inputField">
+    <button onclick="validateInput()">Validate Input</button>
+    <br><hr><br>
+    <h1>12.Change an image when a button is clicked.</h1>
+    <script>
+        function changeImage() {
+            var image = document.getElementById("myImage");
+            if (image.src.match("bird.jpg")) {
+                image.src = "Peacock.jpg";
+            } else {
+                image.src = "bird.jpg";
+            }
+        }
+    </script>
+    <img id="myImage" src="bird.jpg" alt="Image" style="width:200px;height:auto;">
+    <br>
+    <button onclick="changeImage()">Change Image</button>
+    <br><hr><br>
+    <h1>13.Display the value entered in an input box on the screen.</h1>
+    <script>
+        function displayInput() {
+            var userInput = document.getElementById("userInput").value;
+            document.getElementById("displayArea").innerHTML = userInput;
+        }
+    </script>
+    <input type="text" id="userInput" name="userInput">
+    <button onclick="displayInput()">Display Input</button>
+    <p id="displayArea"></p>
+    <br><hr><br>
+    <h1>14.Disable a button after it is clicked.</h1>
+    <script>
+        function disableButton(btn) {
+            btn.disabled = true;
+            btn.innerHTML = "Disabled";
+        }
+    </script>
+    <button onclick="disableButton(this)">Click to Disable Me</button>
+    <br><hr><br>
+    <h1>15.Create a dropdown and display the selected value.</h1>
+    <script>
+        function displaySelected() {
+            var selectedValue = document.getElementById("myDropdown").value;
+            document.getElementById("selectedValue").innerHTML = "You selected: " + selectedValue;
+        }
+    </script>
+    <select id="myDropdown" onchange="displaySelected()">
+        <option value="Option 1">HTML</option>
+        <option value="Option 2">CSS</option>
+        <option value="Option 3">JavaScript</option>
+    </select>
+    <p id="selectedValue"></p>
+    <br><hr><br> 
+    <h1>16.Add hover effect to a button using CSS.</h1>
+
+    <button class="hover-button">Hover Over Me!</button>  
+    <br><hr><br>
+    <h1>17.Create a counter with increment and decrement buttons.</h1>    
+    <script>
+        let count = 0;
+        function increment() {
+            count++;
+            document.getElementById("counter").innerHTML = count;
+        }
+        function decrement() {
+            count--;
+            document.getElementById("counter").innerHTML = count;
+        }
+    </script>
+    <button onclick="decrement()">-</button>
+    <span id="counter" style="margin: 0 15px;">0</span>
+    <button onclick="increment()">+</button>
+    <br><hr><br>
+    <h1>18.Change font size of text using JavaScript.</h1>
+    <script>
+        function changeFontSize() {
+            document.getElementById("fontText").style.fontSize = "24px";
+        }
+            
+    </script>
+    <p id="fontText">This text will change size.</p>
+    <button onclick="changeFontSize()">Change Font Size</button>
+    <br><hr><br>
+    <h1>19.Create a checkbox and show a message when it is checked.</h1>
+    <script>
+        function showMessage(checkbox) {
+            if (checkbox.checked) {
+                alert("Checkbox is checked!");
+            }
+        }
+    </script>
+    <input type="checkbox" id="myCheckbox" onclick="showMessage(this)">
+    <label for="myCheckbox">Check me!</label>
+    <br><hr><br>
+    <h1>20.Create a password field with show and hide functionality.</h1>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("passwordField");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
+    <input type="password" id="passwordField" name="passwordField">
+    <button onclick="togglePassword()">Show/Hide Password</button>
+    <br><hr><br>
+
+    <h1>21.Create a simple navbar using HTML and CSS.</h1>
+    <nav style="background-color: #0056b3; padding: 10px;padding-left: 500px;">
+        <a href="#" style="color: white; margin-right: 15px; text-decoration: none;">Home</a>
+        <a href="#" style="color: white; margin-right: 15px; text-decoration: none;">About</a>
+        <a href="#" style="color: white; margin-right: 15px; text-decoration: none;">Services</a>
+        <a href="#" style="color: white; text-decoration: none;">Contact</a>
+    </nav>
+    <br><hr><br>
+    <h1>22.Print a message in the browser console using JavaScript.</h1>
+    <script>
+        console.log("Hello, this is a message printed in the browser console!");
+    </script>
+    <br><hr><br>
+    <h1>23.Prevent a form from submitting and reloading the page.</h1>
+    <form onsubmit="event.preventDefault(); alert('Form submission prevented!');">
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <br><hr><br>
+    <h1>24.Create a textarea and display the number of characters typed.</h1>
+    <script>
+        function countCharacters() {
+            var textArea = document.getElementById("myTextarea");
+            var charCount = textArea.value.length;
+            document.getElementById("charCount").innerHTML = charCount;
+        }
+    </script>
+    <textarea id="myTextarea" oninput="countCharacters()"></textarea>
+    <p>Characters: <span id="charCount">0</span></p>
+    <br><hr><br>
+    <h1>25.Add an external JavaScript file to an HTML page.</h1>
+     <button onclick="showMessage1()">Click Me</button>
+    <script src="external.js"></script>
+    <br><hr><br>
+    <h1>26.Validate a form and display error messages below input fields.</h1>
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            var username = document.getElementById("usernameField").value;
+            var email = document.getElementById("emailField").value;
+            var error = false;
+            if (username === "") {
+                document.getElementById("usernameError").innerHTML = "Username is required";
+                error = true;
+            } else {
+                document.getElementById("usernameError").innerHTML = "";
+            }
+            if (email === "") {
+                document.getElementById("emailError").innerHTML = "Email is required";
+                error = true;
+            } else {
+                document.getElementById("emailError").innerHTML = "";
+            }
+            if (!error) {
+                alert("Form submitted successfully!");
+            }
+        }
+    </script>
+    <form onsubmit="validateForm(event)">
+        <label for="usernameField">Username:</label><br>
+        <input type="text" id="usernameField" name="usernameField"><br>
+        <span id="usernameError" style="color: red;"></span><br>
+        <label for="emailField">Email:</label><br>
+        <input type="text" id="emailField" name="emailField"><br>
+        <span id="emailError" style="color: red;"></span><br>
+        <input type="submit" value="Submit">
+    </form>
+        <br><hr><br>
+        <h1>27.Create a responsive layout using Flexbox.</h1>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <div style="flex: 1 1 200px; background-color: #f2f2f2; padding: 20px; text-align: center;">Flex Item 1</div>
+        <div style="flex: 1 1 200px; background-color: #d9d9d9; padding: 20px; text-align: center;">Flex Item 2</div>
+        <div style="flex: 1 1 200px; background-color: #bfbfbf; padding: 20px; text-align: center;">Flex Item 3</div>
+    </div>  
+    <br><hr><br>
+    <h1>28.Add and remove items from a list using JavaScript.</h1>
+    <script>
+        function addItem() {
+            var ul = document.getElementById("myList");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode("Strawberry"));
+            ul.appendChild(li);
+        }
+        function removeItem() {
+            var ul = document.getElementById("myList");
+            if (ul.lastChild) {
+                ul.removeChild(ul.lastChild);
+            }
+        }
+    </script>
+    <ul id="myList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Orange</li>
+    </ul>
+    <button onclick="addItem()">Add Item</button>
+    <button onclick="removeItem()">Remove Item</button>
+    <br><hr><br>
+    <h1>29.Open and close a popup using JavaScript.</h1>
+    <script>
+        function openPopup() {
+            var popup = document.getElementById("myPopup");
+            popup.style.display = "block";
+        }
+        function closePopup() {
+            var popup = document.getElementById("myPopup");
+            popup.style.display = "none";
+        }
+    </script>
+    <button onclick="openPopup()">Open Popup</button>
+    <div id="myPopup" style="display:none; position:fixed; top:
+50%; left:50%; transform:translate(-50%, -50%); background-color:white; padding:20px; box-shadow:0 4px 8px rgba(0,0,0,0.2);">
+        <p>This is a popup!</p>
+        <button onclick="closePopup()">Close Popup</button>
+    </div>
+    <br><hr><br>
+    <h1>30.Create an image slider using JavaScript.</h1>
+    <script>
+        let slideIndex = 0;
+        const slides = ["bird.jpg", "Peacock.jpg"];
+        function showSlides() {
+            const img = document.getElementById("sliderImage");
+            img.src = slides[slideIndex];
+            slideIndex = (slideIndex + 1) % slides.length;
+        }
+        setInterval(showSlides, 2000); // Change image every 2 seconds
+    </script>
+    <img id="sliderImage" src="bird.jpg" alt="Image Slider" style
+    ="width:300px;height:auto;">
+    <br><hr><br>
+    <h1>31.Filter a list of items based on user input.</h1>
+    <script>
+        function filterList() {
+            var input = document.getElementById("filterInput").value.toLowerCase();
+            var ul = document.getElementById("itemList");
+            var li = ul.getElementsByTagName("li");
+            for (var i = 0; i < li.length; i++) {
+                var item = li[i].textContent || li[i].innerText;
+                if (item.toLowerCase().indexOf(input) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+    <input type="text" id="filterInput" onkeyup="filterList()" placeholder
+    ="Search for items..">
+    <ul id="itemList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Orange</li>
+        <li>Mango</li>
+        <li>Pineapple</li>
+    </ul>
+    <br><hr><br>
+    <h1>32.Store and retrieve data using localStorage.</h1>
+    <script>
+        function saveData() {
+            var data = document.getElementById("localData").value;
+            localStorage.setItem("myData", data);
+            alert("Data saved!");
+        }
+        function retrieveData() {
+            var data = localStorage.getItem("myData");
+            document.getElementById("displayLocalData").innerHTML = data ? data : "No data found.";
+        }
+    </script>
+    <input type="text" id="localData" name="localData">
+    <button onclick="saveData()">Save Data</button>
+    <button onclick="retrieveData()">Retrieve Data</button>
+
+    <p id="displayLocalData"></p>
+    <br><hr><br>
+    <h1>33.Create a dark and light theme toggle.</h1>
+    <script>
+        function toggleTheme() {
+            var body = document.body;
+            if (body.style.backgroundColor === "black") {
+                body.style.backgroundColor = "white";
+                body.style.color = "black";
+            } else {
+                body.style.backgroundColor = "black";
+                body.style.color = "white";
+            }
+        }       
+    </script>
+    <button onclick="toggleTheme()">Toggle Dark/Light Theme</button>
+    <br><hr><br>
+    <h1>34.Display data from a JSON file on a webpage.</h1>
+    <script>
+        const jsonData = '{"employees":[ {"name":"John", "age":30, "city":"New York"}, {"name":"Anna", "age":22, "city":"London"}, {"name":"Mike", "age":32, "city":"Chicago"}]}';
+        const obj = JSON.parse(jsonData);
+        let output = "<ul>";
+        for (let i = 0; i < obj.employees.length; i++) {
+            output += "<li>" + obj.employees[i].name + ", " + obj.employees[i].age + ", " + obj.employees[i].city + "</li>";
+        }
+        output += "</ul>";
+        document.write(output);
+    </script>   
+    <br><hr><br>
+    <h1>35.Count how many times a button is clicked.</h1>
+    <script>
+        let clickCount = 0;
+        function countClicks() {
+            clickCount++;
+            document.getElementById("clickCounter").innerHTML = "Button clicked " + clickCount + " times.";
+        }
+    </script>
+    <button onclick="countClicks()">Click Me!</button>
+    <p id="clickCounter"></p>   
+    <br><hr><br>    
+    <h1>36.Create a sticky header using CSS.</h1>
+    <header style="position: sticky; top: 0; background-color: #0056b3; color: white; padding: 10px; text-align: center;">
+        <h2>Sticky Header</h2>  
+    </header>
+    <p>Scroll down to see the sticky header in action.</p>
+    <div style="height: 1000px;"></div>
+    <br><hr><br>
+    <h1>37.Check password length and display a warning message.</h1>
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("passwordCheck").value;
+            if (password.length < 8) {
+                document.getElementById("passwordWarning").innerHTML = "Password must be at least 8 characters long.";
+            } else {
+                document.getElementById("passwordWarning").innerHTML = "Password length is sufficient.";
+            }
+        }
+    </script>
+    <input type="password" id="passwordCheck" onkeyup="checkPassword()" placeholder="Enter password">
+    <p id="passwordWarning"></p>    
+    <br><hr><br>
+    <h1>38.Create a countdown timer using JavaScript.</h1>
+    <script>
+        let timeLeft = 10;
+        function startCountdown() {
+            const timer = setInterval(function() {
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    document.getElementById("countdown").innerHTML = "Time's up!";
+                } else {
+                    document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
+                }
+                timeLeft -= 1;
+            }, 1000);
+        }                       
+    </script>
+    <button onclick="startCountdown()">Start Countdown</button>
+    <p id="countdown"></p>
+    <br><hr><br>
+    <h1>39.Calculate BMI using height and weight inputs.</h1>
+    <script>
+        function calculateBMI() {
+            var height = parseFloat(document.getElementById("height").value) / 100; // Convert cm to meters
+            var weight = parseFloat(document.getElementById("weight").value);
+            var bmi = weight / (height * height);
+            document.getElementById("bmiResult").innerHTML = "Your BMI is: " + bmi.toFixed(2);
+        }
+    </script>
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height" name="height"><br><br>
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" name="weight"><br><br>
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <p id="bmiResult"></p>
+    <br><hr><br>
+    <h1>40.Switch content using tabs.</h1>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+    <div>  
+        <button class="tablinks" onclick="openTab(event, 'Tab1')">HTML</button>
+        <button class="tablinks" onclick="openTab(event, 'Tab2')">CSS</button>
+        <button class="tablinks" onclick="openTab(event, 'Tab3')">JavaScript</button>
+    </div>
+    <div id="Tab1" class="tabcontent
+" style="display:none;">
+        <h3>HTML</h3>
+        <p>HTML provides the foundational structure and content of a webpage. </p>
+    </div>
+    <div id="Tab2" class="tabcontent
+        
+" style="display:none;">
+        <h3>CSS</h3>
+        <p>CSS is used to style and layout web pages.</p>
+    </div>
+    <div id="Tab3" class="tabcontent
+" style="display:none;">
+        <h3>JavaScript</h3>
+        <p>JavaScript is used to add interactivity and dynamic behavior to web pages.</p>
+    </div>
+ <br><hr><br>
+ <h1>41.Create an accordion using HTML, CSS, and JavaScript.</h1>
+    <script>
+        function toggleAccordion(element) {
+            var panel = element.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        }
+    </script>
+    <button onclick="toggleAccordion(this)">HTML</button>
+    <div style="display:none; padding: 10px; border: 1px solid #ccc;">
+        <p>HTML stands for HyperText Markup Language. It is the standard markup language for creating web pages.</p>
+    </div>
+    <button onclick="toggleAccordion(this)">CSS</button>
+    <div style="display:none; padding: 10px; border: 1px solid #ccc;">
+        <p>CSS is used to style and layout web pages.</p>
+    </div>
+    <button onclick="toggleAccordion(this)">JavaScript</button>
+    <div style="display:none; padding: 10px; border: 1px solid #ccc;">
+        <p>JavaScript is used to add interactivity and dynamic behavior to web pages.</p>
+    </div>
+    <br><hr><br>
+    <h1>42.Create a simple login system using localStorage.</h1>
+    <script>
+        function login() {
+            var username = document.getElementById("loginUsername").value;
+            var password = document.getElementById("loginPassword").value;
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+            alert("Login successful!");
+        }
+        function showStoredCredentials() {
+            var storedUsername = localStorage.getItem("username");
+            var storedPassword = localStorage.getItem("password");
+            document.getElementById("storedCredentials").innerHTML = "Stored Username: " + storedUsername + "<br>Stored Password: " + storedPassword;
+        }
+    </script>
+    <label for="loginUsername">Username:</label>
+    <input type="text" id="loginUsername" name="loginUsername"><br><br>
+    <label for="loginPassword">Password:</label>
+    <input type="password" id="loginPassword" name="loginPassword"><br><br>
+    <button onclick="login()">Login</button>
+    <button onclick="showStoredCredentials()">Show Stored Credentials</button>
+    <p id="storedCredentials"></p>
+    <br><hr><br>   
+    <h1>43.Show a "scroll to top" button when the page is scrolled.</h1>
+    <script>
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+            var scrollButton = document.getElementById("scrollTopButton");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollButton.style.display = "block";
+            } else {
+                scrollButton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }       
+    </script>
+    <button onclick="topFunction()" id="scrollTopButton" style="display:none;
+    position:fixed; bottom:20px; right:30px; z-index:99; font-size:18px; border:none; outline:none; background-color:#0056b3; color:white; cursor:pointer; padding:15px; border-radius:4px;">Top</button>
+    <br><hr><br>
+    <h1>44.Validate email format using JavaScript.</h1> 
+    <script>
+        function validateEmail() {
+            var email = document.getElementById("emailToValidate").value;
+            var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (regex.test(email)) {
+                document.getElementById("emailValidationResult").innerHTML = "Valid email format.";
+            } else {
+                document.getElementById("emailValidationResult").innerHTML = "Invalid email format.";
+            }
+        }
+    </script>
+    <input type="text" id="emailToValidate" name="emailToValidate"
+    placeholder="Enter your email">
+    <button onclick="validateEmail()">Validate Email</button>
+    <p id="emailValidationResult"></p>
+    <br><hr><br>
+    <h1>45.Preview an image before uploading it.</h1>
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+    <input type="file" accept="image/*" onchange="previewImage(event)">
+    <br><br>
+    <img id="imagePreview" style="max-width:200px; max-height:200px;"/>
+    <br><hr><br>
+    <h1>46.Create a number guessing game using JavaScript.</h1>
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        function guessNumber() {
+            let userGuess = parseInt(document.getElementById("numberGuess").value);
+            if (userGuess === randomNumber) {
+                alert("Congratulations! You guessed the correct number.");
+            } else if (userGuess < randomNumber) {
+                alert("Too low! Try again.");
+            } else {
+                alert("Too high! Try again.");
+            }
+        }       
+    </script>
+    <input type="number" id="numberGuess" name="numberGuess" placeholder="Enter a number between 1 and 100">
+    <button onclick="guessNumber()">Guess</button>      
+    <br><hr><br>
+    <h1>47.Handle multiple buttons using the same JavaScript function.</h1>
+    <script>
+        function buttonClicked(buttonName) {
+            alert(buttonName + " button clicked!");
+        }   
+
+    </script>
+    <button onclick="buttonClicked('Button 1')">Button 1</button>
+    <button onclick="buttonClicked('Button 2')">Button 2</button>
+    <button onclick="buttonClicked('Button 3')">Button 3</button>
+    <br><hr><br>
+    <h1>48.Disable form submission if validation fails.</h1>
+    <script>
+        function validateAndSubmit(event) {
+            var name = document.getElementById("formName").value;
+            if (name === "") {
+                alert("Name cannot be empty!");
+                event.preventDefault();
+            } else {
+                alert("Form submitted successfully!");
+            }
+        }
+    </script>
+    <form onsubmit="validateAndSubmit(event)">
+        <label for="formName">Name:</label>
+        <input type="text" id="formName" name="formName"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <br><hr><br>
+    <h1>49.Create a search feature for a list of products.</h1>
+    <script>
+        function searchProducts() {
+            var input = document.getElementById("productSearch").value.toLowerCase();
+            var ul = document.getElementById("productList");
+            var li = ul.getElementsByTagName("li");
+            for (var i = 0; i < li.length; i++) {
+                var product = li[i].textContent || li[i].innerText;
+                if (product.toLowerCase().indexOf(input) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+    <input type="text" id="productSearch" onkeyup="searchProducts()" placeholder
+    ="Search for products..">
+    <ul id="productList">
+        <li>Laptop</li>
+        <li>Smartphone</li>
+        <li>Tablet</li>
+        <li>Headphones</li>
+        <li>Smartwatch</li>
+    </ul>
+    <br><hr><br>
+    <h1>50.Build a simple landing page using HTML, CSS, and JavaScript.</h1>
+    <header style="background-color: #0056b3; color: white; padding: 20px; text-align: center;">
+        <h1>Welcome to Our Landing Page</h1>
+        <p>Your journey to excellence starts here.</p>
+    </header>
+    <section style="padding: 20px;">
+        <h2>About Us</h2>
+        <p>We are committed to providing the best services to our customers. Our team of experts is dedicated to helping you achieve your goals.</p>
+        <button onclick="alert('Thank you for joining us!')">Join Now</button>
+    </section>
+    <footer style="background-color: #f2f2f2; color: #333; text-align: center; padding: 10px; margin-top: 20px;">
+        <p>&copy; 2024 Our Company. All rights reserved.</p>
+
+    </footer>
+    <br><hr><br>
+    
+
+</body>
+</html>

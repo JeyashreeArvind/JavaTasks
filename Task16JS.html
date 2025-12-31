@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks - Day 16</title>
+</head>
+<body>
+  <h1>1.Create a webpage that displays your name and changes color when clicked.</h1>
+    <h2 id="name" style="cursor:pointer;">Shree Arvind</h2>
+    <script>
+        document.getElementById("name").onclick = function() {
+            this.style.color = this.style.color === "blue" ? "black" : "blue";
+        };
+    </script>
+    <br><hr><br>  
+<h1>2.Create two buttons and show different messages for each button click.</h1>
+    <button onclick="alert('Button 1 clicked!')">Button 1</button>
+    <button onclick="alert('Button 2 clicked!')">Button 2</button>      
+    <br><hr><br>
+    <h1>3.Create an input field and display its value when a button is clicked.</h1>
+    <input type="text" id="inputField" placeholder="Type something...">
+    <button onclick="displayInputValue()">Show Value</button>
+    <p id="displayArea"></p>
+    <script>
+        function displayInputValue() {
+            let inputValue = document.getElementById("inputField").value;
+            document.getElementById("displayArea").innerText = "You entered: " + inputValue;
+        }
+    </script>
+    <br><hr><br>
+    <h1>4.Change the background color of a div when mouse enters it.</h1>
+    <div id="colorDiv" style="width: 200px; height: 200px; background-color: lightgray; cursor:pointer;">
+        Hover over me!
+    </div>
+    <script>
+        document.getElementById("colorDiv").onmouseover = function() {
+            this.style.backgroundColor = "lightblue";
+        };
+        document.getElementById("colorDiv").onmouseout = function() {
+            this.style.backgroundColor = "lightgray";
+        };
+    </script>   
+    <br><hr><br>
+    <h1>5.Create a form with two input fields and reset the form using JavaScript.</h1>
+    <form id="myForm">
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <button type="button" onclick="resetForm()">Reset</button>
+    </form>
+    <script>
+        function resetForm() {
+            document.getElementById("myForm").reset();
+        }
+    </script>       
+    <br><hr><br>
+    <h1>6.Show and hide an image using two separate buttons.</h1>
+    <img id="myImage" src="bird.jpg" width="300px" alt="Sample Image">
+    <br>
+    <button onclick="showImage()">Show Image</button>
+    <button onclick="hideImage()">Hide Image</button>
+    <script>
+        function showImage() {
+            document.getElementById("myImage").style.display = "block";
+        }
+        function hideImage() {
+            document.getElementById("myImage").style.display = "none";
+        }
+    </script>   
+    <br><hr><br>
+    <h1>7.Create a paragraph and make the text bold using JavaScript.</h1>
+    <p id="myParagraph">This is a sample paragraph.</p>
+    <button onclick="makeBold()">Make Bold</button>
+    <script>
+        function makeBold() {
+            document.getElementById("myParagraph").style.fontWeight = "bold";
+        }
+    </script>   
+    <br><hr><br>
+    <h1>8.Create a simple unordered list and style it using CSS.</h1>
+    <ul style="list-style-type: square;">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul> 
+    <br><hr><br>      
+    <h1>9.Count the number of characters typed in an input field.</h1>
+    <input type="text" id="charInput" placeholder="Type something...">
+    <p id="charCount"></p>
+    <script>
+        document.getElementById("charInput").oninput = function() {
+            document.getElementById("charCount").innerText = "Characters: " + this.value.length;
+        };
+    </script>
+    <br><hr><br>
+    <h1>10.Create a button that toggles text visibility.</h1>
+    <p id="toggleText">This text can be toggled.</p>
+    <button onclick="toggleTextVisibility()">Toggle Text</button>
+    <script>
+        function toggleTextVisibility() {
+            let textElement = document.getElementById("toggleText");
+            if (textElement.style.display === "none") {
+                textElement.style.display = "block";
+            } else {
+                textElement.style.display = "none";
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>11.Change the border color of an input field on focus.</h1>
+    <input type="text" id="focusInput" placeholder="Focus on me!">
+    <script>
+        document.getElementById("focusInput").onfocus = function() {
+            this.style.borderColor = "green";
+        };
+        document.getElementById("focusInput").onblur = function() {
+            this.style.borderColor = "";
+        };
+    </script>   
+    <br><hr><br>
+<h1>13.Create a checkbox and enable a button only when it is checked.</h1>      
+    <input type="checkbox" id="agreeCheckbox"> I agree to the terms
+    <br>
+    <button id="submitButton" disabled>Submit</button>
+    <script>
+        document.getElementById("agreeCheckbox").onchange = function() {
+            document.getElementById("submitButton").disabled = !this.checked;
+        };
+    </script>   
+    <br><hr><br>
+    <h1>14.Change the font family of text using JavaScript.</h1>
+    <p id="fontParagraph">This text will change font family.</p>
+    <button onclick="changeFontFamily()">Change Font</button>
+    <script>
+        function changeFontFamily() {
+            document.getElementById("fontParagraph").style.fontFamily = "Arial, sans-serif";
+        }
+    </script>
+    <br><hr><br>
+    <h1>15.Create a simple card layout using HTML and CSS.</h1>
+    <div style="border: 1px solid #ccc; padding: 16px; width: 200px; box-shadow: 2px 2px 12px #aaa;">
+        <h3>Card Title</h3>
+        <p>This is a simple card layout created using HTML and CSS.</p>
+        <button style="padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Action</button>  
+    </div>
+    <br><hr><br>
+    <h1>16.Show a confirmation message before submitting a form.</h1>
+    <form onsubmit="return confirm('Are you sure you want to submit?');">
+        <input type="text" placeholder="Enter your name">
+        <button type="submit">Submit</button>
+    </form>
+    <br><hr><br>
+    <h1>17.Change the value of one input field based on another input.</h1>
+    <input type="text" id="sourceInput" placeholder="Type something..." oninput="copyValue()">
+    <input type="text" id="targetInput" placeholder="Copied value will appear here">
+    <script>
+        function copyValue() {
+            document.getElementById("targetInput").value = document.getElementById("sourceInput").value;
+        }
+    </script>
+    <br><hr><br>
+    <h1>18.Create a button that clears the content of a paragraph.</h1>
+    <p id="clearParagraph">This paragraph will be cleared when you click the button.</p>
+    <button onclick="clearParagraphContent()">Clear Paragraph</button>
+    <script>
+        function clearParagraphContent() {
+            document.getElementById("clearParagraph").innerText = "";
+        }
+    </script>
+    <br><hr><br>
+    <h1>19.Display even or odd based on a number entered by the user.</h1>
+    <input type="number" id="numberInput" placeholder="Enter a number">
+    <button onclick="checkEvenOdd()">Check Even/Odd</button>
+    <p id="evenOddResult"></p>
+    <script>
+        function checkEvenOdd() {
+            let num = parseInt(document.getElementById("numberInput").value);
+            let result = (num % 2 === 0) ? "Even" : "Odd";
+            document.getElementById("evenOddResult").innerText = "The number " + num + " is " + result + ".";
+        }
+    </script>   
+    <br><hr><br>
+    <h1>20.Create a dropdown menu and change page background based on selection.</h1>
+    <select onchange="changeBackground()">
+        <option value="">Select a background</option>
+        <option value="lightblue">Light Blue</option>
+        <option value="lightgreen">Light Green</option>
+        <option value="lightyellow">Light Yellow</option>
+    </select>
+    <script>
+        function changeBackground() {
+            let selectedColor = document.querySelector("select").value;
+            document.body.style.backgroundColor = selectedColor;
+        }
+    </script>           
+    <br><hr><br>
+    <h1>21.Print the length of a string entered by the user.</h1>
+    <input type="text" id="stringInput" placeholder="Type a string...">
+    <button onclick="printStringLength()">Show Length</button>  
+    <p id="stringLengthResult"></p>
+    <script>
+        function printStringLength() {
+            let str = document.getElementById("stringInput").value;
+            document.getElementById("stringLengthResult").innerText = "Length: " + str.length;
+        }
+    </script>   
+    <br><hr><br>
+    <h1>22.Create a submit button that is disabled by default.</h1>
+    <button id="disabledSubmit" disabled>Submit</button>
+    <script>
+    </script>
+    <br><hr><br>
+    <h1>23.Add multiple CSS classes to an element using JavaScript.</h1>
+    <p id="multiClassParagraph">This paragraph will have multiple classes added.</p>
+    <button onclick="addMultipleClasses()">Add Classes</button>
+    <script>
+        function addMultipleClasses() {
+            let paragraph = document.getElementById("multiClassParagraph");
+            paragraph.classList.add("class1", "class2", "class3");
+            paragraph.style.color = "red"; // Just to visualize the change
+        }
+    </script>  <br><hr><br>
+    <h1>24.Create a simple footer using HTML and CSS.</h1>
+    <footer style="background-color: #f1f1f1; text-align: center; padding: 10px; width: 100%; bottom: 0;background-color: lightgray;">
+        <p>&copy; 2025 My Website</p>
+    </footer>
+    <br><hr><br>
+    <h1>25.Display a message when the page finishes loading.</h1>
+    <button onclick="alert('Page is loaded!')">Click me after page load</button>
+    <script>
+        window.onload = function() {
+            console.log("Page has fully loaded.");
+        };      
+    </script>
+    <br><hr><br>
+    <h1>26.Validate a form to allow only numbers in an input field.</h1>
+    <form onsubmit="return validateNumberInput()">
+        <input type="text" id="numberOnlyInput" placeholder="Enter numbers only">
+        <button type="submit">Submit</button>   
+    </form>
+    <script>
+        function validateNumberInput() {
+            let input = document.getElementById("numberOnlyInput").value;
+            if (isNaN(input) || input.trim() === "") {
+                alert("Please enter a valid number.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <br><hr><br>
+    <h1>27.Create a list and remove an item when it is clicked.</h1>
+    <ul id="myList">
+        <li onclick="removeItem(this)">Apple</li>
+        <li onclick="removeItem(this)">Banana</li>
+        <li onclick="removeItem(this)">Orange</li>
+    </ul>
+    <script>
+        function removeItem(item) {
+            item.remove();
+        }
+    </script>
+
+<br><hr><br>
+<h1>28.Display an error message if password is less than 8 characters.</h1>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <button onclick="checkPasswordLength()">Check Password</button>
+    <p id="passwordError" style="color:red;"></p>
+    <script>
+        function checkPasswordLength() {
+            let password = document.getElementById("passwordInput").value;
+            let errorElement = document.getElementById("passwordError");
+            if (password.length < 8) {
+                errorElement.innerText = "Error: Password must be at least 8 characters long.";
+            } else {
+                errorElement.innerText = "Password length is valid.";
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>29.Create a layout using CSS Grid.</h1>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <div style="background-color: lightblue; padding: 10px;">Item 1</div>
+        <div style="background-color: lightgreen; padding: 10px;">Item 2</div>
+        <div style="background-color: lightyellow; padding: 10px;">Item 3</div>
+    </div>
+    <br><hr><br>
+    <h1>30.Change multiple elements styles using a single JavaScript function.</h1>
+    <p id="element1">Element 1</p>
+    <p id="element2">Element 2</p>
+    <p id="element3">Element 3</p>
+    <button onclick="changeStyles()">Change Styles</button>
+    <script>
+        function changeStyles() {
+            let element1 = document.getElementById("element1");
+            let element2 = document.getElementById("element2");
+            let element3 = document.getElementById("element3");
+
+            element1.style.color = "blue";
+            element2.style.color = "green";
+            element3.style.color = "red";
+        }
+    </script>
+    <br><hr><br>
+    <h1>31.Store a username in localStorage and display it on page load.</h1>
+    <p id="usernameDisplay"></p>
+    <script>
+        function storeUsername(username) {
+            localStorage.setItem("username", username);
+        }
+
+        function displayStoredUsername() {
+            let storedUsername = localStorage.getItem("username");
+            if (storedUsername) {
+                document.getElementById("usernameDisplay").innerText = "Welcome back, " + storedUsername + "!";
+            } else {
+                let username = prompt("Please enter your username:");
+                if (username) {
+                    storeUsername(username);
+                    document.getElementById("usernameDisplay").innerText = "Welcome, " + username + "!";
+                }
+            }
+        }
+
+        window.onload = displayStoredUsername;
+    </script>   
+    <br><hr><br>
+    <h1>32.Disable right-click on a webpage using JavaScript.</h1>
+    <script>
+        document.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+            alert("Right-click is disabled on this webpage.");
+        });
+    </script>     
+    <br><hr><br>
+    <h1>33.Count vowels in a text entered by the user.</h1>
+    <input type="text" id="textInput" placeholder="Enter text">
+    <button onclick="countVowels()">Count Vowels</button>
+    <p id="vowelCount"></p>
+    <script>
+        function countVowels() {
+            let text = document.getElementById("textInput").value;
+            let vowels = "aeiouAEIOU";
+            let count = 0;
+            for (let i = 0; i < text.length; i++) {
+                if (vowels.includes(text[i])) {
+                    count++;
+                }
+            }
+            document.getElementById("vowelCount").innerText = "Number of vowels: " + count;
+        }
+    </script>
+    <br><hr><br>
+    <h1>34.Create a simple modal box using HTML, CSS, and JavaScript.</h1>
+    <button onclick="openModal()">Open Modal</button>
+    <div id="myModal" style="display:none; position:fixed; z-index
+
+:1; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.4);">
+        <div style="background-color:#fefefe; margin:15% auto; padding:20px; border:1px solid #888; width:80%;">
+            <span onclick="closeModal()" style="color:#aaa; float:right; font-size:28px; font-weight:bold; cursor:pointer;">&times;</span>
+            <p>This is a simple modal box.</p>
+        </div>  
+    </div>
+    <script>
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+    </script>
+    <br><hr><br>
+    <h1>35.Sort a list of numbers entered by the user.</h1>
+    <input type="text" id="numberListInput" placeholder="Enter numbers separated by commas">
+    <button onclick="sortNumbers()">Sort Numbers</button>   
+    <p id="sortedNumbers"></p>
+    <script>
+        function sortNumbers() {
+            let input = document.getElementById("numberListInput").value;
+            let numberArray = input.split(",").map(Number);
+            numberArray.sort(function(a, b) { return a - b; });
+            document.getElementById("sortedNumbers").innerText = "Sorted Numbers: " + numberArray.join(", ");
+        }   
+    </script>
+    <br><hr><br>
+    <h1>36.Change an image source based on dropdown selection.</h1>
+    <select onchange="changeImageSource()">
+        <option value="bird.jpg">Bird</option>
+        <option value="peacock1.jpg">Peacock</option>
+        <option value="swan.jpg">Swan</option>
+    </select>
+    <br><br>
+    <img id="dynamicImage" src="bird.jpg" width="300px" alt="Dynamic Image">    
+    <script>
+        function changeImageSource() {
+            let selectedImage = document.querySelector("select").value;
+            document.getElementById("dynamicImage").src = selectedImage;
+        }
+    </script>
+
+<br><hr><br>
+    <h1>37.Highlight the active menu item using JavaScript.</h1>
+    <ul id="menu">
+        <li onclick="highlightItem(this)">Home</li>
+        <li onclick="highlightItem(this)">About</li>
+        <li onclick="highlightItem(this)">Services</li>
+        <li onclick="highlightItem(this)">Contact</li>
+    </ul>
+    <script>
+        function highlightItem(item) {
+            let menuItems = document.getElementById("menu").getElementsByTagName("li");
+            for (let i = 0; i < menuItems.length; i++) {
+                menuItems[i].style.backgroundColor = "";
+            }
+            item.style.backgroundColor = "lightgray";
+        }
+    </script>
+    <br><hr><br>
+    <h1>38.Validate that two password fields match.</h1>
+    <input type="password" id="password1" placeholder="Enter password">
+    <input type="password" id="password2" placeholder="Confirm password">   
+    <button onclick="validatePasswords()">Validate Passwords</button>
+    <p id="passwordMatchResult"></p>
+    <script>
+        function validatePasswords() {
+            let pass1 = document.getElementById("password1").value;
+            let pass2 = document.getElementById("password2").value;
+            let resultElement = document.getElementById("passwordMatchResult");
+            if (pass1 === pass2) {
+                resultElement.innerText = "Passwords match.";
+            } else {
+                resultElement.innerText = "Passwords do not match.";
+            }
+        }   
+    </script>
+    <br><hr><br>
+    <h1>39.Display a warning message when input length exceeds a limit.</h1>
+    <input type="text" id="limitedInput" placeholder="Type something..." oninput="checkInputLength()">
+    <p id="lengthWarning" style="color:red;"></p>
+    <script>
+        function checkInputLength() {
+            let input = document.getElementById("limitedInput").value;
+            let warningElement = document.getElementById("lengthWarning");
+            if (input.length > 10) {
+                warningElement.innerText = "Warning: Input length exceeds 10 characters!";
+            } else {
+                warningElement.innerText = "";
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>40.Create a button that scrolls the page to a specific section.</h1>
+    <button onclick="scrollToSection()">Scroll to Section</button>
+    <div id="section" style="height: 1000px;">
+        <p>This is the target section.</p>
+    </div>
+    <script>
+        function scrollToSection() {
+            document.getElementById("section").scrollIntoView({ behavior: "smooth" });
+        }
+    </script>   
+    <br><hr><br>
+    <h1>41.Create a form and log all input values to the console on submit.</h1>
+    <form onsubmit="logFormValues(event)">
+        <input type="text" id="formInput" placeholder="Enter something">
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        function logFormValues(event) {
+            event.preventDefault();
+            let inputValue = document.getElementById("formInput").value;
+            console.log("Form input value:", inputValue);
+        }
+    </script>   
+    <br><hr><br>
+    <h1>42.Toggle between two text values on button click.</h1>
+    <p id="toggleParagraph">Text A</p>
+    <button onclick="toggleText()">Toggle Text</button> 
+    <script>
+        function toggleText() {
+            let paragraph = document.getElementById("toggleParagraph");
+            if (paragraph.innerText === "Hello JavaScript") {
+                paragraph.innerText = "Hai JavaScript";
+            } else {
+                paragraph.innerText = "Hello JavaScript";
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>43.Create a simple FAQ section with show/hide answers</h1>
+    <div class="faq">
+        <div class="faq-question" onclick="toggleAnswer(this)">What is JavaScript?</div>
+        <div class="faq-answer" style="display: none;">JavaScript is a programming language that enables interactive web pages.</div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            let answer = element.nextElementSibling;
+            if (answer.style.display === "none") {
+                answer.style.display = "block";
+            } else {
+                answer.style.display = "none";
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>44.Display a message when the user copies text from the page.</h1>  
+    <p id="copyText">Try copying this text.</p>
+    <script>
+        document.getElementById("copyText").addEventListener("copy", function() {
+            alert("Text copied!");
+        });
+    </script>
+    <br><hr><br>
+    <h1>45.Convert text entered by the user to uppercase using JavaScript.</h1>
+    <input type="text" id="userInput" placeholder="Enter text">
+    <button onclick="convertToUppercase()">Convert to Uppercase</button>
+    <p id="output"></p>
+    <script>
+        function convertToUppercase() {
+            let input = document.getElementById("userInput").value;
+            let output = document.getElementById("output");
+            output.innerText = input.toUpperCase();
+        }
+    </script>
+    <br><hr><br>
+    <h1>46.Count the number of words in a textarea.</h1>
+    <textarea id="wordCountInput" placeholder="Enter text here"></textarea>
+    <button onclick="countWords()">Count Words</button>
+    <p id="wordCountOutput"></p>
+    <script>
+        function countWords() {
+            let input = document.getElementById("wordCountInput").value;
+            let wordCount = input.trim() === "" ? 0 : input.trim().split(/\s+/).length;
+            document.getElementById("wordCountOutput").innerText = "Word count: " + wordCount;
+        }
+    </script>
+    <br><hr><br>
+    <h1>47.Disable all input fields using a single button.</h1>
+    <input type="text" id="input1" placeholder="Input 1">
+    <input type="text" id="input2" placeholder="Input 2">
+    <button onclick="disableInputs()">Disable Inputs</button>
+    <script>
+        function disableInputs() {
+            let inputs = document.querySelectorAll("input");
+            inputs.forEach(input => {
+                input.disabled = true;
+            });
+        }
+    </script>
+    <br><hr><br>
+    <h1>48.Create a basic page layout using header, section, and footer tags.</h1>
+    <header style="background-color: lightgray; padding: 10px; text-align: center;">
+        <h1>My Website Header</h1>
+    </header>
+    <section style="padding: 10px;">
+        <h2>Welcome to My Website</h2>
+        <p>This is a simple page layout using header, section, and footer tags.</p> 
+    </section>
+    <footer style="background-color: lightgray; padding: 10px; text-align: center;">
+        <p>My Website Footer</p>
+    </footer>           
+    <br><hr><br>
+    <h1>49.Display a success message after form submission without page reload.</h1>
+    <form onsubmit="showSuccessMessage(event)">
+        <input type="text" id="formInput" placeholder="Enter something" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="successMessage" style="color:green;"></p>
+    <script>
+        function showSuccessMessage(event) {
+            event.preventDefault();
+            document.getElementById("successMessage").innerText = "Form submitted successfully!";
+        }
+    </script>
+    <br><hr><br>
+    <h1>50.Change the page title dynamically using JavaScript.</h1>
+    <input type="text" id="titleInput" placeholder="Enter new title">
+    <button onclick="changePageTitle()">Change Title</button>
+    <script>
+        function changePageTitle() {
+            let newTitle = document.getElementById("titleInput").value;
+            document.title = newTitle;
+        }
+    </script>
+    <br><hr><br>                                                                                    
+  </body>
+</html>
