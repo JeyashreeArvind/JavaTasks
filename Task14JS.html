@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks -14</title>
+    <style>
+        .dark-mode {
+        background-color: #121212;
+        color: white;
+    }
+    img{
+        width:25%;
+        height:auto;
+    }
+    </style>
+</head>
+<body>
+<h1>1.Create variables using var, let, and const to store your name and print a greeting</h1>
+<script>
+    var nameVar = "Shree";
+    let nameLet = "Shree";
+    const nameConst = "Shree";
+
+    const greeting = "Hello, " + nameConst + "!";
+    console.log(greeting);
+    document.write(greeting);
+</script>   
+<br><hr><br>
+<h1>2.Create variables of different types and log their types using typeof</h1>
+<script>
+    let str = "Hello, World!";
+    let num = 42;
+    let bool = true;
+    let obj = {name: "Shree", age: 25};
+    let arr = [1, 2, 3, 4, 5];
+
+    console.log(typeof str); // string
+    console.log(typeof num); // number
+    console.log(typeof bool); // boolean
+    console.log(typeof obj); // object
+    console.log(typeof arr); 
+    document.write(typeof str); // string
+    document.write("<br>",typeof num); // number
+    document.write("<br>",typeof bool); // boolean
+    document.write("<br>",JSON.stringify(obj)); // object
+    document.write("<br>",JSON.stringify(arr)); 
+</script>
+<br><hr><br>
+<h1>3.Create variables for two numbers and perform all basic arithmetic operations</h1>
+<script>
+    let a = 10;
+    let b = 5;
+
+    console.log("Addition: " + (a + b));
+    console.log("Subtraction: " + (a - b));
+    console.log("Multiplication: " + (a * b));
+    console.log("Division: " + (a / b));
+    console.log("Modulus: " + (a % b));
+    document.write("Addition: " + (a + b));
+    document.write("<br>Subtraction: " + (a - b));
+    document.write("<br>Multiplication: " + (a * b));
+    document.write("<br>Division: " + (a / b));
+    document.write("<br>Modulus: " + (a % b));
+</script>
+<br><hr><br>
+<h1>4.Take a string variable and practice concatenation, getting length, and extracting parts</h1>
+<script>
+    let strVar = "Hello, JavaScript!";
+    
+    // Concatenation
+    let concatStr = strVar + " How are you?";
+    console.log(concatStr);
+    console.log("<br>Length of string: " + strVar.length);
+    document.write(concatStr);
+    document.write("<br>Length of string: " + strVar.length);
+    
+    // Extracting parts
+    let partStr = strVar.slice(7, 17);
+    console.log("Extracted part: " + partStr);
+    document.write("<br>Extracted part: " + partStr);
+
+</script>
+<br><hr><br>
+<h1>5.Use template literals to create a formatted string with variables</h1>
+<script>
+    let firstName = "Shree";
+    let lastName = "Arvind";
+    let age = 35;
+
+    let formattedStr = `My name is ${firstName} ${lastName} and I am ${age} years old.`;
+    console.log(formattedStr);
+    document.write(formattedStr);
+</script>
+<br><hr><br>
+<h1>6.Write a program that checks if a number is even or odd</h1>
+<script>
+    let num1 = 10;
+    document.write("The number is: " + num1 + "<br>");
+    if (num1 % 2 === 0) {
+        console.log("Even");
+        document.write("Even");
+    } else {
+        console.log("Odd");
+        document.write("Odd");
+    }
+</script> 
+<br><hr><br>
+<h1>7.Assign a letter grade based on a numerical score</h1>
+<script>
+    let score = 85;
+    let grade;
+    document.write("The score is: " + score + "<br>");
+
+    if (score >= 90) {
+        grade = 'A';
+    } else if (score >= 80) {
+        grade = 'B';
+    } else if (score >= 70) {
+        grade = 'C';
+    } else if (score >= 60) {
+        grade = 'D';
+    } else {
+        grade = 'F';
+    }
+
+    console.log("The grade is: " + grade);
+    document.write("The grade is: " + grade);
+</script>
+<br><hr><br>
+<h1>8.Use a switch statement to print the day name based on a number (1-7)</h1>
+<script>
+    let dayNumber = 3;
+    let dayName;
+    document.write("The day number is: " + dayNumber + "<br>");
+
+    switch (dayNumber) {
+        case 1:
+            dayName = "Monday";
+            break;
+        case 2:
+            dayName = "Tuesday";
+            break;
+        case 3:
+            dayName = "Wednesday";
+            break;
+        case 4:
+            dayName = "Thursday";
+            break;
+        case 5:
+            dayName = "Friday";
+            break;
+        case 6:
+            dayName = "Saturday";
+            break;
+        case 7:
+            dayName = "Sunday";
+            break;
+        default:
+            dayName = "Invalid number";
+    }
+
+    console.log("The day is: " + dayName);
+    document.write("The day is: " + dayName);
+</script>   
+<br><hr><br>
+<h1>9.Determine if a year is a leap year</h1>
+<script>
+    let year = 2024;
+    let isLeapYear = false;
+    document.write("The year is: " + year + "<br>");
+
+    if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+        isLeapYear = true;
+    }
+
+    if (isLeapYear) {
+        console.log(year + " is a leap year.");
+        document.write(year + " is a leap year.");
+    } else {
+        console.log(year + " is not a leap year.");
+        document.write(year + " is not a leap year.");
+    }
+</script>
+<br><hr><br>
+<h1>10.Categorize age into child, teenager, adult, senior</h1>
+<script>
+    let age1 = 45;
+    let category;
+    document.write("The age is: " + age1 + "<br>");
+
+    if (age1 >= 0 && age1 <= 12) {
+        category = "Child";
+    } else if (age1 >= 13 && age1 <= 19) {
+        category = "Teenager";
+    } else if (age1 >= 20 && age1 <= 59) {
+        category = "Adult";
+    } else if (age1 >= 60) {
+        category = "Senior";
+    } else {
+        category = "Invalid age";
+    }
+
+    console.log("Age category: " + category);
+    document.write("Age category: " + category);
+</script>
+<br><hr><br>
+<h1>11.Print multiplication table for a given number</h1>
+<script>
+    let tableNum = 7;
+    document.write("Multiplication Table for " + tableNum + ":<br>");
+
+    for (let i = 1; i <= 10; i++) {
+        let result = tableNum * i;
+        console.log(tableNum + " x " + i + " = " + result);
+        document.write(tableNum + " x " + i + " = " + result + "<br>");
+    }           
+</script>
+<br><hr><br>
+<h1>12.Create a pyramid pattern using numbers with nested loops</h1>
+<script>
+    let rows = 5;
+    document.write("Pyramid Pattern:<br>");
+
+    for (let i = 1; i <= rows; i++) {
+        let pattern = '';
+        for (let j = 1; j <= i; j++) {
+            pattern += j + ' ';
+        }
+        console.log(pattern);
+        document.write(pattern + "<br>");
+    }
+</script>
+<br><hr><br>
+<h1>13.Calculate the sum of numbers from 1 to N using a loop</h1>
+<script>
+    let N = 10;
+    let sum = 0;
+    document.write("Calculating sum from 1 to " + N + ":<br>");
+
+    for (let i = 1; i <= N; i++) {
+        sum += i;
+    }
+
+    console.log("The sum is: " + sum);
+    document.write("The sum is: " + sum);       
+</script>
+<br><hr><br>
+<h1>14.Print numbers 1-100, but for multiples of 3 print "Fizz", multiples of 5 print "Buzz", for both print "FizzBuzz"</h1>
+<script>
+    document.write("FizzBuzz from 1 to 100:<br>");
+
+    for (let i = 1; i <= 100; i++) {
+        let output = '';
+        if (i % 3 === 0) output += 'Fizz';
+        if (i % 5 === 0) output += 'Buzz';
+        if (output === '') output = i;
+        
+        console.log(output);
+        document.write(output + "<br>");
+    }
+</script>
+<br><hr><br>    
+<h1>15.Reverse a string using a loop without built-in methods</h1>
+<script>
+    let originalStr = "JavaScript";
+    let reversedStr = '';
+    document.write("Original String: " + originalStr + "<br>");
+
+    for (let i = originalStr.length - 1; i >= 0; i--) {
+        reversedStr += originalStr[i];
+    }
+
+    console.log("Reversed String: " + reversedStr);
+    document.write("Reversed String: " + reversedStr);
+</script>
+<br><hr><br>
+<h1>16.Create an array, add/remove elements, find length, access elements</h1>
+<script>
+    let arr1 = [10, 20, 30, 40, 50];
+    document.write("Original Array: " + JSON.stringify(arr1) + "<br>");
+
+    // Add element
+    arr1.push(60);
+    document.write("After Adding 60: " + JSON.stringify(arr1) + "<br>");
+
+    // Remove element
+    arr1.pop();
+    document.write("After Removing last element: " + JSON.stringify(arr1) + "<br>");        
+    // Find length
+    let length = arr.length;
+    document.write("Length of Array: " + length + "<br>");
+
+    // Access elements
+    let firstElement = arr1[0];
+    let thirdElement = arr1[2];
+    document.write("First Element: " + firstElement + "<br>");
+    document.write("Third Element: " + thirdElement + "<br>");
+</script>
+<br><hr><br>
+<h1>17.Find the largest number in an array</h1>
+<script>
+    let numbers = [34, 67, 23, 89, 12, 90, 45];
+    let largest = numbers[0];
+    document.write("Array: " + JSON.stringify(numbers) + "<br>");
+
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] > largest) {
+            largest = numbers[i];
+        }
+    }
+
+    console.log("The largest number is: " + largest);
+    document.write("The largest number is: " + largest);    
+</script>
+<br><hr><br>
+<h1>18.Calculate sum and average of array elements</h1>
+<script>
+    let nums = [10, 20, 30, 40, 50];
+    let total = 0;
+    document.write("Array: " + JSON.stringify(nums) + "<br>");
+
+    for (let i = 0; i < nums.length; i++) {
+        total += nums[i];
+    }
+
+    let average = total / nums.length;
+
+    console.log("Sum: " + total);
+    console.log("Average: " + average);
+    document.write("Sum: " + total + "<br>");
+    document.write("Average: " + average);
+</script>
+<br><hr><br>
+<h1>19.Create new array with only even numbers</h1>
+<script>
+    let mixedNumbers = [11, 22, 33, 44, 55, 66, 77, 88, 99];
+    let evenNumbers = [];
+    document.write("Original Array: " + JSON.stringify(mixedNumbers) + "<br>");
+
+    for (let i = 0; i < mixedNumbers.length; i++) {
+        if (mixedNumbers[i] % 2 === 0) {
+            evenNumbers.push(mixedNumbers[i]);
+        }
+    }
+
+    console.log("Even Numbers: " + JSON.stringify(evenNumbers));
+    document.write("Even Numbers: " + JSON.stringify(evenNumbers)); 
+</script>
+<br><hr><br>
+<h1>20.Check if a specific value exists in an array</h1>
+<script>
+    let fruits = ["apple", "banana", "orange", "mango", "grape"];
+    let searchFruit = "mango";
+    let found = false;
+    document.write("Fruits Array: " + JSON.stringify(fruits) + "<br>");
+    document.write("Searching for: " + searchFruit + "<br>");
+
+    for (let i = 0; i < fruits.length; i++) {
+        if (fruits[i] === searchFruit) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found) {
+        console.log(searchFruit + " exists in the array.");
+        document.write(searchFruit + " exists in the array.");
+    } else {
+        console.log(searchFruit + " does not exist in the array.");
+        document.write(searchFruit + " does not exist in the array.");
+    }       
+</script>
+<br><hr><br>
+<h1>21.Write a function that checks if a string is a palindrome</h1>
+<script>
+    function isPalindrome(str) {
+        let len = str.length;
+        for (let i = 0; i < len / 2; i++) {
+            if (str[i] !== str[len - 1 - i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    let testStr = "madam";
+    document.write("Testing string: " + testStr + "<br>");
+
+    if (isPalindrome(testStr)) {
+        console.log(testStr + " is a palindrome.");
+        document.write(testStr + " is a palindrome.");
+    } else {
+        console.log(testStr + " is not a palindrome.");
+        document.write(testStr + " is not a palindrome.");
+    }
+</script>
+<br><hr><br>
+<h1>22.Create recursive and iterative factorial functions</h1>
+<script>
+    // Iterative factorial function
+    function iterativeFactorial(n) {
+        let result = 1;
+        for (let i = 2; i <= n; i++) {
+            result *= i;
+        }
+        return result;
+    }
+
+    // Recursive factorial function
+    function recursiveFactorial(n) {
+        if (n === 0 || n === 1) {
+            return 1;
+        }
+        return n * recursiveFactorial(n - 1);
+    }
+
+    let number = 5;
+    document.write("Calculating factorial for: " + number + "<br>");
+
+    let iterativeResult = iterativeFactorial(number);
+    let recursiveResult = recursiveFactorial(number);
+
+    console.log("Iterative Factorial: " + iterativeResult);
+    console.log("Recursive Factorial: " + recursiveResult);
+    document.write("Iterative Factorial: " + iterativeResult + "<br>");
+    document.write("Recursive Factorial: " + recursiveResult);
+</script>
+<br><hr><br>
+<h1>23.Function to determine if a number is prime</h1>
+<script>
+    function isPrime(num) {
+        if (num <= 1) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    let primeTestNum = 29;
+    document.write("Testing number: " + primeTestNum + "<br>");
+
+    if (isPrime(primeTestNum)) {
+        console.log(primeTestNum + " is a prime number.");
+        document.write(primeTestNum + " is a prime number.");
+    } else {
+        console.log(primeTestNum + " is not a prime number.");
+        document.write(primeTestNum + " is not a prime number.");
+    }
+</script>
+<br><hr><br>
+<h1>24.Generate Fibonacci sequence up to N terms</h1>
+<script>
+    let N1 = 10;
+    let fibSequence = [0, 1];
+    document.write("Fibonacci Sequence up to " + N1 + " terms:<br>");
+
+    for (let i = 2; i < N1  ; i++) {
+        fibSequence[i] = fibSequence[i - 1] + fibSequence[i - 2];
+    }
+
+    console.log("Fibonacci Sequence: " + JSON.stringify(fibSequence));
+    document.write(JSON.stringify(fibSequence));
+</script>
+<br><hr><br>
+<h1>25.Function that validates password (min 8 chars, has uppercase, lowercase, number)</h1>
+<script>
+    function validatePassword(password) {
+        const minLength = 8;
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasLowercase = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+
+        if (password.length >= minLength && hasUppercase && hasLowercase && hasNumber) {
+            return true;
+        }
+        return false;
+    }
+
+    let testPassword = "Password123";
+    document.write("Testing password: " + testPassword + "<br>");
+
+    if (validatePassword(testPassword)) {
+        console.log("Password is valid.");
+        document.write("Password is valid.");
+    } else {
+        console.log("Password is invalid.");
+        document.write("Password is invalid.");
+    }
+</script>
+<br><hr><br>
+<h1>26.Remove duplicate values from an array</h1>
+<script>
+    let arrayWithDuplicates = [1, 2, 3, 2, 4, 5, 1, 6];
+    let uniqueArray = [];
+    document.write("Original Array: " + JSON.stringify(arrayWithDuplicates) + "<br>");
+
+    for (let i = 0; i < arrayWithDuplicates.length; i++) {
+        if (!uniqueArray.includes(arrayWithDuplicates[i])) {
+            uniqueArray.push(arrayWithDuplicates[i]);
+        }
+    }
+
+    console.log("Array without duplicates: " + JSON.stringify(uniqueArray));
+    document.write("Array without duplicates: " + JSON.stringify(uniqueArray));
+</script>
+<br><hr><br>
+<h1>27.Sort array of numbers without sort() method</h1>
+<script>
+    let unsortedArray = [34, 7, 23, 32, 5, 62];
+    document.write("Unsorted Array: " + JSON.stringify(unsortedArray) + "<br>");
+
+    // Bubble Sort Algorithm
+    for (let i = 0; i < unsortedArray.length - 1; i++) {
+        for (let j = 0; j < unsortedArray.length - 1 - i; j++) {
+            if (unsortedArray[j] > unsortedArray[j + 1]) {
+                // Swap
+                let temp = unsortedArray[j];
+                unsortedArray[j] = unsortedArray[j + 1];
+                unsortedArray[j + 1] = temp;
+            }
+        }
+    }
+
+    console.log("Sorted Array: " + JSON.stringify(unsortedArray));
+    document.write("Sorted Array: " + JSON.stringify(unsortedArray));
+</script>
+<br><hr><br>
+<h1>28.Find two numbers in array that add up to target sum</h1>
+<script>
+    let numArray = [10, 15, 3, 7];
+    let targetSum = 17;
+    let foundPair = false;
+    document.write("Array: " + JSON.stringify(numArray) + "<br>");
+    document.write("Target Sum: " + targetSum + "<br>");
+
+    for (let i = 0; i < numArray.length; i++) {
+        for (let j = i + 1; j < numArray.length; j++) {
+            if (numArray[i] + numArray[j] === targetSum) {
+                console.log("Pair found: " + numArray[i] + " + " + numArray[j] + " = " + targetSum);
+                document.write("Pair found: " + numArray[i] + " + " + numArray[j] + " = " + targetSum);
+                foundPair = true;
+            }
+        }
+    }
+
+    if (!foundPair) {
+        console.log("No pair found that adds up to the target sum.");
+        document.write("No pair found that adds up to the target sum.");
+    }
+</script>
+<br><hr><br>
+<h1>29.Create and manipulate 2D arrays</h1>
+<script>
+    let matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ];
+    document.write("Original 2D Array (Matrix):<br>");
+    for (let i = 0; i < matrix.length; i++) {
+        document.write(JSON.stringify(matrix[i]) + "<br>");
+    }       
+    let transposedMatrix = [];
+    for (let i = 0; i < matrix[0].length; i++)
+    {
+        transposedMatrix[i] = [];
+        for (let j = 0; j < matrix.length; j++) {
+            transposedMatrix[i][j] = matrix[j][i];
+        }
+    }
+
+    document.write("Transposed 2D Array (Matrix):<br>");
+    for (let i = 0; i < transposedMatrix.length; i++) {
+        document.write(JSON.stringify(transposedMatrix[i]) + "<br>");
+    }
+</script>
+<br><hr><br>    
+<h1>30.Split array into chunks of specified size</h1>
+<script>
+    function chunkArray(arr, chunkSize) {
+        let chunks = [];
+        for (let i = 0; i < arr.length; i += chunkSize) {
+            let chunk = [];
+            for (let j = i; j < i + chunkSize && j < arr.length; j++) {
+                chunk.push(arr[j]);
+            }
+            chunks.push(chunk);
+        }
+        return chunks;
+    }
+
+    let originalArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let size = 3;
+    document.write("Original Array: " + JSON.stringify(originalArray) + "<br>");
+    document.write("Chunk Size: " + size + "<br>");
+
+    let chunkedArray = chunkArray(originalArray, size);
+
+    console.log("Chunked Array: " + JSON.stringify(chunkedArray));
+    document.write("Chunked Array: " + JSON.stringify(chunkedArray));
+</script>
+<br><hr><br>
+<h1>31.Create person object with properties/methods, modify, delete, iterate</h1>
+<script>
+    let person = {
+        name: "Shree",
+        age: 35,
+        greet: function() {
+            return "Hello, my name is " + this.name;
+        }
+    };
+
+    document.write("Person Object:<br>");
+    document.write("Name: " + person.name + "<br>");
+    document.write("Age: " + person.age + "<br>");
+    document.write(person.greet() + "<br>");
+
+    // Modify property
+    person.age = 36;
+    document.write("After modifying age:<br>");
+    document.write("Age: " + person.age + "<br>");
+
+    // Delete property
+    delete person.name;
+    document.write("After deleting name property:<br>");
+    for (let key in person) {
+        document.write(key + ": " + person[key] + "<br>");
+    }   
+</script>
+<br><hr><br>
+<h1>32.Create product objects, calculate total value</h1>
+<script>
+    let products = [
+        {name: "Laptop", price: 800, quantity: 2},
+        {name: "Phone", price: 500, quantity: 3},
+        {name: "Tablet", price: 300, quantity: 4}
+    ];
+
+    let totalValue = 0;
+    document.write("Products:<br>");
+    for (let i = 0; i < products.length; i++) {
+        let productValue = products[i].price * products[i].quantity;
+        totalValue += productValue;
+        document.write(products[i].name + ": $" + products[i].price + " x " + products[i].quantity + " = $" + productValue + "<br>");
+    }
+
+    console.log("Total Inventory Value: $" + totalValue);
+    document.write("Total Inventory Value: $" + totalValue);
+</script>
+<br><hr><br>
+<h1>33.Object with array of grades, calculate average, find highest/lowest</h1>
+<script>
+    let student = {
+        name: "Shree",
+        grades: [85, 92, 78, 90, 88]
+    };
+
+    let totalGrades = 0;
+    let highestGrade = student.grades[0];
+    let lowestGrade = student.grades[0];
+
+    for (let i = 0; i < student.grades.length; i++) {
+        totalGrades += student.grades[i];
+        if (student.grades[i] > highestGrade) {
+            highestGrade = student.grades[i];
+        }
+        if (student.grades[i] < lowestGrade) {
+            lowestGrade = student.grades[i];
+        }
+    }
+
+    let averageGrade = totalGrades / student.grades.length;
+
+    console.log("Student Name: " + student.name);
+    console.log("Average Grade: " + averageGrade);
+    console.log("Highest Grade: " + highestGrade);
+    console.log("Lowest Grade: " + lowestGrade);
+
+    document.write("Student Name: " + student.name + "<br>");
+    document.write("Average Grade: " + averageGrade + "<br>");
+    document.write("Highest Grade: " + highestGrade + "<br>");
+    document.write("Lowest Grade: " + lowestGrade + "<br>");    
+</script>
+<br><hr><br>
+<h1>34.Create function to deeply copy nested objects</h1>
+<script>
+    function deepCopy(obj) {
+        if (obj === null || typeof obj !== "object") {
+            return obj;
+        }
+        let copy = Array.isArray(obj) ? [] : {};
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                copy[key] = deepCopy(obj[key]);
+            }
+        }
+        return copy;
+    }
+
+    let originalObject = {
+        name: "Shree",
+        address: {
+            street: "123 Main St",
+            city: "New York"
+        },
+        hobbies: ["reading", "swimming"]
+    };
+
+    let copiedObject = deepCopy(originalObject);
+
+    console.log("Original Object:", originalObject);
+    console.log("Copied Object:", copiedObject);
+
+    document.write("Original Object: " + JSON.stringify(originalObject) + "<br>");
+    document.write("Copied Object: " + JSON.stringify(copiedObject) + "<br>");
+</script>
+<br><hr><br>    
+<h1>35.Combine multiple objects into one</h1>
+<script>
+    let obj1 = {a: 1, b: 2};
+    let obj2 = {b: 3, c: 4};
+    let obj3 = {d: 5};
+    document.write("Object 1: " + JSON.stringify(obj1) + "<br>");
+    document.write("Object 2: " + JSON.stringify(obj2) + "<br>");   
+    document.write("Object 3: " + JSON.stringify(obj3) + "<br>");
+
+    let combinedObject = {};
+
+    for (let key in obj1) {
+        combinedObject[key] = obj1[key];
+    }
+    for (let key in obj2) {
+        combinedObject[key] = obj2[key];
+    }
+    for (let key in obj3) {
+        combinedObject[key] = obj3[key];
+    }
+
+    console.log("Combined Object:", combinedObject);
+    document.write("Combined Object: " + JSON.stringify(combinedObject) + "<br>");  
+</script>
+<br><hr><br>
+<h1>36.Create interactive list where users can add/remove items</h1>
+<script>
+    let itemList = [];
+
+    function addItem() {
+        let newItem = prompt("Enter an item to add:");
+        if (newItem) {
+            itemList.push(newItem);
+            displayList();
+        }
+    }
+
+    function removeItem() {
+        let itemToRemove = prompt("Enter an item to remove:");
+        let index = itemList.indexOf(itemToRemove);
+        if (index !== -1) {
+            itemList.splice(index, 1);
+            displayList();
+        } else {
+            alert("Item not found in the list.");
+        }
+    }
+
+    function displayList() {
+        document.getElementById("itemList").innerHTML = "<ul>" + itemList.map(item => "<li>" + item + "</li>").join('') + "</ul>";
+    }       
+</script>
+<button onclick="addItem()">Add Item</button>
+<button onclick="removeItem()">Remove Item</button>
+<div id="itemList"></div>
+<br><hr><br>
+<h1>37.Create dark/light mode toggle</h1>
+<script>
+    function toggleMode() {
+        let body = document.body;
+        body.classList.toggle("dark-mode");
+    }   
+</script>
+<button onclick="toggleMode()">Toggle Dark/Light Mode</button>    
+<br><hr><br>
+<h1>38.Validate form inputs with real-time feedback</h1>
+<form>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" oninput="validateUsername()">
+    <span id="usernameFeedback"></span><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" oninput="validateEmail()">
+    <span id="emailFeedback"></span><br><br>
+    <input type="submit" value="Submit">
+</form>
+<script>
+    function validateUsername() {
+        let username = document.getElementById("username").value;
+        let feedback = document.getElementById("usernameFeedback");
+        if (username.length < 5) {
+            feedback.textContent = "Username must be at least 5 characters long.";
+            feedback.style.color = "red";
+        } else {
+            feedback.textContent = "Valid username.";
+            feedback.style.color = "green";
+        }
+    }
+
+    function validateEmail() {
+        let email = document.getElementById("email").value;
+        let feedback = document.getElementById("emailFeedback");
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            feedback.textContent = "Invalid email format.";
+            feedback.style.color = "red";
+        } else {
+            feedback.textContent = "Valid email.";
+            feedback.style.color = "green";
+        }
+    }
+</script>
+<br><hr><br>
+<h1>39.Create increment/decrement counter with buttons</h1>
+<div>
+    <button onclick="decrement()">-</button>
+    <span id="counterValue">0</span>
+    <button onclick="increment()">+</button>    
+</div>
+<script>
+    let counter = 0;
+
+    function increment() {
+        counter++;
+        document.getElementById("counterValue").textContent = counter;
+    }
+
+    function decrement() {
+        counter--;
+        document.getElementById("counterValue").textContent = counter;
+    }
+</script>
+<br><hr><br>
+<h1>40.Simple gallery with next/previous buttons</h1>
+<div>
+    <button onclick="previousImage()">Previous</button>
+    <img id="galleryImage" src="bird.jpg" alt="Gallery Image">
+    <button onclick="nextImage()">Next</button>
+</div>
+<script>
+    let images = [
+        "peacock1.jpg",
+        "swan.jpg",
+        "bird.jpg",
+    ];
+    let currentIndex = 0;
+
+    function showImage(index) {
+        document.getElementById("galleryImage").src = images[index];
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+    }
+
+    function previousImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
+    }   
+</script>
+<br><hr><br>
+<h1>41.Use spread operator to merge arrays/objects, rest for function parameters</h1>
+<script>
+    // Merging arrays using spread operator
+    let array1 = [1, 2, 3];
+    let array2 = [4, 5, 6];
+    let mergedArray = [...array1, ...array2];
+    console.log("Merged Array: " + JSON.stringify(mergedArray));
+    document.write("Merged Array: " + JSON.stringify(mergedArray) + "<br>");
+
+    // Merging objects using spread operator
+    let objA = {x: 1, y: 2};
+    let objB = {y: 3, z: 4};
+    let mergedObject = {...objA, ...objB};
+    console.log("Merged Object: " + JSON.stringify(mergedObject));
+    document.write("Merged Object: " + JSON.stringify(mergedObject) + "<br>");
+
+    // Using rest parameters in function
+    function sumAll(...numbers) {
+        return numbers.reduce((acc, curr) => acc + curr, 0);
+    }
+
+    let totalSum = sumAll(1, 2, 3, 4, 5);
+    console.log("Total Sum: " + totalSum);
+    document.write("Total Sum: " + totalSum + "<br>");
+</script>
+<br><hr><br>
+<h1>42.Extract values from arrays/objects using destructuring</h1>
+<script>
+    // Array destructuring
+    let rgb = [255, 0, 0];
+    let [red, green, blue] = rgb;
+    console.log("Red: " + red + ", Green: " + green + ", Blue: " + blue);
+    document.write("Red: " + red + ", Green: " + green + ", Blue: " + blue + "<br>");
+
+    // Object destructuring
+    let personObj = {
+        firstName: "Shree",
+        lastName: "Arvind",
+        age: 35
+    };
+    let {firstName1, lastName1, age2} = personObj;
+    console.log("First Name: " + firstName1 + ", Last Name: " + lastName1 + ", Age: " + age2);
+    document.write("First Name: " + firstName1 + ", Last Name: " + lastName1 + ", Age: " + age2 + "<br>");
+</script>
+<br><hr><br>
+<h1>43.Use Map and Set data structures for specific problems</h1>
+<script>
+    // Using Map to store key-value pairs
+    let fruitMap = new Map();
+    fruitMap.set("apple", 1);
+    fruitMap.set("banana", 2);
+    fruitMap.set("orange", 3);
+
+    console.log("Fruit Map:");
+    fruitMap.forEach((value, key) => {
+        console.log(key + ": " + value);
+    });
+    document.write("Fruit Map:<br>");
+    fruitMap.forEach((value, key) => {
+        document.write(key + ": " + value + "<br>");
+    });
+
+    // Using Set to store unique values
+    let numberSet = new Set([1, 2, 2, 3, 4, 4, 5]);
+    console.log("Number Set:");
+    numberSet.forEach(value => {
+        console.log(value);
+    });
+    document.write("Number Set:<br>");
+    numberSet.forEach(value => {
+        document.write(value + "<br>");
+    });
+</script>
+<br><hr><br>
+<h1>44.Create promise that resolves/rejects based on conditions</h1>
+<script>
+    function checkNumber(num) {
+        return new Promise((resolve, reject) => {
+            if (num % 2 === 0) {
+                resolve(num + " is even.");
+            } else {
+                reject(num + " is odd.");
+            }
+        });
+    }
+
+    let testNum = 10;
+    document.write("Testing number: " + testNum + "<br>");
+
+    checkNumber(testNum)
+        .then(message => {
+            console.log("Resolved: " + message);
+            document.write("Resolved: " + message + "<br>");
+        })
+        .catch(error => {
+            console.log("Rejected: " + error);
+            document.write("Rejected: " + error + "<br>");
+        });
+</script>
+<br><hr><br>
+<h1>45.Fetch data from mock API using async/await</h1>
+<button onclick="fetchData()">Fetch Data</button>   
+<script>
+    async function fetchData() {
+        try {
+            let response = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+            let data = await response.json();   
+            console.log("Fetched Data:", data);
+            document.write("Fetched Data:<br>" + JSON.stringify(data) + "<br>");
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            document.write("Error fetching data: " + error + "<br>");
+        }
+    }   
+  
+</script>   
+<br><hr><br>
+</body>
+</html>
