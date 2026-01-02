@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks -Day 17</title>
+    <link id="favicon" rel="icon" href="default-favicon.ico" type="image/x-icon">
+    <link id="dynamic-favicon" rel="icon" href="default-favicon.ico" type="image/x-icon">
+    <script>
+    function hideParagraphs() {
+        var paragraphs = document.getElementsByTagName('p');
+        for (var i = 0; i < paragraphs.length; i++) {
+            paragraphs[i].style.display = 'none';
+        }
+    }
+</script>
+    <style>
+        /* Basic styling for the navigation bar */
+nav ul {
+    list-style-type: none; /* Removes bullet points */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+nav li {
+    float: left; /* Makes the menu horizontal */
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin-left: 250px;
+}
+
+/* Change the background color on hover */
+nav li a:hover {
+    background-color: #111;
+}
+
+/* Style for the active (clicked/current) link */
+nav li a.active {
+    background-color: #4CAF50; /* Highlight color */
+    color: white;
+}
+
+    .hidden-paragraph {
+            display: none; /* Hides the element and removes it from the document flow */
+        }
+     #widthToggle {
+            display: none;
+        }
+
+        /* Style the label to look like a button */
+        .toggle-label {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-label:hover {
+            background-color: #0056b3;
+        }
+
+        /* Initial state of the div */
+        .resizable-div {
+            width: 100px;
+            height: 100px;
+            background-color: #28a745;
+            transition: width 0.5s ease; /* Smooth transition for the width change */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* State when the checkbox is checked */
+        /* When the input (widthToggle) is checked, the sibling div (resizable-div) changes its width */
+        #widthToggle:checked ~ .resizable-div {
+            width: 300px; /* New, increased width */
+        }
+
+        /* Change button text based on state (optional visual enhancement) */
+        #widthToggle:checked + .toggle-label::before {
+            content: 'Shrink Div';
+        }
+
+        #widthToggle:not(:checked) + .toggle-label::before {
+            content: 'Increase Width';
+        }
+        .container {
+            width: 50%;
+            margin: 20px auto;
+            text-align: center;
+        }
+        #textParagraph {
+            padding: 10px;
+            border: 1px solid #ccc;
+            /* Start with left alignment */
+            text-align: left; 
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        .styled-list {
+  
+  list-style-type: upper-roman; 
+  color: #0000ff; 
+  margin-left: 40px; 
+  padding: 10px;
+}
+
+.styled-list li {
+  
+  font-size: 18px;
+  padding: 5px 0; 
+}
+.error-message {
+            color: red;
+            display: none; /* Hide the message initially */
+            margin-top: 10px;
+        }
+        .large-text {
+    font-size: 20px; /* Or any other size */
+}
+.clock-container {
+            font-family: monospace;
+            font-size: 2rem;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: fit-content;
+            margin: 50px auto;
+        }
+#colorBox {
+    width: 200px;
+    height: 200px;
+    background-color: lightblue; /* Initial color */
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* New class to apply the toggled color */
+.toggled {
+    background-color: lightcoral !important;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+table {
+    /* Collapses the borders of adjacent cells into a single border */
+    border-collapse: collapse; 
+    width: 50%; /* Optional: Adjusts table width */
+    margin: 20px 0; /* Optional: Adds some space around the table */
+}
+
+/* Apply a 1px solid black border to the table, table headers, and table data cells */
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px; /* Optional: Adds space between content and border */
+    text-align: left; /* Optional: Aligns text to the left */
+}
+
+thead th {
+    background-color: #f2f2f2; /* Optional: Shades the header row */
+}
+#mouse-area {
+            width: 200px;
+            height: 100px;
+            border: 2px solid blue;
+            padding: 10px;
+            text-align: center;
+            background-color: lightblue;
+        }
+        #message-area {
+            margin-top: 10px;
+            color: red;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            display: none; /* Hide by default */
+        }
+        #scrollToTopBtn {
+            /* Position the button fixed at the bottom right */
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99; /* Make sure it doesn't overlap other things */
+            border: none;
+            outline: none;
+            background-color: #007BFF; /* Blue background */
+            color: white; /* White text/icon */
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        #myDiv {
+            width: 100px;
+            height: 100px; /* Initial height */
+            background-color: rgb(27, 218, 122);
+            transition: height 0.5s ease; /* Smooth transition for height change */
+            margin-top: 10px;
+        }
+        .body-container {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure container fills the body height */
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+header, footer {
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+.main-content {
+    display: flex;
+    flex: 1; /* Allows main-content to grow and fill available vertical space */
+}
+
+article {
+    flex: 3; /* Article takes up more space than the sidebar (e.g., 3 parts) */
+    background-color: #f4f4f4;
+    padding: 1em;
+}
+
+aside {
+    flex: 1; /* Sidebar takes up one part of the space */
+    background-color: #ddd;
+    padding: 1em;
+    margin-left: 1em; /* Add some space between article and sidebar */
+}
+
+footer {
+    margin-top: 1em; /* Add space above the footer */
+}
+
+/* Basic styling for visualization */
+* {
+    box-sizing: border-box;
+}
+
+/* Make it responsive: stack columns vertically on small screens */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column; /* Stack vertically on smaller screens */
+    }
+
+    aside {
+        margin-left: 0;
+        margin-top: 1em;
+    }
+}
+
+        </style>
+</head>
+<body>
+    <h1>1.Create a webpage that shows a welcome message when it loads.</h1>
+    <p id="welcome">Loading...</p>
+
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {            
+        const msg = 'Welcome to my webpage!';
+        document.getElementById('welcome').textContent = msg;
+    });
+    </script>
+    <br><hr><br>
+    <h1>2.Create a button that changes the text color of a paragraph to red.</h1>
+        
+    <p id="colorParagraph">This is a paragraph that will change color.</p>
+    <button id="colorButton">Change Text Color to Red</button>
+
+    <script>
+    document.getElementById('colorButton').addEventListener('click', function() {
+        document.getElementById('colorParagraph').style.color = 'red';
+    });
+    </script>
+    <br><hr><br>
+    <h1>3.Create an input field and clear its value using a button.</h1>
+
+    <input id="textInput" type="text" placeholder="Enter text here">
+    <button id="clearButton">Clear</button>
+
+    <script>
+    document.getElementById('clearButton').addEventListener('click', function() {
+        const input = document.getElementById('textInput');
+        input.value = '';
+        input.focus();
+    });
+    </script>
+    <br><hr><br>
+    <h1>4.Show the current year using JavaScript.</h1>
+    <p>&copy; 2025-<span id="year"></span> By Your Company</p>
+
+<script>
+  // Wait for the DOM to load
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("year").textContent = new Date().getFullYear();
+  });
+</script>
+<br><hr><br>
+    <h1>5.Create two paragraphs and hide one of them using JavaScript.</h1>
+    <p id="paragraph1">
+        This is the first paragraph. It is visible by default. It provides an introduction
+        to the content that follows. This paragraph will always be displayed on the page.
+    </p>
+
+    <!-- Paragraph 2 (initially hidden) -->
+    <p id="paragraph2" class="hidden-paragraph">
+        This is the second paragraph. It is initially hidden using CSS and a class name.
+        You can make it appear or disappear using the button below and the JavaScript
+        function. It demonstrates how to control element visibility.
+    </p>
+
+    <!-- Button to toggle the visibility of the second paragraph -->
+    <button onclick="toggleParagraph()">Toggle Second Paragraph</button>
+
+    <!-- JavaScript code -->
+    <script>
+        function toggleParagraph() {
+            var paragraph = document.getElementById("paragraph2");
+            if (paragraph.style.display === "none" || getComputedStyle(paragraph).display === "none") {
+                paragraph.style.display = "block"; // Show the paragraph
+            } else {
+                paragraph.style.display = "none"; // Hide the paragraph
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>6.Create a button that increases the width of a div.</h1>
+    <input type="checkbox" id="widthToggle">
+
+    <!-- Label acts as the clickable button -->
+    <label for="widthToggle" class="toggle-label"></label>
+
+    <!-- The div whose width will change -->
+    <div class="resizable-div">
+        Watch my width change!
+    </div>
+    <br><hr><br>
+    <h1>7.Display the total number of characters typed in a textarea.</h1>
+    <h2>Character Counter Example</h2>
+
+    <textarea id="myTextarea" rows="4" cols="50" placeholder="Start typing here..."></textarea>
+    
+    <p>Total characters typed: <span id="charCount">0</span></p>
+
+    <script>
+        // Get references to the textarea and the counter span
+        const textarea = document.getElementById('myTextarea');
+        const counter = document.getElementById('charCount');
+
+        // Add an input event listener to the textarea
+        textarea.addEventListener('input', function() {
+            // Update the counter text with the current length of the textarea value
+            counter.textContent = textarea.value.length;
+        });
+    </script>
+    <br><hr><br>
+    <h1>8.Create a simple form and print form values in the console.</h1>
+    <h2>User Information Form</h2>
+    
+    <!-- The form element with an ID for easy access in JS -->
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <!-- A button to submit the form -->
+        <button type="submit">Submit</button>
+    </form>
+   <script>
+    const myForm = document.getElementById('myForm');
+
+// Add an event listener for the 'submit' event
+myForm.addEventListener('submit', function (event) {
+    // Prevent the default form submission which reloads the page
+    event.preventDefault();
+
+    // Get the values from the input fields
+    const nameValue = document.getElementById('name').value;
+    const emailValue = document.getElementById('email').value;
+
+    // Print the collected values to the browser's console
+    console.log('--- Form Values ---');
+    console.log('Name:', nameValue);
+    console.log('Email:', emailValue);
+    console.log('-------------------');
+});
+   </script>
+   <br><hr><br>
+   <h1>9.Change the background color of the body when a checkbox is checked.</h1>
+   <label>
+        <input type="checkbox" id="colorToggle" onchange="changeBackground()">
+        Check this box to change the background color
+    </label>
+    <script>
+        function changeBackground() {
+    const checkbox = document.getElementById('colorToggle');
+    const body = document.body;
+
+    if (checkbox.checked) {
+        body.style.backgroundColor = '#e0f7fa'; // A light blue color
+    } else {
+        body.style.backgroundColor = '#ffffff'; // White (default color)
+    }
+}
+    </script>
+    <br><hr><br>
+    <h1>10.Create a button that changes the text alignment of a paragraph.</h1>
+    <div class="container">
+        <!-- The paragraph whose alignment will change -->
+        <p id="textParagraph">
+            This is an example paragraph. Clicking the button below will cycle its text alignment between left, center, and right. Observe how the text shifts within its container.
+        </p>
+
+        <!-- The button that triggers the JavaScript function -->
+        <button onclick="changeAlignment()">Change Alignment</button>
+    </div>
+
+    <script>
+        // JavaScript function to handle the alignment change
+        function changeAlignment() {
+            // Get the paragraph element by its ID
+            const paragraph = document.getElementById('textParagraph');
+            
+            // Get the current alignment style
+            const currentAlignment = paragraph.style.textAlign;
+
+            // Use a switch statement to cycle through alignment options
+            switch (currentAlignment) {
+                case 'center':
+                    paragraph.style.textAlign = 'right';
+                    break;
+                case 'right':
+                    paragraph.style.textAlign = 'left';
+                    break;
+                case 'left':
+                // Falls through to default if 'left' or an empty string (initial state)
+                default:
+                    paragraph.style.textAlign = 'center';
+                    break;
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>11.Create an ordered list and style it using CSS.</h1>
+    <ol class="styled-list">
+  <li>First item</li>
+  <li>Second item</li>
+  <li>Third item</li>
+  <li>Fourth item</li>
+</ol>
+<br><hr><br>
+<h1>12.Display the length of the input value when a button is clicked.</h1>
+<h2>Display Input Value Length</h2>
+
+    <label for="myInput">Enter text:</label>
+    <!-- 1. The input field with a specific ID -->
+    <input type="text" id="myInput">
+    
+    <!-- 2. The button that triggers the JavaScript function -->
+    <button onclick="displayLength()">Get Length</button>
+    
+    <!-- 3. An area to display the result -->
+    <p>The length of the input is: <strong id="lengthDisplay">0</strong></p>
+
+    <!-- 4. The JavaScript code -->
+    <script>
+        function displayLength() {
+            // Get the value from the input field
+            const inputValue = document.getElementById("myInput").value;
+            
+            // Calculate the length of the string
+            const length = inputValue.length;
+            
+            // Display the length in the designated strong tag
+            document.getElementById("lengthDisplay").textContent = length;
+        }
+    </script>
+    <br><hr><br>
+    <h1>13.Create a password field and display a message when input is empty.</h1>
+    <h2>Enter your password:</h2>
+    <form id="passwordForm">
+        <label for="password">Password:</label>
+        <!-- The 'type="password"' creates a password field (hides characters) -->
+        <input type="password" id="password" name="password">
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <!-- Area to display the error message -->
+    <p id="errorMessage" class="error-message">Password cannot be empty.</p>
+    <script>
+        // Get references to the form, input field, and error message elements
+const passwordForm = document.getElementById('passwordForm');
+const passwordInput = document.getElementById('password');
+const errorMessage = document.getElementById('errorMessage');
+
+// Add an event listener for the form submission
+passwordForm.addEventListener('submit', function(event) {
+    // Prevent the default form submission behavior (which reloads the page)
+    event.preventDefault();
+
+    // Check if the input field is empty (trimmed to remove leading/trailing whitespace)
+    if (passwordInput.value.trim() === '') {
+        // If empty, display the error message
+        errorMessage.style.display = 'block';
+    } else {
+        // If not empty, hide the error message (in case it was previously shown)
+        errorMessage.style.display = 'none';
+        // You can add further logic here, such as submitting the form via fetch or similar
+        alert('Password submitted successfully!');
+    }
+});
+
+    </script>
+<br><hr><br>
+<h1>14.Create a button that enables a disabled input field.</h1>
+ <input type="text" id="myInput1" disabled placeholder="I am disabled initially">
+    <button id="enableButton">Enable Input</button>
+
+    <script>
+        // Get references to the input field and the button
+        const myInput = document.getElementById('myInput1');
+        const enableButton = document.getElementById('enableButton');
+
+        // Add a click event listener to the button
+        enableButton.addEventListener('click', function() {
+            // Enable the input field
+            myInput.disabled = false;
+            // Focus the input field so the user can start typing immediately
+            myInput.focus();
+            // Optional: Update UI elements
+            enableButton.textContent = 'Input is now enabled';
+            enableButton.disabled = true; // Disable the enable button
+        });
+    </script>   
+    <br><hr><br>
+    <h1>15.Change the font size of multiple elements at the same time.</h1>
+   <p class="my-element">This is the first paragraph with class "my-element".</p>
+    <p class="my-element">This is the second paragraph with class "my-element".</p>
+    <div>
+        <p class="my-element">This paragraph is inside a div, also with the class "my-element".</p>
+    </div>
+    <p>This paragraph does not have the class and will not be changed.</p>
+
+    <button onclick="changeFontSize()">Change Font Size of all 'my-element'</button>
+
+    <script>
+        function changeFontSize() {
+            // Select all elements with the class 'my-element'
+            const elements = document.querySelectorAll('.my-element');
+
+            // Iterate over the NodeList of elements and change the font size for each
+            elements.forEach(element => {
+                element.style.fontSize = '24px'; // Set the new font size
+                element.style.color = 'blue';    // Optional: change another style
+            });
+        }
+    </script>
+    <br><hr><br>
+    <h1>16.Display today's date in DD-MM-YYYY format.</h1>
+    <h2>Display Today's Date</h2>
+
+    <button onclick="displayDate()">Click to show today's date</button>
+    
+    <p id="dateDisplay"></p>
+
+    <script>
+        function displayDate() {
+            const today = new Date();
+            
+            // Get day, month, and year
+            let day = today.getDate();
+            let month = today.getMonth() + 1; // Month is 0-indexed, so add 1
+            const year = today.getFullYear();
+            
+            // Add a leading zero if day or month is a single digit
+            if (day < 10) {
+                day = '0' + day;
+            }
+            if (month < 10) {
+                month = '0' + month;
+            }
+            
+            // Format the date string as DD-MM-YYYY
+            const formattedDate = day + '-' + month + '-' + year;
+            
+            // Display the date in the HTML element with id="dateDisplay"
+            document.getElementById('dateDisplay').textContent = formattedDate;
+        }
+    </script>
+  <br><hr><br>
+  <h1>17.Create a button that toggles background color of a div.</h1>
+  <div id="colorBox">
+        This is the div whose color will change.
+    </div>
+    <button id="toggleButton" onclick="toggleColor()">
+        Toggle Background Color
+    </button>
+    <script>
+        function toggleColor() {
+    const colorBox = document.getElementById('colorBox');
+    // The toggle method adds the class if it doesn't exist, and removes it if it does
+    colorBox.classList.toggle('toggled');
+}
+    </script>
+<br><hr><br>
+
+    <h1>18.Create an input field and show its value inside a paragraph.</h1>
+    <label for="live-input">Type here:</label>
+    <input type="text" id="live-input" placeholder="Start typing...">
+
+    <h3>Current Value:</h3>
+    <p id="output-paragraph">The value will appear here.</p>
+
+    <script>
+        // Get references to the input and paragraph elements
+        const inputField1 = document.getElementById('live-input');
+        const outputParagraph1 = document.getElementById('output-paragraph');
+
+        // Add an event listener to the input field
+        // The 'input' event fires whenever the value of the input changes
+        inputField1.addEventListener('input', function() {
+            // Update the text content of the paragraph with the current value of the input field
+            outputParagraph1.textContent = inputField1.value;
+        });
+    </script>
+<br><hr><br>
+<h1>19.Create a simple table and add borders using CSS.</h1>
+<h1>Simple Data Table</h1>
+
+    <table>
+        <caption>Monthly Sales</caption>
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Sales</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>January</td>
+                <td>$5000</td>
+            </tr>
+            <tr>
+                <td>February</td>
+                <td>$4500</td>
+            </tr>
+            <tr>
+                <td>March</td>
+                <td>$6000</td>
+            </tr>
+        </tbody>
+    </table>
+    <br><hr><br>
+    <h1>20.Display a message when the mouse leaves a div.</h1>
+<div id="mouse-area">
+        Hover your mouse over this div and then move it out.
+    </div>
+    <p id="message-area"></p>
+    <script>
+        // Select the elements
+var mouseArea = document.getElementById('mouse-area');
+var messageArea = document.getElementById('message-area');
+
+// Add a 'mouseleave' event listener to the div
+mouseArea.addEventListener('mouseleave', function() {
+    // Display the message when the mouse leaves
+    messageArea.textContent = 'The mouse has left the div!';
+});
+
+// Optionally, you can add a 'mouseenter' event to clear the message 
+// when the mouse enters the div again.
+mouseArea.addEventListener('mouseenter', function() {
+    messageArea.textContent = '';
+});
+
+    </script>
+    <br><hr><br>
+    <h1>21.Create a submit button that shows an alert before submission.</h1>
+    <h2>Form with Alert</h2>
+
+    <form id="myForm" onsubmit="return confirmSubmission()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // JavaScript function to handle the confirmation
+        function confirmSubmission() {
+            // Display an alert and ask for confirmation
+            const userConfirmed = confirm("Are you sure you want to submit this form?");
+
+            // If the user clicks "OK", the function returns true and the form submits.
+            // If the user clicks "Cancel", the function returns false and the submission is halted.
+            return userConfirmed;
+        }
+    </script>
+    <br><hr><br>
+    <h1>22.Create a paragraph and underline the text using JavaScript.</h1>
+    <p id="myParagraph">This is the paragraph that will be underlined.</p>
+    <button onclick="underlineParagraph()">Underline Text</button>
+    <script>
+        function underlineParagraph() {
+    // Get the paragraph element by its ID
+    const paragraphElement = document.getElementById("myParagraph");
+
+    // Set the text-decoration style to 'underline'
+    if (paragraphElement) {
+        paragraphElement.style.textDecoration = "underline";
+    } else {
+        console.error("Paragraph element not found!");
+    }
+}
+
+    </script>
+    <br><hr><br>
+    <h1>23.Display the number of words typed in a textarea.</h1>
+    <h1>Live Word Counter</h1>
+    <textarea id="word-counter-textarea" rows="10" cols="50" placeholder="Start typing here..."></textarea>
+    <p>Word Count: <span id="word-count">0</span></p>
+    <script>
+        // Select the textarea and the element where the count will be displayed
+const inputTextArea = document.getElementById("word-counter-textarea");
+const wordCountDisplay = document.getElementById("word-count");
+
+// Add an event listener for the 'input' event
+inputTextArea.addEventListener("input", () => {
+    // Get the value from the textarea
+    let text = inputTextArea.value.trim(); // Trim leading/trailing whitespace
+
+    // Split the text by one or more whitespace characters (\s+)
+    // The filter((item) => item) part removes any empty strings from the array 
+    // that might result from multiple spaces
+    let words = text.split(/\s+/).filter((item) => item); 
+
+    // Update the display with the number of words (the array length)
+    wordCountDisplay.textContent = words.length;
+
+    // Handle the case where the textarea is empty after trimming
+    if (text === "") {
+        wordCountDisplay.textContent = 0;
+    }
+});
+
+    </script>
+    <br><hr><br>
+    <h1>24.Create a button that hides all paragraphs on the page.</h1>
+    <p>This is paragraph 1.</p>
+    <p>This is paragraph 2.</p>
+    <p>This is paragraph 3.</p>
+
+    <button onclick="hideParagraphs()">Hide All Paragraphs</button>
+    <br><hr><br>
+    <h1>
+25.Display a message when the user presses a key inside an input field.
+    </h1>
+    <p>Click on the input field below and start typing:</p>
+
+<!-- The onkeydown event calls the showMessage function -->
+<input type="text" onkeydown="showMessage()" onkeyup="clearMessage()">
+
+<!-- This div will display the message -->
+<p id="message1" style="color: blue;"></p>
+    <script>
+  // JavaScript function to display the message
+  function showMessage() {
+    document.getElementById("message1").innerHTML = "A key was pressed!";
+  }
+  
+  // JavaScript function to clear the message (optional, for better user experience)
+  function clearMessage() {
+    document.getElementById("message1").innerHTML = "";
+  }
+</script>
+<br><hr><br>
+<h1>26.Validate a form to check minimum length for an input field.</h1>
+<form id="myForm">
+    <label for="password">Password (minimum 8 characters):</label>
+    <input type="password" id="password" name="password" minlength="8" required>
+    <!-- Element to display validation feedback -->
+    <span id="passwordError" style="color: red;"></span>
+    
+    <button type="submit">Submit</button>
+</form>
+<script>
+    // Get references to the form and input elements
+const myForm1 = document.getElementById('myForm');
+const passwordInput1 = document.getElementById('password');
+const passwordError = document.getElementById('passwordError');
+const minLength = 8;
+
+// Add an event listener for the form's submit event
+myForm.addEventListener('submit', function (event) {
+    // Check if the input value meets the minimum length requirement
+    if (passwordInput1.value.length < minLength) {
+        // Prevent the form from submitting
+        event.preventDefault(); 
+        // Display a custom error message
+        passwordError.textContent = 'Password must be at least ' + minLength + ' characters long.';
+    } else {
+        // Clear any previous error messages if validation passes
+        passwordError.textContent = '';
+        // The form will submit normally if you do not call preventDefault() here
+        // alert('Form submitted successfully!'); 
+    }
+});
+
+</script>
+<br><hr><br>
+<h1>27.Create a button that resets all input fields on the page.</h1>
+<form id="myForm">
+    <!-- Your input fields go here -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <br><br>
+    <input type="checkbox" id="subscribe" name="subscribe">
+    <label for="subscribe">Subscribe?</label>
+    <br><br>
+
+    <!-- The reset button -->
+    <button type="reset">Reset Form</button>
+</form>
+<script>
+    function resetFields() {
+    document.getElementById("myForm").reset();
+}
+</script>
+<br><hr><br>
+<h1>28.Change styles of all buttons using JavaScript.</h1>
+<button>Button 1</button>
+<button>Button 2</button>
+<button>Button 3</button>
+<script>
+    // Select all buttons
+const allButtons = document.querySelectorAll('button');
+
+// Iterate over the NodeList and apply styles
+allButtons.forEach(button => {
+  button.style.backgroundColor = '#4CAF50'; // Change background color
+  button.style.color = 'white';              // Change text color
+  button.style.padding = '10px 20px';        // Add padding
+  button.style.border = 'none';              // Remove border
+  button.style.borderRadius = '5px';         // Add rounded corners
+  button.style.cursor = 'pointer';           // Change cursor to pointer
+});
+
+</script>
+<br><hr><br>
+<h1>29.Create a simple dropdown menu and show selected value below it.</h1>
+<label for="fruits">Choose a fruit:</label>
+    <select name="fruits" id="fruits">
+        <option value="">--Select--</option>
+        <option value="apple">Apple</option>
+        <option value="banana">Banana</option>
+        <option value="cherry">Cherry</option>
+        <option value="date">Date</option>
+    </select>
+
+    <p>Selected Value: <strong id="output">None</strong></p>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+    // Get references to the select element and the output strong tag
+    const selectElement = document.getElementById('fruits');
+    const outputElement = document.getElementById('output');
+
+    // Add an 'change' event listener to the select element
+    selectElement.addEventListener('change', function() {
+        // 'this.value' contains the value of the currently selected option
+        const selectedValue = this.value;
+
+        // Update the text content of the output element
+        if (selectedValue === "") {
+            outputElement.textContent = "None";
+        } else {
+            outputElement.textContent = selectedValue;
+        }
+    });
+});
+    </script>
+    <br><hr><br>
+    <h1>30.Display a message when the user right-clicks on the page.</h1>
+    <p>Right-click within this area to see the message.</p>
+
+    <script>
+        document.addEventListener('contextmenu', function(event) {
+            // Prevent the default context menu from appearing
+            event.preventDefault();
+
+            // Display your custom message
+            alert('A custom message for you!');
+        });
+    </script>
+    <br><hr><br>
+    <h1>
+        31.Store user age in localStorage and display it on page reload.
+    </h1>
+    <h1>User Age Information</h1>
+    <p id="ageDisplay">Age will appear here.</p>
+
+    <script>
+        // Key for localStorage
+        const STORAGE_KEY = 'userAge';
+
+        // Function to prompt for age and store it
+        function promptAndStoreAge() {
+            // Check if age is already stored in localStorage
+            let userAge = localStorage.getItem(STORAGE_KEY);
+
+            if (!userAge) {
+                // If not stored, prompt the user
+                let ageInput = prompt("Please enter your age:");
+
+                // Validate input
+                if (ageInput !== null && ageInput.trim() !== '' && !isNaN(ageInput)) {
+                    userAge = ageInput;
+                    // Store the valid age in localStorage
+                    localStorage.setItem(STORAGE_KEY, userAge);
+                } else if (ageInput !== null) {
+                    // If input was invalid, display a message but continue
+                    alert("Invalid age entered. The age will not be stored.");
+                }
+            }
+
+            // Display the age (either newly entered or retrieved)
+            displayAge(userAge);
+        }
+
+        // Function to display the age on the page
+        function displayAge(age) {
+            const displayElement = document.getElementById('ageDisplay');
+            if (age && age !== '') {
+                displayElement.textContent = `Your age is: ${age} years old. (Stored in localStorage)`;
+            } else {
+                displayElement.textContent = 'No valid age stored yet.';
+            }
+        }
+
+        // Call the main function when the script runs (on page load)
+        promptAndStoreAge();
+    </script>
+    <br><hr><br>
+    <h1>32.Validate input to allow only letters.</h1>
+    <form name="form1" action="#" onsubmit="return allLetter(document.form1.text1)">
+    <input type="text" name="text1" />
+    <input type="submit" value="Submit" />
+</form>
+<script>
+    function allLetter(inputtxt) {
+    var letters = /^[A-Za-z]+$/;
+    if (inputtxt.value.match(letters)) {
+        return true;
+    } else {
+        alert('Please input alphabet characters only');
+        return false;
+    }
+}
+
+</script>
+<br><hr><br>
+<h1>33.Create a button that toggles between two images.</h1>
+<img id="toggleImage" src="bird.jpg" alt="Image 1" width="200">
+    
+    <!-- The button to trigger the change -->
+    <button id="toggleButton1">Toggle Image</button>
+    <script>
+        // Get references to the image and the button elements
+const toggleImage = document.getElementById("toggleImage");
+const toggleButton = document.getElementById("toggleButton1");
+
+// Define the paths to your two images
+const imageSrc1 = "bird.jpg";
+const imageSrc2 = "swan.jpg";
+
+// Add an event listener to the button
+toggleButton.addEventListener("click", function() {
+    // Check the current source of the image
+    if (toggleImage.getAttribute('src') === imageSrc1) {
+        // If it's the first image, switch to the second
+        toggleImage.setAttribute('src', imageSrc2);
+    } else {
+        // Otherwise, switch back to the first image
+        toggleImage.setAttribute('src', imageSrc1);
+    }
+});
+
+    </script>
+    <br><hr><br>
+    <h1>34.Create a navigation menu and highlight the clicked item.</h1>
+    <nav id="navbar">
+    <ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+</nav>
+<script>
+    // Get all links with the class 'nav-link'
+var navLinks = document.querySelectorAll('.nav-link');
+var currentUrl = window.location.href;
+
+// Loop through the links and add the 'active' class to the one matching the current page URL
+for (var i = 0; i < navLinks.length; i++) {
+    if (navLinks[i].href === currentUrl) {
+        navLinks[i].classList.add('active');
+    }
+}
+
+</script>
+<br><hr><br>
+<h1>35.Create a textarea and limit maximum characters allowed.</h1>
+<textarea id="myTextarea" rows="5" cols="40" maxlength="150"></textarea>
+<p>
+    <span id="charCount">0</span> / 150 characters
+</p>
+<script>
+    // Get references to the textarea and the character count display element
+let textarea1 = document.getElementById('myTextarea');
+let charCount = document.getElementById('charCount');
+const maxLength = textarea.getAttribute('maxlength'); // Get the max length from the attribute
+
+// Add an event listener for input changes
+textarea.oninput = function() {
+    // Update the display with the current length of the textarea's value
+    charCount.innerText = textarea1.value.length;
+
+    // Optional: Add visual feedback when the limit is reached or approached
+    if (textarea1.value.length >= maxLength) {
+        charCount.style.color = 'red';
+    } else {
+        charCount.style.color = 'black'; // Reset color if below limit
+    }
+};
+
+</script>
+<br><hr><br>
+<h1>36.Display the sum of two numbers entered by the user.</h1>
+<h2>Calculate the Sum of Two Numbers</h2>
+
+    <label for="num1">Number 1:</label>
+    <input type="number" id="num1"><br><br>
+
+    <label for="num2">Number 2:</label>
+    <input type="number" id="num2"><br><br>
+
+    <button onclick="calculateSum()">Calculate</button>
+
+    <h3>Result: <span id="result"></span></h3>
+
+    <script>
+        function calculateSum() {
+            // Get the values entered by the user
+            let number1 = document.getElementById('num1').value;
+            let number2 = document.getElementById('num2').value;
+
+            // Convert the input values (which are strings) to numbers
+            // If the input is empty or invalid, the + operator might behave unexpectedly,
+            // so we use parseFloat for reliability with potential non-integer inputs.
+            let sum = parseFloat(number1) + parseFloat(number2);
+
+            // Check if the sum is a valid number before displaying
+            if (isNaN(sum)) {
+                document.getElementById('result').textContent = "Please enter valid numbers.";
+            } else {
+                // Display the result in the 'result' span
+                document.getElementById('result').textContent = sum;
+                }
+        }
+    </script>
+    <br><hr><br>
+    <h1>37.Create a button that changes the page font family.</h1>
+    <button onclick="changeFont()">Change Font to 'Georgia'</button>
+
+    <h1>This is a Heading (H1)</h1>
+    <p>
+        This is a paragraph of text. Watch the font change when you click the button above! 
+        The current font is Arial.
+    </p>
+
+    <script>
+        // JavaScript function to change the font family
+        function changeFont() {
+            // Get the body element of the document
+            const bodyElement = document.body;
+
+            // Check the current font and switch it
+            if (bodyElement.style.fontFamily === 'Georgia, serif') {
+                bodyElement.style.fontFamily = 'Arial, sans-serif';
+            } else {
+                bodyElement.style.fontFamily = 'Georgia, serif';
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>38.Show an error message if email input is empty.</h1>
+    <h2>Email Validation Example</h2>
+
+    <form onsubmit="return validateForm()">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <span id="emailError" class="error">Error: Email cannot be empty.</span>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            // Get the value of the email input field
+            let emailInput = document.getElementById("email");
+            let emailValue = emailInput.value;
+            // Get the error message element
+            let errorMessage = document.getElementById("emailError");
+
+            // Check if the email value is empty
+            if (emailValue.trim() === "") {
+                // If empty, display the error message
+                errorMessage.style.display = "inline";
+                // Prevent the form from submitting
+                return false; 
+            } else {
+                // If not empty, hide the error message (in case it was shown before)
+                errorMessage.style.display = "none";
+                // Allow the form to submit (or perform other actions)
+                alert("Form submitted successfully!");
+                return true; 
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>39.Create a button that scrolls the page to the top.</h1>
+    <h1>Scroll down to see the button appear</h1>
+    <p>This is placeholder content. Keep scrolling...</p>
+
+    <!-- The Button -->
+    <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
+        &#x219Up; <!-- Unicode arrow character -->
+    </button>
+
+    <script>
+        // Get the button element
+        let mybutton = document.getElementById("scrollToTopBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function scrollToTop() {
+            // This provides a smooth scrolling effect in modern browsers
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+    <br><hr><br>
+    <h1>40.Display current time and update it every second.</h1>
+    <h1>Current Time:</h1>
+    <div id="clock" class="clock-container">
+        <!-- The time will be inserted here by JavaScript -->
+    </div>
+    <script>
+        function updateClock() {
+    // 1. Get the current date and time
+    const now = new Date();
+
+    // 2. Format the time (e.g., HH:MM:SS)
+    // You can customize the formatting further if needed
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    
+    // Example format: 03:15:30 PM
+    const formattedTime = now.toLocaleTimeString(); 
+
+    // 3. Find the element in the HTML
+    const clockElement = document.getElementById('clock');
+
+    // 4. Update the element's text content
+    if (clockElement) {
+        clockElement.textContent = formattedTime;
+    }
+}
+
+// Initial call to display the time immediately when the page loads
+updateClock();
+
+// Update the clock every 1000 milliseconds (1 second)
+setInterval(updateClock, 1000);
+
+    </script>
+    <h1>41.Create a form and prevent submission if any field is empty.</h1>
+  <form action="/submit-page" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        function validateForm() {
+            // Get the values of the form fields
+            let username = document.getElementById("username").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            // Check if any field is empty
+            if (username == "" || email == "" || password == "") {
+                alert("All fields must be filled out!");
+                // Prevent the form from submitting
+                return false; 
+            }
+
+            // If all checks pass, the form will submit
+            return true;
+        }
+    </script>  
+    <br><hr><br>
+    <h1>42.Create a button that hides and shows a table.</h1>
+    <button onclick="toggleTable()">Toggle Table Visibility</button>
+
+    <!-- The table to be hidden and shown, initially visible -->
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Data A</td>
+                <td>Data B</td>
+            </tr>
+            <tr>
+                <td>Data C</td>
+                <td>Data D</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- The JavaScript function -->
+    <script>
+        function toggleTable() {
+            var table = document.getElementById("myTable");
+            if (table.style.display === "none") {
+                table.style.display = "table"; // Show the table
+            } else {
+                table.style.display = "none"; // Hide the table
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>43.Display a message when the window is resized.</h1>
+    <h1>Resize Your Browser Window</h1>
+    <p>Watch the bottom-right corner for a message when you resize the window.</p>
+
+    <!-- The message element -->
+    <div id="resize-message">
+        Window is being resized!
+    </div>
+    <script>
+        // Select the message element
+const resizeMessage = document.getElementById('resize-message');
+
+// Variable to store the timeout ID
+let resizeTimeout;
+
+// Function to show the message
+function showMessage() {
+    // Add the 'show' class to make it visible
+    resizeMessage.classList.add('show');
+
+    // Clear any existing timeout so the message stays visible during continuous resizing
+    clearTimeout(resizeTimeout);
+
+    // Set a new timeout to hide the message after a short delay (e.g., 1.5 seconds)
+    resizeTimeout = setTimeout(() => {
+        resizeMessage.classList.remove('show');
+    }, 1500); // Hide after 1.5 seconds
+}
+
+// Add an event listener for the 'resize' event on the window object
+window.addEventListener('resize', showMessage);
+
+    </script>
+    <br><hr><br>
+    <h1>44.Convert user input text to lowercase using JavaScript.</h1>
+    <form>
+    <label for="username">Enter Text:</label>
+    <input type="text" id="userInput" placeholder="Type here...">
+    <button type="button" onclick="convertAndDisplay()">Convert</button>
+</form>
+<p>Lowercase Text: <strong id="outputText"></strong></p>
+<script>
+    function convertAndDisplay() {
+    // 1. Get the value from the input field
+    const originalText = document.getElementById('userInput').value;
+
+    // 2. Convert the text to lowercase
+    const lowerCaseText = originalText.toLowerCase();
+
+    // 3. Display the result
+    document.getElementById('outputText').textContent = lowerCaseText;
+}
+
+</script>
+<br><hr><br>
+<h1>45.Create a button that changes the height of a div.</h1>
+<div class="container">
+        <!-- The button that triggers the action -->
+        <button onclick="changeHeight()">Change Div Height</button>
+
+        <!-- The div whose height will be changed -->
+        <div id="myDiv"></div>
+    </div>
+
+    <script>
+        // JavaScript function to change the height
+        function changeHeight() {
+            var divElement = document.getElementById("myDiv");
+            // Check the current height and toggle it between two values
+            if (divElement.style.height === "200px") {
+                divElement.style.height = "100px";
+            } else {
+                divElement.style.height = "200px";
+            }
+        }
+    </script>
+    <br><hr><br>
+    <h1>46.Count how many input fields are present on the page.</h1>
+    <button onclick="countInputs()">Count Input Fields</button>
+
+        <p>Total number of input fields: <span id="count-display">0</span></p>
+    </div>
+
+    <script>
+        function countInputs() {
+            // This selects all elements with the tag name 'input'
+            const allInputs = document.querySelectorAll('input');
+            const count = allInputs.length;
+
+            // Update the HTML element with the count
+            document.getElementById('count-display').textContent = count;
+        }
+
+        // Run the function on page load to display the initial count
+        window.onload = countInputs;
+    </script>
+    <br><hr><br>
+    <h1>47.Display a message when the user selects text on the page.</h1>
+    <h1>Select some text below</h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus aliquam iaculis. 
+        Pellentesque interdum elit sapien, quis interdum enim laoreet sed. Mauris varius magna ac dapibus molestie. 
+        Select any part of this sentence to see a message.
+    </p>
+
+    <div id="messageBox" class="message-box">
+        You selected some text!
+    </div>
+    <script>
+        document.addEventListener('mouseup', function(event) {
+    // A small delay ensures the selection is fully captured
+    setTimeout(() => {
+        const selection = window.getSelection().toString().trim();
+        const messageBox = document.getElementById('messageBox');
+
+        if (selection.length > 0) {
+            // Display the message box near the cursor/selection
+            messageBox.style.display = 'block';
+            messageBox.style.top = `${event.clientY + 10}px`; // Position below the cursor
+            messageBox.style.left = `${event.clientX}px`;
+            
+            // Optional: Log the selected text
+            console.log("Selected text: ", selection);
+        } else {
+            // Hide the message if no text is selected (e.g., a simple click)
+            messageBox.style.display = 'none';
+        }
+    }, 10); // 10ms delay
+});
+
+// Hide the message box if the user clicks anywhere else after the message is shown
+document.addEventListener('mousedown', function() {
+    const messageBox = document.getElementById('messageBox');
+    if (messageBox.style.display === 'block') {
+        messageBox.style.display = 'none';
+    }
+});
+
+    </script>
+    <br><hr><br>
+    <h1>48.Create a simple page layout using CSS Flexbox.</h1>
+    <div class="body-container">
+    <div class="container">
+        <header>Header</header>
+        <div class="main-content">
+            <article>Article (Main Content)</article>
+            <aside>Sidebar</aside>
+        </div>
+        <footer>Footer</footer>
+    </div>
+    </div>
+    <br><hr><br>
+    <h1>49.Display a message after successful form validation.</h1>
+    <form id="myForm">
+  <!-- Form fields go here (inputs, button, etc.) -->
+  <button type="submit">Submit</button>
+  <div id="successMessage" style="display: none; color: green; padding: 10px; border: 1px solid green; margin-top: 10px;">
+    Form submitted successfully! 🎉
+  </div>
+</form>
+<script>
+    document.getElementById('myForm').addEventListener('submit', function (event) {
+  // Prevent the default form submission behavior (page reload)
+  event.preventDefault();
+
+  // Perform your validation checks here. 
+  // For this example, we assume validation is successful.
+  let formIsValid = true; // Replace with your actual validation logic
+
+  if (formIsValid) {
+    // Hide potential error messages (if any were present)
+    // ...
+
+    // Display the success message
+    const successMsg = document.getElementById('successMessage');
+    successMsg.style.display = 'block';
+
+    // You can also clear the form fields if needed:
+    // event.target.reset();
+
+    // Further actions like sending data to a server using Fetch API or Ajax can go here
+  } else {
+    // Handle validation errors (show error messages)
+    // ...
+  }
+});
+
+</script>
+<br><hr><br>
+<h1>50.Change the favicon of the webpage dynamically.</h1>
+    <h1>Watch the favicon change!</h1>
+    <button onclick="changeToNewFavicon()">Change Favicon</button>
+    <button onclick="changeToDefaultFavicon()">Reset Favicon</button>
+    
+<script>
+ // Function to change the favicon
+function changeFavicon(newIconUrl) {
+    const favicon = document.getElementById('favicon');
+    favicon.href = newIconUrl;
+}
+
+// Example usage with buttons in the HTML
+function changeToNewFavicon() {
+    // Replace 'new-favicon.ico' with the path to your new icon file
+    changeFavicon('new-favicon.ico');
+    console.log('Favicon changed to new icon.');
+}
+
+function changeToDefaultFavicon() {
+    // Replace 'default-favicon.ico' with the path to your default icon file
+    changeFavicon('default-favicon.ico');
+    console.log('Favicon reset to default icon.');
+}
+
+
+  
+</script>
+<br><hr><br>
+</body>
+</html>
