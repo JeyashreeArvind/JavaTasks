@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks- Day 20</title>
+    <style>
+        @keyframes moveRightAndLeft {
+    0% {
+      transform: translateX(0); /* Start on the left */
+    }
+    100% {
+      transform: translateX(calc(100vw - 120px)); /* Move to the right, subtracting box width */
+    }
+  }
+
+  .moving-box {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    position: relative;
+    
+    /* Apply the animation */
+    animation-name: moveRightAndLeft;
+    animation-duration: 3s;
+    animation-iteration-count: infinite; /* Loop continuously */
+    animation-direction: alternate; /* Go back and forth */
+    animation-timing-function: linear; /* Constant speed */
+  }
+  /* Basic styling for the container */
+.loading-container {
+  display: flex;
+  font-family: 'Arial', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3498db;
+}
+
+/* Apply the animation to each letter */
+.loading-container span {
+  display: inline-block;
+  animation: bounce 1.5s infinite;
+}
+
+/* Define the bouncing movement */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px); /* Moves text up */
+  }
+}
+
+/* Set staggered delays for the 'wave' effect */
+.loading-container span:nth-child(2) { animation-delay: 0.1s; }
+.loading-container span:nth-child(3) { animation-delay: 0.2s; }
+.loading-container span:nth-child(4) { animation-delay: 0.3s; }
+.loading-container span:nth-child(5) { animation-delay: 0.4s; }
+.loading-container span:nth-child(6) { animation-delay: 0.5s; }
+.loading-container span:nth-child(7) { animation-delay: 0.6s; }
+.loading-container span:nth-child(8) { animation-delay: 0.7s; }
+.loading-container span:nth-child(9) { animation-delay: 0.8s; }
+.loading-container span:nth-child(10) { animation-delay: 0.9s; }
+
+/* 1. Define the animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Start 20px lower */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End at original position */
+  }
+}
+
+/* 2. Apply to the div */
+.fade-in-up-div {
+  animation: fadeInUp 1s ease-out forwards;
+  /* animation-fill-mode: forwards keeps it at 100% opacity */
+}
+.box1 {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  margin-top: 20px;
+}
+
+/* Define the animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); background-color: #e74c3c; }
+  100% { transform: scale(1); }
+}
+
+/* Class to be added by JS */
+.animate {
+  animation: pulse 0.5s ease-in-out;
+}
+
+/* 1. Container - Defines the 3D space */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px; /* Essential for 3D effect */
+}
+
+/* 2. Inner card - Handles the rotation and transition */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s; /* Speed of flip */
+  transform-style: preserve-3d; /* Maintains 3D space for children */
+}
+
+/* 3. The Hover Action - Rotates 180 degrees */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* 4. Positioning Front and Back */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hides back when flipped */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+/* 5. Styling Front Face */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* 6. Styling Back Face and initial 180deg flip */
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg); /* Faces away initially */
+}
+.progress-container {
+  width: 100%;
+  background-color: #f3efe6;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden; /* Ensures the progress doesn't bleed out */
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #e4c465;
+  width: 0; /* Start width */
+  animation: progressBar 3s ease-in-out forwards; /* 3s duration */
+}
+
+@keyframes progressBar {
+  0% { width: 0; }
+  80% { width: 80%; } /* End width */
+}
+
+
+
+.ball {
+  width: 80px;
+  height: 80px;
+  background-color: rgb(40, 199, 40);
+  border-radius: 50%;
+  position: relative;
+  /* Apply the animation: name | duration | timing-function | iteration-count | direction */
+  animation: bounce 0.5s cubic-bezier(0.5, 0.05, 1, 0.5) infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-150px); /* Adjust height of bounce */
+  }
+}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey base */
+  border-top: 16px solid #3498db; /* Blue spinning part */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite; /* Animation definition */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.color-change {
+  font-size: 2em;
+  /* Bind the animation: name, duration, timing, loop */
+  animation: colorChange 3s infinite;
+}
+
+/* Define keyframes */
+@keyframes colorChange {
+  0% { color: red; }
+  50% { color: blue; }
+  100% { color: red; }
+}
+/* CSS */
+.pulse-button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden; /* Hides pseudo-elements outside button */
+  transition: background-color 0.3s; /* Smooth hover effect */
+}
+
+.pulse-button:hover {
+  background-color: #0056b3;
+}
+
+/* The pulse effect using a pseudo-element */
+.pulse-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background-color: rgba(0, 123, 255, 0.3); /* Light blue, semi-transparent */
+  z-index: -1; /* Behind the button text */
+  opacity: 0;
+  transform: scale(1);
+  animation: pulse 2s infinite; /* Applies the animation */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9); /* Start slightly smaller */
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2); /* Grow larger */
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.9); /* Return to start */
+    opacity: 0.7;
+  }
+}
+
+/* For a continuous, non-hover pulse */
+/*
+.pulse-button {
+  animation: pulse 2s infinite;
+}
+*/
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    animation: rotateBox 2s linear infinite;
+  }
+
+  /* Keyframes for animation */
+  @keyframes rotateBox {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Pause animation on hover */
+  .box:hover {
+    animation-play-state: paused;
+  }
+/* The element to be animated */
+  #box {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    position: relative;
+    /* Initial animation: 5 seconds */
+    animation: moveBox 5s infinite linear;
+  }
+
+  /* Keyframes for movement */
+  @keyframes moveBox {
+    from { left: 0px; }
+    to { left: 300px; }
+  }
+  @keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-once {
+  /* Animation name, duration, timing, and count */
+  animation: slideIn 1s ease-out 1;
+  
+  /* Ensures the element stays at 100% (final state) */
+  animation-fill-mode: forwards;
+  
+  /* Optional: initial state before animation starts */
+  opacity: 0; 
+}
+.container1 {
+    width: 100%;
+    height: 100px;
+    border: 2px solid #333;
+    position: relative;
+    background-color: #f0f0f0;
+  }
+
+  .moving-box1 {
+    width: 50px;
+    height: 50px;
+    background-color: #ff5722;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    /* Animation Properties */
+    animation-name: slideHorizontal;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate; /* Key for back-and-forth movement */
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes slideHorizontal {
+    from {
+      left: 0;
+    }
+    to {
+      left: calc(100% - 50px); /* Moves to the right side */
+    }
+  }
+  .box2 {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    position: relative;
+    
+    /* 1. Define animation name, duration, and behavior */
+    animation-name: slideIn;
+    animation-duration: 2s;
+    
+    /* 2. Set a 2-second delay before the animation starts */
+    animation-delay: 2s;
+    
+    /* 3. Keep the element at the end state after finishing */
+    animation-fill-mode: forwards;
+}
+
+/* Define the keyframes for the animation */
+@keyframes slideIn {
+    from {
+        left: -100px;
+        opacity: 0;
+    }
+    to {
+        left: 50px;
+        opacity: 1;
+    }
+}
+.box3 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+}
+
+/* Define the animation */
+@keyframes slide {
+  from { left: 0; }
+  to { left: 300px; background-color: blue; }
+}
+
+/* The class to add/remove */
+.box3.animate {
+  animation: slide 1s forwards;
+}
+.box4 {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    margin: 100px auto;
+    
+    /* Smoothly animate the transformation */
+    transition: transform 0.4s ease-in-out; 
+  }
+
+  .box4:hover {
+    /* Scale up to 120% and rotate 360 degrees */
+    transform: scale(1.2) rotate(360deg);
+    background-color: #e74c3c; /* Optional color change */
+  }
+.typewriter h1 {
+  overflow: hidden; /* Hide text as it is "typed" */
+  border-right: .15em solid orange; /* The blinking cursor */
+  white-space: nowrap; /* Keep text on a single line */
+  margin: 0 auto; /* Optional: centers the text */
+  letter-spacing: .15em; 
+  width: 0; /* Initial state */
+  
+  /* Apply typing and cursor animations */
+  animation: 
+    typing 3.5s steps(30, end) forwards,
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing animation */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* The blinking cursor animation */
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: orange; }
+}
+/* Define the keyframes to move the background */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Apply the animation to your body or a container */
+.body-cont {
+  /* A large background image with multiple color stops */
+  background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%; /* Makes the gradient larger than the container */
+  animation: gradient-shift 15s ease infinite; /* Apply the animation */
+}
+
+
+.container4 {
+    text-align: center;
+}
+
+.box5 {
+    width: 150px;
+    height: 150px;
+    background-color: #4CAF50;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: relative;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    /* ... more keyframes for shaking ... */
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.apply-shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
+.animated-box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    animation: slide 2s infinite;
+  }
+
+  @keyframes slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(200px); }
+  }
+  .progress-container1 {
+    width: 100%;
+    max-width: 500px;
+    height: 30px;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    overflow: hidden; /* Ensures child doesn't overflow corners */
+    margin: 50px auto;
+  }
+
+  /* The actual filling bar */
+  .progress-bar1 {
+    height: 100%;
+    width: 0%; /* Start at 0% */
+    background-color: #4caf50; /* Green color */
+    border-radius: 15px;
+    
+    /* Animation definition: name, duration, timing, count, fill-mode */
+    animation: fillBar 3s ease-in-out forwards;
+  }
+
+  /* Keyframes to define the animation sequence */
+  @keyframes fillBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+  @keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.box6 {
+  width: 100px;
+  height: 50px;
+  background: skyblue;
+  margin: 10px;
+  opacity: 0;
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Staggered Delays */
+.box-1 { animation-delay: 0.1s; }
+.box-2 { animation-delay: 0.3s; }
+.box-3 { animation-delay: 0.5s; }
+.container3 {
+  overflow: hidden; /* Keeps box in view */
+  width: 100%;
+  border: 1px solid black;
+}
+
+.box7 {
+  width: 100px;
+  height: 100px;
+  background-color: #0099CC;
+  animation-name: slideIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards; /* Crucial step */
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100px); opacity: 0; }
+  to { transform: translateX(500px); opacity: 1; }
+}
+.box8 {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  position: relative;
+  /* Apply animation: name | duration | timing | iteration */
+  animation: slideFade 2s ease-in-out infinite alternate;
+}
+
+@keyframes slideFade {
+  0% {
+    opacity: 0;
+    left: 0px;
+  }
+  100% {
+    opacity: 1;
+    left: 200px;
+  }
+}
+/* --- Base Styles (Mobile First) --- */
+/* Mobile devices: Up to 767px */
+.container4 {
+    display: flex;
+    flex-direction: column; /* Stacked layout */
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.box9 {
+    background-color: #3498db;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* --- Breakpoint 1: Tablet --- */
+/* Tablets: 768px - 1024px */
+@media (min-width: 768px) {
+    .container4 {
+        flex-direction: row;
+        flex-wrap: wrap; /* Allows wrapping */
+    }
+    
+    .box9{
+        flex: 0 0 calc(50% - 0.5rem); /* Two columns */
+    }
+}
+
+/* --- Breakpoint 2: Desktop --- */
+/* Desktops: 1025px and wider */
+@media (min-width: 1025px) {
+    .container4 {
+        flex-direction: row;
+        flex-wrap: nowrap; /* Side-by-side */
+    }
+    
+    .box9 {
+        flex: 1; /* Equal width three columns */
+    }
+}
+/* Base animation (mobile-first) */
+.box10 {
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  animation: slide 2s infinite alternate;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(50px); }
+}
+
+/* Tablet and Desktop: Slower, further animation */
+@media (min-width: 768px) {
+  .box10 {
+    animation: slide 4s infinite alternate;
+  }
+  @keyframes slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(200px); }
+  }
+}
+@media screen and (max-width: 600px) {
+  *, *::before, *::after {
+    animation-name: none !important;
+    animation-duration: 0s !important;
+    transition-property: none !important;
+    transition-duration: 0s !important;
+    transform: none !important;
+  }
+}
+/* General Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #767474;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li { margin: 0 1rem; }
+
+/* Mobile Menu Hidden by Default */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: 0.4s; /* Smooth animation for icon transition */
+}
+
+/* Responsive Styles for Mobile */
+@media screen and (max-width: 768px) {
+    .hamburger { display: flex; }
+    
+    .nav-links {
+        position: fixed;
+        right: -100%; /* Start off-screen */
+        top: 60px;
+        flex-direction: column;
+        background-color: #333;
+        width: 100%;
+        text-align: center;
+        transition: 0.5s ease-in-out; /* Slide-in animation */
+    }
+
+    .nav-links.active {
+        right: 0; /* Animated into view */
+    }
+}
+/* --- Base Styles (Mobile First) --- */
+.animated-boxs {
+  width: 100px;
+  height: 100px;
+  background-color: rebeccapurple;
+  /* Faster animation for mobile (0.5s) */
+  animation: rotate 0.5s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- Desktop Styles (Screens wider than 768px) --- */
+@media (min-width: 768px) {
+  .animated-boxs {
+    /* Slower animation for desktop (2s) */
+    animation-duration: 2s;
+  }
+}
+
+
+/* Card Container - Flexbox for responsiveness */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Base Card Styling */
+.card {
+    background: white;
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Animated Hover Effect */
+.card:hover {
+    transform: translateY(-10px); /* Lifts up */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Deepens shadow */
+}
+
+.card-content h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-content p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 700px) {
+    .card {
+        width: 100%; /* Full width on smaller screens */
+        max-width: 400px;
+    }
+}
+/* --- Default: Grid Layout (for larger screens) --- */
+.containers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 15px;
+  padding: 15px;
+  background-color: #f0f0f0;
+}
+
+.box11 {
+  background-color: #3498db;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* --- Media Query: Switch to Flexbox (e.g., for phones) --- */
+@media (max-width: 768px) {
+  .containers {
+    display: flex;
+    flex-direction: column; /* Stack vertically */
+    gap: 10px; /* Adjust gap for mobile */
+  }
+
+  .box11 {
+    width: 100%; /* Ensure items take full width */
+    box-sizing: border-box; /* Prevent padding issues */
+  }
+}
+/* Sidebar hidden by default on mobile */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: -250px; /* Start off-screen */
+  background-color: #111;
+  transition: 0.3s; /* Slide animation */
+  z-index: 1000;
+  padding-top: 60px;
+}
+
+/* Slide in when this class is added via JS */
+.sidebar.active {
+  left: 0;
+}
+
+/* Hide toggle button on Desktop */
+.menu-toggle {
+  display: none;
+}
+
+/* MOBILE STYLES (Under 768px) */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+  }
+
+  /* Dark background overlay when menu is open */
+  #overlay.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+  }
+}
+
+/* Desktop Sidebar (Optional: Always visible or different style) */
+@media (min-width: 769px) {
+  .sidebar {
+    left: 0;
+    position: relative; /* Integrate into layout */
+  }
+}
+.container8 {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to move to the next row */
+  gap: 10px;
+  width: 100%;
+}
+
+.box12 {
+  flex: 1 1 300px; /* Grow, Shrink, Basis: 300px */
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.5s ease-in-out; /* Animates changes smoothly */
+}
+
+/* Optional: Media query to further customize break points */
+@media (max-width: 600px) {
+  .box12 {
+    flex: 1 1 100%; /* Make items full width on small screens */
+  }
+}
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  padding: 15px;
+}
+
+.gallery-item {
+  overflow: hidden; /* Crucial for zoom effect */
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Smooth animation */
+}
+
+/* Hover Zoom Effect */
+.gallery-item:hover img {
+  transform: scale(1.1); /* Zoom 10% */
+}
+.box13 {
+    width: 100px;
+    height: 100px;
+    background-color: rebeccapurple;
+    position: relative;
+    /* Define base animation */
+    animation: moveRight 3s infinite;
+    animation-direction: normal; /* Default direction */
+  }
+
+  /* Define Keyframes */
+  @keyframes moveRight {
+    from { left: 0px; }
+    to { left: 300px; }
+  }
+
+  /* Media Query: Change direction on smaller screens */
+  @media (max-width: 600px) {
+    .box13 {
+      /* Reverses the direction on screens <= 600px */
+      animation-direction: reverse;
+    }
+  }
+.animated-text2 {
+    font-family: sans-serif;
+    font-size: 3rem;
+    color: white;
+    font-weight: bold;
+    opacity: 0;
+  }
+
+  /* --- DESKTOP ANIMATION (Default, larger than 768px) --- */
+  @keyframes slideInDesktop {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+
+  @media (min-width: 769px) {
+    .animated-text2 {
+      animation: slideInDesktop 1s ease-out forwards;
+    }
+  }
+
+  /* --- MOBILE ANIMATION (Max 768px) --- */
+  @keyframes bounceInMobile {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @media (max-width: 768px) {
+    .animated-text2 {
+      animation: bounceInMobile 1s ease-in-out forwards;
+      font-size: 1.5rem; /* Smaller font for mobile */
+    }
+  }
+  .banner {
+  width: 100%;
+  height: 60vh; /* Adjusts based on screen height */
+  background: url('hero-image.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.animated-text1 {
+  font-size: clamp(2rem, 5vw, 4rem); /* Responsive font sizing */
+  animation: slideUp 1.2s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 768px) {
+  .animated-element {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* Apply subtle animations by default */
+.boxes {
+  transition: transform 0.5s ease-in-out;
+}
+
+/* For small screens OR if user prefers reduced motion, remove transition */
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  .boxes {
+    transition: none;
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.responsive-btn {
+  padding: 15px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  transition: all 0.3s ease;
+  outline: none;
+  position: relative;
+}
+
+/* 1. DESKTOP HOVER: 3D Lift Effect */
+@media (hover: hover) {
+  .responsive-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: #0056b3;
+  }
+}
+
+/* 2. TABLET/MOBILE HOVER: Color Change & Scale */
+@media (max-width: 768px) {
+  .responsive-btn {
+    background-color: #28a745;
+  }
+  
+  /* On touch devices, :hover often acts as :active, 
+     but this ensures a different feel */
+  .responsive-btn:active {
+    transform: scale(0.95);
+    background-color: #1e7e34;
+  }
+}
+layout-container {
+    display: grid;
+    /* Transition grid-template-rows, not height directly */
+    transition: grid-template-rows 0.5s ease-in-out; 
+    
+    /* Initially hidden (0 height) */
+    grid-template-rows: 0fr; 
+    overflow: hidden;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+  }
+
+  /* 2. Inner Content Wrapper */
+  .content-wrapper {
+    min-height: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  /* 3. The Breakpoint Trigger */
+  /* When screen is wider than 600px, expand the container */
+  @media (min-width: 600px) {
+    .layout-container {
+      grid-template-rows: 1fr; /* Animates to full height */
+    }
+  }
+
+  /* Styling for illustration */
+  .boxB {
+    background: #3498db;
+    color: white;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+/* Modal Wrapper (Hidden by default) */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* Overlay */
+  overflow: auto;
+}
+
+/* Modal Content Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%; /* Responsive width */
+  max-width: 500px;
+  border-radius: 5px;
+  position: relative;
+  
+  /* Animation properties */
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Keyframes for Animation */
+@keyframes slideIn {
+  from {transform: translateY(-100px); opacity: 0}
+  to {transform: translateY(0); opacity: 1}
+}
+
+/* Responsiveness for mobile */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+    margin: 30% auto;
+  }
+}
+/* Base style for the circle */
+.circle {
+  width: 50px;
+  height: 50px;
+  background-color: #3498db;
+  border-radius: 50%;
+  position: relative;
+  /* Default animation: ease-in-out */
+  animation: moveCircle 2s ease-in-out infinite alternate;
+}
+
+/* Keyframes for movement */
+@keyframes moveCircle {
+  from { left: 0; }
+  to { left: 300px; }
+}
+
+/* 1. Change to linear on small screens (< 600px) */
+@media (max-width: 600px) {
+  .circle {
+    animation-timing-function: linear;
+    background-color: #e74c3c; /* Change color to indicate change */
+  }
+}
+
+/* 2. Change to a custom cubic-bezier on medium screens */
+@media (min-width: 601px) and (max-width: 1000px) {
+  .circle {
+    animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: #2ecc71; /* Change color to indicate change */
+  }
+}
+/* Container styling */
+.footer-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  justify-content: space-around;
+  padding: 50px 0;
+  background-color: #7f8493;
+}
+
+/* Column styling */
+.footer-col {
+  width: 25%;
+  padding: 0 15px;
+}
+
+/* Animated Link Effect */
+.footer-col ul li a {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.footer-col ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #e91e63;
+  transition: width 0.3s ease; /* Animation for the underline */
+}
+
+.footer-col ul li a:hover::after {
+  width: 100%; /* Expands the underline on hover */
+}
+
+.footer-col ul li a:hover {
+  color: #ffffff;
+  padding-left: 8px; /* Subtle slide-right effect */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 767px) {
+  .footer-col {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 574px) {
+  .footer-col {
+    width: 100%;
+  }
+}
+/* Base styles: Hidden menu, vertical layout */
+.nav-list {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  transition: all 0.5s ease-in-out;
+}
+
+.nav-list.active {
+  display: flex; /* Shown when toggled */
+  transform: translateY(0);
+}
+
+/* Specific Mobile Animation: Slide Down */
+.nav-list li {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+.nav-list.active li {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media screen and (min-width: 768px) {
+  .nav-list {
+    display: flex; /* Always visible on desktop */
+    flex-direction: row;
+    transform: none;
+  }
+
+  /* Different Animation: Horizontal Slide-in or Hover */
+  .nav-list li {
+    opacity: 1;
+    transform: none;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-list li:hover {
+    transform: scale(1.1); /* Subtle hover animation */
+  }
+
+  .menu-toggle {
+    display: none; /* Hide hamburger on desktop */
+  }
+}
+.navbar1{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+/* Responsive Grid Layout */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 50px;
+}
+
+.feature-card {
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Scroll Animation Initial State */
+.js-scroll {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.js-scroll.fade-in-bottom {
+  transform: translateY(40px);
+}
+
+/* Active State (added by JS) */
+.js-scroll.scrolled {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* 1. Define the continuous animation (@keyframes) */
+@keyframes breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.box-in {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  
+  /* Apply the keyframe animation */
+  animation: breathe 2s infinite ease-in-out;
+  
+  /* 2. Set up transition for state changes (e.g., hover) */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* 3. Define the hover state */
+.box-in:hover {
+  transform: scale(1.2); /* Overrides keyframe scale during hover */
+  background-color: #2ecc71;
+}
+.contents {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+.cards {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.cards:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.boxs1 {
+            width: 100px;
+            height: 100px;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        /* --- THE ANIMATION DEFINITION --- */
+        @keyframes desktopPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+        }
+
+        /* --- MEDIA QUERY: ENABLE ANIMATION ONLY ON DESKTOP --- */
+        /* 1. Using hover capability: Targets devices with a mouse */
+        @media (hover: hover) {
+            .boxs1 {
+                animation: desktopPulse 2s infinite;
+            }
+        }
+        
+        /* 2. OR Using viewport width: Uncomment below to use width-based breakpoint */
+        /*
+        @media (min-width: 1024px) {
+            .box {
+                animation: desktopPulse 2s infinite;
+            }
+        }
+        */
+/* --- Base Styles --- */
+:root {
+    --primary: #4a90e2;
+    --dark: #333;
+    --light: #fff;
+    /* Responsive font scaling using clamp */
+    --font-h1: clamp(2rem, 5vw, 4rem);
+    --font-p: clamp(1rem, 2vw, 1.5rem);
+}
+
+
+
+/* --- Navbar & Layout --- */
+.navbars {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 5vw;
+    background: var(--light);
+    position: sticky; top: 0; z-index: 1000;
+}
+.nav-links { display: flex; list-style: none; gap: 20px; }
+
+.hero {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #a8eba7;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* --- Adaptive Animations (CSS Keyframes) --- */
+@keyframes slideInUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-text {
+    font-size: var(--font-h1);
+    animation: slideInUp 1s ease-out;
+}
+
+.animate-subtext {
+    font-size: var(--font-p);
+    animation: slideInUp 1s ease-out 0.3s both;
+}
+
+.cta-button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: var(--primary);
+    color: white; border: none; border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover { transform: scale(1.1); }
+
+/* --- Responsive Grid --- */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 50px 5vw;
+}
+
+.cards1 {
+    background: #efb9b9;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- Media Queries for Device Adaptation --- */
+@media (max-width: 768px) {
+    .nav-links { display: none; } /* Simplified navbar for mobile */
+    .hero { height: 60vh; }
+    .card { transform: scale(1); }
+}
+
+@media (min-width: 769px) {
+    .card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+}
+
+    </style>
+</head>
+<body>
+<h1>1.Create a box that uses @keyframes to move left to right continuously.</h1> 
+<div class="moving-box"></div> 
+<h1>2.Create a loading text animation using CSS keyframes.</h1>
+<div class="loading-container">
+  <span>L</span>
+  <span>o</span>
+  <span>a</span>
+  <span>d</span>
+  <span>i</span>
+  <span>n</span>
+  <span>g</span>
+  <span>.</span>
+  <span>.</span>
+  <span>.</span>
+</div>
+<h1>3.Animate a div to fade in and slide up on page load.</h1>
+<div class="fade-in-up-div">
+  <h1>Hello World!</h1>
+  <p>I animated on load.</p>
+</div>
+<h1>4.Create a button that triggers a CSS keyframe animation on click.</h1>
+<button id="animateBtn">Click Me</button>
+<div class="box1"></div>
+<script>
+    const btn = document.getElementById("animateBtn");
+const box = document.querySelector(".box1");
+
+btn.addEventListener("click", () => {
+  // Add the animation class
+  box.classList.add("animate");
+
+  // Remove the class after 0.5s (duration of animation)
+  // so it can be triggered again
+  setTimeout(() => {
+    box.classList.remove("animate");
+  }, 500); 
+});
+</script>
+<h1>5.Create a card that flips on hover using CSS transform.</h1>
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <p>Hover Me</p>
+    </div>
+    <div class="flip-card-back">
+      <p>Back Side</p>
+    </div>
+  </div>
+</div>
+<h1>6.Animate a progress effect using width change and keyframes.</h1>
+<div class="progress-container">
+  <div class="progress-bar"></div>
+</div>
+<h1>7.Create a bouncing ball animation using CSS.</h1>
+<div class="container">
+  <div class="ball"></div>
+</div>
+<h1>8.Create a rotating loader using border and keyframes.</h1>
+<div class="loader"></div>
+<h1>9.Animate text color change using keyframes.</h1>
+<p class="color-change">Animated Text</p>
+<h1>10.Create a pulse animation for a button.</h1>
+<!-- HTML -->
+<button class="pulse-button">Click Me</button>
+<h1>11.Pause a CSS animation when the mouse hovers over an element.</h1>
+<div class="box"></div>
+<h1>12.Change animation speed using a button click.</h1>
+<div id="box"></div>
+  <br>
+  <!-- Buttons to change speed -->
+  <button onclick="changeSpeed('5s')">Slow (5s)</button>
+  <button onclick="changeSpeed('1s')">Fast (1s)</button>
+  <button onclick="changeSpeed('0.2s')">Very Fast (0.2s)</button>
+
+  <script>
+    function changeSpeed(newDuration) {
+      // Access the element and change its CSS animationDuration property
+      document.getElementById('box').style.animationDuration = newDuration;
+    }
+  </script>
+  <h1>13.Create an animation that runs only once when the page loads.</h1>
+  <div class="animate-once">
+  <h1>Welcome</h1>
+</div>
+<h1>14.Create a div that alternates between two positions using animation-direction.</h1>
+<div class="container1">
+        <div class="moving-box1"></div>
+    </div>
+    <h1>15.Create a CSS animation that starts after a delay.</h1>
+     <div class="box2"></div>
+     <h1>16.Trigger animation by adding and removing a class using JavaScript.</h1>
+     <button id="triggerBtn">Animate</button>
+<div id="box3" class="box3"></div>
+<script>
+    const box3 = document.getElementById('box3');
+const btntr = document.getElementById('triggerBtn');
+
+btntr.addEventListener('click', () => {
+  // 1. Remove the class to reset
+  box3.classList.remove('animate');
+  
+  // 2. Force reflow (optional but recommended to restart animation)
+  void box3.offsetWidth; 
+  
+  // 3. Add the class back
+  box3.classList.add('animate');
+});
+
+</script>
+<h1>17.Create a hover animation that uses both scale and rotate.</h1>
+<div class="box4"></div>
+<h1>18.Create a text typing-like effect using CSS animation.</h1>
+<div class="typewriter">
+  <h1>Typing effect with CSS.</h1>
+</div>
+<h1>19.Animate background color gradient using keyframes.</h1>
+<div class="body-cont">
+<h1>Watch the background change!</h1>
+</div>
+<h1>20.Create a box that shakes when a button is clicked.</h1>
+<div class="container4">
+        <!-- The box to be shaken -->
+        <div id="shakeBox" class="box5">Shake Me!</div>
+        <button id="shakeBtn">Click to Shake</button>
+    </div>
+    <script>
+        const box5 = document.getElementById('shakeBox');
+const buttons = document.getElementById('shakeBtn');
+
+buttons.addEventListener('click', function() {
+    box5.classList.add('apply-shake');
+    setTimeout(function() {
+        box5.classList.remove('apply-shake');
+    }, 500);
+});
+
+    </script>
+    <h1>21.Stop and restart an animation using JavaScript.</h1>
+    <div id="box6" class="animated-box"></div>
+<button onclick="toggleAnimation()">Pause/Resume</button>
+<script>
+  // JavaScript
+  function toggleAnimation() {
+    const box6 = document.getElementById('box6');
+    if (box6.style.animationPlayState === 'paused') {
+      box6.style.animationPlayState = 'running';
+    } else {
+      box6.style.animationPlayState = 'paused';
+    }
+  }
+</script>
+<h1>22.Create an animation that fills a bar from 0% to 100%.</h1>
+<div class="progress-container1">
+    <div class="progress-bar1"></div>
+  </div>
+  <h1>23.Create multiple elements that animate with different delays.</h1>
+  <div class="box-container">
+  <div class="box6 box-1"></div>
+  <div class="box6 box-2"></div>
+  <div class="box6 box-3"></div>
+</div>
+<h1>24.Create a CSS animation using animation-fill-mode.</h1>
+<div class="container3">
+  <div class="box7"></div>
+</div>
+<h1>
+25.Create an animation that changes both opacity and position.
+</h1>
+<div class="box8"></div>
+<h1>26.Create a responsive layout with three breakpoints (mobile, tablet, desktop).</h1>
+<div class="container4">
+        <div class="box9">Mobile: Stacked</div>
+        <div class="box9">Tablet: 2 Col</div>
+        <div class="box9">Desktop: 3 Col</div>
+    </div>
+    <h1>27.Change animation behavior based on screen size using media queries.</h1>
+    <div class="container4">
+  <div class="box10"></div>
+</div>
+<h1>28.Disable animations completely on screens smaller than 600px.</h1>
+<h1>
+29.Create a responsive navbar with animated open/close effect.
+</h1>
+<nav class="navbar">
+    <div class="logo">Brand</div>
+    <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+<script>
+    const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    // Optional: Add a class to animate the hamburger into an "X"
+    hamburger.classList.toggle('toggle-icon');
+});
+
+</script>
+<h1>30.Change animation duration for mobile and desktop using media queries.</h1>
+<div class="animated-boxs"></div>
+<h1>31.Create a responsive card layout with animated hover effects.</h1>
+<div class="card-container">
+        <!-- Card 1 -->
+        <div class="card">
+            <div class="card-content">
+                <h3>Card One</h3>
+                <p>This is a subtle lift-up hover animation.</p>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="card">
+            <div class="card-content">
+                <h3>Card Two</h3>
+                <p>Smooth transitions for better UX.</p>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="card">
+            <div class="card-content">
+                <h3>Card Three</h3>
+                <p>Responsive design for all devices.</p>
+            </div>
+        </div>
+    </div>
+    <h1>32.Switch from grid layout to flex layout using media queries.</h1>
+    <div class="containers">
+  <div class="box11">Item 1</div>
+  <div class="box11">Item 2</div>
+  <div class="box11">Item 3</div>
+  <div class="box11">Item 4</div>
+</div>
+<h1>33.Create a sidebar that slides in only on mobile view.</h1>
+<!-- Mobile Toggle Button -->
+<button class="menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+
+<!-- The Sidebar -->
+<aside id="sidebar" class="sidebar">
+  <button class="close-btn" onclick="toggleSidebar()">×</button>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+</aside>
+
+<!-- Main Content Overlay -->
+<div id="overlay" onclick="toggleSidebar()"></div>
+<script>
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("active");
+  document.getElementById("overlay").classList.toggle("active");
+}
+
+</script>
+<h1>34.Animate layout reflow when screen size changes.</h1>
+<div class="container8">
+  <div class="box12">1</div>
+  <div class="box12">2</div>
+  <div class="box12">3</div>
+</div>
+<script>
+    // JavaScript to improve resize performance
+let resizeTimer;
+window.addEventListener('resize', () => {
+  document.body.classList.add('resize-animation-stopper');
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    document.body.classList.remove('resize-animation-stopper');
+  }, 100);
+});
+
+</script>
+<h1>35.Create a responsive image gallery with animated hover zoom</h1>
+<div class="gallery-container">
+  <div class="gallery-item">
+    <img src="bird.jpg" alt="Gallery Image 1">
+  </div>
+  <div class="gallery-item">
+    <img src="swan.jpg" alt="Gallery Image 2">
+  </div>
+  
+  <div class="gallery-item">
+    <img src="Peacock.jpg" alt="Gallery Image 4">
+  </div>
+</div>
+<h1>36.Use media queries to change keyframe animation direction</h1>
+<div class="box13"></div>
+<h1>37.Create text that animates differently on mobile vs desktop.</h1>
+<div class="animated-text2">Responsive Motion</div>
+<h1>38.Create a responsive banner with animated text.</h1>
+<section class="banner">
+  <div class="banner-content">
+    <h1 class="animated-text1">Discover the Future</h1>
+    <p>Innovating your digital experience in 2026.</p>
+  </div>
+</section>
+<h1>39.Reduce animation motion when screen width is small.</h1>
+<div class="box"></div>
+<h1>40.Create a responsive button with different hover animations per device.</h1>
+<div class="button-container">
+  <button class="responsive-btn">Responsive Action</button>
+</div>
+<h1>41.Animate height changes when layout switches between breakpoints.</h1>
+<div class="layout-container">
+    <div class="content-wrapper">
+      <div class="content">
+        <h3>Collapsible Content</h3>
+        <p>This content changes height smoothly when the breakpoint is hit.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="boxB">Persistent Box</div>
+  <h1>42.Create a responsive modal with animated open/close effect.</h1>
+  <!-- Trigger Button -->
+<button id="openModalBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2>Modal Header</h2>
+    <p>This is a responsive animated modal.</p>
+  </div>
+</div>
+<script>
+    // Get elements
+const modal = document.getElementById("myModal");
+const btnsp = document.getElementById("openModalBtn");
+const span = document.querySelector(".close-btn");
+
+// Open modal
+btnsp.onclick = function() {
+  modal.style.display = "block";
+}
+
+// Close modal (X button)
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// Close modal (outside click)
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+</script>
+<h1>43.Change animation timing function using media queries.</h1>
+<div class="circle"></div>
+<h1>44.Create a responsive footer with animated links.</h1>
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get Help</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">Returns</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<h1>45.Animate menu items differently based on screen size.</h1>
+<nav class="navbar1">
+  <div class="menu-toggle" id="mobile-menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+  <ul class="nav-list">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+<h1>46.Create a responsive section where animations trigger on scroll.</h1>
+<section class="features">
+  <div class="feature-card js-scroll fade-in-bottom">
+    <h3>Fast</h3>
+    <p>Optimized for speed.</p>
+  </div>
+  <div class="feature-card js-scroll fade-in-bottom">
+    <h3>Responsive</h3>
+    <p>Works on all devices.</p>
+  </div>
+  <div class="feature-card js-scroll fade-in-bottom">
+    <h3>Animated</h3>
+    <p>Engaging user experience.</p>
+  </div>
+</section>
+<script>
+    const scrollElements = document.querySelectorAll(".js-scroll");
+
+const elementInView = (el, dividend = 1) => {
+  const elementTop = el.getBoundingClientRect().top;
+  return (
+    elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+  );
+};
+
+const displayScrollElement = (element) => {
+  element.classList.add("scrolled");
+};
+
+const handleScrollAnimation = () => {
+  scrollElements.forEach((el) => {
+    if (elementInView(el, 1.25)) {
+      displayScrollElement(el);
+    }
+  });
+};
+
+window.addEventListener("scroll", () => {
+  handleScrollAnimation();
+});
+
+</script>
+<h1>47.Combine transition and keyframes in the same layout.</h1>
+<div class="box-in"></div>
+<h1>48.Create a responsive dashboard layout with animated cards.</h1>
+<div class="dashboard">
+  
+  <main class="contents">
+    <div class="cards">
+      <h3>Revenue</h3>
+      <p>$12,400</p>
+    </div>
+    <div class="cards">
+      <h3>Revenue</h3>
+      <p>$16,400</p>
+    </div>
+    <div class="cards">
+      <h3>Revenue</h3>
+      <p>$18,400</p>
+    </div>
+  </main>
+</div>
+<h1>49.Create a page where animations are enabled only on desktop</h1>
+<div class="boxs1">Hover Me</div>
+<h1>50.Build a fully responsive page with adaptive animations for all screen sizes.</h1>
+<nav class="navbars">
+        <div class="logo">Brand</div>
+        <ul class="nav-links">
+            <li>Home</li>
+            <li>Services</li>
+            <li>About</li>
+        </ul>
+    </nav>
+    <header class="hero">
+        <h1 class="animate-text">Adaptive Design</h1>
+        <p class="animate-subtext">Responsive for all devices.</p>
+        <button class="cta-button">Get Started</button>
+    </header>
+    <section class="features">
+        <div class="cards1">Card 1</div>
+        <div class="cards1">Card 2</div>
+        <div class="cards1">Card 3</div>
+    </section>
+</body>
+</html>

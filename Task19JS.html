@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks- Day 19</title>
+    <style>
+   a { margin: 10px; display: inline-block; color: blue; }
+    #changeBtn { margin: 20px; padding: 10px; cursor: pointer; }  
+    .custom-outline {
+    outline: 3px solid #04AA6D !important;
+    outline-offset: 1px;
+  }   
+
+.quote-container {
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 500px;
+}
+section { padding: 20px; border: 1px solid #ccc; margin: 10px; }
+#quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+#author {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.quote-container button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+#width-display {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+.color-button {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            font-size: 24px;
+        }
+input { font-size: 20px; padding: 10px; cursor: pointer;background-color: white; }
+#myParagraph {
+        text-decoration: none;
+        font-family: sans-serif;
+        font-size: 18px;
+    }
+    #message { margin-top: 10px; color: blue; font-weight: bold; }
+    footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    display: block; /* Initially visible */
+}
+#colorDiv {
+    width: 200px;
+    height: 200px;
+    border: 5px solid black; /* Initial border */
+    margin: 20px;
+    transition: border-color 0.3s; /* Smooth transition */
+}
+#main-header {
+            background-color: lightgray;
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        #capsLockMsg {
+            display: none;
+            color: red;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+#scrollBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  * { box-sizing: border-box; }
+
+
+
+/* Flexbox Container */
+.container2 {
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    height: 100vh;
+    gap: 10px;
+    padding: 10px;
+}
+
+/* Flexbox Items (3 Sections) */
+.container {
+  display: flex;
+  gap: 10px;
+  height: 300px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  transition: flex-direction 0.3s ease;
+}
+
+.section {
+  flex: 1; /* Distributes space equally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3498db;
+  color: white;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+}
+
+/* Different colors for visual clarity */
+#section-2 { background-color: #2ecc71; }
+#section-3 { background-color: #e74c3c; }
+
+
+/* Sidebar Styling */
+.sidebar {
+    height: 100%;
+    width: 0; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s; /* Animation speed */
+}
+
+/* Sidebar Links */
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+/* Close Button Position */
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Open Button Styling */
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+/* Responsive adjustment for small screens */
+@media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+}
+
+
+    </style>
+</head>
+<body>
+<h1>1.Create a webpage and display a random quote when it loads.</h1>  
+<div class="quote-container">
+        <p id="quote">"Loading inspiration..."</p>
+        <h3 id="author"></h3>
+        <button onclick="displayQuote()">New Quote</button>
+    </div>
+<script>
+    const quotes = [
+    { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+    { text: "Innovation distinguishes between a leader and a follower.", author: "Steve Jobs" },
+    { text: "Stay hungry, stay foolish.", author: "Whole Earth Catalog" },
+    { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
+    { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" }
+];
+
+function displayQuote() {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    const selectedQuote = quotes[randomIndex];
+    
+    document.getElementById("quote").innerText = `"${selectedQuote.text}"`;
+    document.getElementById("author").innerText = `- ${selectedQuote.author}`;
+}
+
+// Display a random quote immediately when the page loads
+window.onload = displayQuote;
+
+</script>
+<h1>2.Create a button that changes the text color of the clicked element only.</h1>
+<button class="color-button">Click Me to turn Red</button>
+    <button class="color-button">Click Me to turn Green</button>
+    <button class="color-button">Click Me to turn Blue</button>
+
+    <script>
+        // Select all buttons
+        const buttons = document.querySelectorAll('.color-button');
+
+        // Add a click event listener to each button
+        buttons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                // 'event.target' refers to the specific element that was clicked
+                event.target.style.color = 'white';
+                
+                // Example: Making the background match the click
+                if(event.target.textContent.includes('Red')) {
+                    event.target.style.color = 'red';
+                } else if(event.target.textContent.includes('Green')) {
+                    event.target.style.color = 'green';
+                } else {
+                    event.target.style.color = 'blue';
+                }
+            });
+        });
+    </script>
+    <h1>3.Create an input field and show the number of times it was clicked.</h1>
+    <input type="button" id="clickBtn" value="Click me: 0" onclick="countClick()">
+
+    <script>
+        // 1. Initialize the counter variable
+        let count = 0;
+
+        // 2. Define the function to handle clicks
+        function countClick() {
+            // Increment the counter
+            count += 1;
+            
+            // Update the button's text to show the new count
+            document.getElementById("clickBtn").value = "Click me: " + count;
+        }
+    </script>
+    <h1>4.Display the current hour using JavaScript.</h1>
+    <h1 id="time"></h1>
+    <script>
+        const now = new Date();
+        const hour = now.getHours();
+        const minute = now.getMinutes();
+        
+        // Display formatted time (HH:MM)
+        document.getElementById("time").innerHTML = "Current hour: " + hour + ":" + (minute < 10 ? '0' : '') + minute;
+    </script>
+    <h1>5.Create a paragraph and toggle its text decoration (underline / none).</h1>
+    <p id="myParagraph">Click the button to toggle my underline.</p>
+    <button id="toggleBtn">Toggle Underline</button>
+
+<script>
+    // Get references to the elements
+    const pElement = document.getElementById("myParagraph");
+    const button = document.getElementById("toggleBtn");
+
+    // Add click event listener to the button
+    button.addEventListener("click", function() {
+        // Toggle between 'underline' and 'none'
+        if (pElement.style.textDecoration === "underline") {
+            pElement.style.textDecoration = "none";
+        } else {
+            pElement.style.textDecoration = "underline";
+        }
+    });
+</script>
+<h1>6.Create a button that changes the background color of the last section.</h1>
+<section>Section 1</section>
+  <section>Section 2</section>
+  <section id="last-section">Last Section</section>
+
+  <button id="colorBtn1">Change Last Section Color</button>
+
+  <script>
+    // 1. Select the button
+    const button1 = document.getElementById('colorBtn1');
+
+    // 2. Add click event listener
+    button1.addEventListener('click', function() {
+      // 3. Select the last section (using querySelectorAll and indexing)
+      const sections = document.querySelectorAll('section');
+      const lastSection = sections[sections.length - 1];
+      
+      // 4. Change the background color
+      lastSection.style.backgroundColor = 'lightcoral';
+    });
+  </script>
+  <h1>7.Display the total number of paragraphs on the page.</h1>
+  <p>Sample paragraph A.</p>
+    <p>Sample paragraph B.</p>
+    
+    <!-- Placeholder to show the result -->
+    <div id="result" style="font-weight:bold;"></div>
+
+    <script>
+        // Count paragraphs
+        var count1 = document.getElementsByTagName('p').length;
+        // Display inside the 'result' div
+        document.getElementById('result').textContent = "Total paragraphs: " + count1;
+    </script>
+    <h1>8.Create an input field and show its value length in real time.</h1>
+    <label for="myInput">Type something: </label>
+    <input type="text" id="myInput" placeholder="Start typing...">
+    <p>Character Count: <span id="charCount">0</span></p>
+
+    <script>
+        // 1. Select the input field and the display span
+        const inputField = document.getElementById('myInput');
+        const charCount = document.getElementById('charCount');
+
+        // 2. Add an 'input' event listener to the field
+        inputField.addEventListener('input', function() {
+            // 3. Update the span with the current length of the input value
+            charCount.textContent = this.value.length;
+        });
+    </script>
+    <h1>9.Create a button that hides the last list item.</h1>
+    <ul id="myList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Last Item</li>
+    </ul>
+
+    <button id="hideBtn">Hide Last Item</button>
+
+    <script>
+        document.getElementById('hideBtn').addEventListener('click', function() {
+            // Find the list
+            var list = document.getElementById('myList');
+            // Find the last child (li)
+            var lastItem = list.lastElementChild;
+            
+            // If the item exists, hide it
+            if (lastItem) {
+                lastItem.style.display = 'none';
+            }
+        });
+    </script>
+    <h1>10.Display the browser window width dynamically.</h1>
+    <div id="width-display">Width: Loading...</div>
+
+    <script>
+        // Function to update the width
+        function updateWidth() {
+            // window.innerWidth gives the viewport width including scrollbars
+            const width = window.innerWidth;
+            document.getElementById('width-display').innerText = `Width: ${width}px`;
+        }
+
+        // Run on load to set initial width
+        updateWidth();
+
+        // Add event listener for resizing
+        window.addEventListener('resize', updateWidth);
+    </script>
+    <h1>11.Create a paragraph and change its line height using JavaScript.</h1>
+    <button onclick="createAndStyleParagraph()">Create Paragraph</button>
+    <div id="container"></div>
+
+    <script>
+        function createAndStyleParagraph() {
+            // 1. Create a new <p> element
+            var newPara = document.createElement("p");
+            
+            // 2. Add content to the paragraph
+            newPara.textContent = "This is a new paragraph. Clicking the button created this paragraph and changed its line-height to 2.5 to make the lines spread far apart.";
+            
+            // 3. Change the line-height using simple JavaScript
+            // Values can be pixels (30px), ems (2em), or unitless (2.5)
+            newPara.style.lineHeight = "2.5";
+            newPara.style.fontSize = "32px";
+            newPara.style.border = "1px solid black"; // Added to see the impact
+            
+            // 4. Append the paragraph to the container
+            document.getElementById("container").appendChild(newPara);
+        }
+    </script>
+    <h1>12.Create an input field and show a message when the user presses a number key.</h1>
+    <label for="numInput">Type here: </label>
+    <input type="text" id="numInput" placeholder="Press a key...">
+    <p id="message"></p>
+
+    <script>
+        const inputField1 = document.getElementById('numInput');
+        const messageArea = document.getElementById('message');
+
+        inputField1.addEventListener('keydown', function(event) {
+            // Check if the pressed key is a number (0-9)
+            // 'event.key' provides the character value
+            if (event.key >= '0' && event.key <= '9') {
+                messageArea.textContent = 'Number key pressed: ' + event.key;
+                messageArea.style.color = 'green';
+            } else {
+                messageArea.textContent = 'Not a number';
+                messageArea.style.color = 'red';
+            }
+        });
+    </script>
+    <h1>13.Create a button that changes the font style of all links.</h1>
+    <h2>Link Style Changer</h2>
+    
+    <!-- The Button -->
+    <button id="changeBtns">Change Link Styles</button>
+    <br><br>
+    
+    <!-- Example Links -->
+    <a href="#">Link One</a>
+    <a href="#">Link Two</a>
+    <a href="#">Link Three</a>
+
+    <script>
+        // Select the button
+        const button2 = document.getElementById('changeBtns');
+
+        // Add click event listener
+        button2.addEventListener('click', function() {
+            // Select all anchor tags
+            const links = document.querySelectorAll('a');
+            
+            // Loop through each link and change its style
+            links.forEach(function(link) {
+                link.style.fontFamily = 'Courier New, Courier, monospace';
+                link.style.color = 'red';
+                link.style.fontWeight = 'bold';
+                link.style.textDecoration = 'none'; // Removes underline
+            });
+        });
+    </script>
+    <h1>14.Display the number of radio buttons on the page.</h1>
+<form>
+  <input type="radio" name="gender" value="male"> Male<br>
+  <input type="radio" name="gender" value="female"> Female<br>
+  <input type="radio" name="age" value="child"> Child<br>
+  <input type="radio" name="age" value="adult"> Adult<br>
+</form>
+
+<button onclick="countRadios()">Count Radio Buttons</button>
+<p>Total radio buttons: <span id="result1"></span></p>
+
+<script>
+function countRadios() {
+  // 1. Select all input elements where type is radio
+  const radios = document.querySelectorAll('input[type="radio"]');
+  
+  // 2. Get the number of elements found
+  const total = radios.length;
+  
+  // 3. Display the result
+  document.getElementById("result1").innerText = total;
+}
+</script>
+<h1>15.Create a button that toggles visibility of a footer.</h1>
+<button id="toggleBtns">Toggle Footer</button>
+
+    <!-- Content to show the footer moves -->
+    <div style="height: 100vh;">Scroll down or just click the button.</div>
+
+    <footer id="myFooter">
+        <p>&copy; 2025 Simple Footer</p>
+    </footer>
+    <script>
+        // Get references to the button and footer
+const buttons1 = document.getElementById('toggleBtns');
+const footer = document.getElementById('myFooter');
+
+// Add click event listener to the button
+buttons1.addEventListener('click', function() {
+    // Check current display state
+    if (footer.style.display === 'none') {
+        footer.style.display = 'block'; // Show
+    } else {
+        footer.style.display = 'none'; // Hide
+    }
+});
+
+    </script>
+    <h1>16.Create a simple form and disable submission using JavaScript.</h1>
+    <h2>Simple Form</h2>
+    <form id="myForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        // 1. Get the form element from the DOM
+        var form = document.getElementById('myForm');
+
+        // 2. Add an event listener for the 'submit' event
+        form.addEventListener('submit', function(event) {
+            
+            // 3. Prevent the default form submission (page reload)
+            event.preventDefault();
+
+            // 4. Custom logic (optional)
+            document.getElementById('message').innerText = "Form submission disabled!";
+            console.log("Form submission was prevented.");
+        });
+    </script>
+    <h1>17.Create a div and change its border color randomly.</h1>
+    <div id="colorDiv"></div>
+<button onclick="changeBorderColor()">Change Border Color</button>
+
+<script>
+function changeBorderColor() {
+  // 1. Generate a random color in Hexadecimal format
+  const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+  
+  // 2. Select the div
+  const div = document.getElementById("colorDiv");
+  
+  // 3. Apply the random color to the border
+  div.style.borderColor = randomColor;
+}
+</script>
+<h1>18.Display the current protocol (http / https) on the page.</h1>
+<h3>Current Protocol: <span id="protocol"></span></h3>
+
+  <script>
+    // Access the protocol property and display it
+    document.getElementById("protocol").innerText = window.location.protocol;
+  </script>
+  <h1>19.Create a button that clears all textareas.</h1>
+  <!-- Sample Textareas -->
+    <textarea class="my-text-area">Text 1</textarea>
+    <textarea class="my-text-area">Text 2</textarea>
+    <textarea class="my-text-area">Text 3</textarea>
+
+    <br>
+    <!-- The Button -->
+    <button type="button" onclick="clearAllTextAreas()">Clear All Textareas</button>
+
+    <script>
+        function clearAllTextAreas() {
+            // Select all textarea elements on the page
+            var textAreas = document.querySelectorAll('textarea');
+            
+            // Loop through them and set their value to empty
+            textAreas.forEach(function(textArea) {
+                textArea.value = '';
+            });
+        }
+    </script>
+    <h1>20.Create a paragraph and change its text transform using JavaScript.</h1>
+    <p id="myParagraphs">This is a sample paragraph to be transformed.</p>
+    
+    <button onclick="transformText()">Make Uppercase</button>
+
+    <script>
+        function transformText() {
+            // 1. Get the paragraph element
+            var p = document.getElementById("myParagraphs");
+            
+            // 2. Change the CSS textTransform property
+            p.style.textTransform = "uppercase";
+        }
+    </script>
+    <h1>21.Create a button that changes the background color of the header.</h1>
+    <header id="main-header">
+        <h1>My Website</h1>
+    </header>
+
+    <br>
+    <!-- The button that triggers the JavaScript function -->
+    <button onclick="changeHeaderColor()">Change Header Color</button>
+
+    <script>
+        function changeHeaderColor() {
+            // Get the header element by its ID
+            var header = document.getElementById("main-header");
+            
+            // Change the background color style
+            header.style.backgroundColor = "skyblue";
+        }
+    </script>
+    <h1>22.Display the total number of list items present on the page.</h1>
+    <p>Total list items: <span id="total-count">0</span></p>
+
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+</ul>
+
+<script>
+    // 1. Select all 'li' elements in the document
+const listItems = document.querySelectorAll("li");
+
+// 2. Get the length of the NodeList
+const totalItems = listItems.length;
+
+// 3. Display the result
+document.getElementById("total-count").innerText = totalItems;
+console.log("Total items: " + totalItems); // Also logs to console
+
+</script>
+<h1>23.Create an input field and show a message when Caps Lock is on.</h1>
+<label for="password">Password: </label>
+    <input type="password" id="password" placeholder="Enter password...">
+    <div id="capsLockMsg">WARNING! Caps lock is ON.</div>
+
+    <script>
+        var input = document.getElementById("password");
+        var message = document.getElementById("capsLockMsg");
+
+        // Listen for keyup event to check Caps Lock status
+        input.addEventListener("keyup", function(event) {
+            // getModifierState returns true if CapsLock is active
+            if (event.getModifierState("CapsLock")) {
+                message.style.display = "block"; // Show message
+            } else {
+                message.style.display = "none";  // Hide message
+            }
+        });
+    </script>
+    <h1>24.Create a button that hides all buttons on the page.</h1>
+    <button id="hideAllBtn" onclick="hideAllButtons()">Hide All Buttons</button>
+
+    <!-- Other buttons to be hidden -->
+    <button>Button 1</button>
+    <button>Button 2</button>
+    <button>Button 3</button>
+
+    <script>
+        function hideAllButtons() {
+            // Selects all <button> elements on the page
+            var buttons = document.querySelectorAll("button");
+            
+            // Loop through the NodeList of buttons
+            for (var i = 0; i < buttons.length; i++) {
+                // Set display to "none" to remove them from page flow
+                buttons[i].style.display = "none";
+            }
+        }
+    </script>
+    <h1>25.Display a message when the user double-clicks anywhere on the page.</h1>
+    <p>Double-click anywhere on this page.</p>
+    
+    <script>
+        // Add a double-click event listener to the entire document
+        document.addEventListener('dblclick', function() {
+            alert('Page was double-clicked!');
+        });
+    </script>
+    <h1>26.Validate input to allow only lowercase letters.</h1>
+    <input type="text" pattern="[a-z]+" title="Only lowercase letters allowed" required>
+    <script>
+        
+    function validateInput(text) {
+  // Regex: ^ (start), [a-z] (lowercase letters), + (one or more), $ (end)
+  const regex = /^[a-z]+$/;
+  
+  if (regex.test(text)) {
+    console.log("Valid: Only lowercase letters.");
+    document.write("Valid: Only lowercase letters.");
+    return true;
+  } else {
+    console.log("Invalid: Must be lowercase letters only.");
+    document.write("Invalid: Must be lowercase letters only.");
+    return false;
+  }
+}
+</script>
+<h1>27.Create a button that saves text input into localStorage.</h1>
+<input type="text" id="userInput" placeholder="Enter text...">
+    
+    <!-- Button to trigger save -->
+    <button id="saveBtn">Save to LocalStorage</button>
+
+    <script>
+        // Select the button and input field
+        const saveButton = document.getElementById('saveBtn');
+        const userInput = document.getElementById('userInput');
+
+        // Add click event listener to the button
+        saveButton.addEventListener('click', function() {
+            // Get the value from the input
+            const textToSave = userInput.value;
+            
+            // Save to localStorage with a key
+            localStorage.setItem('savedText', textToSave);
+            
+            alert('Text saved: ' + textToSave);
+        });
+    </script>
+    <h1>28.Display the total number of visible elements on the page.</h1>
+    <script>
+    // Select all elements (*)
+const allElements = document.querySelectorAll('*');
+
+// Filter elements that have an offsetParent (visible)
+const visibleElements = Array.from(allElements).filter(el => el.offsetParent !== null);
+
+console.log("Total visible elements:", visibleElements.length);
+document.write("Total visible elements: " + visibleElements.length);
+</script>
+<h1>29.Create a button that toggles outline style of all inputs.</h1>
+<button id="toggleBtn2">Toggle Outline</button>
+  <br>
+  <input type="text" placeholder="Input 1">
+  <input type="password" placeholder="Input 2">
+  <input type="email" placeholder="Input 3">
+
+<script>
+  const buttons4 = document.getElementById('toggleBtns2');
+  const inputs = document.querySelectorAll('input');
+
+  buttons4.addEventListener('click', () => {
+    // Loop through all inputs and toggle the class
+    inputs.forEach(input => {
+      input.classList.toggle('custom-outline');
+    });
+  });
+</script>
+<h1>30.Store and display the number of page visits using localStorage.</h1>
+<h1>Page Visits: <span id="visit-count">0</span></h1>
+
+    <script>
+        // 1. Check if the browser supports localStorage
+        if (typeof(Storage) !== "undefined") {
+            
+            // 2. Retrieve existing count, or set to 0 if null
+            let visits = localStorage.getItem("pageVisits") || 0;
+            
+            // 3. Increment the count
+            visits++;
+            
+            // 4. Store the new count back to localStorage
+            localStorage.setItem("pageVisits", visits);
+            
+            // 5. Display the count on the page
+            document.getElementById("visit-count").innerText = visits;
+        } else {
+            document.getElementById("visit-count").innerText = "Not supported";
+        }
+    </script>
+    <h1>31.Create a button that removes duplicate values from a list.</h1>
+    <h3>Original List:</h3>
+    <ul id="myList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Apple</li>
+        <li>Orange</li>
+        <li>Banana</li>
+        <li>Grape</li>
+    </ul>
+
+    <button onclick="removeDuplicates()">Remove Duplicates</button>
+
+    <script>
+        function removeDuplicates() {
+            // 1. Get the list elements
+            let list = document.getElementById("myList");
+            let items = list.getElementsByTagName("li");
+            let uniqueItems = new Set();
+            let itemsToRemove = [];
+
+            // 2. Loop through items to identify duplicates
+            for (let i = 0; i < items.length; i++) {
+                let text = items[i].innerText;
+                if (uniqueItems.has(text)) {
+                    // Mark duplicate for removal
+                    itemsToRemove.push(items[i]);
+                } else {
+                    // Add new unique item to Set
+                    uniqueItems.add(text);
+                }
+            }
+
+            // 3. Remove duplicates from the DOM
+            itemsToRemove.forEach(item => item.remove());
+        }
+    </script>
+    <h1>32.Validate that the entered year is a leap year.</h1>
+    <script>
+    function isLeapYear(year) {
+    // Leap year rules: divisible by 4, but not 100, OR divisible by 400
+    if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+        return "a Leap Year"; // It is a leap year
+    } else {
+        return "Not a Leap Year"; 
+       // It is not a leap year
+    }
+}
+console.log(isLeapYear(2023));
+document.write("The year 2023 is ", isLeapYear(2023));
+</script>
+<h1>33.Create a button that switches between two CSS stylesheets.</h1>
+<h1>Toggle Theme Example</h1>
+    <button id="toggleBtnn">Switch Stylesheet</button>
+
+    <script>
+        // Simple Javascript to switch style
+        const btns2 = document.getElementById("toggleBtnn");
+        const themes = document.getElementById("themes");
+
+        btns2.addEventListener("click", function() {
+            if (themes.getAttribute("href") == "style1.css") {
+                themes.setAttribute("href", "style2.css");
+            } else {
+                themes.setAttribute("href", "style1.css");
+            }
+        });
+    </script>
+<h1>
+34.Display a message when the page visibility changes.
+</h1>
+<h1>Switch tabs to see the message in the console.</h1>
+
+    <script>
+        // Listen for visibility changes
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                console.log("Page is HIDDEN (user left tab)");
+                // Example: document.title = "Come Back!";
+            } else {
+                console.log("Page is VISIBLE (user returned)");
+                // Example: document.title = "Welcome Back!";
+            }
+        });
+    </script>
+    <h1>35.Create a form and disable submit until all fields are filled.</h1>
+    <h3>Register</h3>
+<form id="myFormd">
+    <input type="text" id="name" placeholder="Username" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <button type="submit" id="submitBtns" disabled>Submit</button>
+</form>
+<script>
+    // Get references to the elements
+const formd = document.getElementById('myFormd');
+const inputs1 = form.querySelectorAll('input');
+const submitBtns = document.getElementById('submitBtns');
+
+// Add input event listener to all inputs
+inputs1.forEach(input => {
+    input.addEventListener('input', () => {
+        // Check if all fields are filled
+        let allFilled = true;
+        inputs1.forEach(i => {
+            if (i.value.trim() === "") {
+                allFilled = false;
+            }
+        });
+
+        // Enable/Disable button
+        submitBtns.disabled = !allFilled;
+    });
+});
+
+</script>
+<h1>36.Create a button that replaces text inside all paragraphs.</h1>
+<p>Original paragraph 1.</p>
+    <p>Original paragraph 2.</p>
+    <p>Original paragraph 3.</p>
+
+    <!-- The Button -->
+    <button id="replaceBtn">Replace All Text</button>
+
+    <script>
+        // 1. Select the button
+        const buttond = document.getElementById('replaceBtn');
+
+        // 2. Add click event listener to the button
+        buttond.addEventListener('click', function() {
+            
+            // 3. Select all paragraphs
+            const paragraphs = document.querySelectorAll('p');
+            
+            // 4. Loop through each paragraph and change text
+            paragraphs.forEach(function(p) {
+                p.textContent = "Text has been replaced!";
+            });
+        });
+    </script>
+    <h1>37.Display the total character count across multiple textareas.</h1>
+    <!-- Textarea fields -->
+<textarea class="count-me" placeholder="First box..."></textarea>
+<textarea class="count-me" placeholder="Second box..."></textarea>
+<textarea class="count-me" placeholder="Third box..."></textarea>
+
+<!-- Display for total count -->
+<p>Total Characters: <span id="total-display">0</span></p>
+
+<script>
+  const textareas = document.querySelectorAll('.count-me');
+  const totalDisplay = document.getElementById('total-display');
+
+  const updateCount = () => {
+    let total = 0;
+    textareas.forEach(textarea => {
+      total += textarea.value.length;
+    });
+    totalDisplay.textContent = total;
+  };
+
+  // Attach listener to every textarea
+  textareas.forEach(textarea => {
+    textarea.addEventListener('input', updateCount);
+  });
+</script>
+<h1>38.Create a button that freezes and unfreezes page scrolling.</h1>
+<h1>Scroll Lock Example</h1>
+<p>Scroll down to see the page scroll.</p>
+
+<button id="scrollBtn" onclick="toggleScroll()">Freeze Scroll</button>
+
+<script>
+  function toggleScroll() {
+    // Get the button element
+    const btn = document.getElementById("scrollBtn");
+    
+    // Toggle body overflow between hidden and auto
+    if (document.body.style.overflow === "hidden") {
+      document.body.style.overflow = "auto";
+      btn.innerText = "Freeze Scroll";
+    } else {
+      document.body.style.overflow = "hidden";
+      btn.innerText = "Unfreeze Scroll";
+    }
+  }
+</script>
+<h1>39.Display a warning when the user tries to close the browser tab.</h1>
+<p>Click anywhere on the page, then try to close the tab.</p>
+
+    <script>
+        window.addEventListener('beforeunload', (event) => {
+            // Standard method to trigger confirmation
+            event.preventDefault();
+            // Required for Chrome to show confirmation box
+            event.returnValue = '';
+        });
+    </script>
+    <h1>40.Create a simple three-section layout using CSS Flexbox.</h1>
+   <div class="container" id="layout-container">
+  <div class="section" id="section-1">Section 1</div>
+  <div class="section" id="section-2">Section 2</div>
+  <div class="section" id="section-3">Section 3</div>
+</div>
+<button onclick="toggleLayout()">Change Layout Direction</button>
+ 
+
+<script>
+function toggleLayout() {
+  const container = document.getElementById('layout-container');
+  
+  // Check current direction and toggle it
+  if (container.style.flexDirection === 'column') {
+    container.style.flexDirection = 'row';
+  } else {
+    container.style.flexDirection = 'column';
+  }
+}
+
+</script>
+    
+    
+    <h1>41.Create a button that toggles read-only state of input fields.</h1>
+    <h3>User Profile</h3>
+<input type="text" id="username" value="JohnDoe" readonly><br><br>
+<input type="email" id="email" value="john@example.com" readonly><br><br>
+
+<button id="toggleBtn" onclick="toggleReadOnly()">Enable Editing</button>
+
+<script>
+function toggleReadOnly() {
+    // 1. Get the input elements
+    const inputs = document.querySelectorAll('input[type="text"], input[type="email"]');
+    const btn = document.getElementById('toggleBtn');
+    
+    // 2. Toggle the readOnly property
+    inputs.forEach(input => {
+        input.readOnly = !input.readOnly;
+    });
+    
+    // 3. Update button text based on state
+    if (inputs[0].readOnly) {
+        btn.innerText = "Enable Editing";
+    } else {
+        btn.innerText = "Disable Editing";
+    }
+}
+</script>
+<h1>42.Convert input text to camelCase using JavaScript.</h1>
+<script>
+function toCamelCase(str) {
+    return str
+        .toLowerCase() // Convert whole string to lowercase
+        .split(' ')    // Split into words by spaces
+        .map((word, index) => {
+            // Capitalize the first letter of every word after the first
+            if (index === 0) return word;
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join('');     // Join without spaces
+}
+
+console.log(toCamelCase("convert input text"));
+document.write("The input text is : convert input text<br>The result is:  ") // "convertInputText"
+document.write(toCamelCase("convert input text")); 
+console.log(toCamelCase("Hello world example")); // "helloWorldExample"
+</script>
+<h1>43.Create a button that highlights elements on mouse hover.</h1>
+<button id="myButtond">Hover Over Me!</button>
+<script>
+    // Get the button element
+const buttondn = document.getElementById('myButtond');
+
+// Add mouseover event listener to highlight
+buttondn.addEventListener('mouseover', () => {
+  buttondn.style.backgroundColor = 'yellow'; // Change color on hover
+  buttondn.style.fontWeight = 'bold';
+});
+
+// Add mouseout event listener to reset
+buttondn.addEventListener('mouseout', () => {
+  buttondn.style.backgroundColor = 'lightgray'; // Restore color
+  buttondn.style.fontWeight = 'normal';
+});
+
+</script>
+<h1>44.Display a message when the browser loses internet connection.</h1>
+<script>
+window.addEventListener('offline', function(e) {
+    document.write('Oops! You are offline now!');
+});
+
+window.addEventListener('online', function(e) {
+    document.write('Back online!');
+});
+</script>
+<h1>45.Create a button that selects all text inside an input field.</h1>
+<input type="text" value="Hello World! Click button to select me." id="myInput" size="40">
+
+    <!-- 2. The Button -->
+    <button onclick="selectAllText()">Select All</button>
+
+    <script>
+        function selectAllText() {
+            // Get the input field
+            var inputField = document.getElementById("myInput");
+            
+            // 3. Select the text
+            inputField.select();
+            
+            // 4. Focus the field (optional, but good for user experience)
+            inputField.focus();
+        }
+    </script>
+    <h1>46.Display the total number of disabled form elements.</h1>
+    <form id="myForm">
+  <input type="text" name="name" value="User" disabled><br>
+  <input type="email" name="email" value="user@example.com"><br>
+  <button type="submit" disabled>Submit</button>
+  <select disabled>
+    <option>Option 1</option>
+  </select>
+</form>
+
+<p>Total disabled elements: <span id="count">0</span></p>
+
+<script>
+  // 1. Select all disabled elements in the document
+  const disabledElements = document.querySelectorAll(":disabled");
+  
+  // 2. Get the length of the node list
+  const totalDisabled = disabledElements.length;
+  
+  // 3. Display the count
+  document.getElementById("count").innerText = totalDisabled;
+</script>
+<h1>47.Create a button that toggles visibility of all tables.</h1>
+<button id="toggleBtntb">Toggle Tables</button>
+
+<table class="data-table">
+    <tr><th>Table 1</th><th>Data</th></tr>
+    <tr><td>A</td><td>1</td></tr>
+</table>
+
+<table class="data-table">
+    <tr><th>Table 2</th><th>Data</th></tr>
+    <tr><td>B</td><td>2</td></tr>
+</table>
+
+<script>
+    document.getElementById('toggleBtntb').addEventListener('click', function() {
+        // Select all tables
+        var tables = document.querySelectorAll('table');
+        
+        tables.forEach(function(table) {
+            // Check current display state and toggle
+            if (table.style.display === 'none') {
+                table.style.display = 'table';
+            } else {
+                table.style.display = 'none';
+            }
+        });
+    });
+</script>
+<h1>48.Create a simple sidebar layout using CSS.</h1>
+<div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main">
+        <button class="openbtn" onclick="toggleNav()">☰ Menu</button>
+        <h2>My Simple Sidebar</h2>
+        <p>Click the button to open/close the sidebar.</p>
+    </div>
+    <script>
+        // Function to open/close the sidebar
+function toggleNav() {
+    var sidebar = document.getElementById("mySidebar");
+    
+    // Check if sidebar is currently closed (width 0)
+    if (sidebar.style.width === "250px") {
+        closeNav();
+    } else {
+        openNav();
+    }
+}
+
+function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
+
+    </script>
+    <h1>49.Display a confirmation message before deleting content.</h1>
+    <button id="deleteBtn">Delete Content</button>
+
+    <script>
+        document.getElementById('deleteBtn').onclick = function() {
+            // Display confirmation box
+            var result = confirm("Are you sure you want to delete this content?");
+            
+            if (result) {
+                // If OK is clicked
+                alert("Content deleted.");
+                // Add actual deletion logic here
+            } else {
+                // If Cancel is clicked
+                alert("Deletion cancelled.");
+            }
+        };
+    </script>
+    <h1>50.Dynamically change the page language attribute</h1>
+    <h1 id="text">Hello World</h1>
+    
+    <button onclick="changeLanguage('en')">English</button>
+    <button onclick="changeLanguage('es')">Spanish</button>
+    <button onclick="changeLanguage('fr')">French</button>
+
+    <script>
+        function changeLanguage(lang) {
+            // 1. Change the html lang attribute
+            document.documentElement.setAttribute('lang', lang);
+            
+            // 2. Optionally, change the content based on the new lang
+            const textElement = document.getElementById('text');
+            if (lang === 'es') textElement.innerText = "Hola Mundo";
+            else if (lang === 'fr') textElement.innerText = "Bonjour le monde";
+            else textElement.innerText = "Hello World";
+        }
+    </script>
+</body>
+</html>
