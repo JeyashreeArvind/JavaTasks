@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks</title>
+    <meta name="description" content="This is the original meta description.">
+    <style>
+        .greeting-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 { color: #333; }
+        #mySection {
+    background-color: #f0f0f0; /* Initial background color */
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 8px;
+    max-width: 600px;
+    transition: background-color 0.5s ease; /* Smooth transition */
+}
+.required-highlight {
+    border: 2px solid red !important;
+    background-color: #fff3f3;
+}
+
+div {
+        padding: 20px;
+        margin: 10px;
+        background-color: lightgray;
+        border: 2px solid transparent; /* Hidden by default */
+        transition: border 0.3s;
+    }
+
+    /* Class to be toggled by JavaScript */
+    .show-border {
+        border: 2px solid blue !important;
+    }
+    .toggle-section {
+    display: block; /* Visible by default */
+    padding: 10px;
+    border: 1px solid black;
+    margin: 5px;
+}
+
+/* Class to be added/removed by JS */
+.hidden {
+    display: none !important;
+}
+
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+fieldset:disabled {
+        opacity: 0.6;
+    }
+
+button:hover {
+    background-color: #0056b3;
+}
+ input { padding: 8px; width: 250px; }
+        #reversedText { font-weight: bold; color: blue; }
+        .even-color {
+        color: blue;
+        font-weight: bold;
+    }
+    #textElement { font-size: 24px; margin-bottom: 20px; }
+    .form-container { max-width: 400px; margin: auto; }
+        textarea { width: 100%; padding: 8px; margin: 5px 0 15px 0; }
+        button { padding: 10px 15px; cursor: pointer; }
+        /* Style for hiding the message initially */
+        .hidden { display: none; }
+        #thankYouMessage { text-align: center; color: green; }
+        #myDiv {
+    width: 200px;
+    height: 100px;
+    border: 2px solid black; /* Initial border-width is 2px */
+    background-color: lightblue;
+    margin-bottom: 10px;
+  }
+  #myHeader {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        height: 100px; /* Initial height */
+        transition: height 0.4s; /* Smooth transition */
+        overflow: hidden;
+    }
+    /* Style for inputs that are empty */
+.empty-field {
+    border: 2px solid red;
+    background-color: #ffcccc;
+}
+
+/* Default style */
+input {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+body { font-family: sans-serif; margin: 0; padding: 0; }
+header, footer { background: #333; color: white; text-align: center; padding: 1rem; }
+nav { background: #444; color: white; padding: 0.5rem; }
+nav ul { padding: 0; list-style: none; display: flex; justify-content: center; gap: 1rem; align-items: center; }
+nav a { color: white; text-decoration: none; }
+main { display: flex; padding: 1rem; }
+section { flex: 3; padding: 1rem; }
+aside { flex: 1; padding: 1rem; background: #eee; }
+/* Simple JS-driven style class */
+.dark-mode { background-color: #222; color: white; }
+.dark-mode aside { background-color: #333; }
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Defines two equal columns */
+    gap: 10px;                       /* Spacing between columns */
+  }
+  .grid-item {
+    padding: 20px;
+    border: 1px solid #333;
+  }
+
+    </style>
+</head>
+<body>
+<h1>1.Create a webpage and display a greeting message based on time (morning / afternoon / evening).</h1>   
+
+<div class="greeting-card">
+        <h1 id="greeting">Loading...</h1>
+    </div>
+<script>
+        function setGreeting() {
+            const greetingElement = document.getElementById('greeting');
+            const hour = new Date().getHours(); // Get current hour (0-23)
+            let message = "";
+
+            // Determine greeting based on 24-hour format
+            if (hour < 12) {
+                message = "Good Morning!";
+            } else if (hour < 17) {
+                message = "Good Afternoon!";
+            } else {
+                message = "Good Evening!";
+            }
+
+            greetingElement.textContent = message;
+        }
+
+        // Run function on load
+        setGreeting();
+    </script>
+    <h1>2.Create a button that changes the text color of all headings on the page.</h1>
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <p>This paragraph will not change.</p>
+    
+    <!-- The Button -->
+    <button id="colorBtn">Change Headings to Red</button>
+
+    <script>
+        // 1. Get the button element
+        const btn = document.getElementById('colorBtn');
+
+        // 2. Add click event listener
+        btn.addEventListener('click', function() {
+            // 3. Select all headings (h1, h2, etc.)
+            const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            
+            // 4. Loop through and change color
+            headings.forEach(heading => {
+                heading.style.color = 'red'; // You can use HEX, RGB, or names
+            });
+        });
+    </script>
+    <h1>3.Create an input field and display a message when the user presses Enter.</h1>
+    <h3>Type something and press Enter:</h3>
+    <input type="text" id="myInput" placeholder="Press Enter...">
+    <p id="message"></p>
+
+    <script>
+        // Get the input field and message element
+        const inputField = document.getElementById("myInput");
+        const messagePara = document.getElementById("message");
+
+        // Add an event listener for keydown
+        inputField.addEventListener("keydown", function(event) {
+            // Check if the pressed key is "Enter"
+            if (event.key === "Enter") {
+                // Prevent the default action (e.g., form submission)
+                event.preventDefault();
+                
+                // Display the message
+                messagePara.textContent = "You pressed Enter! Input value: " + inputField.value;
+                inputField.value = ""; // Optional: Clear the input field
+            }
+        });
+    </script>
+    <h1>4.Show the browser name using JavaScript.</h1>
+    <script>
+        // Get the user agent string
+var agent = navigator.userAgent.toLowerCase();
+var browserName = "Unknown";
+
+// Analyze the user agent string
+if (agent.indexOf("edge") > -1) {
+    browserName = "Edge";
+} else if (agent.indexOf("edg") > -1) {
+    browserName = "Chromium-based Edge";
+} else if (agent.indexOf("opr") > -1) {
+    browserName = "Opera";
+} else if (agent.indexOf("chrome") > -1) {
+    browserName = "Chrome";
+} else if (agent.indexOf("trident") > -1) {
+    browserName = "Internet Explorer";
+} else if (agent.indexOf("firefox") > -1) {
+    browserName = "Firefox";
+} else if (agent.indexOf("safari") > -1) {
+    browserName = "Safari";
+}
+
+// Display the browser name
+document.write("You are using: " + browserName);
+console.log(browserName);
+
+    </script>
+    <h1>5.Create a paragraph and change its letter spacing using JavaScript.</h1>
+    <div id="container"></div>
+
+<script>
+  // 1. Create the paragraph element
+  const newParagraph = document.createElement("p");
+  newParagraph.innerText = "This is a new paragraph with modified letter spacing.";
+  
+  // 2. Add content to the document
+  document.getElementById("container").appendChild(newParagraph);
+
+  // 3. Change the letter spacing using JavaScript
+  newParagraph.style.letterSpacing = "5px"; // Increases space by 5px
+  newParagraph.style.fontSize = "20px";
+</script>
+<h1>6.Create a button that changes the background color of only one section.</h1>
+<section id="mySection">
+        <h1>This is a Section</h1>
+        <p>Click the button below to change my background color!</p>
+    </section>
+
+    <button id="colorButton">Change Color</button>
+    <script>
+        // Get the button and the section elements
+const colorButton = document.getElementById('colorButton');
+const mySection = document.getElementById('mySection');
+
+// Array of colors to cycle through
+const colors = ['#ffcc00', '#a3e4d7', '#f5b7b1', '#d2b4de'];
+let currentColorIndex = 0;
+
+// Add an event listener to the button
+colorButton.addEventListener('click', function() {
+    // Change the background color of the section
+    mySection.style.backgroundColor = colors[currentColorIndex];
+    
+    // Increment the index and loop back to the start if needed
+    currentColorIndex = (currentColorIndex + 1) % colors.length;
+});
+
+    </script>
+    <h1>7.Display the total number of links present on the page.</h1>
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <p>Total Links: <span id="linkCount"></span></p>
+
+    <script>
+        // Use the length property of document.links
+        var totalLinks = document.links.length;
+        document.getElementById("linkCount").innerHTML = totalLinks;
+    </script>
+    <h1>8.Create a text input and show the reversed value of the text.</h1>
+    <h3>Enter Text to Reverse:</h3>
+    <!-- The input field -->
+    <input type="text" id="userInput" placeholder="Type something...">
+    
+    <!-- Area to show the result -->
+    <p>Reversed: <span id="reversedText"></span></p>
+
+    <script>
+        const inputFields = document.getElementById('userInput');
+        const outputSpan = document.getElementById('reversedText');
+
+        // Add event listener to reverse text in real-time
+        inputFields.addEventListener('input', function() {
+            // 1. Get the current value
+            const text = inputFields.value;
+            
+            // 2. Reverse the string:
+            //    - split("") turns the string into an array of characters
+            //    - reverse() reverses the array in place
+            //    - join("") joins the array back into a string
+            const reversed = text.split('').reverse().join('');
+            
+            // 3. Display the result
+            outputSpan.innerText = reversed;
+        });
+    </script>
+    <h1>9.Create a button that hides the first list item.</h1>
+    <ul id="myList">
+        <li>First Item (will be hidden)</li>
+        <li>Second Item</li>
+        <li>Third Item</li>
+    </ul>
+
+    <button onclick="hideFirstItem()">Hide First Item</button>
+
+    <script>
+        function hideFirstItem() {
+            // Select the first list item
+            const firstItem = document.querySelector('#myList li:first-child');
+            // Hide it
+            if (firstItem) {
+                firstItem.style.display = 'none';
+            }
+        }
+    </script>
+    <h1>10.Display the screen width and height on the page.</h1>
+    <h2>Screen Dimensions</h2>
+  <p id="screen"></p>
+
+  <script>
+    document.getElementById("screen").innerHTML = 
+      "Width: " + screen.width + "px<br>" + 
+      "Height: " + screen.height + "px";
+  </script>
+  <h1>11.Create a paragraph and change its text direction (LTR / RTL).</h1>
+  <button id="toggleBtn">Switch to RTL</button>
+    <div id="containers"></div>
+
+    <script>
+        // 1. Create the paragraph element
+        const para = document.createElement("p");
+        para.innerText = "This is a sample paragraph demonstrating text direction.";
+        para.id = "myPara";
+        
+        // 2. Append it to the container
+        document.getElementById("containers").appendChild(para);
+
+        // 3. Simple function to toggle direction
+        const btns = document.getElementById("toggleBtn");
+        btns.addEventListener("click", () => {
+            if (para.style.direction === "rtl") {
+                para.style.direction = "ltr";
+                btns.innerText = "Switch to RTL";
+            } else {
+                para.style.direction = "rtl";
+                btns.innerText = "Switch to LTR";
+            }
+        });
+    </script>
+    <h1>12.Create an input field and display a message when it loses focus.</h1>
+    <label for="myInput">Click in and out of this field: </label>
+    <input type="text" id="myInput" onblur="displayMessage()">
+    
+    <p id="message" style="color: blue;"></p>
+
+    <script>
+        function displayMessage() {
+            // Get the input value
+            var inputVal = document.getElementById("myInput").value;
+            // Display message
+            document.getElementById("message").innerText = "You left the field! Current value: " + inputVal;
+        }
+    </script>
+    <h1>13.Create a button that changes the font color of only even paragraphs.</h1>
+    <button id="colorBtns">Toggle Even Paragraphs Color</button>
+
+    <div id="content">
+        <p>Paragraph 1 (Odd)</p>
+        <p>Paragraph 2 (Even)</p>
+        <p>Paragraph 3 (Odd)</p>
+        <p>Paragraph 4 (Even)</p>
+        <p>Paragraph 5 (Odd)</p>
+    </div>
+
+<script>
+    document.getElementById('colorBtns').addEventListener('click', function() {
+        // Select all even paragraph elements using :nth-of-type
+        const evenParagraphs = document.querySelectorAll('p:nth-of-type(even)');
+        
+        // Loop through and toggle the class
+        evenParagraphs.forEach(p => {
+            p.classList.toggle('even-color');
+        });
+    });
+</script>
+<h1>14.Display the number of images present on the page.</h1>
+<p>Number of images: <span id="imageCount"></span></p>
+<img src="bird.jpg" alt="Img1" width="300px">
+<img src="swan.jpg" alt="Img2" width="=300px">
+<script>
+    document.getElementById('imageCount').innerText = document.images.length;
+
+</script>
+<h1>15.Create a button that changes the text to uppercase and lowercase alternately.</h1>
+<p id="textElement">Hello World - Click Button</p>
+    
+    <!-- The button -->
+    <button id="toggleBtn1">Toggle Case</button>
+
+    <script>
+        const button = document.getElementById('toggleBtn1');
+        const textElement = document.getElementById('textElement');
+        let isUppercase = false;
+
+        button.addEventListener('click', function() {
+            if (isUppercase) {
+                // Change to lowercase
+                textElement.textContent = textElement.textContent.toLowerCase();
+            } else {
+                // Change to uppercase
+                textElement.textContent = textElement.textContent.toUpperCase();
+            }
+            // Toggle the state
+            isUppercase = !isUppercase;
+        });
+    </script>
+    <h1>16.Create a simple form and display a thank-you message after submission.</h1>
+    <div class="form-container">
+    <!-- The Form -->
+    <form id="myForm">
+        <h2>Contact Us</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Thank You Message (hidden by default) -->
+    <div id="thankYouMessage" class="hidden">
+        <h2>Thank You!</h2>
+        <p>Your message has been submitted successfully.</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        // Prevent the form from actually submitting to a new page
+        event.preventDefault();
+
+        // Hide the form
+        document.getElementById('myForm').style.display = 'none';
+
+        // Show the thank you message
+        document.getElementById('thankYouMessage').classList.remove('hidden');
+    });
+</script>
+<h1>17.Create a div and change its border width using JavaScript.</h1>
+<h2>Create and Style a DIV</h2>
+  
+  <div id="myDiv">This is a div.</div>
+
+  <button onclick="changeBorder()">Change Border Width</button>
+
+  <script>
+    function changeBorder() {
+      // Target the div by its ID
+      var divElement = document.getElementById("myDiv");
+      // Change the border width using JavaScript
+      divElement.style.borderWidth = "10px";
+    }
+  </script>
+  <h1>18.Display the current URL on the webpage.</h1>
+  <p>The current URL is: <span id="urlDisplay"></span></p>
+<script>
+    // Get the current URL
+let currentURL = window.location.href;
+
+// Display the URL in the element with id="urlDisplay"
+document.getElementById("urlDisplay").innerText = currentURL;
+
+</script>
+<h1>19.Create a button that resets only one specific input field.</h1>
+<input type="text" id="myInput1" value="Text to be cleared">
+
+<!-- The Clear Button -->
+<button type="button" onclick="document.getElementById('myInput1').value = ''">
+  Clear Input
+</button>
+<h1>20.Create a paragraph and add extra spacing between words.</h1>
+<p id="spaced-paragraph">This is a paragraph with extra word spacing applied via JavaScript.</p>
+
+<script>
+  // Select the element by its ID
+  const paragraph = document.getElementById('spaced-paragraph');
+  
+  // Apply extra spacing between words (e.g., 20 pixels)
+  paragraph.style.wordSpacing = '20px';
+</script>
+<h1>21.Create a button that changes the background color randomly.</h1>
+<button id="colorButtons">Change Background Color</button>
+
+    <script>
+        // 1. Get the button element
+        const buttond = document.getElementById('colorButtons');
+
+        // 2. Add click event listener to the button
+        buttond.addEventListener('click', function() {
+            // 3. Generate random RGB values (0-255)
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            
+            // 4. Create the RGB color string
+            const randomColor = `rgb(${r}, ${g}, ${b})`;
+            
+            // 5. Change the background color of the body
+            document.body.style.backgroundColor = randomColor;
+        });
+    </script>
+    <h1>22.Display the number of characters excluding spaces in an input field.</h1>
+    <input type="text" id="textInput1" placeholder="Type here...">
+<p>Characters (no spaces): <span id="charCount">0</span></p>
+
+<script>
+  const inputField2 = document.getElementById('textInput1');
+  const countDisplay = document.getElementById('charCount');
+
+  inputField2.addEventListener('input', () => {
+    // 1. Get current input value
+    let text = inputField2.value;
+    
+    // 2. Remove all spaces using regex (\s+ matches all whitespace)
+    let noSpacesText = text.replace(/\s+/g, '');
+    
+    // 3. Display the length
+    countDisplay.textContent = noSpacesText.length;
+  });
+</script>
+<h1>23.Create a button that hides all input fields on the page.</h1>
+<h2>Form</h2>
+    <input type="text" placeholder="Name"><br><br>
+    <input type="email" placeholder="Email"><br><br>
+    <input type="password" placeholder="Password"><br><br>
+    
+    <!-- Button to trigger hide function -->
+    <button id="hideBtn">Hide All Input Fields</button>
+
+    <script>
+        document.getElementById('hideBtn').addEventListener('click', function() {
+            // Select all input elements on the page
+            var inputs = document.querySelectorAll('input');
+            
+            // Loop through and set display to 'none'
+            inputs.forEach(function(input) {
+                input.style.display = 'none';
+            });
+        });
+    </script>
+    <h1>24.Display a message when the user clicks anywhere on the page.</h1>
+    <p>Click anywhere on this page.</p>
+
+    <script>
+        // Listen for a click on the entire document
+        document.addEventListener('click', function() {
+           // document.write('You clicked on the page!');
+        });
+    </script>
+    <h1>25.Create a simple header and change its height using JavaScript.</h1>
+    <header id="myHeader">
+    <h1>My Website Header</h1>
+</header>
+
+<br>
+<button onclick="changeHeaderHeight()">Change Height</button>
+
+<script>
+    // 2. Change its height using JavaScript
+    function changeHeaderHeight() {
+        // Select the header by ID
+        var header = document.getElementById("myHeader");
+        
+        // Change the height style
+        header.style.height = "200px";
+        header.innerHTML = "<h1>Height Changed!</h1>";
+    }
+</script>
+<h1>26.Validate input to allow only numbers and decimal values.</h1>
+<input type="text" id="decimalInput" placeholder="Enter number" oninput="validateDecimal(this)">
+<script>
+    function validateDecimal(el) {
+    // Remove all characters except digits and the first decimal point
+    el.value = el.value
+        .replace(/[^0-9.]/g, '') // Remove non-numeric chars (except .)
+        .replace(/(\..*)\./g, '$1'); // Remove additional decimal points
+}
+
+</script>
+<h1>27.Create a button that copies text from an input field to the clipboard.</h1>
+<!-- Input Field -->
+<input type="text" id="myInput" value="Hello World! Copy me.">
+
+<!-- Copy Button -->
+<button onclick="copyText()">Copy Text</button>
+
+<script>
+function copyText() {
+  // 1. Get the input element
+  const copyText = document.getElementById("myInput");
+
+  // 2. Select the text field (optional, but good for user feedback)
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // 3. Copy the text inside the input field
+  navigator.clipboard.writeText(copyText.value)
+    .then(() => {
+      // Optional: Alert the user
+      alert("Copied the text: " + copyText.value);
+    })
+    .catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+}
+</script>
+<h1>28.Display the total number of form elements present on the page.</h1>
+<script>
+  function countAllFormElements() {
+    let totalElements = 0;
+    // Loop through all forms in the document
+    for (let i = 0; i < document.forms.length; i++) {
+      // Add the number of elements in current form to total
+      totalElements += document.forms[i].elements.length;
+    }
+    // Display the result (e.g., in an alert or console)
+    document.write("Total form elements: " + totalElements);
+    console.log("Total form elements:", totalElements);
+  }
+  
+  // Run the function
+  countAllFormElements();
+</script>
+<h1>29.Create a button that toggles border visibility of all divs.</h1>
+<button id="toggleBtnd">Toggle Borders</button>
+
+    <div>Content 1</div>
+    <div>Content 2</div>
+    <div>Content 3</div>
+
+<script>
+    const button3 = document.getElementById('toggleBtnd');
+    
+    button3.addEventListener('click', () => {
+        // Get all divs
+        const divs = document.querySelectorAll('div');
+        
+        // Loop through and toggle the class
+        divs.forEach(div => {
+            div.classList.toggle('show-border');
+        });
+    });
+</script>
+<h1>30.Store and display the last visited time using localStorage.</h1>
+ <h2>Last Visit Time Tracker</h2>
+    <p id="displayArea">Loading...</p>
+    <script>
+        // 1. Get the current time when the page loads
+const now = new Date().toLocaleString();
+
+// 2. Retrieve the last visited time from localStorage
+const lastVisit = localStorage.getItem("lastVisitedTime");
+
+// 3. Display the result
+const displayArea = document.getElementById("displayArea");
+
+if (lastVisit) {
+    displayArea.innerText = "Last visited on: " + lastVisit;
+} else {
+    displayArea.innerText = "This is your first visit!";
+}
+
+// 4. Update the localStorage with the current time for the next visit
+localStorage.setItem("lastVisitedTime", now);
+
+    </script>
+    <h1>31.Create a button that sorts a list of names alphabetically.</h1>
+    <!-- The list of names -->
+<ul id="nameList">
+    <li>Zoe</li>
+    <li>Adam</li>
+    <li>Charlie</li>
+    <li>Bella</li>
+</ul>
+
+<!-- The trigger button -->
+<button onclick="sortNames()">Sort Alphabetically</button>
+
+<script>
+function sortNames() {
+    const list = document.getElementById('nameList');
+    // Convert the HTML collection into a standard Array
+    const names = Array.from(list.getElementsByTagName('li'));
+
+    // Sort the array based on the text content of each <li>
+    names.sort((a, b) => a.innerText.localeCompare(b.innerText));
+
+    // Clear the current list and re-append sorted items
+    list.innerHTML = "";
+    names.forEach(li => list.appendChild(li));
+}
+</script>
+<h1>32.Validate that a number entered is within a given range.</h1>
+<h2>Range Validator (1-100)</h2>
+    <input type="text" id="userInput" placeholder="Enter a number">
+    <button onclick="checkInput()">Validate</button>
+    <p id="result"></p>
+
+    <script>
+        function checkInput() {
+            // Get the value
+            let val = document.getElementById("userInput").value;
+            let min = 1;
+            let max = 100;
+            let num = parseFloat(val);
+            let resultTag = document.getElementById("result");
+
+            // Validate: Not NaN AND within range
+            if (!isNaN(num) && num >= min && num <= max) {
+                resultTag.innerHTML = num + " is Valid.";
+                resultTag.style.color = "green";
+            } else {
+                resultTag.innerHTML = "Invalid! Please enter a number between " + min + " and " + max;
+                resultTag.style.color = "red";
+            }
+        }
+    </script>
+    <h1>33.Create a button that changes the page language direction (LTR / RTL).</h1>
+    <button id="dir-toggle">Switch Direction</button>
+    
+    <hr>
+    
+    <div id="content">
+        <h1>Hello World</h1>
+        <p>This is a demonstration of LTR/RTL switching.</p>
+    </div>
+    <script>
+        // Get the button element
+const toggleBtne = document.getElementById('dir-toggle');
+
+// Add event listener
+toggleBtne.addEventListener('click', function() {
+    // Get the root html element
+    const htmlTag = document.documentElement;
+    
+    // Check current direction and toggle
+    if (htmlTag.getAttribute('dir') === 'rtl') {
+        htmlTag.setAttribute('dir', 'ltr');
+    } else {
+        htmlTag.setAttribute('dir', 'rtl');
+    }
+});
+
+    </script>
+    <h1>34.Display a message when the user switches browser tabs.</h1>
+    <script>
+//        // document.addEventListener("visibilitychange", () => {
+//   if (document.visibilityState === 'hidden') {
+//     alert('You have switched away from this tab!');
+//   } else if (document.visibilityState === 'visible') {
+//     alert('Welcome back!');
+//   }
+// });
+    </script>
+    <h1>35.Create a form and highlight empty fields on submit.</h1>
+    <form id="myFormd" onsubmit="return validateForm()">
+    <label>Name:</label><br>
+    <input type="text" name="fname" class="validate-me"><br><br>
+
+    <label>Email:</label><br>
+    <input type="text" name="femail" class="validate-me"><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+<script>
+    function validateForm() {
+    let isValid = true;
+    // Get all inputs with the class "validate-me"
+    let inputs = document.querySelectorAll('.validate-me');
+
+    inputs.forEach(function(input) {
+        // Check if value is empty
+        if (input.value.trim() === "") {
+            // Add red border class
+            input.classList.add('empty-field');
+            isValid = false;
+        } else {
+            // Remove red border if filled
+            input.classList.remove('empty-field');
+        }
+    });
+
+    if (!isValid) {
+        alert("Please fill in all required fields.");
+        return false; // Prevents form submission
+    }
+    
+    return true; // Allows form submission
+}
+
+</script>
+<h1>36.Create a button that removes all child elements inside a div.</h1>   
+<div id="parentDiv" style="border: 1px solid black; padding: 10px; margin-bottom: 10px;">
+  <p>Child Paragraph 1</p>
+  <span>Child Span 1</span>
+  <div>Child Div 1</div>
+</div>
+
+<button id="clearBtn">Remove All Children</button>
+
+<script>
+  // 1. Select the button and the parent div
+  const button4 = document.getElementById('clearBtn');
+  const parent = document.getElementById('parentDiv');
+
+  // 2. Add click event listener to the button
+  button4.addEventListener('click', function() {
+    // 3. Clear all content inside the div
+    parent.innerHTML = '';
+  });
+</script>
+<h1>37.Display the total word count from multiple input fields.</h1>
+<!-- Input fields to track -->
+<input type="text" class="word-input" placeholder="Field 1">
+<input type="text" class="word-input" placeholder="Field 2">
+<textarea class="word-input" placeholder="Field 3"></textarea>
+
+<!-- Display for total count -->
+<p>Total Word Count: <span id="total-display">0</span></p>
+
+<script>
+  const inputs = document.querySelectorAll('.word-input');
+  const display = document.getElementById('total-display');
+
+  const updateCount = () => {
+    let totalWords = 0;
+
+    inputs.forEach(input => {
+      // Trim whitespace and split by spaces/line breaks
+      const words = input.value.trim().split(/\s+/);
+      // Only count if the field isn't empty
+      if (words[0] !== "") {
+        totalWords += words.length;
+      }
+    });
+
+    display.textContent = totalWords;
+  };
+
+  // Add event listener to every input field
+  inputs.forEach(input => {
+    input.addEventListener('input', updateCount);
+  });
+</script>
+<h1>38.Create a button that locks and unlocks a form.</h1>
+<h3>User Information</h3>
+<form id="myForm">
+    <fieldset id="fieldSet">
+        <div>Name: <input type="text" value="John Doe"></div>
+        <div>Email: <input type="email" value="john@example.com"></div>
+        <div>Role: 
+            <select>
+                <option>Admin</option>
+                <option>User</option>
+            </select>
+        </div>
+    </fieldset>
+</form>
+
+<button id="lockBtn" onclick="toggleForm()">Lock Form</button>
+
+<script>
+    function toggleForm() {
+        // 1. Get references to the button and the fieldset
+        var btn = document.getElementById('lockBtn');
+        var fieldSet = document.getElementById('fieldSet');
+        
+        // 2. Toggle the "disabled" property
+        fieldSet.disabled = !fieldSet.disabled;
+        
+        // 3. Update button text based on the new state
+        if (fieldSet.disabled) {
+            btn.textContent = "Unlock Form";
+        } else {
+            btn.textContent = "Lock Form";
+        }
+    }
+</script>
+<h1>39.Display a warning when the user tries to refresh the page.</h1>
+<script>
+        // Attach the event listener to the window
+        window.addEventListener('beforeunload', function (e) {
+            // Cancel the event (standard)
+            e.preventDefault();
+            // Chrome requires returnValue to be set
+            e.returnValue = '';
+        });
+    </script>
+</head>
+<body>
+    <h2>Try to refresh this page (F5)</h2>
+    <input type="text" placeholder="Type something here first...">
+    <h1>40.Create a simple layout using semantic HTML tags.</h1>
+    <header>
+        <h1>Website Header</h1>
+    </header>
+
+    <!-- Navigation section -->
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><button id="themeToggle">Toggle Theme</button></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main>
+        <section>
+            <h2>Main Content Section</h2>
+            <p>This is the primary content area.</p>
+        </section>
+        
+        <!-- Aside for sidebars or related content -->
+        <aside>
+            <h3>Sidebar</h3>
+            <p>Related content or ads.</p>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Semantic Layout Example</p>
+    </footer>
+    <script>
+// Select the button and body
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Add event listener for click
+themeToggle.addEventListener('click', () => {
+    // Toggle the dark-mode class on the body
+    body.classList.toggle('dark-mode');
+});
+
+    </script>
+    <h1>41.Create a button that toggles visibility of multiple sections.</h1>
+    <button id="toggleBtn5">Toggle Sections</button>
+
+<div class="toggle-section">Section 1 Content</div>
+<div class="toggle-section">Section 2 Content</div>
+<div class="toggle-section">Section 3 Content</div>
+<script>
+    document.getElementById('toggleBtn5').addEventListener('click', function() {
+    // Select all elements with the class 'toggle-section'
+    var sections = document.querySelectorAll('.toggle-section');
+    
+    // Loop through the NodeList and toggle the 'hidden' class
+    sections.forEach(function(section) {
+        section.classList.toggle('hidden');
+    });
+});
+
+</script>
+<h1>42.Convert user input to title case using JavaScript.</h1>
+<script>
+    function toTitleCase(str) {
+  return str.toLowerCase().replace(/(^|\s)\S/g, (L) => L.toUpperCase());
+}
+
+// Example usage:
+console.log(toTitleCase("i waNT thIs stRing to Be conVerted")); 
+document.write("i waNT thIs stRing to Be conVerted.  Converted: ", toTitleCase("i waNT thIs stRing to Be conVerted")); 
+// Output: "I Want This String To Be Converted"
+
+</script>
+<h1>
+    43.Create a button that changes the background color based on time of day.
+</h1>
+<button id="timeButton">Check Time & Change Background</button>
+
+    <script>
+        document.getElementById('timeButton').addEventListener('click', function() {
+            // Get current hour (0-23)
+            const hour = new Date().getHours();
+            let backgroundColor;
+
+            // Set colors based on time of day
+            if (hour < 12) {
+                // Morning (before 12 PM)
+                backgroundColor = '#FFDAB9'; // Peach
+            } else if (hour < 18) {
+                // Afternoon (12 PM - 5:59 PM)
+                backgroundColor = '#87CEEB'; // Sky Blue
+            } else {
+                // Evening/Night (6 PM and later)
+                backgroundColor = '#2F4F4F'; // Dark Slate Gray
+            }
+
+            // Apply color to the body
+            document.body.style.backgroundColor = backgroundColor;
+        });
+    </script>
+<h1>44.Display a message when the browser goes online again.</h1>
+<h2>Check Console or Alerts</h2>
+
+    <script>
+        // Listen for browser coming back online
+        window.addEventListener('online', () => {
+            console.log('Online: Network connection restored.');
+            alert('You are back online!');
+        });
+
+        // Listen for browser going offline
+        window.addEventListener('offline', () => {
+            console.log('Offline: Network connection lost.');
+            alert('You have gone offline.');
+        });
+    </script>
+    <h1>45.Create a button that highlights all required input fields.</h1>
+    <form id="myForm">
+    <label>Name:</label>
+    <input type="text" name="name" required><br><br>
+
+    <label>Email:</label>
+    <input type="email" name="email" required><br><br>
+
+    <label>Phone (Optional):</label>
+    <input type="text" name="phone"><br><br>
+
+    <button type="button" onclick="highlightRequired()">Highlight Required Fields</button>
+</form>
+<script>
+    function highlightRequired() {
+    // 1. Get all input elements that have the 'required' attribute
+    const requiredFields = document.querySelectorAll('input[required]');
+
+    // 2. Loop through the required fields and toggle the CSS class
+    requiredFields.forEach(field => {
+        field.classList.toggle('required-highlight');
+    });
+}
+
+</script>
+<h1>46.Display the total number of checked checkboxes.</h1>
+<input type="checkbox" class="check-item" /> Item 1
+<input type="checkbox" class="check-item" /> Item 2
+<input type="checkbox" class="check-item" /> Item 3
+<br>
+<p>Total Checked: <span id="count1">0</span></p>
+<script>
+    // Get all checkbox elements
+const checkboxes = document.querySelectorAll('.check-item');
+const countDisplays = document.getElementById('count1');
+
+// Function to update the count
+function updateCount() {
+    // Select only the checked ones and get the length
+    const checkedCount = document.querySelectorAll('.check-item:checked').length;
+    countDisplays.textContent = checkedCount;
+}
+
+// Add event listener to each checkbox
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateCount);
+});
+
+</script>
+<h1>47.Create a button that disables page scrolling.
+
+</h1>
+<button id="toggleScrollBtn">Disable Scroll</button>
+    <p style="padding-top: 60px;">Scroll down to see the effect...</p>
+
+    <script>
+        const buttone = document.getElementById('toggleScrollBtn');
+        
+        buttone.addEventListener('click', () => {
+            // Toggle the 'no-scroll' class on the body
+            document.body.classList.toggle('no-scroll');
+            
+            // Update button text based on state
+            if (document.body.classList.contains('no-scroll')) {
+                buttone.textContent = 'Enable Scroll';
+            } else {
+                buttone.textContent = 'Disable Scroll';
+            }
+        });
+    </script>
+    <h1>48.Create a simple two-column layout using CSS.</h1>
+    <div class="grid-container">
+  <div class="grid-item">Column 1</div>
+  <div class="grid-item">Column 2</div>
+</div>
+<h1>49.Display a message after successfully copying text.</h1>
+<input type="text" value="Text to copy" id="myInputs1">
+<button onclick="copyText()">Copy Text</button>
+<script>
+    function copyText() {
+  // Get the text field
+  var copyText = document.getElementById("myInputs1");
+
+  // Use the Clipboard API to write text
+  navigator.clipboard.writeText(copyText.value).then(() => {
+    // Alert the user that the action was successful
+    alert("Copied the text: " + copyText.value);
+  });
+}
+
+</script>
+<h1>50.Dynamically change the meta description of the webpage.</h1>
+<button id="changeMetaBtn">Change Description</button>
+
+    <script>
+        document.getElementById('changeMetaBtn').addEventListener('click', function() {
+            // 2. Select the meta tag
+            let metaDescription = document.querySelector('meta[name="description"]');
+            
+            // 3. Update the content attribute
+            if (metaDescription) {
+                metaDescription.setAttribute('content', 'This is the new, dynamic meta description!');
+                alert('Meta description updated! Check the <head> in inspector.');
+            }
+        });
+    </script>
+
+</body>
+</html>
