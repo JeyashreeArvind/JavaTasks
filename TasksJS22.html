@@ -1,0 +1,3287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks- Day 22</title>
+    <style>
+        
+
+.main-container {
+    width: 400px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 { text-align: center; color: #333; }
+
+label { display: block; margin-top: 10px; font-weight: bold; }
+
+input, select {
+    width: 400px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #ccc;
+    color: #666;
+}
+
+button {
+    cursor: pointer;
+    background-color: #04AA6D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+}
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover { opacity: 0.9; }
+
+.summary-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    border-left: 5px solid #04AA6D;
+}
+
+
+.login-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #ccc;
+    color: #666;
+}
+
+.btn {
+    cursor: pointer;
+    background-color: #04AA6D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    width: 300px;
+}
+.myForm input{
+width: 300px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group input{
+    width: 300px;
+}
+.btn1{
+    width: 300px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.85em;
+  display: none; /* Hidden by default */
+}
+
+/* Style the input border when invalid */
+.form-group input:invalid {
+  border: 2px solid red;
+}
+
+/* Class to show error message dynamically */
+.error-message.show {
+  display: block;
+}
+
+.container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; }
+h2 { text-align: center; color: #333; }
+.form-group1 { margin-bottom: 1rem; }
+.form-group1  label { display: block; margin-bottom: 0.5rem; color: #666; }
+.form-group1  input { width: 100%; padding: 0.5rem; box-sizing: border-box; border: 1px solid #ddd; border-radius: 4px; }
+.form-group1 button { width: 100%; padding: 0.7rem; border: none; background-color: #28a745; color: white; font-size: 1rem; border-radius: 4px; cursor: pointer; }
+.form-group1 button:hover { background-color: #218838; }
+.hidden { display: none; }
+#successMessage { color: #28a745; text-align: center; margin-top: 1rem; font-weight: bold; }
+
+.container { max-width: 400px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+        #counter-display { font-size: 1.2em; font-weight: bold; color: #2c3e50; }
+        
+.form-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: sans-serif;
+}
+
+.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .light-mode {
+            background-color: #ffffff;
+            color: black;
+        }
+
+#successMessage {
+  text-align: center;
+  color: #28a745;
+}
+.form-group2 input:required, 
+select:required, 
+textarea:required {
+  border: 2px solid #ff5722; /* Reddish border */
+  background-color: #fff3e0; /* Light orange background */
+}
+.form-group2 button{
+    width: 300px;
+}
+.form-group textarea{
+    width: 300px;
+}
+.main-container { display: flex; gap: 20px; max-width: 900px; width: 100%; }
+.form-container, .preview-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); flex: 1; }
+
+/* Form Styles */
+.form-container input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+textarea { resize: vertical; height: 100px; }
+
+/* Profile Card Styles */
+.profile-card { text-align: center; }
+.profile-card img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid #007bff; }
+.profile-card h3 { margin: 0; color: #333; }
+.title { color: #007bff; font-weight: bold; }
+#prevBio { color: #666; font-size: 0.9em; }
+ .match { color: green; }
+.mismatch { color: red; }   
+
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input {
+    width: 300px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 300px;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+/*body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}*/
+
+.dashboard-header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dashboard-container {
+    display: flex;
+    flex: 1; /* Allows the container to grow and fill the remaining height */
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 0.5rem 0;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #eee;
+}
+
+.sidebar ul li a:hover {
+    background-color: #f4f4f4;
+    padding-left: 0.5rem;
+    transition: 0.2s;
+}
+
+.content-area {
+    flex: 1; /* Allows the content area to take up the remaining space */
+    padding: 2rem;
+}
+
+.card {
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+.dashboard-header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#current-datetime {
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+
+.container {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    color: #555;
+}
+
+
+.checkbox-group {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input {
+    margin-right: 10px;
+}
+
+.btn2 {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.btn2:hover {
+    background-color: #0056b3;
+}
+
+#clearButton {
+    background-color: #dc3545;
+}
+
+#clearButton:hover {
+    background-color: #c82333;
+}
+.results-container {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+#averageRating {
+    color: #28a745;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.feedback-container {
+    width: 400px;
+    margin: 20px auto;
+}
+
+
+
+.char-counter {
+    text-align: right;
+    font-size: 0.875rem;
+    color: #888;
+    margin-top: 5px;
+}
+
+.char-counter.limit-reached {
+    color: #ff0000; /* Optional: Change color when limit is reached */
+}
+#submitButton:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+#submitButton:enabled {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+.form3 input,.form3 button{
+    width:300px;
+}
+   
+   .card-header {
+    font-size: 16px;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.user-count {
+    font-size: 48px;
+    font-weight: bold;
+    color: #007bff; /* A nice blue color */
+}
+
+.card-footer {
+    font-size: 12px;
+    color: #adb5bd;
+    margin-top: 15px;
+}
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#item-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#item-list li {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    background-color: #f9f9f9;
+    /* transition for hiding/showing */
+    display: block; 
+}
+
+#item-list li.hidden {
+    display: none;
+}
+.submit-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.step {
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+/* Hide steps by default. JavaScript will override this for the active step. */
+.step:not(#step1) {
+  display: none;
+}
+
+/* Basic styling for inputs and buttons */
+input {
+  display: block;
+  margin-bottom: 10px;
+  width: 400px;
+  padding: 8px;
+}
+
+button {
+  padding: 10px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.form-step { display: none; }
+.form-step.active { display: block; }
+input:invalid { border: 2px solid red; }
+
+delete-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #da190b;
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    text-align: center;
+}
+
+#confirmDeleteBtn, #cancelDeleteBtn {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    cursor: pointer;
+}
+
+#confirmDeleteBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+#cancelDeleteBtn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+.dashboard-container {
+    padding: 20px;
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 10px 15px;
+    margin-right: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+.filter-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.data-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.item {
+    background-color: #e9e9e9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    width: 150px;
+    text-align: center;
+}
+
+/* The class used by JS to hide items */
+.item.hidden {
+    display: none;
+}
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.notification-area {
+    margin-top: 20px;
+    /* Position for displaying notifications */
+}
+
+/* Individual notification styling */
+.notification {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Color variations for different types */
+.notification.info { background-color: #e7f3fe; border-left: 5px solid #2196F3; color: #0d47a1; }
+.notification.success { background-color: #e8f5e9; border-left: 5px solid #4CAF50; color: #1b5e20; }
+.notification.error { background-color: #ffebee; border-left: 5px solid #f44336; color: #b71c1c; }
+
+.dismiss-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    color: inherit;
+    opacity: 0.7;
+}
+
+.dismiss-btn:hover {
+    opacity: 1;
+}
+
+/* Class added by JavaScript when dismissing */
+.notification.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.notification{
+    padding: 15px 25px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.success {
+    background-color: #4CAF50; /* Green */
+}
+
+.notification.error {
+    background-color: #f44336; /* Red */
+}
+
+.notification-message {
+    margin-right: 15px;
+}
+
+.close-btn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+}
+.conditional {
+  display: none; /* Hidden by default */
+  margin-top: 15px;
+  padding: 10px;
+  border-left: 3px solid #007bff;
+  background-color: #f9f9f9;
+}
+.dashboard-container1 {
+    display: grid;
+    grid-template-columns: 250px 1fr; /* Sidebar width and main content area */
+    min-height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar1 {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+    padding-left: 5px;
+}
+
+/* Main Content Area */
+.main-content {
+    padding: 20px;
+}
+
+
+
+/* Card Container (Flexbox for responsiveness) */
+.card-container1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+}
+
+.card1 {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Flexible sizing for cards */
+    flex: 1 1 calc(50% - 20px); /* Default: 2 cards per row on medium screens */
+    min-width: 200px;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Large Screens (Desktops) - 3 or more cards per row */
+@media (min-width: 1024px) {
+    .card {
+        flex: 1 1 calc(33.3% - 20px);
+    }
+}
+
+/* Small Screens (Tablets and Mobile) */
+@media (max-width: 768px) {
+    .dashboard-container1 {
+        /* Stack sidebar and main content vertically */
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar1 {
+        /* Make sidebar horizontal/collapsible for mobile (simplified here) */
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px;
+        position: fixed; /* Optional: Fix to top/bottom */
+        width: 100%;
+        top: 0;
+    }
+
+    .logo {
+        display: none; /* Hide logo on mobile */
+    }
+
+    nav ul {
+        display: flex;
+    }
+
+    nav ul li a {
+        padding: 5px 10px;
+    }
+
+    .main-content {
+        padding-top: 60px; /* Offset for fixed sidebar */
+    }
+
+    .card1 {
+        /* On mobile, stack cards vertically (1 per row) */
+        flex: 1 1 100%;
+    }
+}
+/* Sidebar base styles */
+.sidebar2 a {
+  display: block;
+  padding: 16px;
+  color: #333;
+  text-decoration: none;
+}
+
+/* Highlight style for the active item */
+.sidebar2 a.active {
+  background-color: #04AA6D; /* Modern dashboard green */
+  color: white;
+  border-left: 5px solid #026b45; /* Optional accent border */
+}
+
+/* Hover effect for non-active items */
+.sidebar2 a:hover:not(.active) {
+  background-color: #f1f1f1;
+}
+#logout-button {
+    background-color: #dc3545; /* Red color for logout */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+#logout-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+.dashboard-stat-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', sans-serif;
+  max-width: 300px;
+}
+
+.dashboard-stat-card h3 {
+  font-size: 14px;
+  color: #6b7280; /* Muted gray for label */
+  margin-bottom: 8px;
+}
+
+#last-login-time {
+  font-weight: 600;
+  color: #111827; /* Darker text for emphasis */
+}
+
+
+.widget-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.widget-container:hover {
+    transform: translateY(-5px);
+}
+
+.widget-header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.widget-body {
+    padding: 20px;
+    color: #333;
+}
+
+.widget-body p {
+    margin: 10px 0;
+}
+
+.widget-body strong {
+    color: #007bff;
+    font-size: 1.1em;
+}
+
+.widget-footer {
+    padding: 15px;
+    background-color: #f9f9f9;
+    text-align: center;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+/* Style for duplicate rows */
+.duplicate-row {
+  background-color: #ffcccc;
+  border: 2px solid red;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+
+
+</style>
+</head>
+<body class="light-mode">
+ <h1>1.Create a registration form and display submitted data in a summary section.</h1>  
+
+<div class="main-container">
+    <!-- Registration Form -->
+    <div class="form-section">
+        <h2>Register</h2>
+        <form id="regForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="course">Course:</label>
+            <select id="course" name="course">
+                <option value="Web Development">Web Development</option>
+                <option value="Data Science">Data Science</option>
+            </select>
+
+            <button type="submit">Submit Registration</button>
+        </form>
+    </div>
+
+    <!-- Summary Section (Initially Hidden) -->
+    <div class="summary-section" id="summarySection" style="display:none;">
+        <h3>Registration Summary</h3>
+        <p><strong>Name:</strong> <span id="summaryName"></span></p>
+        <p><strong>Email:</strong> <span id="summaryEmail"></span></p>
+        <p><strong>Course:</strong> <span id="summaryCourse"></span></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('regForm').addEventListener('submit', function(e) {
+    // 1. Prevent form from submitting normally (reloading page)
+    e.preventDefault();
+
+    // 2. Get values from form fields
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const course = document.getElementById('course').value;
+
+    // 3. Populate summary section
+    document.getElementById('summaryName').innerText = name;
+    document.getElementById('summaryEmail').innerText = email;
+    document.getElementById('summaryCourse').innerText = course;
+
+    // 4. Show summary section
+    document.getElementById('summarySection').style.display = 'block';
+
+    // 5. Optional: Clear the form
+    document.getElementById('regForm').reset();
+});
+
+</script>
+<h1>2.Create a login form and show a welcome message after successful validation.</h1>
+ <div class="login-container">
+        <form id="loginForm">
+            <h2>Login</h2>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+            <p id="message"></p>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form from submitting to a new page
+
+    // Get input values
+    const usernameInput = document.getElementById('username').value;
+    const passwordInput = document.getElementById('password').value;
+    const messageElement = document.getElementById('message');
+
+    // Simple Validation
+    if (usernameInput === 'admin' && passwordInput === 'password123') {
+        messageElement.style.color = 'green';
+        messageElement.textContent = 'Login successful! Welcome, ' + usernameInput;
+        // Optionally redirect: window.location.href = 'dashboard.html';
+    } else {
+        messageElement.style.color = 'red';
+        messageElement.textContent = 'Invalid username or password.';
+    }
+});
+
+    </script>
+    <h1>3.Disable the submit button until all required fields are filled.</h1>
+    <form id="myForm" class="myForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    
+    <button type="submit" class="btn" id="submitBtn" disabled>Submit</button>
+</form>
+<h1>4.Show inline error messages for invalid form inputs.</h1>
+<form id="signupForm">
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <!-- Error message container -->
+    <span class="error-message" id="usernameError"></span>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <span class="error-message" id="emailError"></span>
+  </div>
+
+  <button type="submit" class="btn1">Register</button>
+</form>
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+  let isValid = true;
+
+  // Get inputs and error spans
+  const username = document.getElementById('username');
+  const email = document.getElementById('email');
+  const usernameError = document.getElementById('usernameError');
+  const emailError = document.getElementById('emailError');
+
+  // Reset errors
+  usernameError.textContent = '';
+  usernameError.classList.remove('show');
+  emailError.textContent = '';
+  emailError.classList.remove('show');
+
+  // Validate Username
+  if (username.value.trim() === '') {
+    usernameError.textContent = 'Username is required.';
+    usernameError.classList.add('show');
+    isValid = false;
+  }
+
+  // Validate Email
+  if (email.value.trim() === '') {
+    emailError.textContent = 'Email is required.';
+    emailError.classList.add('show');
+    isValid = false;
+  } else if (!email.validity.valid) {
+    emailError.textContent = 'Please enter a valid email address.';
+    emailError.classList.add('show');
+    isValid = false;
+  }
+
+  // Prevent form submission if not valid
+  if (!isValid) {
+    event.preventDefault();
+  } else {
+    alert("Form submitted successfully!");
+  }
+});
+
+</script>
+<h1>5.Create a form and clear all fields after successful submission.</h1>
+<div class="container">
+    <h2>Sign Up</h2>
+    <form id="userForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <!-- Message area to show success -->
+    <p id="successMessage" class="hidden">Form submitted successfully! ✨</p>
+</div>
+
+<script>
+    document.getElementById('userForm').addEventListener('submit', function(event) {
+    // 1. Prevent the default form submission (page reload)
+    event.preventDefault();
+
+    // 2. Perform submission logic here (e.g., fetch, API call)
+    console.log("Form submitted!");
+
+    // 3. Clear the form fields
+    event.target.reset();
+
+    // 4. Show success message (optional)
+    const successMessage = document.getElementById('successMessage');
+    successMessage.classList.remove('hidden');
+
+    // Hide message after 3 seconds
+    setTimeout(() => {
+        successMessage.classList.add('hidden');
+    }, 3000);
+});
+
+</script>
+<h1>6.Display total number of form submissions on the page.</h1>
+<div class="container">
+    <h3>Submit Your Info</h3>
+    <!-- Counter Display Area -->
+    <p>Total Submissions: <span id="counter-display">0</span></p>
+    
+    <form id="myForm">
+        <input type="text" placeholder="Enter Name" required>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    // Initialize counter
+    let submissionCount = 0;
+    const form = document.getElementById('myForm');
+    const counterDisplay = document.getElementById('counter-display');
+
+    // Add event listener for form submission
+    form.addEventListener('submit', function(event) {
+        // Prevent default form reload behavior
+        event.preventDefault();
+        
+        // Increment counter
+        submissionCount++;
+        
+        // Update DOM with new count
+        counterDisplay.innerText = submissionCount;
+        
+        // Optional: Clear the form
+        form.reset();
+        alert("Form submitted! Total: " + submissionCount);
+    });
+</script>
+<h1>7.Create a contact form and show a success message without page reload.</h1>
+<div class="form-container">
+  <form id="contactForm">
+    <h2>Contact Us</h2>
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit" id="submitBtn">Send Message</button>
+  </form>
+  
+  <!-- Success Message (Hidden by default) -->
+  <div id="successMessage" style="display: none;">
+    <h3>Thank you!</h3>
+    <p>Your message has been sent successfully.</p>
+  </div>
+</div>
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+  // 1. Prevent the default page reload
+  e.preventDefault();
+
+  // 2. Collect the data (optional: send to a server using fetch)
+  const formData = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    message: document.getElementById('message').value
+  };
+
+  // 3. Simulate an API call
+  console.log("Form Data Collected:", formData);
+  
+  // 4. Hide the form and show the success message
+  document.getElementById('contactForm').style.display = 'none';
+  const successDiv = document.getElementById('successMessage');
+  successDiv.style.display = 'block';
+});
+
+</script>
+<h1>
+    8.Highlight required fields in a form using CSS.
+</h1>
+<form class="form-group2">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="bio">Bio (Optional)</label>
+    <textarea id="bio" name="bio"></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+<h1>9.Create a profile form and preview entered data live.</h1>
+<div class="main-container">
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2>Create Profile</h2>
+        <form id="profileForm">
+            <input type="text" id="inName" placeholder="Full Name" required>
+            <input type="text" id="inTitle" placeholder="Job Title">
+            <input type="email" id="inEmail" placeholder="Email">
+            <input type="file" id="inPhoto" accept="image/*">
+            <textarea id="inBio" placeholder="Short Bio"></textarea>
+        </form>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="preview-container">
+        <h2>Live Preview</h2>
+        <div class="profile-card">
+            <img id="prevPhoto" src="via.placeholder.com" alt="Profile Photo">
+            <h3 id="prevName">Your Name</h3>
+            <p class="title" id="prevTitle">Job Title</p>
+            <p id="prevBio">Your bio will appear here...</p>
+            <p id="prevEmail">email@example.com</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to handle live text input updates
+function livePreview(inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+
+    input.addEventListener('input', () => {
+        preview.textContent = input.value;
+    });
+}
+
+// Map inputs to preview elements
+livePreview('inName', 'prevName');
+livePreview('inTitle', 'prevTitle');
+livePreview('inBio', 'prevBio');
+livePreview('inEmail', 'prevEmail');
+
+// Function to handle image file preview
+document.getElementById('inPhoto').addEventListener('change', function(event) {
+    const reader = new FileReader();
+    reader.onload = function(){
+        const output = document.getElementById('prevPhoto');
+        output.src = reader.result;
+    };
+    if(event.target.files[0]) {
+        reader.readAsDataURL(event.target.files[0]);
+    }
+});
+
+</script>
+<h1>10.Create a password confirmation check in a form.</h1>
+<div class="form-container">
+        <form>
+            <h2>Register</h2>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="input-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" required>
+                <!-- This span will show the message -->
+                <span id="message"></span>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        const password = document.getElementById('password');
+const confirmPassword = document.getElementById('confirm_password');
+const message = document.getElementById('message');
+
+function validatePassword() {
+    // Check if both fields have values
+    if (password.value.length > 0 || confirmPassword.value.length > 0) {
+        if (password.value === confirmPassword.value) {
+            message.innerHTML = "Passwords match";
+            message.className = "match";
+        } else {
+            message.innerHTML = "Passwords do not match";
+            message.className = "mismatch";
+        }
+    } else {
+        message.innerHTML = "";
+    }
+}
+
+// Run the function whenever the user types in either field
+password.addEventListener('keyup', validatePassword);
+confirmPassword.addEventListener('keyup', validatePassword);
+
+    </script>
+    <h1>11.Show form field values in a table after submission.</h1>
+    <div class="container">
+        <h2>Enter Your Details</h2>
+        <form id="myForm1">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+            
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="resultContainer" style="display: none;">
+            <h3>Submitted Information</h3>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Table rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('myForm1').addEventListener('submit', function(event) {
+    // Prevent the default form submission action (which refreshes the page)
+    event.preventDefault();
+
+    // Get the form elements by their IDs
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+
+    // Get the table body element to insert new rows
+    const tableBody = document.getElementById('tableBody');
+    // Clear any previous results
+    tableBody.innerHTML = '';
+
+    // Function to create a new table row
+    function createTableRow(field, value) {
+        const row = document.createElement('tr');
+        const cell1 = document.createElement('td');
+        const cell2 = document.createElement('td');
+        cell1.textContent = field;
+        cell2.textContent = value;
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+        tableBody.appendChild(row);
+    }
+
+    // Add the collected data to the table
+    createTableRow('First Name', firstName);
+    createTableRow('Last Name', lastName);
+    createTableRow('Email', email);
+
+    // Show the result container
+    document.getElementById('resultContainer').style.display = 'block';
+
+    // Optional: Reset the form fields after submission
+    this.reset();
+});
+
+    </script>
+<h1></h1>
+<header class="dashboard-header">
+        <h1>Dashboard Title</h1>
+    </header>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                    <li><a href="#logout">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="content-area">
+            <h2>Welcome to the Content Area</h2>
+            <p>This is where the main content, charts, and data will be displayed.</p>
+            <div class="card">
+                <h3>Card 1</h3>
+                <p>Some information here.</p>
+            </div>
+            <div class="card">
+                <h3>Card 2</h3>
+                <p>More information here.</p>
+            </div>
+        </main>
+    </div>
+    <h1>13.Display current date and time in the dashboard header.</h1>
+    <header class="dashboard-header">
+        <h1>My Dashboard</h1>
+        <span id="current-datetime"></span>
+    </header>
+
+        <script>
+        function updateDateTime() {
+    const dateTimeElement = document.getElementById('current-datetime');
+    if (!dateTimeElement) return;
+
+    const now = new Date();
+
+    // Format the date and time options as required
+    const dateOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    };
+    const timeOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true // Set to false for 24-hour format
+    };
+
+    const formattedDate = now.toLocaleDateString(undefined, dateOptions);
+    const formattedTime = now.toLocaleTimeString(undefined, timeOptions);
+
+    dateTimeElement.textContent = `${formattedDate} | ${formattedTime}`;
+}
+
+// Update immediately on page load
+updateDateTime();
+
+// Update the time every second
+setInterval(updateDateTime, 1000);
+
+    </script>
+    <h1>14.Create a settings form and save values using localStorage.</h1>
+    <div class="container">
+        <h1>User Settings</h1>
+        <form id="settingsForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username">
+
+            <label for="theme">Theme:</label>
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="system">System Default</option>
+            </select>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="newsletter">
+                <label for="newsletter">Subscribe to Newsletter</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="notifications">
+                <label for="notifications">Enable Notifications</label>
+            </div>
+
+            <button type="submit">Save Settings</button>
+            <button type="button" id="clearButton" class="btn2">Clear Settings</button>
+        </form>
+    </div>
+<h1>15.Load saved settings automatically when the page reloads.</h1>
+<h1>Settings Persistence Demo</h1>
+    <button onclick="toggleDarkMode()" class="btn1" style="margin-left: 600px;">Toggle Dark Mode</button>
+
+    <script>
+        const body = document.body;
+        const savedMode = localStorage.getItem('displayMode');
+
+        // Function to apply the saved setting on page load
+        function applySavedMode() {
+            if (savedMode === 'dark-mode') {
+                body.classList.replace('light-mode', 'dark-mode');
+            } else {
+                body.classList.replace('dark-mode', 'light-mode');
+            }
+        }
+
+        // Function to toggle the setting and save it
+        function toggleDarkMode() {
+            if (body.classList.contains('light-mode')) {
+                body.classList.replace('light-mode', 'dark-mode');
+                localStorage.setItem('displayMode', 'dark-mode');
+            } else {
+                body.classList.replace('dark-mode', 'light-mode');
+                localStorage.setItem('displayMode', 'light-mode');
+            }
+        }
+
+        // Apply settings immediately when the script runs
+        applySavedMode();
+    </script>
+    <h1>16.Create a feedback form and calculate average rating.</h1>
+    <div class="form-container">
+    <h2>Submit Your Feedback</h2>
+    <form id="feedbackForm">
+        <label for="rating">Rating (1-5 stars):</label>
+        <select id="rating" required>
+            <option value="">Select a rating</option>
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+        </select>
+        
+        <label for="comments">Comments:</label>
+        <textarea id="comments" rows="4" placeholder="Your comments..."></textarea>
+        
+        <button type="submit">Submit Feedback</button>
+    </form>
+
+    <div class="results-container">
+        <h3>Average Rating: <span id="averageRating">0.0</span></h3>
+        <p>Total Submissions: <span id="totalSubmissions">0</span></p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const feedbackForm = document.getElementById('feedbackForm');
+    const averageRatingEl = document.getElementById('averageRating');
+    const totalSubmissionsEl = document.getElementById('totalSubmissions');
+    
+    let totalRatingsSum = 0;
+    let submissionCount = 0;
+
+    feedbackForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission to a server
+
+        const ratingInput = document.getElementById('rating');
+        const ratingValue = parseInt(ratingInput.value, 10);
+
+        if (isNaN(ratingValue) || ratingValue < 1 || ratingValue > 5) {
+            alert("Please select a valid rating.");
+            return;
+        }
+
+        // Add the new rating to the total sum
+        totalRatingsSum += ratingValue;
+        // Increment the submission count
+        submissionCount += 1;
+
+        // Calculate the new average
+        const average = totalRatingsSum / submissionCount;
+
+        // Update the display elements
+        averageRatingEl.textContent = average.toFixed(1); // Display with one decimal place
+        totalSubmissionsEl.textContent = submissionCount;
+
+        // Reset the form for the next submission
+        feedbackForm.reset();
+        alert("Thank you for your feedback!");
+    });
+});
+
+</script>
+<h1>17.Show character count for feedback textarea.</h1>
+<div class="feedback-container">
+    <label for="feedback">Your Feedback:</label>
+    <textarea id="feedback" maxlength="150" placeholder="Type your feedback here..."></textarea>
+    <div class="char-counter">
+        <span id="current-count">0</span> / <span id="max-length">150</span>
+    </div>
+</div>
+<script>
+ // Select the necessary elements from the DOM
+const textarea = document.getElementById("feedback");
+const currentCount = document.getElementById("current-count");
+const maxLengthSpan = document.getElementById("max-length");
+const counterContainer = document.querySelector(".char-counter");
+
+// Get the maximum length from the HTML attribute
+const maxLength = textarea.getAttribute("maxlength");
+maxLengthSpan.textContent = maxLength;
+
+// Add an event listener for user input
+textarea.addEventListener("input", function() {
+    const currentLength = this.value.length;
+    currentCount.textContent = currentLength;
+
+    // Optional: Add visual feedback if limit is reached
+    if (currentLength >= maxLength) {
+        counterContainer.classList.add("limit-reached");
+    } else {
+        counterContainer.classList.remove("limit-reached");
+    }
+});   
+
+</script>
+<h1>18.Disable form submission when validation fails.</h1>
+<form id="myForm" class="form3">
+    <label for="password">Password (min 6 chars):</label>
+    <input type="password" id="password" name="password">
+
+    <button type="submit" id="submitButton" disabled>Submit</button>
+</form>
+<script>
+    const passwordInput = document.getElementById('password');
+const submitButton = document.getElementById('submitButton');
+const myForm = document.getElementById('myForm');
+
+// Validation function
+function validateForm() {
+    // Simple example: check if password length is at least 6 characters
+    if (passwordInput.value.length >= 6) {
+        submitButton.disabled = false; // Enable the button
+    } else {
+        submitButton.disabled = true;  // Disable the button
+    }
+}
+
+// Listen for input events (user typing)
+passwordInput.addEventListener('input', validateForm);
+
+// Optional: Prevent the form from actually submitting via JS if you want to handle submission with an API
+myForm.addEventListener('submit', function(event) {
+    if (submitButton.disabled) {
+        event.preventDefault(); // Stop the form submission
+        alert('Please fix the validation errors.');
+    }
+});
+
+</script>
+<h1>19.Create a form with radio buttons and display selected option.</h1>
+<div class="form-container">
+        <h2>Select Your Favorite Color</h2>
+        <form>
+            <div class="option-group">
+                <input type="radio" id="red" name="color" value="Red">
+                <label for="red">Red</label>
+            </div>
+            <div class="option-group">
+                <input type="radio" id="blue" name="color" value="Blue">
+                <label for="blue">Blue</label>
+            </div>
+            <div class="option-group">
+                <input type="radio" id="green" name="color" value="Green">
+                <label for="green">Green</label>
+            </div>
+            <button type="button" onclick="displaySelected()">Show Selected</button>
+        </form>
+
+        <div id="result">
+            Selected Option: <span id="selected-value"></span>
+        </div>
+    </div>
+
+    <script>
+        function displaySelected() {
+            // Get all radio buttons with the name "color"
+            const radioButtons = document.querySelectorAll('input[name="color"]');
+            let selectedValue = '';
+
+            // Iterate over the radio buttons to find the checked one
+            for (const radioButton of radioButtons) {
+                if (radioButton.checked) {
+                    selectedValue = radioButton.value;
+                    break; // Exit the loop once the checked button is found
+                }
+            }
+
+            // Display the result
+            const resultDiv = document.getElementById('result');
+            const selectedValueSpan = document.getElementById('selected-value');
+
+            if (selectedValue) {
+                selectedValueSpan.textContent = selectedValue;
+                resultDiv.style.display = 'block';
+            } else {
+                selectedValueSpan.textContent = '';
+                resultDiv.style.display = 'none';
+                alert('Please select an option.');
+            }
+        }
+    </script>
+    <h1>20.Create a dashboard card showing total users count (static value).</h1>
+    <div class="card">
+        <div class="card-header">
+            Total Users
+        </div>
+        <div class="card-body">
+            <span class="user-count" id="user-count">0</span>
+        </div>
+        <div class="card-footer">
+            As of today
+        </div>
+    </div>
+
+    <script>
+        // Use JavaScript to set a static value
+        document.getElementById('user-count').textContent = '2,450';
+    </script>
+    <h1>21.Show different messages based on form input values.</h1>
+    <form>
+    <label for="yesno_input">Type 'yes' to see a special message:</label>
+    <input type="text" id="yesno_input" oninput="checkValue()">
+    <p id="yes_message" style="display: none; color: green;">You typed yes! Great!</p>
+    <p id="no_message" style="display: none; color: red;">Keep trying, type 'yes' to see the message.</p>
+</form>
+<script>
+    function checkValue() {
+    let inputValue = document.getElementById('yesno_input').value.toLowerCase();
+    let yesMessage = document.getElementById('yes_message');
+    let noMessage = document.getElementById('no_message');
+
+    if (inputValue === 'yes') {
+        yesMessage.style.display = 'block';
+        noMessage.style.display = 'none';
+    } else {
+        yesMessage.style.display = 'none';
+        noMessage.style.display = 'block';
+    }
+}
+
+</script>
+<h1>22.Create a simple search box to filter dashboard items.</h1>
+<div class="container">
+        <h2>Dashboard Items Filter</h2>
+        <input type="text" id="searchInput" placeholder="Search for items...">
+        
+        <ul id="item-list">
+            <li>Item A: Sales Report</li>
+            <li>Item B: User Statistics</li>
+            <li>Item C: Performance Metrics</li>
+            <li>Item D: Error Logs</li>
+            <li>Item E: System Health</li>
+        </ul>
+    </div>
+    <script>
+// Get the search input and the list of items
+const searchInput = document.getElementById('searchInput');
+const itemList = document.getElementById('item-list');
+const items = itemList.getElementsByTagName('li');
+
+// Add an event listener for input (keyup is good for real-time filtering)
+searchInput.addEventListener('keyup', function() {
+    const filter = searchInput.value.toLowerCase();
+
+    // Loop through all list items, and hide those that don't match the search query
+    for (let i = 0; i < items.length; i++) {
+        const itemText = items[i].textContent || items[i].innerText;
+        
+        if (itemText.toLowerCase().indexOf(filter) > -1) {
+            items[i].style.display = ""; // Show the item
+        } else {
+            items[i].style.display = "none"; // Hide the item
+        }
+    }
+});
+
+    </script>
+    <h1>23.Display a loading message while form is being submitted.</h1>
+    <form id="myForm5">
+    <input type="text" name="name" placeholder="Your Name"><br><br>
+    <button type="submit" id="submitButton">Submit</button>
+</form>
+
+<div id="loadingMessage" style="display: none;">
+    <p>Please wait, submitting...</p>
+    
+</div>
+<script>
+    document.getElementById('myForm5').onsubmit = function() {
+    // Show the loading message
+    document.getElementById('loadingMessage').style.display = 'block';
+
+    // Disable the submit button to prevent multiple clicks
+    document.getElementById('submitButton').disabled = true;
+};
+
+</script>
+<h1>24.Reset form fields using a reset button.</h1>
+<form id="myForm3">
+  <label >Name</label>
+  <input type="text" id="field1"><br><br>
+  <button type="button" onclick="resetMyForm()">Custom Reset</button>
+</form>
+
+<script>
+  function resetMyForm() {
+    document.getElementById("myForm3").reset();
+  }
+</script>
+<h1>25.Create a form with a dropdown and display selected value.</h1>
+<h1>Select a Fruit</h1>
+
+    <form id="fruitForm">
+        <label for="fruits">Choose a fruit:</label>
+        <select id="fruits" name="fruits">
+            <option value="">--Select an option--</option>
+            <option value="apple">Apple</option>
+            <option value="banana">Banana</option>
+            <option value="orange">Orange</option>
+            <option value="mango">Mango</option>
+        </select>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Selected Value:</h2>
+    <p id="selectedValueDisplay">None selected yet.</p>
+
+    <!-- Link to the JavaScript file -->
+    <script>
+        // Get references to the form and the display element
+const fruitForm = document.getElementById('fruitForm');
+const selectedValueDisplay = document.getElementById('selectedValueDisplay');
+const fruitsDropdown = document.getElementById('fruits');
+
+// Add an event listener to the form's submit event
+fruitForm.addEventListener('submit', function(event) {
+    // Prevent the form from actually submitting (which would reload the page)
+    event.preventDefault();
+
+    // Get the selected value from the dropdown menu
+    const selectedValue = fruitsDropdown.value;
+
+    // Get the text of the selected option (more user-friendly)
+    const selectedText = fruitsDropdown.options[fruitsDropdown.selectedIndex].text;
+
+    // Check if an option was selected (the default value is "")
+    if (selectedValue === "") {
+        selectedValueDisplay.textContent = "Please select a valid option.";
+    } else {
+        // Display the selected value and text to the user
+        selectedValueDisplay.textContent = `Value: ${selectedValue}, Text: ${selectedText}`;
+    }
+});
+
+    </script>
+    <h1>26.Create a multi-step form and navigate between steps.</h1>
+    <form id="multiStepForm">
+  <!-- Step 1 -->
+  <div class="step" id="step1">
+    <h2>Step 1: Account Info</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <button type="button" class="next-btn" data-target="step2">Next</button>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step" id="step2" style="display: none;">
+    <h2>Step 2: Profile Info</h2>
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" required>
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" required>
+    <button type="button" class="prev-btn" data-target="step1">Previous</button>
+    <button type="button" class="next-btn" data-target="step3">Next</button>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step" id="step3" style="display: none;">
+    <h2>Step 3: Confirmation</h2>
+    <p>Please review your information.</p>
+    <button type="button" class="prev-btn" data-target="step2">Previous</button>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('multiStepForm');
+  const nextButtons = document.querySelectorAll('.next-btn');
+  const prevButtons = document.querySelectorAll('.prev-btn');
+
+  // Function to show a specific step
+  function showStep(stepId) {
+    // Hide all steps
+    document.querySelectorAll('.step').forEach(step => {
+      step.style.display = 'none';
+    });
+    // Show the target step
+    document.getElementById(stepId).style.display = 'block';
+  }
+
+  // Handle 'Next' button clicks
+  nextButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      // Basic validation (you'd add more robust validation here)
+      const currentStep = e.target.closest('.step');
+      const inputs = currentStep.querySelectorAll('input[required]');
+      let allValid = true;
+
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          allValid = false;
+          input.style.border = '1px solid red';
+        } else {
+          input.style.border = '';
+        }
+      });
+
+      if (allValid) {
+        const nextStepId = e.target.getAttribute('data-target');
+        showStep(nextStepId);
+      } else {
+        alert('Please fill out all required fields.');
+      }
+    });
+  });
+
+  // Handle 'Previous' button clicks
+  prevButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const prevStepId = e.target.getAttribute('data-target');
+      showStep(prevStepId);
+    });
+  });
+
+  // Handle form submission (optional, for final step)
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Form submitted successfully!');
+    // Here you would typically collect all form data and send it to a server
+  });
+});
+
+</script>
+<h1>27.Validate each step of the form before moving to the next step.</h1>
+<form id="multiStepForm1">
+  <!-- Step 1 -->
+  <div class="form-step active">
+    <label>Full Name:</label>
+    <input type="text" name="name" required minlength="3">
+    <button type="button" class="next-btn">Next</button>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="form-step">
+    <label>Email:</label>
+    <input type="email" name="email" required>
+    <button type="button" class="prev-btn">Previous</button>
+    <button type="button" class="next-btn">Next</button>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="form-step">
+    <button type="submit">Submit</button>
+  </div>
+</form>
+<script>
+    const steps = Array.from(document.querySelectorAll(".form-step"));
+const nextBtns = document.querySelectorAll(".next-btn");
+const prevBtns = document.querySelectorAll(".prev-btn");
+
+nextBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const currentStep = btn.closest(".form-step");
+    const inputs = currentStep.querySelectorAll("input");
+    
+    // Validate all inputs in the current step
+    let allValid = true;
+    inputs.forEach(input => {
+      if (!input.checkValidity()) {
+        input.reportValidity(); // Shows the browser's default error popup
+        allValid = false;
+      }
+    });
+
+    if (allValid) {
+      changeStep(1);
+    }
+  });
+});
+
+prevBtns.forEach((btn) => {
+  btn.addEventListener("click", () => changeStep(-1));
+});
+
+function changeStep(cursor) {
+  const activeStep = document.querySelector(".form-step.active");
+  let index = steps.indexOf(activeStep);
+  steps[index].classList.remove("active");
+  steps[index + cursor].classList.add("active");
+}
+
+</script>
+<h1>28.Create a dashboard table and add new rows dynamically from form data.</h1>
+<div class="container">
+        <h1>Add New Dashboard Item</h1>
+        <!-- Input Form -->
+        <form id="itemForm">
+            <label for="itemName">Item Name:</label>
+            <input type="text" id="itemName" required>
+
+            <label for="itemStatus">Status:</label>
+            <select id="itemStatus" required>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                <option value="Pending">Pending</option>
+            </select>
+
+            <label for="itemDate">Start Date:</label>
+            <input type="date" id="itemDate" required>
+
+            <button type="submit">Add Item</button>
+        </form>
+
+        <!-- Dashboard Table -->
+        <h2>Current Dashboard Items</h2>
+        <div class="table-container">
+            <table id="dashboardTable">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Status</th>
+                        <th>Start Date</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Dynamic rows will be added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const itemForm = document.getElementById('itemForm');
+    const tableBody = document.getElementById('tableBody');
+
+    itemForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        // 1. Get form data
+        const itemName = document.getElementById('itemName').value;
+        const itemStatus = document.getElementById('itemStatus').value;
+        const itemDate = document.getElementById('itemDate').value;
+
+        // 2. Create a new table row element
+        const newRow = document.createElement('tr');
+
+        // 3. Populate the row with cells
+        newRow.innerHTML = `
+            <td>${itemName}</td>
+            <td>${itemStatus}</td>
+            <td>${formatDate(itemDate)}</td>
+        `;
+
+        // 4. Append the new row to the table body
+        tableBody.appendChild(newRow);
+
+        // 5. Reset the form for the next entry
+        itemForm.reset();
+    });
+
+    // Helper function to format the date (optional, but improves display)
+    function formatDate(dateString) {
+        // Input format is 'YYYY-MM-DD' from the input[type="date"]
+        const [year, month, day] = dateString.split('-');
+        return `${month}/${day}/${year}`;
+    }
+});
+
+    </script>
+    <h1>29.Edit a table row data using form inputs.</h1>
+    <h2>Product Inventory</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Price ($)</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="inventory-table-body">
+            <!-- Table rows will be inserted here by JavaScript or hardcoded -->
+            <tr data-id="1">
+                <td class="id">1</td>
+                <td class="name">Laptop</td>
+                <td class="price">999.99</td>
+                <td class="quantity">50</td>
+                <td><button onclick="editRow(this)">Edit</button></td>
+            </tr>
+            <tr data-id="2">
+                <td class="id">2</td>
+                <td class="name">Mouse</td>
+                <td class="price">25.50</td>
+                <td class="quantity">150</td>
+                <td><button onclick="editRow(this)">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Edit Product</h3>
+    <form id="edit-form">
+        <input type="hidden" id="edit-id">
+        <label for="edit-name">Name:</label>
+        <input type="text" id="edit-name" required><br>
+        <label for="edit-price">Price:</label>
+        <input type="number" id="edit-price" step="0.01" required><br>
+        <label for="edit-quantity">Quantity:</label>
+        <input type="number" id="edit-quantity" required><br>
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <script>
+        // Function to populate the form fields when "Edit" is clicked
+function editRow(buttonElement) {
+    const row = buttonElement.closest('tr'); // Find the parent <tr> element
+    const id = row.getAttribute('data-id');
+    const name = row.querySelector('.name').textContent;
+    const price = row.querySelector('.price').textContent;
+    const quantity = row.querySelector('.quantity').textContent;
+
+    // Populate the form fields
+    document.getElementById('edit-id').value = id;
+    document.getElementById('edit-name').value = name;
+    document.getElementById('edit-price').value = price;
+    document.getElementById('edit-quantity').value = quantity;
+}
+
+// Function to handle form submission and update the table
+document.getElementById('edit-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get the updated values from the form
+    const id = document.getElementById('edit-id').value;
+    const newName = document.getElementById('edit-name').value;
+    const newPrice = document.getElementById('edit-price').value;
+    const newQuantity = document.getElementById('edit-quantity').value;
+
+    // Find the corresponding table row using the data-id
+    const tableBody = document.getElementById('inventory-table-body');
+    const rowToUpdate = tableBody.querySelector(`tr[data-id="${id}"]`);
+
+    if (rowToUpdate) {
+        // Update the content of the specific cells
+        rowToUpdate.querySelector('.name').textContent = newName;
+        rowToUpdate.querySelector('.price').textContent = newPrice;
+        rowToUpdate.querySelector('.quantity').textContent = newQuantity;
+
+        // Optional: Clear the form after submission
+        event.target.reset();
+    } else {
+        console.error("Row not found for ID:", id);
+    }
+});
+
+    </script>
+    <h1>30.Delete a table row with confirmation.</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="itemTableBody">
+            <tr data-id="1">
+                <td>Item 1</td>
+                <td><button class="delete-btn">Delete</button></td>
+            </tr>
+            <tr data-id="2">
+                <td>Item 2</td>
+                <td><button class="delete-btn">Delete</button></td>
+            </tr>
+            <tr data-id="3">
+                <td>Item 3</td>
+                <td><button class="delete-btn">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this row?</p>
+            <button id="confirmDeleteBtn">Yes, Delete</button>
+            <button id="cancelDeleteBtn">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('confirmationModal');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+    const tableBody = document.getElementById('itemTableBody');
+    let rowToDelete = null;
+
+    // Add event listener to the table body (event delegation)
+    tableBody.addEventListener('click', (event) => {
+        if (event.target.classList.contains('delete-btn')) {
+            // Get the parent row (TR element)
+            rowToDelete = event.target.closest('tr');
+            // Show the modal
+            modal.style.display = 'flex';
+        }
+    });
+
+    // Handle confirmation
+    confirmDeleteBtn.addEventListener('click', () => {
+        if (rowToDelete) {
+            rowToDelete.remove(); // Delete the row
+            rowToDelete = null; // Reset the stored row
+            modal.style.display = 'none'; // Hide the modal
+        }
+    });
+
+    // Handle cancellation
+    cancelDeleteBtn.addEventListener('click', () => {
+        rowToDelete = null; // Reset the stored row
+        modal.style.display = 'none'; // Hide the modal
+    });
+
+    // Close the modal if the user clicks outside of the content
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            rowToDelete = null;
+            modal.style.display = 'none';
+        }
+    });
+});
+
+    </script>
+    <h1>31.Create a dashboard filter to show specific data only.</h1>
+    <div class="dashboard-container">
+    <!-- Filter Controls -->
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">Show All</button>
+        <button class="filter-btn" data-filter="categoryA">Category A</button>
+        <button class="filter-btn" data-filter="categoryB">Category B</button>
+    </div>
+
+    <!-- Data Items -->
+    <div class="data-items">
+        <div class="item" data-category="categoryA">Data Item 1 (A)</div>
+        <div class="item" data-category="categoryB">Data Item 2 (B)</div>
+        <div class="item" data-category="categoryA">Data Item 3 (A)</div>
+        <div class="item" data-category="categoryA">Data Item 4 (A)</div>
+        <div class="item" data-category="categoryB">Data Item 5 (B)</div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const dataItems = document.querySelectorAll('.item');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove 'active' class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add 'active' class to the clicked button
+            button.classList.add('active');
+
+            const filterValue = button.getAttribute('data-filter');
+
+            dataItems.forEach(item => {
+                if (filterValue === 'all') {
+                    item.classList.remove('hidden');
+                } else {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (itemCategory === filterValue) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    });
+});
+
+</script>
+<h1>32.Display total number of records in the dashboard table.</h1>
+<div class="dashboard-container">
+        <div class="dashboard-header">
+            <h2>Records Dashboard</h2>
+            <p>Total Records: <span id="recordCount1">0</span></p>
+        </div>
+        
+        <table id="dashboardTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <!-- The tbody is where the records (rows) are dynamically added -->
+            <tbody id="tableBody1">
+                <tr>
+                    <td>101</td>
+                    <td>John Doe</td>
+                    <td>Active</td>
+                    <td>2025-01-10</td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>Jane Smith</td>
+                    <td>Inactive</td>
+                    <td>2025-01-11</td>
+                </tr>
+                <tr>
+                    <td>103</td>
+                    <td>Peter Jones</td>
+                    <td>Active</td>
+                    <td>2025-01-12</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+    // 1. Get a reference to the table body element using its ID
+    const tableBody = document.getElementById('tableBody1');
+
+    // 2. Get the reference for the element where the count will be displayed
+    const recordCountSpan = document.getElementById('recordCount1');
+
+    // 3. Count the number of rows within the tbody
+    // Using tableBody.rows.length is efficient for counting rows in a specific section
+    const totalRecords = tableBody.rows.length;
+
+    // 4. Update the display element with the total count
+    recordCountSpan.textContent = totalRecords;
+});
+
+    </script>
+    <h1>33.Create a form that auto-saves data while typing.</h1>
+    <div class="form-container">
+        <h2>Auto-Save Form</h2>
+        <form id="myForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" rows="5"></textarea>
+            </div>
+            <div id="status"></div>
+            <button type="submit">Submit Form</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to save form data to localStorage
+        function saveFormData() {
+            const username = document.getElementById('username').value;
+            const comments = document.getElementById('comments').value;
+            const formData = {
+                username: username,
+                comments: comments
+            };
+            // Save as JSON string
+            localStorage.setItem('myFormAutoSave', JSON.stringify(formData));
+            // Display status
+            document.getElementById('status').textContent = 'Data auto-saved!';
+            // Clear status after a short delay
+            setTimeout(() => {
+                document.getElementById('status').textContent = '';
+            }, 2000);
+        }
+
+        // Function to load data from localStorage when the page loads
+        function loadFormData() {
+            const savedData = localStorage.getItem('myFormAutoSave');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                document.getElementById('username').value = formData.username || '';
+                document.getElementById('comments').value = formData.comments || '';
+                console.log('Form data loaded from local storage.');
+            }
+        }
+
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', loadFormData); // Load data on page load
+
+        const formElements = document.querySelectorAll('#myForm input, #myForm textarea');
+        formElements.forEach(element => {
+            element.addEventListener('input', saveFormData); // Save data on input change
+        });
+
+        // Optional: clear saved data when the form is actually submitted
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            // event.preventDefault(); // Uncomment this line if you want to prevent the actual form submission to a server
+            localStorage.removeItem('myFormAutoSave'); // Clear saved data
+            alert('Form submitted and auto-save data cleared!');
+        });
+    </script>
+    <h1>34.Restore auto-saved form data on page reload.</h1>
+    <h1>Auto-Save Form Data</h1>
+    <form id="myForm8">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+        <button type="submit">Submit</button>
+        <button type="button" id="clearStorage">Clear Saved Data</button>
+    </form>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    const forms = document.getElementById('myForm8');
+    const clearButton = document.getElementById('clearStorage');
+    const storageKey = 'formData';
+
+    // Function to save form data to localStorage
+    function saveFormData() {
+        const data = {
+            username: forms.elements['username'].value,
+            email: forms.elements['email'].value,
+            message: forms.elements['message'].value,
+        };
+        localStorage.setItem(storageKey, JSON.stringify(data));
+    }
+
+    // Function to restore form data from localStorage
+    function restoreFormData() {
+        const savedData = localStorage.getItem(storageKey);
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            forms.elements['username'].value = data.username || '';
+            forms.elements['email'].value = data.email || '';
+            forms.elements['message'].value = data.message || '';
+            console.log('Form data restored.');
+        }
+    }
+
+    // Add event listeners for input changes to save data automatically
+    forms.addEventListener('input', saveFormData);
+
+    // Restore data when the page loads
+    restoreFormData();
+
+    // Optional: Clear data on form submission or when a specific button is clicked
+    forms.addEventListener('submit', (e) => {
+        // e.preventDefault(); // Uncomment this to prevent actual submission
+        localStorage.removeItem(storageKey); // Clear data after submission
+        alert('Form submitted and saved data cleared!');
+    });
+
+    clearButton.addEventListener('click', () => {
+        localStorage.removeItem(storageKey);
+        forms.reset();
+        console.log('Saved data cleared manually.');
+    });
+});
+
+    </script>
+    <h1>35.Create a dashboard notification message area.</h1>
+    <div class="dashboard-container">
+        <h1>My Dashboard</h1>
+        <button id="add-notification-btn">Add New Notification</button>
+        
+        <!-- Notification Message Area -->
+        <div class="notification-area" id="notification-area">
+            <!-- Notifications will be injected here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const notificationArea = document.getElementById('notification-area');
+    const addNotificationBtn = document.getElementById('add-notification-btn');
+    let notificationCount = 0;
+
+    // Function to create and add a new notification element
+    function createNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.classList.add('notification', type);
+        notification.innerHTML = `
+            <span>${message}</span>
+            <button class="dismiss-btn">&times;</button>
+        `;
+
+        // Add event listener to the dismiss button
+        notification.querySelector('.dismiss-btn').addEventListener('click', () => {
+            dismissNotification(notification);
+        });
+
+        // Insert the new notification at the top of the list
+        notificationArea.prepend(notification);
+    }
+
+    // Function to handle the dismissal with animation
+    function dismissNotification(notificationElement) {
+        // Add fade-out class to start CSS transition
+        notificationElement.classList.add('fade-out');
+
+        // Remove the element from the DOM after the transition is complete
+        notificationElement.addEventListener('transitionend', () => {
+            notificationElement.remove();
+        });
+    }
+
+    // Example usage: add a sample notification on button click
+    addNotificationBtn.addEventListener('click', () => {
+        notificationCount++;
+        const types = ['info', 'success', 'error'];
+        const randomType = types[Math.floor(Math.random() * types.length)];
+        createNotification(`This is a new ${randomType} message #${notificationCount}.`, randomType);
+    });
+
+    // Add an initial notification when the page loads
+    createNotification('Welcome to your dashboard! A new update is available.', 'success');
+});
+
+    </script>
+    <h1>36.Show success or error notifications based on user actions.</h1>
+    <div class="button-container">
+        <button onclick="showNotification('Success! Item saved.', 'success')">Show Success</button>
+        <button onclick="showNotification('Error! Failed to process.', 'error')">Show Error</button>
+    </div>
+    <div class="notification-container">
+        <!-- Notifications will be dynamically added here -->
+    </div>
+    <script>
+       function showNotification(message, type) {
+    const container = document.querySelector('.notification-container');
+    const notification = document.createElement('div');
+    notification.classList.add('notification', type);
+    
+    // Add message content
+    const messageSpan = document.createElement('span');
+    messageSpan.classList.add('notification-message');
+    messageSpan.textContent = message;
+
+    // Add close button
+    const closeBtn = document.createElement('span');
+    closeBtn.classList.add('close-btn');
+    closeBtn.innerHTML = '&times;'; // HTML entity for 'x'
+    closeBtn.onclick = () => {
+        notification.classList.remove('show');
+        // Wait for transition to finish before removing from DOM
+        setTimeout(() => {
+            container.removeChild(notification);
+        }, 500); 
+    };
+
+    notification.appendChild(messageSpan);
+    notification.appendChild(closeBtn);
+    container.appendChild(notification);
+
+    // Trigger the slide-in animation
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10); // Small delay to ensure CSS transition is applied
+
+    // Auto-close after 4 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            if (container.contains(notification)) {
+                container.removeChild(notification);
+            }
+        }, 500); // Wait for transition out
+    }, 4000); 
+}
+
+
+    </script>
+    <h1>37.Create a form with conditional fields (show/hide based on selection).</h1>
+    <form id="applicationForm">
+  <!-- Trigger Field -->
+  <label for="reason">How can we help you?</label>
+  <select id="reason" name="reason">
+    <option value="">Select an option...</option>
+    <option value="support">Technical Support</option>
+    <option value="billing">Billing Inquiry</option>
+    <option value="other">Other</option>
+  </select>
+
+  <!-- Conditional Field: Technical Support -->
+  <div id="supportFields" class="conditional">
+    <label for="os">Operating System:</label>
+    <input type="text" id="os" name="os" placeholder="e.g. Windows 11">
+  </div>
+
+  <!-- Conditional Field: Other -->
+  <div id="otherFields" class="conditional">
+    <label for="details">Please specify:</label>
+    <textarea id="details" name="details"></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+<script>
+    const reasonSelect = document.getElementById('reason');
+const supportFields = document.getElementById('supportFields');
+const otherFields = document.getElementById('otherFields');
+
+reasonSelect.addEventListener('change', function() {
+    // Hide all conditional fields first
+    supportFields.style.display = 'none';
+    otherFields.style.display = 'none';
+
+    // Show specific fields based on selection
+    if (this.value === 'support') {
+        supportFields.style.display = 'block';
+    } else if (this.value === 'other') {
+        otherFields.style.display = 'block';
+    }
+});
+
+</script>
+<h1>38.Disable dashboard actions for invalid form state.</h1>
+<form id="myForms">
+    <div>
+        <label for="name">Name (required):</label>
+        <input type="text" id="name" required minlength="3">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email">
+    </div>
+    
+    <!-- Dashboard Actions -->
+    <button type="submit" id="submitBtns" disabled>Save Changes</button>
+    <a href="#" id="cancelLink" class="action-link disabled-link" onclick="return false;">Cancel (disabled)</a>
+</form>
+<script>
+    // Get references to the form and action elements
+const formd = document.getElementById('myForms');
+const submitBtns = document.getElementById('submitBtns');
+const cancelLink = document.getElementById('cancelLink');
+
+// Function to check the form state and update actions
+function checkFormValidity() {
+    // form.checkValidity() uses built-in HTML5 validation rules
+    const isValid = formd.checkValidity();
+
+    if (isValid) {
+        // Enable actions
+        submitBtns.disabled = false;
+        cancelLink.classList.remove('disabled-link');
+        // Re-enable default link behavior
+        cancelLink.onclick = null; 
+    } else {
+        // Disable actions
+        submitBtns.disabled = true;
+        cancelLink.classList.add('disabled-link');
+        // Prevent default link behavior when disabled
+        cancelLink.onclick = function() { return false; };
+    }
+}
+
+// Add event listeners to the form inputs to monitor changes
+// The 'input' event is generally better than 'change' for real-time feedback
+formd.addEventListener('input', checkFormValidity);
+
+// Initial check when the page loads
+document.addEventListener('DOMContentLoaded', checkFormValidity);
+
+</script>
+<h1>39.Create a responsive dashboard layout using CSS</h1>
+<div class="dashboard-container1">
+        <!-- Sidebar -->
+        <aside class="sidebar1">
+            <div class="logo">Dashboard</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#analytics">Analytics</a></li>
+                    <li><a href="#reports">Reports</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header>
+                <h1>Welcome to the Dashboard</h1>
+            </header>
+
+            <!-- Cards/Widgets -->
+            <div class="card-container1">
+                <div class="card1">
+                    <h2>Card 1</h2>
+                    <p>Some information goes here.</p>
+                </div>
+                <div class="card1">
+                    <h2>Card 2</h2>
+                    <p>More details are provided here.</p>
+                </div>
+                <div class="card1">
+                    <h2>Card 3</h2>
+                    <p>Analytics snapshot.</p>
+                </div>
+                <div class="card1">
+                    <h2>Card 4</h2>
+                    <p>Another data point.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <h1>40.Adjust dashboard layout for mobile view using media queries.</h1>
+    <div class="dashboard-container1">
+        <!-- Sidebar -->
+        <aside class="sidebar1">
+            <div class="logo">Dashboard</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#analytics">Analytics</a></li>
+                    <li><a href="#reports">Reports</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header>
+                <h1>Welcome to the Dashboard</h1>
+            </header>
+
+            <!-- Cards/Widgets -->
+            <div class="card-container1">
+                <div class="card1">
+                    <h2>Card 1</h2>
+                    <p>Some information goes here.</p>
+                </div>
+                <div class="card1">
+                    <h2>Card 2</h2>
+                    <p>More details are provided here.</p>
+                </div>
+                <div class="card1">
+                    <h2>Card 3</h2>
+                    <p>Analytics snapshot.</p>
+                </div>
+                <div class="card1">
+                    <h2>Card 4</h2>
+                    <p>Another data point.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <h1>41.Highlight active menu item in dashboard sidebar.</h1>
+    <div class="sidebar2">
+  <a href="index.html" class="nav-link">Dashboard</a>
+  <a href="reports.html" class="nav-link">Reports</a>
+  <a href="settings.html" class="nav-link">Settings</a>
+</div>
+<h1>42.Create a dashboard logout button and clear stored data.</h1>
+<div class="container">
+        <h1>Welcome to the Dashboard</h1>
+        <p>Your session data is stored locally.</p>
+        <!-- The Logout Button -->
+        <button id="logout-button">Log Out</button>
+    </div>
+
+    <script>
+        document.getElementById('logout-button').addEventListener('click', function() {
+            // 1. Clear stored data
+            // To clear a specific item:
+            // localStorage.removeItem('userToken');
+            // sessionStorage.removeItem('sessionData');
+            
+            // To clear all data for the domain:
+            localStorage.clear();
+            sessionStorage.clear();
+
+            // 2. Redirect the user (optional, replace with your login page URL)
+            alert('You have been logged out and all local data has been cleared.');
+            // window.location.href = 'login.html'; 
+        });
+    </script>
+    <h1>43.Show last login time in the dashboard.</h1>
+    <div class="dashboard-stat-card">
+  <h3>Session Info</h3>
+  <p>Last Login: <span id="last-login-time">Loading...</span></p>
+</div>
+<script>
+    // Example: Get current date and format it for the UI
+const loginDisplay = document.getElementById('last-login-time');
+const lastLogin = localStorage.getItem('userLastLogin') || "First-time user";
+
+loginDisplay.textContent = lastLogin;
+
+// Update storage for the next time they visit
+localStorage.setItem('userLastLogin', new Date().toLocaleString());
+
+</script>
+<h1>44.Create a form to update profile details and reflect changes in UI.</h1>
+<div class="container">
+        <!-- Profile Update Form (HTML) -->
+        <div class="form-container">
+            <h2>Update Profile</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="nameInput">Name:</label>
+                    <input type="text" id="nameInput" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailInput">Email:</label>
+                    <input type="email" id="emailInput" required>
+                </div>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+
+        <!-- User Profile Display (HTML) -->
+        <div class="profile-container">
+            <h2>Your Profile</h2>
+            <div class="profile-info">
+                <p><strong>Name:</strong> <span id="displayName">N/A</span></p>
+                <p><strong>Email:</strong> <span id="displayEmail">N/A</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle updates -->
+    <script>
+        // Get references to DOM elements
+        const profileForm = document.getElementById('profileForm');
+        const nameInput = document.getElementById('nameInput');
+        const emailInput = document.getElementById('emailInput');
+        const displayName = document.getElementById('displayName');
+        const displayEmail = document.getElementById('displayEmail');
+
+        // Handle the form submission event
+        profileForm.addEventListener('submit', function(event) {
+            // Prevent the form from submitting the traditional way (which reloads the page)
+            event.preventDefault();
+
+            // Get the values from the form inputs
+            const newName = nameInput.value;
+            const newEmail = emailInput.value;
+
+            // Update the UI elements with the new values
+            displayName.textContent = newName;
+            displayEmail.textContent = newEmail;
+
+            // Optional: clear the form inputs after submission
+            // nameInput.value = '';
+            // emailInput.value = '';
+
+            alert('Profile updated successfully!');
+        });
+    </script>
+    <h1>45.Create a dashboard widget that updates data on button click.</h1>
+    <div class="widget-container">
+        <div class="widget-header">
+            <h3>Analytics Overview</h3>
+        </div>
+        <div class="widget-body">
+            <p>Current Users: <strong id="user-count">542</strong></p>
+            <p>Page Views: <strong id="page-views">1,200</strong></p>
+        </div>
+        <div class="widget-footer">
+            <!-- The onclick attribute calls a JavaScript function -->
+            <button id="update-button">Update Data</button>
+        </div>
+    </div>
+
+    <!-- Link to the JavaScript file -->
+    <script>
+        document.getElementById('update-button').addEventListener('click', function() {
+    // Generate new random data for demonstration
+    const newUserCount = Math.floor(Math.random() * 1000) + 200;
+    const newPageViews = Math.floor(Math.random() * 5000) + 1500;
+
+    // Update the DOM elements with the new data
+    document.getElementById('user-count').textContent = newUserCount.toLocaleString();
+    document.getElementById('page-views').textContent = newPageViews.toLocaleString();
+
+    // Optional: Add a visual feedback
+    const widgetBody = document.querySelector('.widget-body');
+    widgetBody.style.backgroundColor = '#e9ecef'; // Change background slightly
+    setTimeout(() => {
+        widgetBody.style.backgroundColor = '#fff'; // Revert after a short delay
+    }, 500);
+});
+
+    </script>
+    <h1>46.Prevent duplicate entries in dashboard table.</h1>
+    <table id="dashboardTable">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Entries will go here -->
+  </tbody>
+</table>
+<script>
+    function addEntry(id, name) {
+  const table = document.getElementById("dashboardTable");
+  const rows = table.getElementsByTagName("tr");
+
+  // Loop through rows (skip header) to check for duplicates
+  for (let i = 1; i < rows.length; i++) {
+    let existingID = rows[i].cells[0].innerText;
+    if (existingID === id) {
+      alert("Error: Duplicate entry detected!");
+      return; // Stop the function here
+    }
+  }
+
+  // If no duplicate is found, append the new row
+  let newRow = table.insertRow(-1);
+  newRow.insertCell(0).innerText = id;
+  newRow.insertCell(1).innerText = name;
+}
+
+</script>
+<h1>47.Create a dashboard summary section showing totals.</h1>
+<div class="dashboard-summary">
+        <div class="card">
+            <div class="icon-container">📊</div>
+            <div class="card-content">
+                <p class="label">Total Sales</p>
+                <p class="value" id="totalSales">$0</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon-container">📈</div>
+            <div class="card-content">
+                <p class="label">Total Revenue</p>
+                <p class="value" id="totalRevenue">$0</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon-container">👥</div>
+            <div class="card-content">
+                <p class="label">New Users</p>
+                <p class="value" id="newUsers">0</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon-container">📦</div>
+            <div class="card-content">
+                <p class="label">Pending Orders</p>
+                <p class="value" id="pendingOrders">0</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // script.js
+
+// Mock Data (replace with your actual data fetching logic, e.g., an API call)
+const summaryData = {
+    totalSales: 15450,
+    totalRevenue: 893450,
+    newUsers: 124,
+    pendingOrders: 42
+};
+
+// Function to format numbers as currency
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+}
+
+// Function to update the DOM with the data
+function updateDashboard() {
+    document.getElementById('totalSales').textContent = formatCurrency(summaryData.totalSales);
+    document.getElementById('totalRevenue').textContent = formatCurrency(summaryData.totalRevenue);
+    document.getElementById('newUsers').textContent = summaryData.newUsers;
+    document.getElementById('pendingOrders').textContent = summaryData.pendingOrders;
+}
+
+// Call the update function when the script loads
+document.addEventListener('DOMContentLoaded', (event) => {
+    updateDashboard();
+});
+
+    </script>
+    <h1>48.Show confirmation before resetting dashboard data.</h1>
+    <button onclick="confirmReset()">Reset Dashboard Data</button>
+<p id="status">Dashboard status: Normal</p>
+<script>
+    function confirmReset() {
+  // Display a confirmation dialog
+  const isConfirmed = confirm("Are you sure you want to reset all dashboard data? This action cannot be undone.");
+
+  if (isConfirmed) {
+    // User clicked 'OK'
+    resetData();
+  } else {
+    // User clicked 'Cancel' or closed the dialog
+    console.log("Reset cancelled.");
+  }
+}
+
+// Function that actually performs the data reset logic
+function resetData() {
+  console.log("Data successfully reset.");
+  document.getElementById("status").innerText = "Dashboard status: Data reset completed!";
+  // Add your actual data resetting logic here (e.g., clearing local storage, making API calls)
+}
+
+</script>
+<h1>49.Create a form submission history section.</h1>
+<div class="container">
+    <h1>Submit Data</h1>
+    <form id="dataForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <label for="email">Email:</label>
+        <input type="text" id="email" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Submission History</h2>
+    <ul id="history-list">
+        <!-- History items will be injected here by JavaScript -->
+    </ul>
+    <button id="clearHistoryBtn" class="clear-history">Clear History</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('dataForm');
+        const historyList = document.getElementById('history-list');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+        const STORAGE_KEY = 'formSubmissions';
+
+        // Function to get submissions from localStorage
+        function getSubmissions() {
+            const submissionsJson = localStorage.getItem(STORAGE_KEY);
+            return submissionsJson ? JSON.parse(submissionsJson) : [];
+        }
+
+        // Function to save submissions to localStorage
+        function saveSubmissions(submissions) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(submissions));
+        }
+
+        // Function to add a single submission to the DOM
+        function addSubmissionToDOM(submission) {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span><strong>Name:</strong> ${submission.name} | <strong>Email:</strong> ${submission.email}</span>
+                <small>${new Date(submission.timestamp).toLocaleString()}</small>
+            `;
+            historyList.prepend(li); // Add new entries to the top
+        }
+
+        // Function to render all history from storage
+        function renderHistory() {
+            historyList.innerHTML = ''; // Clear current list
+            const submissions = getSubmissions();
+            submissions.forEach(addSubmissionToDOM);
+        }
+
+        // Handle form submission
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const timestamp = new Date().toISOString();
+
+            const newSubmission = { name, email, timestamp };
+            const submissions = getSubmissions();
+
+            submissions.push(newSubmission);
+            saveSubmissions(submissions);
+            addSubmissionToDOM(newSubmission); // Add to UI immediately
+
+            form.reset(); // Clear the form fields
+        });
+
+        // Handle clear history button
+        clearHistoryBtn.addEventListener('click', () => {
+            localStorage.removeItem(STORAGE_KEY);
+            renderHistory(); // Refresh the UI (which will now be empty)
+        });
+
+        // Initial render when the page loads
+        renderHistory();
+    });
+</script>
+<h1>50.Build a simple admin-style dashboard combining form, table, and summary.</h1>
+<div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">Admin Dashboard</div>
+            <nav>
+                <ul>
+                    <li><a href="#dashboard" class="active">Dashboard</a></li>
+                    <li><a href="#users">Users</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header>
+                <h1>Welcome, Admin!</h1>
+            </header>
+
+            <!-- Summary Section -->
+            <section class="summary-cards">
+                <div class="card">
+                    <h3>Total Users</h3>
+                    <p id="total-users">150</p>
+                </div>
+                <div class="card">
+                    <h3>Active Projects</h3>
+                    <p id="active-projects">24</p>
+                </div>
+                <div class="card">
+                    <h3>Revenue</h3>
+                    <p id="total-revenue">$12,400</p>
+                </div>
+            </section>
+
+            <div class="main-sections-wrapper">
+                <!-- Data Entry Form -->
+                <section class="form-section">
+                    <h2>Add New User</h2>
+                    <form id="user-form">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" required>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                        <label for="status">Status:</label>
+                        <select id="status">
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                        <button type="submit">Add User</button>
+                    </form>
+                </section>
+
+                <!-- Data Table -->
+                <section class="table-section">
+                    <h2>Recent Users</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body">
+                            <!-- User rows added by JavaScript -->
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const userForm = document.getElementById('user-form');
+    const userTableBody = document.getElementById('user-table-body');
+    const totalUsersEl = document.getElementById('total-users');
+
+    let userCount = 150; // Initial count from HTML
+    let users = [
+        { username: 'john_doe', email: 'john@example.com', status: 'Active' },
+        { username: 'jane_smith', email: 'jane@example.com', status: 'Inactive' }
+    ];
+
+    function renderTable() {
+        userTableBody.innerHTML = '';
+        users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.status}</td>
+            `;
+            userTableBody.appendChild(row);
+        });
+    }
+
+    function updateUserCount() {
+        totalUsersEl.textContent = userCount;
+    }
+
+    userForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const status = document.getElementById('status').value;
+
+        const newUser = { username, email, status };
+        users.push(newUser);
+        userCount++;
+
+        renderTable();
+        updateUserCount();
+        userForm.reset(); // Clear the form fields
+    });
+
+    // Initial render
+    renderTable();
+    updateUserCount();
+});
+
+    </script>
+
+
+</body>
+</html>
