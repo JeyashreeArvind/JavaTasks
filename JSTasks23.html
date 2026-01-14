@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks - Day 23</title>
+    <style>
+        
+.container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 400px; }
+h2, h3 { text-align: center; }
+form { display: flex; flex-direction: column; }
+input, select, button { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+button { background-color: #04AA6D; color: white; cursor: pointer; border: none; }
+button:hover { opacity: 0.9; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+.container1 { border: 1px solid #ccc; padding: 20px; border-radius: 8px; width: 300px; text-align: center; }
+.hidden { display: none; }
+.todo-app { width: 100%; max-width: 500px; background: #fff; margin: 100px auto; padding: 20px; border-radius: 10px; }
+.row { display: flex; align-items: center; justify-content: space-between; background: #edeef0; border-radius: 30px; padding-left: 20px; }
+input { flex: 1; border: none; outline: none; padding: 10px; background: transparent; }
+button { border: none; padding: 10px 20px; background: #ff5945; color: #fff; border-radius: 30px; cursor: pointer; }
+ul li { cursor: pointer; padding: 12px; position: relative; list-style: none; user-select: none; border-bottom: 1px solid #eee; }
+/* Completed task style */
+ul li.checked { color: #888; text-decoration: line-through; }
+ul li span { position: absolute; right: 10px; cursor: pointer; margin-left: 10px; }
+ul li span.edit { right: 40px; color: blue; }
+ul li span.delete { right: 10px; color: red; }
+.app { max-width: 800px; margin: 0 auto; }
+.input-area { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+textarea { padding: 10px; height: 100px; resize: none; }
+button { padding: 10px; cursor: pointer; background: #28a745; color: white; border: none; }
+#notes-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+.note { background: white; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; }
+.note-content { margin-bottom: 10px; border: none; width: 100%; resize: none; }
+.note-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.delete-btn { background: #dc3545; }
+.profile-container { background: white; padding: 20px; border-radius: 8px; width: 300px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.hidden { display: none; }    
+
+.feedback-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-top: 50px; text-align: center; }
+
+/* Star Rating CSS */
+.rating-wrap { display: flex; flex-direction: row-reverse; justify-content: center; }
+.rating-wrap input { display: none; }
+.rating-wrap label { cursor: pointer; font-size: 30px; color: #ddd; }
+.rating-wrap label:before { content: '\2605'; } /* Unicode Star */
+
+.rating-wrap input:checked ~ label,
+.rating-wrap label:hover,
+.rating-wrap label:hover ~ label { color: #fde16d; }
+
+textarea { width: 90%; margin-top: 15px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+button { margin-top: 15px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+button:hover { background-color: #0056b3; }
+
+.planner-container { max-width: 400px; margin: auto; font-family: Arial; }
+.input-group, .filter-group { margin-bottom: 20px; display: flex; gap: 5px; }
+li { list-style: none; padding: 10px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; }
+.completed { text-decoration: line-through; color: gray; }
+button { cursor: pointer; }
+
+.strength-meter { height: 10px; background-color: #ddd; margin-top: 10px; border-radius: 5px; overflow: hidden; }
+#strength-bar { height: 100%; width: 0%; transition: width 0.3s, background-color 0.3s; }
+#strength-text { font-size: 14px; margin-top: 5px; font-weight: bold; }
+.success input { border: 2px solid #2ecc71; }
+.error input { border: 2px solid #e74c3c; }
+.error-msg { color: #e74c3c; visibility: hidden; }
+.error .error-msg { visibility: visible; }
+.input-group { margin-bottom: 15px; }
+.input-group label { display: block; margin-bottom: 5px; }
+.input-group input { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; }
+.error { color: red; font-size: 12px; display: block; height: 15px; }
+
+/* Real-time Classes */
+.input-group.success input { border-color: #2ecc71; }
+.input-group.error input { border-color: #e74c3c; }
+.wrapper { width: 90%; margin: 0 auto; }
+#search-container { text-align: center; margin: 20px 0; }
+#search-input { padding: 10px; width: 50%; }
+#buttons { text-align: center; margin-bottom: 20px; }
+.button-value { padding: 10px 20px; cursor: pointer; }
+#products { display: grid; grid-template-columns: auto auto auto; gap: 20px; }
+.card { border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
+.hide { display: none; } /* Used for filtering */
+
+.dashboard-container { display: flex; width: 100%; min-height: 100vh; }
+
+/* Sidebar Styling */
+.sidebar { width: 250px; background-color: #333; color: white; padding: 20px; }
+.sidebar .logo { font-size: 24px; margin-bottom: 20px; }
+.sidebar ul { list-style: none; padding: 0; }
+.sidebar ul li { padding: 15px 0; }
+.sidebar a { color: white; text-decoration: none; }
+.sidebar a.active { color: #04AA6D; font-weight: bold; }
+
+/* Main Content Area */
+.content-wrapper { flex: 1; padding: 20px; background-color: #f4f4f4; }
+.content-section { display: none; } /* Hide all */
+.content-section.active { display: block; } /* Show active */
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 700px) {
+    .dashboard-container { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; }
+}
+.form-step { display: none; }
+.form-step.active { display: block; }
+
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.notification {
+    background-color: #333;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    min-width: 200px;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 30px;
+  max-width: 100%;
+  width: 350px;
+}
+
+.progress {
+  background-color: #3498db;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 0%; /* Updates via JS */
+  z-index: -1;
+  transition: 0.4s ease;
+}
+
+.circle {
+  background-color: #fff;
+  color: #999;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #e0e0e0;
+  transition: 0.4s ease;
+}
+
+.circle.active { border-color: #3498db; color: #3498db; }
+.root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --button-bg: #333333;
+    --button-text: #ffffff;
+}
+
+/* Dark Theme */
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --button-bg: #ffffff;
+    --button-text: #000000;
+}
+body { margin: 0; font-family: Arial, sans-serif; }
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 1rem;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    padding: 0 1rem;
+}
+
+.icon {
+    display: none; /* Hidden on desktop */
+    font-size: 24px;
+    text-decoration: none;
+    color: white;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 600px) {
+    .nav-links {
+        display: none; /* Hide links by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px; /* Adjust based on navbar height */
+        left: 0;
+        background-color: #333;
+    }
+
+    .nav-links.active {
+        display: flex; /* Show when active */
+    }
+
+    .nav-links li {
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .icon {
+        display: block; /* Show hamburger icon */
+    }
+}
+.progress-container { width: 100%; background-color: #e0e0e0; border-radius: 5px; margin: 10px 0; }
+.progress-bar { width: 0%; height: 20px; background-color: #4CAF50; border-radius: 5px; text-align: center; color: white; transition: width 0.3s; }
+
+#tips { margin-top: 15px; font-size: 0.9em; color: #555; text-align: left; }
+
+.chat-container { width: 400px; height: 500px; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; overflow: hidden; }
+.chat-header { background-color: #075e54; color: white; padding: 15px; font-weight: bold; text-align: center; }
+.chat-window { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.message { padding: 10px; border-radius: 8px; max-width: 70%; }
+.bot { background-color: #e9ecef; align-self: flex-start; }
+.user { background-color: #dcf8c6; align-self: flex-end; }
+.chat-input-area { display: flex; padding: 10px; background-color: #f0f0f0; }
+#message-input { flex: 1; padding: 10px; border: none; border-radius: 5px; outline: none; }
+#send-btn { padding: 10px 15px; border: none; background-color: #075e54; color: white; border-radius: 5px; cursor: pointer; margin-left: 5px; }
+
+.settings-container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+
+.field { margin-bottom: 15px; }
+select { width: 50%; padding: 8px; box-sizing: border-box; }
+.status-message { font-size: 0.9em; color: #888; height: 1em; margin-bottom: 10px; }
+.pending { color: orange; font-weight: bold; }
+.approved { color: green; font-weight: bold; }
+.action-btn { margin-right: 5px; padding: 5px; cursor: pointer; }
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+    background-color: white;
+    margin: 15% auto; padding: 20px;
+    width: 300px; text-align: center;
+    border-radius: 5px;
+}
+#stayLoggedIn {
+    padding: 10px 20px; cursor: pointer;
+    background-color: #007BFF; color: white;
+    border: none; border-radius: 3px;
+}
+
+
+.ticket-form {
+  max-width: 400px;
+  margin: auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.ticket-form input,
+.ticket-form textarea,
+.ticket-form select,
+.ticket-form button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.ticket-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.ticket-list {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.ticket {
+  background: #fff;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-left: 5px solid #007bff;
+}
+
+.ticket.high { border-color: red; }
+.ticket.medium { border-color: orange; }
+.ticket.low { border-color: green; }
+
+.status-btn {
+  margin-top: 8px;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+ <h1>1.Build a Student Registration Mini-App with form validation and list display.</h1>  
+ <div class="container">
+        <h2>Student Registration</h2>
+        <form id="registrationForm">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <select id="course" required>
+                <option value="">Select Course</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Physics">Physics</option>
+            </select>
+            <button type="submit">Register</button>
+        </form>
+
+        <h3>Registered Students</h3>
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody id="studentList"></tbody>
+        </table>
+    </div>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent page reload
+
+    // Get input values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const course = document.getElementById('course').value;
+
+    // Basic Validation: Check if fields are not empty
+    if (name === '' || email === '' || course === '') {
+        alert('Please fill all fields');
+        return;
+    }
+
+    // Add to Table
+    const tableBody = document.getElementById('studentList');
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${email}</td>
+        <td>${course}</td>
+    `;
+
+    tableBody.appendChild(row);
+
+    // Clear form
+    document.getElementById('registrationForm').reset();
+});
+    </script> 
+    <h1>2.Create a Login & Logout Mini-App with session persistence using localStorage.
+</h1>
+    <div class="container1">
+        <!-- Login Form -->
+        <div id="login-section">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <button onclick="login()">Log In</button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="hidden">
+            <h2>Welcome, <span id="user-display"></span>!</h2>
+            <button onclick="logout()">Log Out</button>
+        </div>
+    </div>
+    <script>
+     // DOM Elements
+const loginSection = document.getElementById('login-section');
+const dashboardSection = document.getElementById('dashboard-section');
+const userDisplay = document.getElementById('user-display');
+const usernameInput = document.getElementById('username');
+
+// Check Session on Load
+window.onload = function() {
+    const savedUser = localStorage.getItem('username');
+    if (savedUser) {
+        showDashboard(savedUser);
+    }
+};
+
+// Login Function
+function login() {
+    const username = usernameInput.value;
+    if (username) {
+        localStorage.setItem('username', username); // Store data
+        showDashboard(username);
+        usernameInput.value = '';
+    } else {
+        alert("Please enter a username");
+    }
+}
+
+// Logout Function
+function logout() {
+    localStorage.removeItem('username'); // Remove specific data
+    // Alternative: localStorage.clear(); to clear all app data
+    loginSection.classList.remove('hidden');
+    dashboardSection.classList.add('hidden');
+}
+
+// Utility to toggle visibility
+function showDashboard(username) {
+    userDisplay.innerText = username;
+    loginSection.classList.add('hidden');
+    dashboardSection.classList.remove('hidden');
+}
+
+    </script>
+    <h1>3.Build a To-Do Manager App with add, edit, delete, and complete status.</h1>
+    <div class="todo-app">
+        <h2>To-Do List</h2>
+        <div class="row">
+            <input type="text" id="input-box" placeholder="Add a new task">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="list-container"></ul>
+    </div>
+    <script>
+    const inputBox = document.getElementById("input-box");
+const listContainer = document.getElementById("list-container");
+
+// Load data from local storage on startup
+function showTask(){
+    listContainer.innerHTML = localStorage.getItem("data");
+}
+showTask();
+
+function addTask(){
+    if(inputBox.value === ''){
+        alert("You must write something!");
+    } else {
+        let li = document.createElement("li");
+        li.innerHTML = `<span>${inputBox.value}</span>`;
+        
+        // Add Edit Button
+        let editSpan = document.createElement("span");
+        editSpan.innerHTML = "\u270E"; // Pencil icon
+        editSpan.className = "edit";
+        li.appendChild(editSpan);
+
+        // Add Delete Button
+        let deleteSpan = document.createElement("span");
+        deleteSpan.innerHTML = "\u00d7"; // Close icon
+        deleteSpan.className = "delete";
+        li.appendChild(deleteSpan);
+        
+        listContainer.appendChild(li);
+    }
+    inputBox.value = "";
+    saveData();
+}
+
+// Handle clicks for check, edit, delete
+listContainer.addEventListener("click", function(e){
+    if(e.target.tagName === "LI"){
+        e.target.classList.toggle("checked");
+        saveData();
+    } else if(e.target.className === "delete"){
+        e.target.parentElement.remove();
+        saveData();
+    } else if(e.target.className === "edit"){
+        let li = e.target.parentElement;
+        let textSpan = li.querySelector("span:not(.edit):not(.delete)");
+        let newText = prompt("Edit your task", textSpan.innerText);
+        if(newText !== null && newText.trim() !== ""){
+            textSpan.innerText = newText;
+            saveData();
+        }
+    }
+}, false);
+
+// Save to local storage
+function saveData(){
+    localStorage.setItem("data", listContainer.innerHTML);
+}
+
+    </script>
+    <h1>4.Create a Notes App with save, edit, and delete functionality.</h1>
+    <div class="app">
+        <h1>My Notes</h1>
+        <div class="input-area">
+            <textarea id="note-text" placeholder="Write a note..."></textarea>
+            <button id="add-btn">Add Note</button>
+        </div>
+        <div id="notes-container"></div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', loadNotes);
+
+const noteText = document.getElementById('note-text');
+const addBtn = document.getElementById('add-btn');
+const container = document.getElementById('notes-container');
+
+// Add Note
+addBtn.addEventListener('click', () => {
+    if (noteText.value.trim() === "") return;
+    addNoteToDOM(noteText.value);
+    saveNotes();
+    noteText.value = '';
+});
+
+function addNoteToDOM(text) {
+    const noteDiv = document.createElement('div');
+    noteDiv.classList.add('note');
+    noteDiv.innerHTML = `
+        <textarea class="note-content">${text}</textarea>
+        <div class="note-actions">
+            <button class="delete-btn">Delete</button>
+        </div>
+    `;
+    
+    // Edit Functionality
+    const textArea = noteDiv.querySelector('.note-content');
+    textArea.addEventListener('input', saveNotes);
+
+    // Delete Functionality
+    const deleteBtn = noteDiv.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', () => {
+        noteDiv.remove();
+        saveNotes();
+    });
+    
+    container.appendChild(noteDiv);
+}
+
+// Local Storage Save
+function saveNotes() {
+    const notes = [];
+    document.querySelectorAll('.note-content').forEach(note => {
+        notes.push(note.value);
+    });
+    localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+// Load from Local Storage
+function loadNotes() {
+    const notes = JSON.parse(localStorage.getItem('notes')) || [];
+    notes.forEach(note => addNoteToDOM(note));
+}
+
+    </script>
+    <h1>5.Build a User Profile Manager with edit and preview feature.</h1>
+    <div class="profile-container">
+        <!-- Edit Mode -->
+        <div id="edit-mode">
+            <h2>Edit Profile</h2>
+            <input type="text" id="edit-name" placeholder="Name">
+            <input type="email" id="edit-email" placeholder="Email">
+            <textarea id="edit-bio" placeholder="Bio"></textarea>
+            <button onclick="saveProfile()">Save Profile</button>
+        </div>
+
+        <!-- Preview Mode -->
+        <div id="preview-mode" class="hidden">
+            <h2>Profile Preview</h2>
+            <p><strong>Name:</strong> <span id="view-name"></span></p>
+            <p><strong>Email:</strong> <span id="view-email"></span></p>
+            <p><strong>Bio:</strong> <span id="view-bio"></span></p>
+            <button onclick="toggleEdit()">Edit</button>
+        </div>
+    </div>
+    <script>
+    // Load data from localStorage on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedName = localStorage.getItem('profileName');
+    const savedEmail = localStorage.getItem('profileEmail');
+    const savedBio = localStorage.getItem('profileBio');
+
+    if (savedName) {
+        document.getElementById('edit-name').value = savedName;
+        document.getElementById('edit-email').value = savedEmail;
+        document.getElementById('edit-bio').value = savedBio;
+        toggleEdit(); // Show preview if data exists
+    }
+});
+
+function saveProfile() {
+    // Get values from input
+    const name = document.getElementById('edit-name').value;
+    const email = document.getElementById('edit-email').value;
+    const bio = document.getElementById('edit-bio').value;
+
+    // Save to localStorage
+    localStorage.setItem('profileName', name);
+    localStorage.setItem('profileEmail', email);
+    localStorage.setItem('profileBio', bio);
+
+    // Update preview
+    document.getElementById('view-name').innerText = name;
+    document.getElementById('view-email').innerText = email;
+    document.getElementById('view-bio').innerText = bio;
+
+    toggleEdit();
+}
+
+function toggleEdit() {
+    const editMode = document.getElementById('edit-mode');
+    const previewMode = document.getElementById('preview-mode');
+
+    // Toggle visibility
+    editMode.classList.toggle('hidden');
+    previewMode.classList.toggle('hidden');
+
+    // Populate preview if switching to preview mode
+    if (previewMode.classList.contains('hidden') === false) {
+        document.getElementById('view-name').innerText = document.getElementById('edit-name').value;
+        document.getElementById('view-email').innerText = document.getElementById('edit-email').value;
+        document.getElementById('view-bio').innerText = document.getElementById('edit-bio').value;
+    }
+}
+
+    </script>
+    <h1>6.Create a Contact Management App to add and remove contacts.</h1>
+    <div class="container">
+        <div id="app">
+    <h2>Contact Management</h2>
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input id="phone" placeholder="Phone Number" required>
+        <button type="submit">Add Contact</button>
+    </form>
+    <ul id="contactList"></ul>
+</div>
+    </div>
+    <script>
+    const contactForm = document.getElementById('contactForm');
+const contactList = document.getElementById('contactList');
+let contacts = [];
+
+// Function to render contacts to the UI
+function renderContacts() {
+    contactList.innerHTML = '';
+    contacts.forEach((contact, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            ${contact.name} - ${contact.phone}
+            <button onclick="removeContact(${index})">Remove</button>
+        `;
+        contactList.appendChild(li);
+    });
+}
+
+// Add Contact event
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+
+    contacts.push({ name, phone });
+    contactForm.reset();
+    renderContacts();
+});
+
+// Remove Contact function
+function removeContact(index) {
+    contacts.splice(index, 1);
+    renderContacts();
+}
+
+    </script>
+<h1>7.Build a Feedback Collection App with rating and comments.</h1>
+<div class="feedback-container">
+    <h2>Submit Your Feedback</h2>
+    
+    <!-- Star Rating System -->
+    <div class="rating-wrap">
+        <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+    </div>
+
+    <!-- Comment Box -->
+    <textarea id="comment" rows="4" placeholder="Tell us what you think..."></textarea>
+    
+    <button id="submitBtn">Submit Feedback</button>
+</div>
+
+<!-- List to display feedback -->
+<div id="feedbackList"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const submitBtn = document.getElementById('submitBtn');
+    const commentInput = document.getElementById('comment');
+    const feedbackList = document.getElementById('feedbackList');
+
+    // Load existing feedback on page load
+    loadFeedback();
+
+    submitBtn.addEventListener('click', () => {
+        // Get selected rating
+        const selectedRating = document.querySelector('input[name="rating"]:checked');
+        const comment = commentInput.value;
+
+        if (!selectedRating) {
+            alert("Please select a rating!");
+            return;
+        }
+
+        const feedback = {
+            rating: selectedRating.value,
+            comment: comment,
+            date: new Date().toLocaleDateString()
+        };
+
+        saveFeedback(feedback);
+        displayFeedback(feedback);
+        
+        // Reset form
+        commentInput.value = '';
+        selectedRating.checked = false;
+    });
+
+    function saveFeedback(feedback) {
+        let allFeedback = JSON.parse(localStorage.getItem('feedbacks')) || [];
+        allFeedback.push(feedback);
+        localStorage.setItem('feedbacks', JSON.stringify(allFeedback));
+    }
+
+    function loadFeedback() {
+        let allFeedback = JSON.parse(localStorage.getItem('feedbacks')) || [];
+        allFeedback.forEach(feedback => displayFeedback(feedback));
+    }
+
+    function displayFeedback(feedback) {
+        const div = document.createElement('div');
+        div.className = 'feedback-item';
+        div.innerHTML = `<strong>${feedback.rating} Stars</strong> <p>${feedback.comment}</p><small>${feedback.date}</small>`;
+        feedbackList.prepend(div);
+    }
+});
+
+</script>
+<h1>8.Create a Simple Expense Tracker with income and expense summary.</h1>
+<div class="container">
+    <h1>Expense Tracker 2026</h1>
+    <div class="summary">
+        <div>Income: $<span id="total-income">0.00</span></div>
+        <div>Expenses: $<span id="total-expenses">0.00</span></div>
+        <h3>Balance: $<span id="balance">0.00</span></h3>
+    </div>
+
+    <form id="expense-form">
+        <input type="text" id="desc" placeholder="Description (e.g. Salary, Rent)" required>
+        <input type="number" id="amount" placeholder="Amount" required>
+        <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+        <button type="submit">Add Transaction</button>
+    </form>
+
+    <ul id="transaction-list"></ul>
+</div>
+<script>
+    const form = document.getElementById('expense-form');
+const list = document.getElementById('transaction-list');
+const totalInc = document.getElementById('total-income');
+const totalExp = document.getElementById('total-expenses');
+const balanceEl = document.getElementById('balance');
+
+let transactions = [];
+
+function updateSummary() {
+    const income = transactions
+        .filter(t => t.type === 'income')
+        .reduce((acc, t) => acc + t.amount, 0);
+    
+    const expense = transactions
+        .filter(t => t.type === 'expense')
+        .reduce((acc, t) => acc + t.amount, 0);
+
+    totalInc.innerText = income.toFixed(2);
+    totalExp.innerText = expense.toFixed(2);
+    balanceEl.innerText = (income - expense).toFixed(2);
+}
+
+function addTransaction(e) {
+    e.preventDefault();
+    const transaction = {
+        id: Date.now(),
+        description: document.getElementById('desc').value,
+        amount: parseFloat(document.getElementById('amount').value),
+        type: document.getElementById('type').value
+    };
+
+    transactions.push(transaction);
+    renderList();
+    updateSummary();
+    form.reset();
+}
+
+function renderList() {
+    list.innerHTML = '';
+    transactions.forEach(t => {
+        const item = document.createElement('li');
+        item.innerHTML = `
+            ${t.description}: <span>$${t.amount.toFixed(2)}</span>
+            <button onclick="removeTransaction(${t.id})">x</button>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function removeTransaction(id) {
+    transactions = transactions.filter(t => t.id !== id);
+    renderList();
+    updateSummary();
+}
+
+form.addEventListener('submit', addTransaction);
+
+
+</script>
+<h1>9.Build a Daily Task Planner with date-wise tasks.</h1>
+<div class="planner-container">
+  <h1>Daily Task Planner</h1>
+  <div class="input-group">
+    <!-- Date picker to categorize tasks -->
+    <input type="date" id="task-date">
+    <input type="text" id="task-input" placeholder="Enter task...">
+    <button id="add-task-btn">Add Task</button>
+  </div>
+  
+  <div class="filter-group">
+    <label>View tasks for:</label>
+    <input type="date" id="filter-date">
+  </div>
+
+  <ul id="task-list"></ul>
+</div>
+<script>
+    const taskInput = document.getElementById('task-input');
+const taskDate = document.getElementById('task-date');
+const filterDate = document.getElementById('filter-date');
+const taskList = document.getElementById('task-list');
+const addTaskBtn = document.getElementById('add-task-btn');
+
+// Set default dates to today's date (2026-01-13)
+const today = new Date().toISOString().split('T')[0];
+taskDate.value = today;
+filterDate.value = today;
+
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks();
+}
+
+function renderTasks() {
+    taskList.innerHTML = '';
+    const selectedFilter = filterDate.value;
+    
+    // Filter tasks based on the selected viewing date
+    const filtered = tasks.filter(t => t.date === selectedFilter);
+
+    filtered.forEach((task) => {
+        const li = document.createElement('li');
+        if (task.completed) li.classList.add('completed');
+        
+        li.innerHTML = `
+            <span onclick="toggleTask('${task.id}')">${task.text}</span>
+            <button onclick="deleteTask('${task.id}')">Delete</button>
+        `;
+        taskList.appendChild(li);
+    });
+}
+
+function addTask() {
+    if (taskInput.value.trim() === '') return;
+    
+    const newTask = {
+        id: Date.now().toString(),
+        text: taskInput.value,
+        date: taskDate.value,
+        completed: false
+    };
+    
+    tasks.push(newTask);
+    taskInput.value = '';
+    saveTasks();
+}
+
+function deleteTask(id) {
+    tasks = tasks.filter(t => t.id !== id);
+    saveTasks();
+}
+
+function toggleTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (task) task.completed = !task.completed;
+    saveTasks();
+}
+
+// Event Listeners
+addTaskBtn.addEventListener('click', addTask);
+filterDate.addEventListener('change', renderTasks);
+window.onload = renderTasks;
+
+</script>
+<h1>
+10.Create a Password Strength Checker App with live feedback.
+</h1>
+<div class="container">
+        <h2>Password Strength</h2>
+        <input type="password" id="password" placeholder="Enter your password">
+        <div class="strength-meter">
+            <div id="strength-bar"></div>
+        </div>
+        <p id="strength-text"></p>
+    </div>
+    <script>
+        const passwordInput = document.getElementById('password');
+const strengthBar = document.getElementById('strength-bar');
+const strengthText = document.getElementById('strength-text');
+
+passwordInput.addEventListener('input', () => {
+    const password = passwordInput.value;
+    let strength = 0;
+
+    // Password criteria
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[a-z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+    // Update UI based on strength
+    let color = "";
+    let text = "";
+    let width = "";
+
+    switch (strength) {
+        case 0:
+        case 1:
+        case 2:
+            color = "#ff4d4d"; // Weak
+            text = "Weak";
+            width = "30%";
+            break;
+        case 3:
+        case 4:
+            color = "#ffa500"; // Moderate
+            text = "Moderate";
+            width = "60%";
+            break;
+        case 5:
+            color = "#22C32A"; // Strong
+            text = "Strong";
+            width = "100%";
+            break;
+    }
+
+    if (password.length === 0) {
+        strengthBar.style.width = "0%";
+        strengthText.innerText = "";
+    } else {
+        strengthBar.style.width = width;
+        strengthBar.style.backgroundColor = color;
+        strengthText.innerText = text;
+        strengthText.style.color = color;
+    }
+});
+
+    </script>
+    <h1>11.Build a Form Validation App showing real-time error handling.</h1>
+    <div class="container">
+        <form id="formd">
+            <h2>Register</h2>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+                <span class="error" id="usernameError"></span>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
+                <span class="error" id="emailError"></span>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <span class="error" id="passwordError"></span>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+    const formd = document.getElementById('formd');
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+
+// Show input error message
+function showError(input, message) {
+    const formControl = input.parentElement;
+    formControl.className = 'input-group error';
+    const span = formControl.querySelector('span');
+    span.innerText = message;
+}
+
+// Show success outline
+function showSuccess(input) {
+    const formControl = input.parentElement;
+    formControl.className = 'input-group success';
+    const span = formControl.querySelector('span');
+    span.innerText = '';
+}
+
+// Validate email format
+function isValidEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+// Real-time validation
+username.addEventListener('input', () => {
+    if (username.value.trim() === '') {
+        showError(username, 'Username is required');
+    } else if (username.value.trim().length < 3) {
+        showError(username, 'Username must be at least 3 characters');
+    } else {
+        showSuccess(username);
+    }
+});
+
+email.addEventListener('input', () => {
+    if (email.value.trim() === '') {
+        showError(email, 'Email is required');
+    } else if (!isValidEmail(email.value.trim())) {
+        showError(email, 'Email is not valid');
+    } else {
+        showSuccess(email);
+    }
+});
+
+password.addEventListener('input', () => {
+    if (password.value.length < 6) {
+        showError(password, 'Password must be at least 6 characters');
+    } else {
+        showSuccess(password);
+    }
+});
+
+// Form submit handler
+formd.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevents actual submission
+
+    // Final check before success
+    if(username.value.trim() !== '' && isValidEmail(email.value.trim()) && password.value.length >= 6) {
+        alert('Form Submitted Successfully!');
+    } else {
+        alert('Please fix errors before submitting.');
+    }
+});
+
+    </script>
+    <h1>12.Create a Search & Filter App for a product list.</h1>
+    <div class="wrapper">
+        <div id="search-container">
+            <input type="search" id="search-input" placeholder="Search product name.."/>
+        </div>
+        <div id="buttons">
+            <button class="button-value" onclick="filterProduct('all')">All</button>
+            <button class="button-value" onclick="filterProduct('Jacket')">Jackets</button>
+            <button class="button-value" onclick="filterProduct('Bottomwear')">Bottomwear</button>
+        </div>
+        <div id="products"></div>
+    </div>
+    <script>
+    let products = {
+    data: [
+        { productName: "Black Leather Jacket", category: "Jacket", price: "129" },
+        { productName: "Stylish Pink Trousers", category: "Bottomwear", price: "89" },
+        { productName: "Brown Men's Jacket", category: "Jacket", price: "189" },
+        { productName: "Comfy Gray Pants", category: "Bottomwear", price: "49" },
+    ],
+};
+
+// Initial Display
+for (let i of products.data) {
+    let card = document.createElement("div");
+    card.classList.add("card", i.category); // Add category for filtering
+    card.innerHTML = `<h5>${i.productName}</h5><h6>$${i.price}</h6>`;
+    document.getElementById("products").appendChild(card);
+}
+
+// Function to filter products by category
+function filterProduct(value) {
+    let buttons = document.querySelectorAll(".button-value");
+    buttons.forEach((button) => {
+        if (value.toUpperCase() == button.innerText.toUpperCase()) {
+            button.classList.add("active");
+        } else {
+            button.classList.remove("active");
+        }
+    });
+
+    let elements = document.querySelectorAll(".card");
+    elements.forEach((element) => {
+        if (value == "all") {
+            element.classList.remove("hide");
+        } else {
+            if (element.classList.contains(value)) {
+                element.classList.remove("hide");
+            } else {
+                element.classList.add("hide");
+            }
+        }
+    });
+}
+
+// Search Functionality
+document.getElementById("search-input").addEventListener("keyup", () => {
+    let searchInput = document.getElementById("search-input").value.toUpperCase();
+    let elements = document.querySelectorAll(".card");
+    let cards = document.querySelectorAll(".card h5");
+
+    cards.forEach((card, index) => {
+        if (card.innerText.toUpperCase().includes(searchInput)) {
+            elements[index].classList.remove("hide");
+        } else {
+            elements[index].classList.add("hide");
+        }
+    });
+});
+
+    </script>
+<h1>13.Build a Dashboard App with sidebar navigation and content switching.
+</h1>
+<div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">My App</div>
+            <ul>
+                <li><a href="#" class="nav-link active" data-target="home">Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-target="projects">Projects</a></li>
+                <li><a href="#" class="nav-link" data-target="settings">Settings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content-wrapper">
+            <header>
+                <h2>Dashboard Overview</h2>
+            </header>
+            
+            <section id="home" class="content-section active">
+                <h3>Welcome Home</h3>
+                <p>Welcome to your dashboard.</p>
+            </section>
+            <section id="projects" class="content-section">
+                <h3>Projects</h3>
+                <p>Active projects list.</p>
+            </section>
+            <section id="settings" class="content-section">
+                <h3>Settings</h3>
+                <p>Application settings.</p>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll(".nav-link");
+    const contentSections = document.querySelectorAll(".content-section");
+
+    navLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            // 1. Remove active class from all links
+            navLinks.forEach(nav => nav.classList.remove("active"));
+            // 2. Add active class to clicked link
+            link.classList.add("active");
+
+            // 3. Hide all sections
+            contentSections.forEach(section => section.classList.remove("active"));
+            // 4. Show target section
+            const target = link.getAttribute("data-target");
+            document.getElementById(target).classList.add("active");
+        });
+    });
+});
+
+    </script>
+<h1>14.Create a Multi-Step Registration App with progress tracking.</h1>
+<div class="registration-container">
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress" id="progress"></div>
+    <div class="circle active">1</div>
+    <div class="circle">2</div>
+    <div class="circle">3</div>
+  </div>
+
+  <form id="registrationForm">
+    <!-- Step 1 -->
+    <div class="form-step active" data-step="1">
+      <h2>Account Info</h2>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button type="button" class="btn next-btn">Next</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="form-step" data-step="2">
+      <h2>Personal Details</h2>
+      <input type="text" placeholder="Full Name" required>
+      <input type="text" placeholder="Phone Number">
+      <button type="button" class="btn prev-btn">Back</button>
+      <button type="button" class="btn next-btn">Next</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="form-step" data-step="3">
+      <h2>Finalize</h2>
+      <p>Click submit to complete your registration.</p>
+      <button type="button" class="btn prev-btn">Back</button>
+      <button type="submit" class="btn">Submit</button>
+    </div>
+  </form>
+</div>
+<script>
+    const progress = document.getElementById('progress');
+const circles = document.querySelectorAll('.circle');
+const steps = document.querySelectorAll('.form-step');
+const nextBtns = document.querySelectorAll('.next-btn');
+const prevBtns = document.querySelectorAll('.prev-btn');
+
+let currentActive = 1;
+
+nextBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentActive++;
+    if (currentActive > circles.length) currentActive = circles.length;
+    updateUI();
+  });
+});
+
+prevBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentActive--;
+    if (currentActive < 1) currentActive = 1;
+    updateUI();
+  });
+});
+
+function updateUI() {
+  // Update Steps visibility
+  steps.forEach(step => {
+    step.classList.remove('active');
+    if (parseInt(step.getAttribute('data-step')) === currentActive) {
+      step.classList.add('active');
+    }
+  });
+
+  // Update Progress Bar
+  circles.forEach((circle, idx) => {
+    if (idx < currentActive) {
+      circle.classList.add('active');
+    } else {
+      circle.classList.remove('active');
+    }
+  });
+
+  const actives = document.querySelectorAll('.circle.active');
+  progress.style.width = ((actives.length - 1) / (circles.length - 1)) * 100 + '%';
+}
+
+</script>
+<h1>15.Build a Theme Switcher App and save preference.</h1>
+<div class="container">
+        <h1>Theme Switcher</h1>
+        <p>Your preference is saved!</p>
+        <button id="theme-toggle">Toggle Dark/Light</button>
+    </div>
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
+
+// 1. Check for saved theme on page load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    body.classList.add('dark-mode');
+}
+
+// 2. Toggle theme on click
+toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    
+    // 3. Save preference in localStorage
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+    </script>
+    <h1>16.Create a Login Attempts Tracker App</h1>
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="attemptLogin()">Login</button>
+        <p id="message"></p>
+        <p>Attempts: <span id="attempts">0</span>/3</p>
+        <button onclick="resetTracker()" class="reset-btn">Reset Tracker</button>
+    </div>
+    <script>
+        // Define correct credentials
+const CORRECT_USER = "admin";
+const CORRECT_PASS = "password123";
+const MAX_ATTEMPTS = 3;
+
+// Load initial state from localStorage
+let attempts = parseInt(localStorage.getItem('loginAttempts')) || 0;
+let isLocked = localStorage.getItem('isLocked') === 'true';
+
+// Update DOM on load
+document.getElementById('attempts').innerText = attempts;
+if (isLocked) lockAccount();
+
+function attemptLogin() {
+    if (isLocked) return;
+
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    const messageNode = document.getElementById('message');
+
+    if (user === CORRECT_USER && pass === CORRECT_PASS) {
+        messageNode.innerText = "Login Successful!";
+        messageNode.style.color = "green";
+        attempts = 0; // Reset on success
+        updateStorage();
+    } else {
+        attempts++;
+        messageNode.innerText = "Invalid Credentials!";
+        messageNode.style.color = "red";
+        updateStorage();
+
+        if (attempts >= MAX_ATTEMPTS) {
+            lockAccount();
+        }
+    }
+}
+
+function lockAccount() {
+    isLocked = true;
+    document.querySelector('button[onclick="attemptLogin()"]').disabled = true;
+    document.getElementById('message').innerText = "Account Locked! Too many attempts.";
+    localStorage.setItem('isLocked', 'true');
+}
+
+function updateStorage() {
+    localStorage.setItem('loginAttempts', attempts);
+    document.getElementById('attempts').innerText = attempts;
+}
+
+function resetTracker() {
+    localStorage.clear();
+    location.reload();
+}
+
+    </script>
+    <h1>17.Build a User Feedback Dashboard with statistics.</h1>
+    <div class="container">
+        <h1>User Feedback Dashboard</h1>
+        
+        <!-- Feedback Form -->
+        <form id="feedbackForm">
+            <input type="text" id="userName" placeholder="Your Name" required>
+            <textarea id="feedbackText" placeholder="Your Feedback" required></textarea>
+            <select id="sentiment">
+                <option value="Positive">Positive</option>
+                <option value="Neutral">Neutral</option>
+                <option value="Negative">Negative</option>
+            </select>
+            <button type="submit">Submit Feedback</button>
+        </form>
+
+        <!-- Stats Section -->
+        <div class="stats-container">
+            <div class="stat-card">Total<br><span id="totalFeedback">0</span></div>
+            <div class="stat-card positive">Positive<br><span id="posCount">0</span></div>
+            <div class="stat-card neutral">Neutral<br><span id="neuCount">0</span></div>
+            <div class="stat-card negative">Negative<br><span id="negCount">0</span></div>
+        </div>
+
+        <!-- Feedback List -->
+        <h3>Recent Feedback</h3>
+        <ul id="feedbackList"></ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('feedbackForm');
+    const list = document.getElementById('feedbackList');
+    
+    // Load existing feedback from localStorage
+    let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+
+    // Function to render feedback list and update stats
+    const updateDashboard = () => {
+        list.innerHTML = '';
+        let pos = 0, neu = 0, neg = 0;
+
+        feedbacks.forEach(fb => {
+            // Update counts
+            if (fb.sentiment === 'Positive') pos++;
+            else if (fb.sentiment === 'Neutral') neu++;
+            else neg++;
+
+            // Create list item
+            const li = document.createElement('li');
+            li.classList.add(fb.sentiment);
+            li.innerHTML = `<strong>${fb.name}</strong> (${fb.sentiment})<br>${fb.text}`;
+            list.appendChild(li);
+        });
+
+        // Update stats DOM
+        document.getElementById('totalFeedback').innerText = feedbacks.length;
+        document.getElementById('posCount').innerText = pos;
+        document.getElementById('neuCount').innerText = neu;
+        document.getElementById('negCount').innerText = neg;
+    };
+
+    // Form Submission Handler
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const newFeedback = {
+            name: document.getElementById('userName').value,
+            text: document.getElementById('feedbackText').value,
+            sentiment: document.getElementById('sentiment').value
+        };
+
+        feedbacks.push(newFeedback);
+        localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+        
+        updateDashboard();
+        form.reset();
+    });
+
+    // Initial load
+    updateDashboard();
+});
+
+    </script>
+    <h1>18.Create a Basic Admin Panel App with add/edit/delete records.</h1>
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+        
+        <!-- Form to Add/Edit Records -->
+        <div class="form-group1">
+            <input type="text" id="name" placeholder="Name">
+            <input type="email" id="email" placeholder="Email">
+            <button onclick="addOrUpdateRecord()" id="submitBtn">Add Record</button>
+            <button onclick="clearForm()" class="btn-clear">Clear</button>
+        </div>
+
+        <!-- Table to Display Records -->
+        <table id="recordTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="recordBody">
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let editingRow = null;
+
+function addOrUpdateRecord() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const tableBody = document.getElementById("recordBody");
+    const submitBtn = document.getElementById("submitBtn");
+
+    if (name === "" || email === "") {
+        alert("Please fill all fields");
+        return;
+    }
+
+    if (editingRow) {
+        // Update existing row
+        editingRow.cells[0].innerHTML = name;
+        editingRow.cells[1].innerHTML = email;
+        submitBtn.innerHTML = "Add Record";
+        editingRow = null;
+    } else {
+        // Add new row
+        const row = tableBody.insertRow();
+        row.innerHTML = `
+            <td>${name}</td>
+            <td>${email}</td>
+            <td>
+                <button class="btn-edit" onclick="editRecord(this)">Edit</button>
+                <button class="btn-delete" onclick="deleteRecord(this)">Delete</button>
+            </td>
+        `;
+    }
+    clearForm();
+}
+
+function editRecord(button) {
+    editingRow = button.parentNode.parentNode;
+    document.getElementById("name").value = editingRow.cells[0].innerHTML;
+    document.getElementById("email").value = editingRow.cells[1].innerHTML;
+    document.getElementById("submitBtn").innerHTML = "Update Record";
+}
+
+function deleteRecord(button) {
+    const row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
+
+function clearForm() {
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    editingRow = null;
+    document.getElementById("submitBtn").innerHTML = "Add Record";
+}
+
+    </script>
+    <h1>
+19.Build a Form Submission History App.
+    </h1>
+    <div class="container">
+        <h2>Submit Data</h2>
+        <form id="dataForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        <h3>Submission History</h3>
+        <ul id="historyList"></ul>
+        <button id="clearBtn">Clear History</button>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("dataForm");
+    const historyList = document.getElementById("historyList");
+    const clearBtn = document.getElementById("clearBtn");
+
+    // Load history from localStorage on page load
+    loadHistory();
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault(); // Prevent page reload
+
+        // Get values
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const timestamp = new Date().toLocaleString();
+
+        const submission = { username, email, timestamp };
+
+        // Save to Local Storage
+        saveSubmission(submission);
+
+        // Add to DOM
+        addToList(submission);
+
+        // Reset Form
+        form.reset();
+    });
+
+    // Clear history function
+    clearBtn.addEventListener("click", () => {
+        localStorage.removeItem("formHistory");
+        historyList.innerHTML = "";
+    });
+
+    function saveSubmission(data) {
+        let history = JSON.parse(localStorage.getItem("formHistory")) || [];
+        history.push(data);
+        localStorage.setItem("formHistory", JSON.stringify(history));
+    }
+
+    function loadHistory() {
+        let history = JSON.parse(localStorage.getItem("formHistory")) || [];
+        history.forEach(addToList);
+    }
+
+    function addToList(data) {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${data.username}</strong> - ${data.email} <br> <small>${data.timestamp}</small>`;
+        historyList.appendChild(li);
+    }
+});
+
+    </script>
+    <h1>20.Create a Notification Center App.</h1>
+    <button id="notifyBtn">Add Notification</button>
+    
+    <!-- Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <script>
+    document.getElementById('notifyBtn').addEventListener('click', () => {
+    showNotification("New Message Received!");
+});
+
+function showNotification(message) {
+    const container = document.getElementById('notificationContainer');
+    
+    // Create the notification element
+    const notification = document.createElement('div');
+    notification.classList.add('notification');
+    notification.textContent = message;
+    
+    // Add to container
+    container.appendChild(notification);
+    
+    // Automatically remove after 4 seconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transition = 'opacity 0.5s';
+        setTimeout(() => notification.remove(), 500); // Remove from DOM after fade
+    }, 4000);
+}
+
+    </script>
+    <h1>21.Build a Responsive Navigation Menu Ap</h1>
+    <nav class="navbar">
+    <a href="#" class="logo">Brand</a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">&#9776;</a>
+</nav>
+
+<script>
+function toggleMenu() {
+    var x = document.getElementById("navLinks");
+    if (x.className === "nav-links") {
+        x.className += " active";
+    } else {
+        x.className = "nav-links";
+    }
+}
+
+</script>
+<h1>22.Create a User Activity Tracker App</h1>
+<div class="container">
+        <h2>User Activity Log</h2>
+        <button id="actionBtn">Click Me!</button>
+        <table id="activityTable">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Activity Type</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody id="logBody"></tbody>
+        </table>
+        <button onclick="clearLog()" class="clear-btn">Clear Log</button>
+    </div>
+    <script>
+
+        // Initialize log array from localStorage or empty array
+let activityLog = JSON.parse(localStorage.getItem('activityLog')) || [];
+
+// Function to log activity
+function logActivity(type, details) {
+    const activity = {
+        timestamp: new Date().toLocaleTimeString(),
+        type: type,
+        details: details
+    };
+    activityLog.push(activity);
+    localStorage.setItem('activityLog', JSON.stringify(activityLog));
+    renderLog();
+}
+
+// Render log to the table
+function renderLog() {
+    const tbody = document.getElementById('logBody');
+    tbody.innerHTML = '';
+    activityLog.forEach(log => {
+        const row = `<tr>
+            <td>${log.timestamp}</td>
+            <td>${log.type}</td>
+            <td>${log.details}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+    });
+}
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+    logActivity('Page View', 'User opened the page');
+    renderLog();
+});
+
+document.getElementById('actionBtn').addEventListener('click', () => {
+    logActivity('Button Click', 'User clicked "Click Me!" button');
+});
+
+// Optional: Track Mouse Movement
+document.addEventListener('mousemove', (e) => {
+    // Only log occasionally to avoid flooding
+    if (Math.random() > 0.99) { 
+        logActivity('Mouse Movement', `X: ${e.clientX}, Y: ${e.clientY}`);
+    }
+}, { once: true }); // Remove {once: true} to log continuously
+
+function clearLog() {
+    localStorage.removeItem('activityLog');
+    activityLog = [];
+    renderLog();
+}
+
+    </script>
+    <h1>23.Build a Profile Completion Status App.</h1>
+    <div class="container">
+        <h2>Complete Your Profile</h2>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+        <p id="statusText">0% Complete</p>
+
+        <div class="form-group">
+            <input type="text" id="name" placeholder="Full Name" oninput="updateProgress()">
+            <input type="email" id="email" placeholder="Email Address" oninput="updateProgress()">
+            <input type="text" id="phone" placeholder="Phone Number" oninput="updateProgress()">
+            <input type="text" id="bio" placeholder="Short Bio" oninput="updateProgress()">
+        </div>
+
+        <div id="tips"></div>
+    </div>
+    <script>
+        function updateProgress() {
+    // 1. Get all inputs
+    const fields = ['name', 'email', 'phone', 'bio'];
+    let completedFields = 0;
+    let tips = [];
+
+    // 2. Check each field
+    fields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field.value.trim() !== "") {
+            completedFields++;
+        } else {
+            // Add suggestion for empty fields
+            tips.push(`Add your ${field.placeholder}`);
+        }
+    });
+
+    // 3. Calculate percentage
+    const percentage = Math.round((completedFields / fields.length) * 100);
+
+    // 4. Update UI
+    const progressBar = document.getElementById('progressBar');
+    progressBar.style.width = percentage + '%';
+    progressBar.innerText = percentage + '%';
+    document.getElementById('statusText').innerText = `${percentage}% Complete`;
+
+    // 5. Update Tips
+    const tipsContainer = document.getElementById('tips');
+    tipsContainer.innerHTML = percentage === 100 ? "Profile Complete! ✅" : "<strong>Next Steps:</strong><br>" + tips.slice(0, 2).join('<br>');
+}
+
+    </script>
+    <h1>24.Create a Survey Form App with result display</h1>
+    <div class="container">
+    <h2>2026 Customer Feedback Survey</h2>
+    <form id="surveyForm">
+        <label>Full Name:</label>
+        <input type="text" id="userName" required>
+
+        <label>Service Rating:</label>
+        <select id="rating">
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Average">Average</option>
+        </select>
+
+        <label>Would you recommend us?</label>
+        <div class="radio-group">
+            <input type="radio" name="recommend" value="Yes" checked> Yes
+            <input type="radio" name="recommend" value="No"> No
+        </div>
+
+        <button type="submit">Submit Survey</button>
+    </form>
+
+    <div id="resultDisplay" class="hidden">
+        <h3>Survey Results</h3>
+        <p id="resName"></p>
+        <p id="resRating"></p>
+        <p id="resRec"></p>
+        <button onclick="window.location.reload()">New Survey</button>
+    </div>
+</div>
+<script>
+    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevents the page from refreshing
+
+    // Capture Data
+    const name = document.getElementById('userName').value;
+    const rating = document.getElementById('rating').value;
+    const recommend = document.querySelector('input[name="recommend"]:checked').value;
+
+    // Display Results
+    document.getElementById('resName').innerText = "Customer: " + name;
+    document.getElementById('resRating').innerText = "Rating: " + rating;
+    document.getElementById('resRec').innerText = "Recommended: " + recommend;
+
+    // Toggle Visibility
+    document.getElementById('surveyForm').classList.add('hidden');
+    document.getElementById('resultDisplay').classList.remove('hidden');
+});
+
+</script>
+<h1>25.Build a Simple Chat UI App (UI only, no backend).</h1>
+<div class="chat-container">
+        <div class="chat-header">Simple Chat</div>
+        <div class="chat-window" id="chat-window">
+            <!-- Messages will appear here -->
+            <div class="message bot">Hello! Type a message below.</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="message-input" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const chatWindow = document.getElementById("chat-window");
+    const messageInput = document.getElementById("message-input");
+    const sendBtn = document.getElementById("send-btn");
+
+    function sendMessage() {
+        const message = messageInput.value.trim();
+        if (message === "") return; // Don't send empty messages
+
+        // Create user message bubble
+        const userDiv = document.createElement("div");
+        userDiv.classList.add("message", "user");
+        userDiv.textContent = message;
+        chatWindow.appendChild(userDiv);
+
+        // Clear input
+        messageInput.value = "";
+
+        // Scroll to bottom
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+        // Simulate a bot reply after 1 second (optional)
+        setTimeout(() => {
+            const botDiv = document.createElement("div");
+            botDiv.classList.add("message", "bot");
+            botDiv.textContent = "Echo: " + message;
+            chatWindow.appendChild(botDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }, 1000);
+    }
+
+    // Event Listeners
+    sendBtn.addEventListener("click", sendMessage);
+    messageInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") sendMessage();
+    });
+});
+
+    </script>
+    <h1>26.Create a User Settings App with auto-save.</h1>
+    <div class="settings-container">
+        <h2>User Settings</h2>
+        <p id="status" class="status-message">Saved</p>
+        
+        <form id="settingsForm">
+            <div class="field">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username">
+            </div>
+            
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter email">
+            </div>
+            
+            <div class="field">
+                <label for="theme">Theme</label>
+                <select id="theme" name="theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('settingsForm');
+    const status = document.getElementById('status');
+    let saveTimeout;
+
+    // 1. Load data from localStorage on page load
+    const loadSettings = () => {
+        const savedSettings = JSON.parse(localStorage.getItem('userSettings')) || {};
+        Object.keys(savedSettings).forEach(key => {
+            const input = form.elements[key];
+            if (input) input.value = savedSettings[key];
+        });
+    };
+
+    // 2. Save data to localStorage
+    const saveSettings = () => {
+        const formData = new FormData(form);
+        const settings = Object.fromEntries(formData.entries());
+        localStorage.setItem('userSettings', JSON.stringify(settings));
+        status.textContent = 'All changes saved';
+        
+        // Reset status message after 2 seconds
+        setTimeout(() => status.textContent = 'Saved', 2000);
+    };
+
+    // 3. Auto-save functionality (debounce)
+    form.addEventListener('input', () => {
+        status.textContent = 'Saving...';
+        clearTimeout(saveTimeout); // Clear timer if user types again
+        saveTimeout = setTimeout(saveSettings, 1000); // Save after 1s delay
+    });
+
+    loadSettings();
+});
+
+    </script>
+    <h1>27.Build a Product Management App with search</h1>
+    <div class="container">
+    <h2>Product Management</h2>
+    <!-- Input for new products -->
+    <div class="inputs">
+        <input type="text" id="title" placeholder="Product Title">
+        <input type="number" id="price" placeholder="Price">
+        <button id="submit">Add Product</button>
+    </div>
+    <!-- Search Bar -->
+    <div class="search-box">
+        <input type="text" id="search" onkeyup="searchData(this.value)" placeholder="Search by name...">
+    </div>
+    <!-- Product List -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th><th>Title</th><th>Price</th><th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</div>
+<script>
+    let dataProduct = localStorage.product ? JSON.parse(localStorage.product) : [];
+
+// Function to add data
+document.getElementById('submit').onclick = function() {
+    let newPro = {
+        title: document.getElementById('title').value.toLowerCase(),
+        price: document.getElementById('price').value,
+    };
+    dataProduct.push(newPro);
+    localStorage.setItem('product', JSON.stringify(dataProduct));
+    showData();
+};
+
+// Function to display and search data
+function showData(filteredData = dataProduct) {
+    let table = '';
+    filteredData.forEach((product, i) => {
+        table += `<tr>
+            <td>${i+1}</td>
+            <td>${product.title}</td>
+            <td>${product.price}</td>
+            <td><button onclick="deleteProduct(${i})">Delete</button></td>
+        </tr>`;
+    });
+    document.getElementById('tbody').innerHTML = table;
+}
+
+// Search Logic: Real-time filtering
+function searchData(value) {
+    let filtered = dataProduct.filter(p => p.title.includes(value.toLowerCase()));
+    showData(filtered);
+}
+
+function deleteProduct(i) {
+    dataProduct.splice(i, 1);
+    localStorage.product = JSON.stringify(dataProduct);
+    showData();
+}
+
+// Initial load
+showData();
+
+</script>
+<h1>28.Create a Registration Approval App (pending / approved status).</h1>
+<div class="container">
+        <h2>User Registration</h2>
+        <form id="regForm">
+            <input type="text" id="userName" placeholder="Enter Name" required>
+            <button type="submit">Register</button>
+        </form>
+
+        <h3>Pending Requests</h3>
+        <table id="regTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const regForm = document.getElementById('regForm');
+    const userNameInput = document.getElementById('userName');
+    const tableBody = document.querySelector('#regTable tbody');
+
+    // Load data from LocalStorage
+    let registrations = JSON.parse(localStorage.getItem('registrations')) || [];
+
+    function saveAndRender() {
+        localStorage.setItem('registrations', JSON.stringify(registrations));
+        renderTable();
+    }
+
+    function renderTable() {
+        tableBody.innerHTML = '';
+        registrations.forEach((user, index) => {
+            const row = `<tr>
+                <td>${user.name}</td>
+                <td class="${user.status.toLowerCase()}">${user.status}</td>
+                <td>
+                    ${user.status === 'Pending' ? 
+                        `<button class="action-btn" onclick="approveUser(${index})">Approve</button>` : 
+                        ''}
+                    <button class="action-btn" onclick="deleteUser(${index})">Delete</button>
+                </td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+    }
+
+    regForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newUser = {
+            name: userNameInput.value,
+            status: 'Pending'
+        };
+        registrations.push(newUser);
+        userNameInput.value = '';
+        saveAndRender();
+    });
+
+    // Global functions for buttons
+    window.approveUser = (index) => {
+        registrations[index].status = 'Approved';
+        saveAndRender();
+    };
+
+    window.deleteUser = (index) => {
+        registrations.splice(index, 1);
+        saveAndRender();
+    };
+
+    renderTable(); // Initial render
+});
+
+    </script>
+    <h1>29.Build a Form Draft Save App.</h1>
+    <h2>Draft Form</h2>
+    <form id="draftForm">
+        <textarea id="content" placeholder="Type your draft here..."></textarea>
+        <br>
+        <button type="button" onclick="saveDraft()">Save Draft</button>
+        <span id="status"></span>
+    </form>
+    <script>
+        // Key for localStorage
+const DRAFT_KEY = 'form_draft_data';
+
+// Load existing draft on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedContent = localStorage.getItem(DRAFT_KEY);
+    if (savedContent) {
+        document.getElementById('content').value = savedContent;
+    }
+});
+
+// Function to save the draft
+function saveDraft() {
+    const content = document.getElementById('content').value;
+    localStorage.setItem(DRAFT_KEY, content);
+    
+    // Show status message
+    const status = document.getElementById('status');
+    status.innerText = 'Draft Saved!';
+    setTimeout(() => status.innerText = '', 2000);
+}
+
+// Optional: Auto-save while typing (every 5 seconds)
+document.getElementById('content').addEventListener('input', () => {
+    // Debounce can be added here for better performance
+    localStorage.setItem(DRAFT_KEY, document.getElementById('content').value);
+});
+
+    </script>
+    <h1>30.Create a Session Timeout Warning App.</h1>
+    <h1>Welcome to the Secure Portal</h1>
+    <p>Move your mouse or click to keep the session alive.</p>
+
+    <!-- The Session Warning Modal -->
+    <div id="sessionModal" class="modal">
+        <div class="modal-content">
+            <h2>Session Timeout Warning</h2>
+            <p>Your session is about to expire due to inactivity.</p>
+            <p>Time remaining: <span id="countdown">30</span> seconds</p>
+            <button id="stayLoggedIn">Stay Logged In</button>
+        </div>
+    </div>
+
+    <script>
+        // Configuration (in milliseconds)
+const WARNING_TIME = 10000; // 10 seconds for demo
+const LOGOUT_TIME = 20000;  // 20 seconds for demo
+let warningTimer, logoutTimer;
+
+const modal = document.getElementById('sessionModal');
+const countdownEl = document.getElementById('countdown');
+const stayLoggedInBtn = document.getElementById('stayLoggedIn');
+
+// Start the session timer
+function startTimer() {
+    warningTimer = setTimeout(showWarning, WARNING_TIME);
+    logoutTimer = setTimeout(logout, LOGOUT_TIME);
+}
+
+// Reset timers on user activity
+function resetTimer() {
+    clearTimeout(warningTimer);
+    clearTimeout(logoutTimer);
+    modal.style.display = "none";
+    startTimer();
+}
+
+function showWarning() {
+    modal.style.display = "block";
+    let seconds = 10;
+    countdownEl.innerText = seconds;
+    
+    // Simple countdown
+    let interval = setInterval(() => {
+        seconds--;
+        countdownEl.innerText = seconds;
+        if (seconds <= 0) clearInterval(interval);
+    }, 1000);
+}
+
+function logout() {
+    alert("Session Expired. Redirecting to login.");
+    window.location.href = "login.html"; // Redirect
+}
+
+// Activity Listeners
+window.onload = startTimer;
+document.onmousemove = resetTimer;
+document.onkeypress = resetTimer;
+stayLoggedInBtn.onclick = resetTimer;
+
+    </script>
+    
+  
+</body>
+</html>
