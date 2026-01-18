@@ -1,0 +1,3243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks-Day 24</title>
+    <style>
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+h2 { text-align: center; }
+form { display: flex; gap: 10px; margin-bottom: 20px; }
+input { padding: 10px; flex: 1; }
+button { padding: 10px; cursor: pointer; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+.btn-edit { background-color: #ffc107; border: none; margin-right: 5px; }
+.btn-delete { background-color: #dc3545; color: white; border: none; }
+#searchInput {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+#dataTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+#dataTable th, #dataTable td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+#dataTable tr:hover { background-color: #f5f5f5; }
+form { width: 800px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+.form-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; }
+input { width: 50%; padding: 8px; box-sizing: border-box; }
+.error-msg { color: red; font-size: 12px; display: none; }
+input.invalid { border: 2px solid red; }
+.root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --button-bg: #333333;
+    --button-text: #ffffff;
+}
+
+body.dark-theme {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --button-bg: #ffffff;
+    --button-text: #000000;
+}
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    
+}
+.pagination-wrapper { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px; }
+#data-list { list-style: none; padding: 0; min-height: 200px; }
+#data-list li { padding: 10px; border-bottom: 1px solid #eee; }
+.pagination-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+button { padding: 8px 12px; cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: 0.5; }
+#page-numbers { display: flex; gap: 5px; }
+.page-number { padding: 5px 10px; border: 1px solid #ddd; cursor: pointer; }
+.page-number.active { background-color: #007bff; color: white; border-color: #007bff; }
+.hidden {
+    display: none !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-window {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.close-modal-btn {
+    cursor: pointer;
+    font-size: 24px;
+}
+.form-step { display: none; }
+.form-step.active { display: block; }
+
+.app-container { display: flex; }
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    transition: all 0.3s;
+    position: fixed;
+    left: 0;
+}
+.sidebar-header { padding: 20px; text-align: center; background-color: #222; }
+.nav-links { list-style: none; padding: 0; }
+.nav-links li a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+}
+.nav-links li a:hover { background-color: #444; }
+.nav-links li a.active { background-color: #04AA6D; }
+
+/* Collapsed State */
+.sidebar.collapsed { left: -250px; }
+
+/* Main Content Area */
+.main-content {
+    margin-left: 250px;
+    width: 100%;
+    transition: all 0.3s;
+}
+.main-content.expanded { margin-left: 0; }
+
+header {
+    background: #f4f4f4;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+.content-body { padding: 20px; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar { left: -250px; }
+    .sidebar.active { left: 0; }
+    .main-content { margin-left: 0; }
+}
+.search-container {
+    position: relative;
+    width: 300px;
+    margin: 50px auto;
+}
+#search-input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.results-list {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: white;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Hidden by default */
+}
+.results-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+.results-list li:hover {
+    background-color: #f0f0f0;
+}
+#status { font-size: 0.9em; color: #888; }
+input { width: 100%; padding: 10px; margin-top: 10px; box-sizing: border-box; }
+.meter-container { height: 10px; width: 100%; background-color: #ddd; margin-top: 10px; border-radius: 5px; overflow: hidden; }
+#strength-meter { height: 100%; width: 0%; transition: 0.3s; }
+#strength-text { font-weight: bold; margin-top: 5px; }
+
+/* Strength Levels */
+.weak { background-color: #ff4d4d; width: 25% !important; }
+.medium { background-color: #ffa64d; width: 50% !important; }
+.strong { background-color: #4dff4d; width: 75% !important; }
+.very-strong { background-color: #00b300; width: 100% !important; }
+.notification {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        background-color: #4CAF50; /* Green */
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        z-index: 1000;
+        opacity: 0; /* Start invisible */
+        transition: opacity 0.6s ease-in-out; /* Smooth fade */
+    }
+    .notification.show {
+        display: block;
+        opacity: 1; /* Fully visible */
+    }
+    .closebtn {
+        float: right;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-left: 15px;
+        color: white;
+    }
+    .editor-container { display: flex; gap: 30px; }
+.inputs, .preview-area { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.inputs { flex: 1; }
+.preview-area { flex: 1; }
+label { display: block; margin-top: 15px; font-weight: bold; }
+input[type="text"], input[type="email"], textarea {
+    width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+}
+textarea { height: 100px; }
+
+.profile-card { border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #fff; }
+#previewName { color: #333; margin-bottom: 5px; }
+#previewEmail { color: #666; font-size: 0.9em; margin-top: 0; }
+#previewBio { color: #444; }
+
+
+.dashboard-container {
+    padding: 20px;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.summary-cards-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap; /* Ensures cards wrap on smaller screens */
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds depth */
+    flex: 1 1 200px; /* Responsive sizing */
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Adds interactivity on hover */
+}
+
+.card-title {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.card-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+#search-input {
+    padding: 10px;
+    width: 250px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style for the highlighted text */
+.highlight {
+    background-color: yellow; /* Default highlight color */
+    color: black;
+}
+
+.nav-bar { background: #333; padding: 15px; color: white; display: flex; justify-content: flex-end; position: relative; }
+
+.notification-icon { cursor: pointer; font-size: 24px; position: relative; }
+.badge { background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; position: absolute; top: -5px; right: -5px; }
+
+.notif-panel { 
+    position: absolute; top: 60px; right: 10px; width: 300px; 
+    background: white; color: black; border: 1px solid #ccc; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 10px; z-index: 100;
+}
+.hidden { display: none; }
+
+#toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+.toast { background: #333; color: #fff; padding: 15px; margin-top: 10px; border-radius: 5px; animation: slideIn 0.3s; }
+
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.grid-container {
+    display: grid;
+    /* This creates a responsive grid: 
+       auto-fit ensures items fit in the available space, 
+       minmax(150px, 1fr) sets a minimum width of 150px and allows them to grow/shrink equally */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px; /* Creates space between grid items */
+    padding: 0 4px;
+}
+
+.grid-item {
+    background-color: #33b5e5;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Simple styling for demonstration */
+}
+:root {
+    --primary-color: #007bff; /* Default */
+    --background-color: #f4f4f4; /* Default */
+    --text-color: #333;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.header { background-color: var(--primary-color); }
+.sidebar { background-color: #e9e9e9; }
+.card { background-color: white; border: 1px solid #ddd; }
+/* Add more theme-specific styles */
+
+.tab-container { font-family: sans-serif; }
+.tab-buttons { display: flex; margin-bottom: 10px; }
+.tab-button {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 5px 5px 0 0;
+  transition: background-color 0.3s;
+}
+.tab-button.active {
+  background-color: #ddd;
+  font-weight: bold;
+  border-bottom: none;
+}
+.tab-panel {
+  border: 1px solid #ccc;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  background-color: #fff;
+}
+.tab-panel.active {
+  display: block; /* Shown when active */
+}
+#searchInput { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; }
+.items-container { display: flex; flex-wrap: wrap; gap: 15px; }
+.item-card { background-color: #e0f7fa; padding: 15px; border-radius: 5px; flex: 1 1 calc(33% - 10px); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+     #modal {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            border: 2px solid #333;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        input,select {
+    width: 50%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+        .onboarding-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 350px;
+    text-align: center;
+    color: black;
+}
+
+.progress-bar {
+    background: #e0e0e0;
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+
+.progress-fill {
+    background: #4caf50;
+    height: 100%;
+    width: 33%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+.secondary {
+    background: #ccc;
+    margin-top: 5px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+.onboarding-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 350px;
+    text-align: center;
+}
+
+.progress-bar {
+    background: #e0e0e0;
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+
+.progress-fill {
+    background: #4caf50;
+    height: 100%;
+    width: 33%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.secondary {
+    background: #ccc;
+    margin-top: 5px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+.app-container { display: flex; min-height: 100vh; }
+
+.sidebar { width: 250px; background: #fff; border-right: 1px solid #e2e8f0; padding: 2rem; }
+.nav-item { padding: 10px; cursor: pointer; border-radius: 5px; margin-bottom: 5px; list-style: none; }
+.nav-item.active { background: var(--primary); color: white; }
+
+.content { flex: 1; padding: 2rem; }
+.stats-grid { display: flex; gap: 20px; margin-bottom: 2rem; }
+.stat-card { background: white; padding: 20px; border-radius: 8px; flex: 1; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
+th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; }
+
+.form-group { margin-bottom: 1.5rem; }
+input, select { width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+.error { color: #dc2626; font-size: 0.8rem; }
+.btn-submit { background: var(--primary); color: black; border: none; padding: 10px 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+<h1>1.Build a Login System with validation and session handling using localStorage.</h1>
+ <!-- index.html -->
+<div id="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+
+        <button type="submit">Login</button>
+    </form>
+    <p id="message"></p>
+</div>
+
+<div id="dashboard" style="display:none;">
+    <h2>Welcome, <span id="user-display"></span>!</h2>
+    <button id="logout-btn">Logout</button>
+</div>
+<script>
+
+// script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('login-form');
+    const message = document.getElementById('message');
+    const dashboard = document.getElementById('dashboard');
+    const loginContainer = document.getElementById('login-container');
+
+    // 1. Check for existing session on page load
+    const checkSession = () => {
+        const session = JSON.parse(localStorage.getItem('userSession'));
+        if (session) {
+            showDashboard(session.email);
+        }
+    };
+
+    // 2. Simple Validation & Login
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Basic Regex Validation
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (!emailPattern.test(email)) {
+            message.textContent = "Please enter a valid email.";
+            return;
+        }
+
+        if (password.length < 6) {
+            message.textContent = "Password must be at least 6 characters.";
+            return;
+        }
+
+        // Simulate successful login and store session
+        const userData = { email, loginTime: new Date().getTime() };
+        localStorage.setItem('userSession', JSON.stringify(userData));
+        showDashboard(email);
+    });
+
+    // 3. UI Toggle Functions
+    function showDashboard(email) {
+        loginContainer.style.display = 'none';
+        dashboard.style.display = 'block';
+        document.getElementById('user-display').textContent = email;
+    }
+
+    // 4. Logout Handling
+    document.getElementById('logout-btn').addEventListener('click', () => {
+        localStorage.removeItem('userSession');
+        location.reload(); // Refresh to reset UI
+    });
+
+    checkSession();
+});
+
+</script>
+<h1>2.Create a CRUD App to manage users with add, edit, delete features.</h1>
+<div class="container">
+        <h2>User Management</h2>
+        <form id="userForm">
+            <input type="hidden" id="userId">
+            <input type="text" id="userName" placeholder="Name" required>
+            <input type="email" id="userEmail" placeholder="Email" required>
+            <button type="submit" id="submitBtn">Add User</button>
+        </form>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userList"></tbody>
+        </table>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const userForm = document.getElementById("userForm");
+    const userName = document.getElementById("userName");
+    const userEmail = document.getElementById("userEmail");
+    const userId = document.getElementById("userId");
+    const userList = document.getElementById("userList");
+    const submitBtn = document.getElementById("submitBtn");
+
+    // Load users from localStorage
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // --- READ: Render users ---
+    const renderUsers = () => {
+        userList.innerHTML = "";
+        users.forEach((user, index) => {
+            userList.innerHTML += `
+                <tr>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>
+                        <button class="btn-edit" onclick="editUser(${index})">Edit</button>
+                        <button class="btn-delete" onclick="deleteUser(${index})">Delete</button>
+                    </td>
+                </tr>
+            `;
+        });
+        localStorage.setItem("users", JSON.stringify(users));
+    };
+
+    // --- CREATE/UPDATE ---
+    userForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const id = userId.value;
+        const newUser = { name: userName.value, email: userEmail.value };
+
+        if (id === "") {
+            // Create
+            users.push(newUser);
+        } else {
+            // Update
+            users[id] = newUser;
+            userId.value = "";
+            submitBtn.innerText = "Add User";
+        }
+        userForm.reset();
+        renderUsers();
+    });
+
+    // --- EDIT (Populate form) ---
+    window.editUser = (index) => {
+        const user = users[index];
+        userName.value = user.name;
+        userEmail.value = user.email;
+        userId.value = index;
+        submitBtn.innerText = "Update User";
+    };
+
+    // --- DELETE ---
+    window.deleteUser = (index) => {
+        if (confirm("Are you sure?")) {
+            users.splice(index, 1);
+            renderUsers();
+        }
+    };
+
+    renderUsers(); // Initial render
+});
+
+    </script>
+    <h1>3.Build a Dynamic Table App with search and row filtering.</h1>
+    <div class="container">
+        <h2>Employee Data</h2>
+        <!-- Search Input -->
+        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for names or roles...">
+
+        <!-- Table -->
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr>
+                    <td>Arvind</td>
+                    <td>Designer</td>
+                    <td>Engineering</td>
+                </tr>
+                <tr>
+                    <td>Jeyashree</td>
+                    <td>Developer</td>
+                    <td>Creative</td>
+                </tr>
+                <tr>
+                    <td>Thanya</td>
+                    <td>Manager</td>
+                    <td>Marketing</td>
+                </tr>
+                <tr>
+                    <td>Kavinaya</td>
+                    <td>Developer</td>
+                    <td>Engineering</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+function filterTable() {
+    // 1. Get references to input, table, and rows
+    let input = document.getElementById("searchInput");
+    let filter = input.value.toLowerCase();
+    let table = document.getElementById("dataTable");
+    let tr = table.getElementsByTagName("tr");
+
+    // 2. Loop through all table rows (excluding header)
+    for (let i = 1; i < tr.length; i++) {
+        let rowMatch = false;
+        let td = tr[i].getElementsByTagName("td");
+        
+        // 3. Loop through columns in each row
+        for (let j = 0; j < td.length; j++) {
+            if (td[j]) {
+
+                let cellText = td[j].textContent || td[j].innerText;
+                // 4. Check if cell text contains search query
+                if (cellText.toLowerCase().indexOf(filter) > -1) {
+                    rowMatch = true;
+                    break; // Match found, skip checking other cells in this row
+                }
+            }
+        }
+        
+        // 5. Toggle visibility based on match
+        if (rowMatch) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+
+    </script>
+    <h1>4.Create a Form Validation App with custom error handling.</h1>
+    <form id="registrationForm">
+    <h2>Register</h2>
+    
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username">
+        <span class="error-msg" id="usernameError"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" id="email">
+        <span class="error-msg" id="emailError"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Password (min 6 chars)</label>
+        <input type="password" id="password">
+        <span class="error-msg" id="passwordError"></span>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    // 1. Prevent default submission
+    event.preventDefault();
+    
+    // 2. Get form values
+    let username = document.getElementById('username').value.trim();
+    let email = document.getElementById('email').value.trim();
+    let password = document.getElementById('password').value.trim();
+    
+    // 3. Reset error states
+    let isValid = true;
+    document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('input').forEach(el => el.classList.remove('invalid'));
+
+    // 4. Validation Logic
+    if (username === '') {
+        showError('usernameError', 'Username is required');
+        isValid = false;
+    }
+
+    if (!email.includes('@')) {
+        showError('emailError', 'Enter a valid email');
+        isValid = false;
+    }
+
+    if (password.length < 6) {
+        showError('passwordError', 'Password must be at least 6 characters');
+        isValid = false;
+    }
+
+    // 5. Final Submission
+    if (isValid) {
+        alert('Form submitted successfully!');
+        // this.submit(); // Uncomment to actually submit the form
+    }
+});
+
+// Helper function to show errors
+function showError(id, message) {
+    let errorElement = document.getElementById(id);
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
+    errorElement.previousElementSibling.previousElementSibling.classList.add('invalid'); // Highlights input
+}
+
+</script>
+<h1>5.Build a To-Do App with persistent data storage.</h1>
+ <h2>2026 To-Do List</h2>
+
+  <input type="text" id="taskInput" placeholder="Enter a task...">
+  <button onclick="addTask()">Add Task</button>
+  <ul id="taskList"></ul>
+
+  <script>
+
+const taskInput = document.getElementById('taskInput');
+const taskList = document.getElementById('taskList');
+
+// 1. Load tasks from localStorage on startup
+document.addEventListener('DOMContentLoaded', getTasks);
+
+function addTask() {
+  if (taskInput.value === '') return;
+
+  createTaskElement(taskInput.value);
+  saveLocalTask(taskInput.value); // Save to storage
+  taskInput.value = '';
+}
+
+function createTaskElement(text) {
+  const li = document.createElement('li');
+  li.innerText = text;
+  
+  // Add a delete button
+  const delBtn = document.createElement('button');
+  delBtn.innerText = 'X';
+  delBtn.onclick = function() {
+    li.remove();
+    removeLocalTask(text);
+  };
+  
+  li.appendChild(delBtn);
+  taskList.appendChild(li);
+}
+
+// 2. Persistent Storage: Save to LocalStorage
+function saveLocalTask(task) {
+  let tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
+  tasks.push(task);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// 3. Persistent Storage: Retrieve on Refresh
+function getTasks() {
+  let tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
+  tasks.forEach(task => createTaskElement(task));
+}
+
+// 4. Persistent Storage: Remove from LocalStorage
+function removeLocalTask(task) {
+  let tasks = JSON.parse(localStorage.getItem('tasks'));
+  const filteredTasks = tasks.filter(t => t !== task);
+  localStorage.setItem('tasks', JSON.stringify(filteredTasks));
+}
+
+  </script>
+  <h1>6.Create a Theme Switcher with saved preference.</h1>
+    <body class="light-theme"> <!-- Default theme -->
+    <div class="container">
+        <h1>Hello World</h1>
+        <p>Click the button to toggle themes.</p>
+        <button id="theme-toggle">Toggle Dark Mode</button>
+    </div>
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+const body = document.body;
+
+// 1. Check for saved user preference in localStorage on page load
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme) {
+    body.classList.add(savedTheme);
+    updateButtonText();
+}
+
+// 2. Toggle theme on button click
+toggleButton.addEventListener('click', () => {
+    body.classList.toggle('dark-theme');
+
+    // 3. Save the current preference
+    let theme = 'light-theme';
+    if (body.classList.contains('dark-theme')) {
+        theme = 'dark-theme';
+    }
+    localStorage.setItem('theme', theme);
+    updateButtonText();
+});
+
+// Helper function to update button text
+function updateButtonText() {
+    if (body.classList.contains('dark-theme')) {
+        toggleButton.innerText = 'Switch to Light Mode';
+    } else {
+        toggleButton.innerText = 'Switch to Dark Mode';
+    }
+}
+
+    </script>
+    <h1>7.Build a Pagination App for a data list.</h1>
+    <div class="pagination-wrapper">
+        <h2>Data List</h2>
+        <ul id="data-list"></ul>
+        
+        <div class="pagination-controls">
+            <button id="prev-btn">Previous</button>
+            <div id="page-numbers"></div>
+            <button id="next-btn">Next</button>
+        </div>
+    </div>
+
+    <script>
+
+// 1. Setup Sample Data
+const data = Array.from({ length: 55 }, (_, i) => `Item ${i + 1}`);
+
+// 2. Pagination State
+let currentPage = 1;
+const itemsPerPage = 10;
+const totalPages = Math.ceil(data.length / itemsPerPage);
+
+// 3. DOM Elements
+const dataList = document.getElementById('data-list');
+const pageNumbers = document.getElementById('page-numbers');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+
+// 4. Render Data and Controls
+function render() {
+    // Calculate start/end indices for the current slice
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const paginatedItems = data.slice(start, end);
+
+    // Render List Items
+    dataList.innerHTML = '';
+    paginatedItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        dataList.appendChild(li);
+    });
+
+    // Render Pagination Numbers
+    pageNumbers.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+        const span = document.createElement('span');
+        span.textContent = i;
+        span.classList.add('page-number');
+        if (i === currentPage) span.classList.add('active');
+        span.addEventListener('click', () => {
+            currentPage = i;
+            render();
+        });
+        pageNumbers.appendChild(span);
+    }
+
+    // Update Buttons State
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+}
+
+// 5. Event Listeners
+prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        render();
+    }
+});
+
+nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+        currentPage++;
+        render();
+    }
+});
+
+// Initial Render
+render();
+
+    </script>
+    <h1>8.Create a Modal Management App with reusable modals.</h1>
+    <button class="open-modal-btn" data-modal="modal1" data-title="Alert" data-content="Something happened!">Open Alert</button>
+    <button class="open-modal-btn" data-modal="modal2" data-title="Form" data-content="<input type='text' placeholder='Enter name'/>">Open Form</button>
+
+    <!-- Modal Structure -->
+    <div class="modal-overlay hidden" id="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h2 id="modal-title">Title</h2>
+                <span class="close-modal-btn">&times;</span>
+            </div>
+            <div class="modal-body" id="modal-content">
+                Content
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('modal-overlay');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content');
+    const closeBtn = document.querySelector('.close-modal-btn');
+    const triggers = document.querySelectorAll('.open-modal-btn');
+
+    // Function to open modal with dynamic content
+    const openModal = (title, content) => {
+        modalTitle.textContent = title;
+        modalContent.innerHTML = content;
+        overlay.classList.remove('hidden');
+    };
+
+    // Function to close modal
+    const closeModal = () => {
+        overlay.classList.add('hidden');
+    };
+
+    // Attach click events to triggers
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const title = trigger.getAttribute('data-title');
+            const content = trigger.getAttribute('data-content');
+            openModal(title, content);
+        });
+    });
+
+    // Close events
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal(); // Click outside
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeModal();
+    });
+});
+
+    </script>
+    <h1>9.Build a Multi-Step Form with validation per step.</h1>
+    <form id="multiStepForm">
+  <!-- Step 1 -->
+  <div class="form-step active">
+    <h3>Step 1: Account</h3>
+    <input type="email" id="email" placeholder="Email" required>
+    <button type="button" class="next-btn">Next</button>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="form-step">
+    <h3>Step 2: Personal</h3>
+    <input type="text" id="username" placeholder="Username" required>
+    <button type="button" class="prev-btn">Previous</button>
+    <button type="button" class="next-btn">Next</button>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="form-step">
+    <h3>Step 3: Confirm</h3>
+    <p>Ready to submit?</p>
+    <button type="button" class="prev-btn">Previous</button>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+<script>
+    const form = document.getElementById('multiStepForm');
+const steps = Array.from(document.querySelectorAll('.form-step'));
+const nextBtns = document.querySelectorAll('.next-btn');
+const prevBtns = document.querySelectorAll('.prev-btn');
+
+nextBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const currentStep = form.querySelector('.form-step.active');
+    const inputs = currentStep.querySelectorAll('input');
+    
+    // Step Validation
+    let isValid = true;
+    inputs.forEach(input => {
+      if (!input.checkValidity()) {
+        input.reportValidity(); // Shows browser error bubble
+        isValid = false;
+      }
+    });
+
+    if (isValid) {
+      changeStep(1);
+    }
+  });
+});
+
+prevBtns.forEach(btn => {
+  btn.addEventListener('click', () => changeStep(-1));
+});
+
+function changeStep(cursor) {
+  const activeStep = form.querySelector('.form-step.active');
+  let index = steps.indexOf(activeStep);
+  steps[index].classList.remove('active');
+  steps[index + cursor].classList.add('active');
+}
+
+</script>
+<h1>10.Create a Dashboard Layout App with sidebar navigation.</h1>
+<div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>AdminPanel</h3>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Users</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <button id="toggleSidebar">☰ Menu</button>
+                <div class="user-info">Welcome, Admin</div>
+            </header>
+            
+            <div class="content-body">
+                <h1>Dashboard Overview</h1>
+                <p>Welcome to your dashboard layout.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const toggleButton = document.getElementById("toggleSidebar");
+    const sidebar = document.getElementById("sidebar");
+    const mainContent = document.querySelector(".main-content");
+
+    toggleButton.addEventListener("click", function() {
+        // Toggle class for sidebar position
+        sidebar.classList.toggle("collapsed");
+        // Toggle class for main content margin
+        mainContent.classList.toggle("expanded");
+    });
+});
+
+    </script>
+    <h1>11.Build a Search Suggestion App with real-time filtering.</h1>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search fruits...">
+        <ul id="results" class="results-list"></ul>
+    </div>
+    <script>
+        const datas = [
+    'Apple', 'Banana', 'Orange', 'Mango', 'Grapes', 
+    'Pineapple', 'Strawberry', 'Watermelon', 'Blueberry'
+];
+
+const searchInput = document.getElementById('search-input');
+const resultsList = document.getElementById('results');
+
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    resultsList.innerHTML = ''; // Clear previous results
+
+    if (query.length > 0) {
+        // Filter data based on input
+        const filtered = datas.filter(item => 
+            item.toLowerCase().includes(query)
+        );
+
+        // Display results
+        if (filtered.length > 0) {
+            filtered.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                // Add click event to fill search box
+                li.addEventListener('click', () => {
+                    searchInput.value = item;
+                    resultsList.style.display = 'none';
+                });
+                resultsList.appendChild(li);
+            });
+            resultsList.style.display = 'block';
+        } else {
+            resultsList.style.display = 'none';
+        }
+    } else {
+        resultsList.style.display = 'none';
+    }
+});
+
+// Hide results when clicking outside
+document.addEventListener('click', (e) => {
+    if (e.target !== searchInput) {
+        resultsList.style.display = 'none';
+    }
+});
+
+    </script>
+    <h1>12.Create a Password Strength Analyzer.</h1>
+    <div class="container">
+        <h2>Password Strength</h2>
+        <input type="password" id="password" placeholder="Enter password...">
+        <div class="meter-container">
+            <div id="strength-meter"></div>
+        </div>
+        <p id="strength-text"></p>
+    </div>
+    <script>
+        const passwordInput = document.getElementById('password');
+const meter = document.getElementById('strength-meter');
+const text = document.getElementById('strength-text');
+
+passwordInput.addEventListener('input', () => {
+    const password = passwordInput.value;
+    let strength = 0;
+
+    // Check for length
+    if (password.length >= 8) strength++;
+    // Check for lowercase
+    if (/[a-z]/.test(password)) strength++;
+    // Check for uppercase
+    if (/[A-Z]/.test(password)) strength++;
+    // Check for numbers
+    if (/[0-9]/.test(password)) strength++;
+    // Check for special characters
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+    // Update UI based on strength score (0-5)
+    updateMeter(strength);
+});
+
+function updateMeter(score) {
+    // Reset
+    meter.className = '';
+    text.textContent = '';
+
+    if (score === 0) {
+        text.textContent = '';
+    } else if (score <= 2) {
+        meter.classList.add('weak');
+        text.textContent = 'Weak';
+        text.style.color = '#ff4d4d';
+    } else if (score === 3) {
+        meter.classList.add('medium');
+        text.textContent = 'Medium';
+        text.style.color = '#ffa64d';
+    } else if (score === 4) {
+        meter.classList.add('strong');
+        text.textContent = 'Strong';
+        text.style.color = '#4dff4d';
+    } else {
+        meter.classList.add('very-strong');
+        text.textContent = 'Very Strong';
+        text.style.color = '#00b300';
+    }
+}
+
+    </script>
+    <h1>13.Build a Notification System with auto-dismiss.</h1>
+    <div id="myNotification" class="notification">
+    This is an auto-dismissing notification!
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+
+<button onclick="showNotification()">Show Notification</button>
+
+<script>
+    function showNotification() {
+        const notification = document.getElementById("myNotification");
+        notification.classList.add("show"); // Make it visible
+
+        // Set a timer to hide it after 3 seconds (3000ms)
+        setTimeout(function() {
+            notification.classList.remove("show"); // Start fade out
+            // Hide completely after transition (600ms, matches CSS transition)
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 600);
+        }, 3000); // Notification shown for 3 seconds
+    }
+</script>
+<h1>14.Create a Form Auto-Save App.</h1>
+<div class="container">
+        <h2>Note Taking App</h2>
+        <form id="autosave-form">
+            <input type="text" id="title" name="title" placeholder="Title">
+            <textarea id="content" name="content" rows="5" placeholder="Content..."></textarea>
+            <span id="status"></span>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("autosave-form");
+    const status = document.getElementById("status");
+    const storageKey = "autosave_form_data";
+    let timer;
+
+    // 1. Load data from localStorage on page load
+    const savedData = localStorage.getItem(storageKey);
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        Object.keys(data).forEach(key => {
+            if (form.elements[key]) {
+                form.elements[key].value = data[key];
+            }
+        });
+        status.textContent = "Last saved: " + new Date().toLocaleTimeString();
+    }
+
+    // 2. Function to save data to localStorage
+    function saveData() {
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        localStorage.setItem(storageKey, JSON.stringify(data));
+        status.textContent = "Saved! " + new Date().toLocaleTimeString();
+        
+        // Clear "Saved" message after 3 seconds
+        setTimeout(() => { status.textContent = ""; }, 3000);
+    }
+
+    // 3. Listen for changes (input/textarea)
+    form.addEventListener("input", () => {
+        status.textContent = "Saving...";
+        
+        // Debounce: Clear timer if user is still typing
+        clearTimeout(timer);
+        
+        // Set timer to save after 1000ms (1 second) of no typing
+        timer = setTimeout(saveData, 1000);
+    });
+});
+
+    </script>
+    <h1>15.Build a User Profile Editor with live preview.</h1>
+    <h1>User Profile Editor</h1>
+    <div class="editor-container">
+        <div class="inputs">
+            <label for="name">Name:</label>
+            <input type="text" id="name1" placeholder="Enter your name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email1" placeholder="Enter your email">
+
+            <label for="bio">Bio:</label>
+            <textarea id="bio1" placeholder="Tell us about yourself..."></textarea>
+        </div>
+        <div class="preview-area">
+            <h2>Live Preview:</h2>
+            <div id="profilePreview" class="profile-card">
+                <!-- Profile will be rendered here -->
+                <h3 id="previewName">Your Name</h3>
+                <p id="previewEmail">your.email@example.com</p>
+                <p id="previewBio">Your bio will appear here...</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const nameInput1 = document.getElementById('name1');
+    const emailInput1 = document.getElementById('email1');
+    const bioInput1 = document.getElementById('bio1');
+
+    const previewName = document.getElementById('previewName');
+    const previewEmail = document.getElementById('previewEmail');
+    const previewBio = document.getElementById('previewBio');
+
+    // Function to update preview
+    function updatePreview() {
+        previewName.textContent = nameInput1.value || "Your Name"; // Use placeholder if empty
+        previewEmail.textContent = emailInput1.value || "your.email@example.com";
+        previewBio.textContent = bioInput1.value || "Your bio will appear here...";
+    }
+
+        });
+    </script>
+    <h1>16.Create a Sortable Table App.</h1>
+    <table id="sortableTable">
+  <thead>
+    <tr>
+      <th onclick="sortTable(0)">Name</th>
+      <th onclick="sortTable(1)">Age</th>
+      <th onclick="sortTable(2)">Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Alice</td><td>25</td><td>USA</td></tr>
+    <tr><td>Bob</td><td>30</td><td>UK</td></tr>
+    <tr><td>Charlie</td><td>22</td><td>Canada</td></tr>
+  </tbody>
+</table>
+
+    <script>
+    function sortTable(columnIndex) {
+  const table = document.getElementById("sortableTable");
+  const tbody = table.tBodies[0];
+  // Convert HTMLCollection of rows to an Array
+  const rows = Array.from(tbody.rows);
+
+  // Determine sort direction (toggle between asc and desc)
+  const isAscending = table.dataset.sortDir !== "asc";
+  table.dataset.sortDir = isAscending ? "asc" : "desc";
+
+  const sortedRows = rows.sort((a, b) => {
+    const aText = a.cells[columnIndex].textContent.trim();
+    const bText = b.cells[columnIndex].textContent.trim();
+
+    // Numeric vs Alphanumeric sorting
+    const result = isNaN(aText) || isNaN(bText) 
+      ? aText.localeCompare(bText) 
+      : parseFloat(aText) - parseFloat(bText);
+
+    return isAscending ? result : -result;
+  });
+
+  // Re-append sorted rows to the tbody
+  sortedRows.forEach(row => tbody.appendChild(row));
+}
+
+    </script>
+    <h1>17.Build a Responsive Navbar App</h1>
+    <div class="topnav" id="myTopnav">
+        <a href="#home" class="active">Logo</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    <div style="padding-left:16px;">
+      <h3>Responsive Navbar Example</h3>
+      <p>Resize the browser window to see the responsive effect.</p>
+    </div>
+
+    <script>
+        /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+
+    </script>
+    <h1>18.Create a Role-Based UI Access App.</h1>
+    <header>
+        <h1>Welcome, <span id="user-role">Guest</span>!</h1>
+        <button onclick="loginAs('admin')">Login as Admin</button>
+        <button onclick="loginAs('user')">Login as User</button>
+        <button onclick="loginAs('guest')">Logout</button>
+    </header>
+
+    <main>
+        <!-- Content visible only to Admins -->
+        <section id="admin-section" class="access-section">
+            <h2>Admin Dashboard</h2>
+            <p>You can manage users and settings here.</p>
+            <ul>
+                <li>Manage Users</li>
+                <li>System Settings</li>
+                <li>View All Analytics</li>
+            </ul>
+        </section>
+
+        <!-- Content visible to Admins and Users -->
+        <section id="user-section" class="access-section">
+            <h2>User Dashboard</h2>
+            <p>You can view your profile and submit tickets.</p>
+            <ul>
+                <li>Edit Profile</li>
+                <li>Submit Support Ticket</li>
+            </ul>
+        </section>
+
+        <!-- Content visible to everyone -->
+        <section id="public-section">
+            <h2>Public Information</h2>
+            <p>Welcome to our application. Anyone can see this.</p>
+        </section>
+    </main>
+
+    <script>
+        // A simple object defining what each role can access.
+const accessControlList = {
+    admin: ['admin-section', 'user-section', 'public-section'],
+    user: ['user-section', 'public-section'],
+    guest: ['public-section']
+};
+
+/**
+ * Updates the UI based on the current user role.
+ * @param {string} role - The current user's role (admin, user, or guest).
+ */
+function updateUIForRole(role) {
+    // Get all sections we might want to control
+    const sections = document.querySelectorAll('.access-section');
+    const allowedSections = accessControlList[role] || [];
+
+    // Iterate over sections and hide those not in the allowed list
+    sections.forEach(section => {
+        if (allowedSections.includes(section.id)) {
+            section.classList.remove('hidden');
+        } else {
+            section.classList.add('hidden');
+        }
+    });
+
+    // Update the header text to show the current role
+    document.getElementById('user-role').textContent = role.charAt(0).toUpperCase() + role.slice(1);
+}
+
+/**
+ * Simulates a login action and updates the UI.
+ * This function is called by the buttons in index.html.
+ * @param {string} role - The role to simulate logging in as.
+ */
+function loginAs(role) {
+    // In a real app, this would involve authenticating with a server,
+    // receiving a token, and verifying the role securely.
+    console.log(`Logging in as: ${role}`);
+    updateUIForRole(role);
+}
+
+// Initialize the UI when the page loads (default to guest)
+document.addEventListener('DOMContentLoaded', () => {
+    updateUIForRole('guest');
+});
+
+    </script>
+    <h1>19.Build a Cart Logic App.</h1>
+   <header>
+        <h1>Our Products</h1>
+        <div class="cart-icon">
+            🛒 (<span id="cart-count">0</span>)
+        </div>
+    </header>
+    
+    <main>
+        <div class="products" id="product-list">
+            <!-- Product cards will be generated here by JavaScript -->
+        </div>
+
+        <div class="cart" id="cart-panel">
+            <h2>Shopping Cart</h2>
+            <ul id="cart-items">
+                <!-- Cart items will be displayed here -->
+            </ul>
+            <div class="cart-total">
+                <strong>Total: $<span id="total-price">0.00</span></strong>
+            </div>
+            <button id="checkout-btn">Checkout</button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Sample product data
+    const products = [
+        { id: 1, name: 'Laptop', price: 999.99 },
+        { id: 2, name: 'Phone', price: 499.50 },
+        { id: 3, name: 'Headphones', price: 150.00 }
+    ];
+
+    let cart = []; // The array to store items in the cart
+
+    const productListEl = document.getElementById('product-list');
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartCountEl = document.getElementById('cart-count');
+    const totalPriceEl = document.getElementById('total-price');
+
+    // Function to render products on the page
+    function renderProducts() {
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <h3>${product.name}</h3>
+                <p>$${product.price.toFixed(2)}</p>
+                <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+            `;
+            productListEl.appendChild(productCard);
+        });
+        attachAddToCartHandlers();
+    }
+
+    // Function to attach event listeners to "Add to Cart" buttons
+    function attachAddToCartHandlers() {
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productId = parseInt(e.target.dataset.id);
+                addToCart(productId);
+            });
+        });
+    }
+
+    // Function to add a product to the cart
+    function addToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+
+        const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+        if (existingItemIndex > -1) {
+            cart[existingItemIndex].quantity += 1;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+        updateCartDisplay();
+    }
+
+    // Function to update the cart display (list of items, count, total)
+    function updateCartDisplay() {
+        cartItemsEl.innerHTML = ''; // Clear the current list
+
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.classList.add('cart-item');
+            li.innerHTML = `
+                <span>${item.name} (${item.quantity})</span>
+                <span>$${(item.price * item.quantity).toFixed(2)} 
+                    <button class="remove-item-btn" data-id="${item.id}">Remove</button>
+                </span>
+            `;
+            cartItemsEl.appendChild(li);
+        });
+
+        updateCartTotal();
+        updateCartCount();
+        attachRemoveItemHandlers();
+    }
+
+    // Function to attach event listeners to "Remove" buttons
+    function attachRemoveItemHandlers() {
+        document.querySelectorAll('.remove-item-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const productId = parseInt(e.target.dataset.id);
+                removeFromCart(productId);
+            });
+        });
+    }
+
+    // Function to remove an item from the cart
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId);
+        updateCartDisplay();
+    }
+
+    // Function to update the total price
+    function updateCartTotal() {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        totalPriceEl.textContent = total.toFixed(2);
+    }
+
+    // Function to update the cart item count in the header
+    function updateCartCount() {
+        const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountEl.textContent = totalCount;
+    }
+
+    // Checkout button logic
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        alert('Checkout complete! Total amount: $' + totalPriceEl.textContent);
+        cart = []; // Clear the cart after checkout
+        updateCartDisplay();
+    });
+
+    // Initial render of products
+    renderProducts();
+});
+
+    </script>
+    <h1>20.Create a Reusable Component System using JS functions.</h1>
+    <h1>My Component System</h1>
+    
+    <!-- This is the mount point for our components -->
+    <div id="app">
+        <!-- Components will be rendered here -->
+    </div>
+
+    <!-- Link the JavaScript file -->
+    <script src="components.js"></script>
+    <script src="app.js"></script>
+    <h1>21.Build a Data Dashboard with summary cards.</h1>
+    <div class="dashboard-container">
+        <header>
+            <h1>Analytics Dashboard</h1>
+        </header>
+        <div class="main-content">
+            <div class="summary-cards-container">
+                <!-- Summary Cards will be dynamically inserted here by JavaScript -->
+                <div class="card" id="users-card">
+                    <div class="card-title">Total Users</div>
+                    <div class="card-value" id="users-value">0</div>
+                </div>
+                <div class="card" id="sales-card">
+                    <div class="card-title">Total Sales</div>
+                    <div class="card-value" id="sales-value">$0</div>
+                </div>
+                <div class="card" id="orders-card">
+                    <div class="card-title">New Orders</div>
+                    <div class="card-value" id="orders-value">0</div>
+                </div>
+                <div class="card" id="growth-card">
+                    <div class="card-title">Growth Rate</div>
+                    <div class="card-value" id="growth-value">0%</div>
+                </div>
+            </div>
+            <!-- Other dashboard components (charts, tables) can go here -->
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Mock data - in a real app, this would be fetched from an API
+    const dashboardData = {
+        totalUsers: 1500000,
+        totalSales: 875000,
+        newOrders: 450,
+        growthRate: 12.5
+    };
+
+    // Function to format numbers with commas
+    function formatNumber(num) {
+        return num.toLocaleString();
+    }
+
+    // Function to update the card values in the DOM
+    function updateDashboardCards(data) {
+        document.getElementById('users-value').textContent = formatNumber(data.totalUsers);
+        document.getElementById('sales-value').textContent = `$${formatNumber(data.totalSales)}`;
+        document.getElementById('orders-value').textContent = formatNumber(data.newOrders);
+        document.getElementById('growth-value').textContent = `${data.growthRate}%`;
+    }
+
+    // Call the update function with the mock data
+    updateDashboardCards(dashboardData);
+
+    // In a real application, you might use fetch() to get data from a server:
+    /*
+    fetch('/api/dashboard-data')
+        .then(response => response.json())
+        .then(data => {
+            updateDashboardCards(data);
+        })
+        .catch(error => console.error('Error fetching dashboard data:', error));
+    */
+});
+
+    </script>
+    <h1>22.Create a Confirmation Dialog System.</h1>
+    <h2>Default Confirmation</h2>
+    <button onclick="confirmAction()">Delete Item</button>
+
+    <script>
+        function confirmAction() {
+            if (confirm("Are you sure you want to delete this item?")) {
+                // User clicked OK (true)
+                alert("Item deleted successfully!");
+                // Add your delete logic here
+            } else {
+                // User clicked Cancel (false)
+                alert("Deletion cancelled.");
+            }
+        }
+    </script>
+    <h1>23.Build a Image Upload & Preview App.</h1>
+    <div class="container">
+        <h2>Image Upload & Preview App</h2>
+        <input type="file" id="imageInput" accept="image/*">
+        <img id="imagePreview" src="VTS logo.jpg" alt="Image Preview">
+    </div>
+
+    <script>
+        // Get references to the DOM elements
+const imageInput = document.getElementById('imageInput');
+const imagePreview = document.getElementById('imagePreview');
+
+// Add an event listener to the file input
+imageInput.addEventListener('change', function(event) {
+    const file = event.target.files[0]; // Get the first file selected by the user
+
+    if (file && file.type.startsWith('image/')) {
+        // Use the FileReader API to read the file content
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            // When the file is loaded, set the source of the image preview
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block'; // Make the image visible
+        };
+
+        // Read the image file as a Data URL (Base64 encoded string)
+        reader.readAsDataURL(file);
+    } else {
+        // Handle case where a non-image file is selected or selection is cancelled
+        imagePreview.src = '#';
+        imagePreview.style.display = 'none';
+        if (file) {
+            alert('Please select a valid image file.');
+        }
+    }
+});
+
+    </script>
+    <h1>24.Create a Form Submission Tracker.</h1>
+
+    <h1>Form Submission Tracker</h1>
+
+    <!-- The Form -->
+    <form id="submissionForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- The Tracker Display Area -->
+    <h2>Submissions (<span id="count">0</span>)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody id="submissionTableBody">
+            <!-- Submissions will be added here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('submissionForm').addEventListener('submit', function(event) {
+    // 1. Prevent the default form submission behavior (page reload)
+    event.preventDefault();
+
+    // 2. Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const timestamp = new Date().toLocaleTimeString();
+
+    // 3. Create a new table row and cells
+    const tableBody = document.getElementById('submissionTableBody');
+    const newRow = tableBody.insertRow();
+    
+    const nameCell = newRow.insertCell(0);
+    const emailCell = newRow.insertCell(1);
+    const timeCell = newRow.insertCell(2);
+
+    // 4. Populate cells with data
+    nameCell.textContent = name;
+    emailCell.textContent = email;
+    timeCell.textContent = timestamp;
+
+    // 5. Update the total submission count
+    const countElement = document.getElementById('count');
+    countElement.textContent = parseInt(countElement.textContent) + 1;
+
+    // 6. Clear the form fields for the next entry
+    event.target.reset();
+});
+
+    </script>
+    <h1>25.Build a Session Timeout App</h1>
+    <h1>Welcome to Your Secure Session</h1>
+    <p>Session will expire in 1 minute of inactivity.</p>
+    <div id="status" style="color: red; font-weight: bold;"></div>
+    <script>
+            let timeout;
+const timeoutDuration = 60000; // 60,000 ms = 1 minute
+
+function startTimer() {
+    // Clear any existing timer
+    clearTimeout(timeout);
+    
+    // Set a new timer to redirect after the duration
+    timeout = setTimeout(() => {
+        alert("Session expired due to inactivity.");
+        window.location.href = "login.html"; // Redirect to login page
+    }, timeoutDuration);
+}
+
+function resetTimer() {
+    document.getElementById('status').innerText = "Activity detected. Timer reset.";
+    startTimer();
+}
+
+// Monitor user activity: mouse, keyboard, or clicks
+window.onload = startTimer;
+window.onmousemove = resetTimer;
+window.onmousedown = resetTimer; 
+window.onclick = resetTimer;     
+window.onkeypress = resetTimer;
+window.onscroll = resetTimer;
+
+</script>
+<h1>27.Build a Dynamic Dropdown App.</h1>
+<h1>Dynamic Dropdown Example</h1>
+
+    <label for="country-select">Choose a country:</label>
+    <!-- The select element is initially empty -->
+    <select id="country-select" onchange="displaySelected()">
+        <option value="">--Select--</option>
+    </select>
+
+    <!-- Area to display the selected value -->
+    <p>Selected Value: <span id="selected-value">None</span></p>
+
+    <!-- Link to the JavaScript file -->
+    <script>
+        // 1. Define the data source
+const countries = [
+    { value: 'usa', text: 'United States' },
+    { value: 'can', text: 'Canada' },
+    { value: 'uk', text: 'United Kingdom' },
+    { value: 'aus', text: 'Australia' }
+];
+
+// 2. Function to populate the dropdown
+function populateDropdown() {
+    // Get the select element by its ID
+    const selectElement = document.getElementById('country-select');
+
+    // Loop through the data and create options
+    countries.forEach(country => {
+        const option = document.createElement('option');
+        option.value = country.value;
+        option.textContent = country.text;
+        selectElement.appendChild(option);
+    });
+}
+
+// 3. Function to handle the change event and display the selected value
+function displaySelected() {
+    const selectElement = document.getElementById('country-select');
+    const selectedValueDisplay = document.getElementById('selected-value');
+    const selectedValue = selectElement.value;
+    const selectedText = selectElement.options[selectElement.selectedIndex].textContent;
+
+    if (selectedValue) {
+        selectedValueDisplay.textContent = `${selectedText} (Value: ${selectedValue})`;
+    } else {
+        selectedValueDisplay.textContent = 'None';
+    }
+}
+
+// 4. Call the populate function when the script loads
+document.addEventListener('DOMContentLoaded', (event) => {
+    populateDropdown();
+});
+
+    </script>
+    <h1>28.Create a Search + Highlight App.</h1>
+    <div class="container">
+        <div class="search-container">
+            <label for="search-input">Search within text:</label>
+            <!-- Call the highlight function on input event for dynamic search -->
+            <input type="text" id="search-input" oninput="highlightSearch()">
+        </div>
+        
+        <div id="content">
+            <p>JavaScript is a powerful programming language that enables interactive web pages. It is one of the core technologies of the World Wide Web, alongside HTML and CSS. The Document Object Model (DOM) is a programming interface for HTML documents, which allows JavaScript to change the document structure, style, and content. This application uses DOM manipulation and regular expressions to highlight search terms dynamically.</p>
+            <p>The **mark** tag in HTML can be used to define text that should be marked or highlighted. We will use a span element with a specific class for our highlighting in this example to ensure we control the styling completely.</p>
+            <p>This is a simple but effective implementation of the search and highlight feature using vanilla JavaScript. Enjoy building web applications!</p>
+        </div>
+    </div>
+    
+    <script>
+        // Store the original content to restore it when the search is cleared
+const contentElement = document.getElementById('content');
+const originalContent = contentElement.innerHTML;
+
+function highlightSearch() {
+    const searchTerm = document.getElementById('search-input').value.trim();
+    
+    // Clear previous highlights
+    contentElement.innerHTML = originalContent;
+
+    if (searchTerm === "") {
+        return;
+    }
+
+    // Use a regular expression for global, case-insensitive matching
+    const regex = new RegExp(escapeRegExp(searchTerm), 'gi');
+    let newHTML = contentElement.innerHTML;
+
+    // Replace all occurrences of the search term with a highlighted span
+    // $& is a special replacement pattern that inserts the matched substring
+    newHTML = newHTML.replace(regex, '<span class="highlight">$&</span>');
+    
+    contentElement.innerHTML = newHTML;
+}
+
+// Helper function to escape special characters in the search term for regex
+// This prevents errors if the user types regex special characters like '.', '*', etc.
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the matched substring
+}
+
+    </script>
+    <h1>29.Build a Progress Tracker App.</h1>
+    <div class="container">
+        <h1>Task Progress Tracker</h1>
+        <form id="task-form">
+            <input type="text" id="new-task" placeholder="Enter a new task..." required>
+            <button type="submit">Add Task</button>
+        </form>
+        <ul id="task-list">
+            <!-- Tasks will be added here dynamically -->
+        </ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const taskForm = document.getElementById('task-form');
+    const newTaskInput = document.getElementById('new-task');
+    const taskList = document.getElementById('task-list');
+
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    function saveTasks() {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function renderTasks() {
+        taskList.innerHTML = '';
+        tasks.forEach((task, index) => {
+            const li = document.createElement('li');
+            li.className = 'task-item';
+            if (task.completed) {
+                li.classList.add('completed');
+            }
+            li.innerHTML = `
+                <span>${task.text}</span>
+                <div>
+                    <button onclick="toggleComplete(${index})">Toggle</button>
+                    <button onclick="deleteTask(${index})">Delete</button>
+                </div>
+            `;
+            taskList.appendChild(li);
+        });
+    }
+
+    taskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const taskText = newTaskInput.value.trim();
+        if (taskText !== '') {
+            tasks.push({ text: taskText, completed: false });
+            saveTasks();
+            renderTasks();
+            newTaskInput.value = '';
+        }
+    });
+
+    window.toggleComplete = function(index) {
+        tasks[index].completed = !tasks[index].completed;
+        saveTasks();
+        renderTasks();
+    };
+
+    window.deleteTask = function(index) {
+        tasks.splice(index, 1);
+        saveTasks();
+        renderTasks();
+    };
+
+    renderTasks(); // Initial render
+});
+
+    </script> 
+    <h1>30.Create a Client-Side Validation Library.</h1>
+    <form id="registrationForm" novalidate> <!-- novalidate disables default browser popups, allowing our JS library to control feedback -->
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" required minlength="4">
+            <span id="usernameError" class="error-message"></span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <span id="emailError" class="error-message"></span>
+        </div>
+        <div>
+            <label for="password">Password (min 6 chars, 1 number):</label>
+            <input type="password" id="password" required minlength="6" pattern="(?=.*\d).{6,}">
+            <span id="passwordError" class="error-message"></span>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="validationLibrary.js"></script>
+    <h1>31.Build a Mini Admin Panel.</h1>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="nav-links">
+                <a href="#" onclick="showContent('dashboard')">Dashboard</a>
+                <a href="#" onclick="showContent('users')">Users</a>
+                <a href="#" onclick="showContent('settings')">Settings</a>
+                <a href="#" onclick="showContent('logout')">Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Welcome, Admin</h1>
+            </header>
+            
+            <div id="content-dashboard" class="content-section active">
+                <h2>Dashboard Overview</h2>
+                <p>Welcome to your mini dashboard. Use the links on the left to navigate.</p>
+                <!-- Add your widgets/charts here -->
+            </div>
+
+            <div id="content-users" class="content-section">
+                <h2>Manage Users</h2>
+                <p>User management interface goes here.</p>
+                <!-- Add user list/table here -->
+            </div>
+
+            <div id="content-settings" class="content-section">
+                <h2>System Settings</h2>
+                <p>Configure system settings here.</p>
+                <!-- Add settings forms here -->
+            </div>
+
+            <div id="content-logout" class="content-section">
+                <h2>Logged Out</h2>
+                <p>You have been successfully logged out.</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        /**
+ * Function to switch content sections in the admin panel.
+ * @param {string} sectionId The ID of the section to show (e.g., 'dashboard', 'users').
+ */
+function showContent(sectionId) {
+    // 1. Get all content sections
+    const contentSections = document.querySelectorAll('.content-section');
+
+    // 2. Hide all sections
+    contentSections.forEach(section => {
+        section.classList.remove('active');
+    });
+
+    // 3. Show the requested section
+    const targetSection = document.getElementById('content-' + sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    }
+}
+
+// Optional: Ensure the dashboard is shown on initial load
+document.addEventListener('DOMContentLoaded', (event) => {
+    showContent('dashboard');
+});
+
+    </script>
+    <h1>32.Create a User Activity Log App.</h1>
+   <h1>Offline Notes</h1>
+    <input type="text" id="noteInput" placeholder="Enter a note...">
+    <button onclick="saveNote()">Save Note</button>
+    <ul id="noteList"></ul>
+
+    <script src="app.js"></script>
+    <h1>34.Create a Form Wizard with Conditional Steps.</h1>
+    <form id="formWizard">
+    <!-- Step 1 -->
+    <div class="step" id="step1">
+        <h2>Step 1: Contact Information</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <br>
+        <button type="button" onclick="nextStep(2)">Next</button>
+    </div>
+
+    <!-- Step 2 (Conditional) -->
+    <div class="step" id="step2" style="display:none;">
+        <h2>Step 2: Preference</h2>
+        <label for="preference">Do you prefer Option A or B?</label>
+        <select id="preference">
+            <option value="A">Option A</option>
+            <option value="B">Option B</option>
+        </select>
+        <br>
+        <button type="button" onclick="prevStep(1)">Previous</button>
+        <button type="button" onclick="conditionalNextStep()">Next</button>
+    </div>
+
+    <!-- Step 3a (Conditional: Option A) -->
+    <div class="step" id="step3a" style="display:none;">
+        <h2>Step 3a: Details for Option A</h2>
+        <p>You chose Option A.</p>
+        <label for="detailsA">Details:</label>
+        <input type="text" id="detailsA">
+        <br>
+        <button type="button" onclick="prevStep(2)">Previous</button>
+        <button type="button" onclick="submitForm()">Submit</button>
+    </div>
+
+    <!-- Step 3b (Conditional: Option B) -->
+    <div class="step" id="step3b" style="display:none;">
+        <h2>Step 3b: Details for Option B</h2>
+        <p>You chose Option B.</p>
+        <label for="detailsB">Details:</label>
+        <input type="text" id="detailsB">
+        <br>
+        <button type="button" onclick="prevStep(2)">Previous</button>
+        <button type="button" onclick="submitForm()">Submit</button>
+    </div>
+</form>
+<script>
+    // Function to show a specific step and hide others
+function showStep(stepId) {
+    const steps = document.querySelectorAll('.step');
+    steps.forEach(step => {
+        step.style.display = 'none';
+    });
+    document.getElementById(stepId).style.display = 'block';
+}
+
+// Function to move to the next sequential step
+function nextStep(stepNumber) {
+    showStep('step' + stepNumber);
+}
+
+// Function to move to the previous step
+function prevStep(stepNumber) {
+    showStep('step' + stepNumber);
+}
+
+// Function to handle conditional next step from Step 2
+function conditionalNextStep() {
+    const preference = document.getElementById('preference').value;
+    if (preference === 'A') {
+        showStep('step3a');
+    } else if (preference === 'B') {
+        showStep('step3b');
+    }
+}
+
+// Function to handle form submission (example)
+function submitForm() {
+    alert("Form Submitted! Check console for data.");
+    // Collect all form data here and process it
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        preference: document.getElementById('preference').value,
+        detailsA: document.getElementById('detailsA').value,
+        detailsB: document.getElementById('detailsB').value
+    };
+    console.log(formData);
+    // You could send this data to a server using fetch()
+}
+
+// Initialize the form wizard by showing the first step
+document.addEventListener('DOMContentLoaded', (event) => {
+    showStep('step1');
+});
+
+</script>
+<h1>35.Build a Dashboard Notification Center.</h1>
+<div class="nav-bar">
+        <div class="notification-icon" onclick="toggleNotifications()">
+            🔔 <span id="notif-count" class="badge">0</span>
+        </div>
+        
+        <!-- Dropdown Panel -->
+        <div id="notif-panel" class="notif-panel hidden">
+            <h3>Notifications</h3>
+            <div id="notif-list">
+                <p class="empty-msg">No new notifications</p>
+            </div>
+            <button onclick="clearAll()">Clear All</button>
+        </div>
+    </div>
+
+    <!-- Toast Container for live alerts -->
+    <div id="toast-container"></div>
+
+    <div class="controls">
+        <button onclick="addNotification('System Update', 'Server maintenance at 2 AM')">Test Notification</button>
+    </div>
+    <script>
+let count = 0;
+
+function toggleNotifications() {
+    document.getElementById('notif-panel').classList.toggle('hidden');
+}
+
+function addNotification(title, message) {
+    count++;
+    document.getElementById('notif-count').innerText = count;
+    
+    // 1. Add to the List
+    const list = document.getElementById('notif-list');
+    const emptyMsg = list.querySelector('.empty-msg');
+    if (emptyMsg) emptyMsg.remove();
+
+    const item = document.createElement('div');
+    item.style.borderBottom = "1px solid #eee";
+    item.innerHTML = `<strong>${title}</strong><br><small>${message}</small>`;
+    list.prepend(item);
+
+    // 2. Show Toast Alert
+    showToast(title);
+}
+
+function showToast(message) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerText = message;
+    container.appendChild(toast);
+
+    setTimeout(() => { toast.remove(); }, 3000);
+}
+
+function clearAll() {
+    count = 0;
+    document.getElementById('notif-count').innerText = count;
+    document.getElementById('notif-list').innerHTML = '<p class="empty-msg">No new notifications</p>';
+}
+
+    </script>
+    <h1>36.Create a Responsive Grid Layout App.</h1>
+    <div class="grid-container" id="grid-container">
+        <!-- Grid items will be added dynamically by JavaScript -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const gridContainer = document.getElementById('grid-container');
+    const numberOfItems = 20; // Example: create 20 grid items
+
+    function createGridItems() {
+        for (let i = 1; i <= numberOfItems; i++) {
+            // 1. Create a new div element
+            const gridItem = document.createElement('div');
+            
+            // 2. Add the 'grid-item' class for styling
+            gridItem.classList.add('grid-item');
+            
+            // 3. Add content to the item
+            gridItem.textContent = `Item ${i}`;
+            
+            // 4. Append the new item to the grid container
+            gridContainer.appendChild(gridItem);
+        }
+    }
+
+    createGridItems();
+});
+
+    </script>
+    <h1>37.Build a User Feedback Analyzer App.</h1>
+    <div class="container">
+        <h1>User Feedback Analyzer</h1>
+        <textarea id="feedbackInput" placeholder="Paste your feedback here..."></textarea>
+        <button onclick="analyzeFeedback()">Analyze Feedback</button>
+        
+        <div id="results" class="hidden">
+            <h3>Analysis Result: <span id="sentimentLabel"></span></h3>
+            <p>Score: <span id="sentimentScore"></span></p>
+        </div>
+    </div>
+    <script>
+        function analyzeFeedback() {
+    const feedback = document.getElementById('feedbackInput').value.toLowerCase();
+    const resultDiv = document.getElementById('results');
+    
+    // Simple dictionaries of sentiment words
+    const positiveWords = ['great', 'excellent', 'love', 'happy', 'good', 'awesome', 'best'];
+    const negativeWords = ['bad', 'slow', 'hate', 'terrible', 'worst', 'issue', 'broken', 'difficult'];
+
+    let score = 0;
+    const words = feedback.split(/\W+/); // Split by non-word characters
+
+    words.forEach(word => {
+        if (positiveWords.includes(word)) score++;
+        if (negativeWords.includes(word)) score--;
+    });
+
+    // Determine label based on score
+    let label = "Neutral";
+    if (score > 0) label = "Positive 😊";
+    else if (score < 0) label = "Negative 😞";
+
+    // Update UI
+    document.getElementById('sentimentLabel').innerText = label;
+    document.getElementById('sentimentScore').innerText = score;
+    resultDiv.classList.remove('hidden');
+}
+
+    </script>
+    <h1>38.Create a State Management Mini-App.</h1>
+    <h1>State Management Mini-App</h1>
+
+    <!-- State Display Area -->
+    <div class="container">
+        <h2>Current State</h2>
+        <p><strong>User Name:</strong> <span id="display-name">Guest</span></p>
+        <p><strong>Counter Value:</strong> <span id="display-count">0</span></p>
+    </div>
+
+    <!-- Actions Area -->
+    <div class="container">
+        <h2>Actions</h2>
+        <div>
+            <button onclick="incrementCounter()">Increment Count</button>
+            <button onclick="decrementCounter()">Decrement Count</button>
+        </div>
+        <div style="margin-top: 15px;">
+            <input type="text" id="name-input" placeholder="Enter new name">
+            <button onclick="updateName()">Update Name</button>
+        </div>
+    </div>
+
+    <!-- State Log Area -->
+    <div class="container">
+        <h2>State Change Log</h2>
+        <ul id="log-list">
+            <!-- Log entries will be added here by JavaScript -->
+        </ul>
+    </div>
+
+    <script>
+        // 1. Define the initial state object
+        let appState = {
+            count: 0,
+            userName: 'Guest'
+        };
+
+        // DOM elements references
+        const displayNameEl = document.getElementById('display-name');
+        const displayCountEl = document.getElementById('display-count');
+        const nameInputEl = document.getElementById('name-input');
+        const logListEl = document.getElementById('log-list');
+
+        // 2. Function to render the state to the UI
+        function renderState() {
+            displayNameEl.textContent = appState.userName;
+            displayCountEl.textContent = appState.count;
+            console.log('State rendered:', appState);
+        }
+
+        // 3. Function to log state changes
+        function logChange(message) {
+            const li = document.createElement('li');
+            li.textContent = `[LOG] ${new Date().toLocaleTimeString()}: ${message}`;
+            logListEl.prepend(li); // Add to the top of the list
+        }
+
+        // 4. State Management Actions (called by HTML buttons)
+        function incrementCounter() {
+            appState.count++; // Update the state
+            logChange(`Count incremented to ${appState.count}`);
+            renderState();   // Re-render the UI
+        }
+
+        function decrementCounter() {
+            appState.count--; // Update the state
+            logChange(`Count decremented to ${appState.count}`);
+            renderState();   // Re-render the UI
+        }
+
+        function updateName() {
+            const newName = nameInputEl.value.trim();
+            if (newName) {
+                const oldName = appState.userName;
+                appState.userName = newName; // Update the state
+                logChange(`User name changed from "${oldName}" to "${newName}"`);
+                renderState();               // Re-render the UI
+                nameInputEl.value = '';      // Clear the input field
+            } else {
+                alert('Please enter a name.');
+            }
+        }
+
+        // 5. Initial render when the page loads
+        document.addEventListener('DOMContentLoaded', (event) => {
+            renderState();
+            logChange('Application started and initial state rendered.');
+        });
+    </script>
+    <h1>39.Build a Tab Management System.</h1>
+    <div class="tab-container">
+  <div class="tab-buttons">
+    <button class="tab-button active" data-tab="tab1">Tab 1</button>
+    <button class="tab-button" data-tab="tab2">Tab 2</button>
+    <button class="tab-button" data-tab="tab3">Tab 3</button>
+  </div>
+  <div class="tab-content">
+    <div id="tab1" class="tab-panel active">Content for Tab 1 goes here.</div>
+    <div id="tab2" class="tab-panel">Content for Tab 2 goes here.</div>
+    <div id="tab3" class="tab-panel">Content for Tab 3 goes here.</div>
+  </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Remove 'active' class from all buttons and panels
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabPanels.forEach(panel => panelclassList.remove('active'));
+
+      // Add 'active' class to the clicked button and its corresponding panel
+      this.classList.add('active');
+      const targetTab = this.getAttribute('data-tab');
+      document.getElementById(targetTab).classList.add('active');
+    });
+  });
+
+  // Initial state: Show the first tab when the page loads
+  if (tabButtons.length > 0) {
+    tabButtons[0].click(); // Simulate a click on the first tab
+  }
+});
+
+</script>
+<h1>40.Create a Search & Filter Dashboard.</h1>
+<div class="dashboard-container">
+        <h1>Product Dashboard</h1>
+        <input type="text" id="searchInput" placeholder="Search products...">
+
+        <div id="itemsContainer" class="items-container">
+            <!-- Items will be displayed here -->
+            <div class="item-card">Product A - Electronics</div>
+            <div class="item-card">Product B - Books</div>
+            <div class="item-card">Product C - Home Goods</div>
+            <div class="item-card">Product D - Electronics</div>
+            <div class="item-card">Product E - Apparel</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const itemsContainer = document.getElementById('itemsContainer');
+    const allItems = itemsContainer.querySelectorAll('.item-card');
+
+    // Function to filter items
+    function filterItems() {
+        const searchTerm = searchInput.value.toLowerCase(); // Get search term, case-insensitive
+
+        allItems.forEach(item => {
+            const itemText = item.textContent.toLowerCase(); // Get item text
+
+            // Check if item text includes the search term
+            if (itemText.includes(searchTerm)) {
+                item.style.display = 'block'; // Show item
+            } else {
+                item.style.display = 'none'; // Hide item
+            }
+        });
+    }
+
+    // Add event listener to the search input for 'input' event (real-time)
+    searchInput.addEventListener('input', filterItems);
+
+    // Initial filter on page load (optional, if you have initial filters)
+    // filterItems();
+});
+
+    </script>
+    <h1>41.Build a Form Rules Engine App.</h1>
+    <form id="rulesForm">
+  <div>
+    <label for="userType">Are you a Student or Professional?</label>
+    <select id="userType">
+      <option value="">Select...</option>
+      <option value="student">Student</option>
+      <option value="pro">Professional</option>
+    </select>
+  </div>
+
+  <!-- This field is hidden by default -->
+  <div id="studentDetails" style="display:none;">
+    <label for="school">School Name:</label>
+    <input type="text" id="school">
+  </div>
+
+  <div id="proDetails" style="display:none;">
+    <label for="company">Company Name:</label>
+    <input type="text" id="company">
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+<script>
+    // Define the rules as data
+const rules = [
+  {
+    condition: () => document.getElementById('userType').value === 'student',
+    show: 'studentDetails',
+    hide: 'proDetails'
+  },
+  {
+    condition: () => document.getElementById('userType').value === 'pro',
+    show: 'proDetails',
+    hide: 'studentDetails'
+  }
+];
+
+// Function to evaluate rules
+function runRules() {
+  rules.forEach(rule => {
+    const showEl = document.getElementById(rule.show);
+    const hideEl = document.getElementById(rule.hide);
+    
+    if (rule.condition()) {
+      showEl.style.display = 'block';
+      hideEl.style.display = 'none';
+    } else if (document.getElementById('userType').value === "") {
+      // Reset if no selection
+      showEl.style.display = 'none';
+      hideEl.style.display = 'none';
+    }
+  });
+}
+
+// Attach event listener to the trigger field
+document.getElementById('userType').addEventListener('change', runRules);
+
+</script>
+<h1>42.Create a Login Attempt Limit App.</h1>
+<div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" id="loginButton">Log In</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const messageDiv = document.getElementById('message');
+    const loginButton = document.getElementById('loginButton');
+
+    const MAX_ATTEMPTS = 3;
+    const COOLDOWN_DURATION_MS = 30000; // 30 seconds
+
+    // Initialize attempt count and lock status from localStorage
+    let attempts = parseInt(localStorage.getItem('loginAttempts')) || 0;
+    let lockUntil = parseInt(localStorage.getItem('lockUntil')) || 0;
+
+    function showMessage(msg, isError = true) {
+        messageDiv.textContent = msg;
+        messageDiv.className = isError ? 'error' : 'success';
+    }
+
+    function checkLockStatus() {
+        const now = Date.now();
+        if (now < lockUntil) {
+            const timeLeft = Math.ceil((lockUntil - now) / 1000);
+            showMessage(`Too many attempts. Try again in ${timeLeft} seconds.`, true);
+            loginButton.disabled = true;
+            setTimeout(checkLockStatus, 1000); // Check again in 1 second
+            return true; // Locked
+        } else {
+            // Unlock and reset attempts
+            attempts = 0;
+            lockUntil = 0;
+            localStorage.removeItem('loginAttempts');
+            localStorage.removeItem('lockUntil');
+            loginButton.disabled = false;
+            messageDiv.textContent = '';
+            return false; // Not locked
+        }
+    }
+
+    loginForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        if (checkLockStatus()) {
+            return;
+        }
+
+        // Simple validation (for demonstration purposes)
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === "user" && password === "password") {
+            // Successful login: reset everything
+            attempts = 0;
+            lockUntil = 0;
+            localStorage.removeItem('loginAttempts');
+            localStorage.removeItem('lockUntil');
+            showMessage('Login successful! Redirecting...', false);
+            // In a real app, you would redirect the user here (e.g., window.location.href = 'dashboard.html';)
+        } else {
+            // Failed login: increment attempts
+            attempts++;
+            localStorage.setItem('loginAttempts', attempts);
+
+            if (attempts >= MAX_ATTEMPTS) {
+                // Lock the account
+                lockUntil = Date.now() + COOLDOWN_DURATION_MS;
+                localStorage.setItem('lockUntil', lockUntil);
+                checkLockStatus(); // Start the countdown
+            } else {
+                const attemptsLeft = MAX_ATTEMPTS - attempts;
+                showMessage(`Invalid credentials. ${attemptsLeft} attempts remaining.`, true);
+            }
+        }
+    });
+
+    // Initial check when the page loads
+    checkLockStatus();
+});
+
+    </script>
+    <h1>43.Build a Dynamic Content Loader App.</h1>
+    <div class="container">
+        <h1>Dynamic Content Loader</h1>
+        <p>Click a button to load content using JavaScript's Fetch API:</p>
+        
+        <button onclick="loadContent('content1.html')">Load Content 1</button>
+        <button onclick="loadContent('content2.html')">Load Content 2</button>
+        
+        <div id="content-area">
+            <!-- Dynamic content will be loaded here -->
+            <p>Select an option above to load content.</p>
+        </div>
+    </div>
+    
+    <!-- Link the JavaScript file -->
+    <script>
+        // Function to load content dynamically
+function loadContent(filename) {
+    // Select the content area element
+    const contentArea = document.getElementById('content-area');
+    
+    // Use the Fetch API to get the content from the specified file
+    fetch(filename)
+        .then(response => {
+            // Check if the request was successful
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            // Parse the response body as text (HTML in this case)
+            return response.text();
+        })
+        .then(html => {
+            // Insert the fetched HTML content into the content area
+            contentArea.innerHTML = html;
+        })
+        .catch(error => {
+            // Handle any errors during the fetch operation
+            console.error('There has been a problem with your fetch operation:', error);
+            contentArea.innerHTML = '<p style="color: red;">Error: Could not load content.</p>';
+        });
+}
+
+    </script>
+    <h1>44.Create a Simple Reporting Dashboard</h1>
+    <div class="dashboard-container">
+        <header>
+            <h1>Sales Reporting Dashboard</h1>
+        </header>
+        <div class="main-content">
+            <div class="card">
+                <h2>Total Sales</h2>
+                <p id="totalSales">$0</p>
+            </div>
+            <div class="card">
+                <h2>Monthly Visitors</h2>
+                <p id="monthlyVisitors">0</p>
+            </div>
+            <div class="card chart-container">
+                <h2>Sales Chart</h2>
+                <canvas id="salesChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Static data simulation
+    const salesData = [
+        { month: 'Jan', sales: 1200 },
+        { month: 'Feb', sales: 1900 },
+        { month: 'Mar', sales: 3000 },
+        { month: 'Apr', sales: 5000 },
+        { month: 'May', sales: 2000 },
+        { month: 'Jun', sales: 3500 }
+    ];
+    const totalSalesValue = salesData.reduce((sum, item) => sum + item.sales, 0);
+    const monthlyVisitorsValue = 50000;
+
+    // Update key metrics in HTML
+    document.getElementById('totalSales').textContent = `$${totalSalesValue.toLocaleString()}`;
+    document.getElementById('monthlyVisitors').textContent = monthlyVisitorsValue.toLocaleString();
+
+    // Render simple bar chart
+    const canvas = document.getElementById('salesChart');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        const chartWidth = canvas.width;
+        const chartHeight = canvas.height;
+        const barWidth = 40;
+        const gap = 20;
+        const maxSales = Math.max(...salesData.map(item => item.sales));
+        const scale = (chartHeight - 30) / maxSales; // Leave space for labels
+
+        ctx.fillStyle = '#493999'; // Bar color
+
+        salesData.forEach((item, index) => {
+            const barHeight = item.sales * scale;
+            const x = index * (barWidth + gap) + 10;
+            const y = chartHeight - barHeight - 10; // Position from bottom
+
+            ctx.fillRect(x, y, barWidth, barHeight);
+
+            // Add month labels
+            ctx.fillStyle = '#333';
+            ctx.fillText(item.month, x, chartHeight - 2);
+        });
+    }
+});
+
+    </script>
+    <h1>45.Build a Keyboard Accessibility App.</h1>
+    <h1>Accessibility Navigator</h1>
+    <p>Press the button below to open an accessible modal.</p>
+    <button id="openModal">Open Secure Modal</button>
+
+    <div id="overlay" class="overlay"></div>
+    <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <h2 id="modalTitle">Keyboard Trap Active</h2>
+        <p>You cannot 'Tab' out of this box. This is essential for screen readers.</p>
+        <input type="text" placeholder="First Name"><br><br>
+        <button id="closeModal">Close (Esc)</button>
+    </div>
+
+    <script>
+        const openBtn = document.getElementById('openModal');
+        const closeBtn = document.getElementById('closeModal');
+        const modal = document.getElementById('modal');
+        const overlay = document.getElementById('overlay');
+
+        // Identify focusable elements
+        const focusableElements = 'button, input, [href]';
+        const firstFocusableElement = modal.querySelectorAll(focusableElements)[0];
+        const lastFocusableElement = modal.querySelectorAll(focusableElements)[1];
+         openBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+            firstFocusableElement.focus(); // Set focus inside
+        });
+
+        const closeModal = () => {
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+            openBtn.focus(); // Return focus to trigger
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+
+        // Keyboard Trap Logic
+        modal.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+
+            if (e.key === 'Tab') {
+                if (e.shiftKey) { // Shift + Tab
+                    if (document.activeElement === firstFocusableElement) {
+                        lastFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                } else { // Tab
+                    if (document.activeElement === lastFocusableElement) {
+                        firstFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            }
+        });
+    </script>
+    <h1>46.Create a UI Error Handling System.</h1>
+    <h1>Error Handling Demo</h1>
+    <input type="number" id="num1" placeholder="Enter a number">
+    <input type="number" id="num2" placeholder="Enter another number">
+    <button onclick="performDivision()">Divide</button>
+    <div id="result"></div>
+    <div id="error-message"></div>
+
+    <script>
+        function performDivision() {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+    const resultDiv = document.getElementById('result');
+    const errorDiv = document.getElementById('error-message');
+
+    // Clear previous messages
+    resultDiv.textContent = '';
+    errorDiv.textContent = '';
+    errorDiv.classList.remove('success'); // Remove success class if present
+
+    try {
+        if (isNaN(num1) || isNaN(num2)) {
+            // Throw a custom error for invalid input
+            throw new Error("Please enter valid numbers.");
+        }
+        if (num2 === 0) {
+            // Throw a specific error for division by zero
+            throw new Error("Cannot divide by zero!");
+        }
+
+        const divisionResult = num1 / num2;
+        resultDiv.textContent = `Result: ${divisionResult}`;
+        resultDiv.classList.add('success'); // Add success class for good results
+
+    } catch (error) {
+        // Handle the error and display it to the user
+        console.error("Caught an error:", error.message); // Log to console for debugging
+        errorDiv.textContent = `Error: ${error.message}`; // Display in UI
+        resultDiv.textContent = ''; // Clear any partial result
+    }
+}
+
+    </script>
+    <h1>47.Build a Dashboard Theme Customizer</h1>
+    <header class="header">...</header>
+    <div class="container">
+        <aside class="sidebar">
+            <nav>...</nav>
+            <div class="theme-customizer">
+                <h3>Theme Settings</h3>
+                <label for="primaryColor">Primary Color:</label>
+                <input type="color" id="primaryColor" value="#007bff">
+                <label for="bgColor">Background Color:</label>
+                <input type="color" id="bgColor" value="#f4f4f4">
+                <button id="saveTheme">Save Theme</button>
+                <button id="resetTheme">Reset Theme</button>
+            </div>
+        </aside>
+        <main class="main-content">
+            <div class="cards-container">
+                <div class="card">Card 1</div>
+                <div class="card">Card 2</div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const primaryColorInput = document.getElementById('primaryColor');
+const bgColorInput = document.getElementById('bgColor');
+const saveButton = document.getElementById('saveTheme');
+const resetButton = document.getElementById('resetTheme');
+
+// Function to apply theme
+function applyTheme(primary, background) {
+    document.documentElement.style.setProperty('--primary-color', primary);
+    document.documentElement.style.setProperty('--background-color', background);
+}
+
+// Load saved theme or defaults
+let savedTheme1 = localStorage.getItem('dashboardTheme');
+if (savedTheme1) {
+    const { primary, background } = JSON.parse(savedTheme1);
+    applyTheme(primary, background);
+    primaryColorInput.value = primary;
+    bgColorInput.value = background;
+} else {
+    applyTheme(primaryColorInput.value, bgColorInput.value);
+}
+
+// Event Listeners
+primaryColorInput.addEventListener('input', (e) => {
+    applyTheme(e.target.value, bgColorInput.value);
+});
+
+bgColorInput.addEventListener('input', (e) => {
+    applyTheme(primaryColorInput.value, e.target.value);
+});
+
+saveButton.addEventListener('click', () => {
+    localStorage.setItem('dashboardTheme', JSON.stringify({
+        primary: primaryColorInput.value,
+        background: bgColorInput.value
+    }));
+    alert('Theme saved!');
+});
+
+resetButton.addEventListener('click', () => {
+    localStorage.removeItem('dashboardTheme');
+    applyTheme('#007bff', '#f4f4f4'); // Reset to defaults
+    primaryColorInput.value = '#007bff';
+    bgColorInput.value = '#f4f4f4';
+});
+
+    </script>
+    <h1>48.Create a User Onboarding Flow App.</h1>
+    <div class="onboarding-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div id="progress" class="progress-fill"></div>
+        </div>
+
+        <!-- Step 1: Welcome -->
+        <div class="step active" id="step1">
+            <h1>Welcome to the App!</h1>
+            <p>Let's get your account set up in just a few seconds.</p>
+            <button onclick="nextStep(2)">Get Started</button>
+        </div>
+
+        <!-- Step 2: Profile Info -->
+        <div class="step" id="step2">
+            <h1>Tell us about yourself</h1>
+            <input type="text" id="userName" placeholder="Enter your name" required>
+            <select id="interest">
+                <option value="">Select an interest</option>
+                <option value="design">Design</option>
+                <option value="coding">Coding</option>
+                <option value="marketing">Marketing</option>
+                 </select>
+            <div class="btn-group">
+                <button class="secondary" onclick="nextStep(1)">Back</button>
+                <button onclick="nextStep(3)">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Success -->
+        <div class="step" id="step3">
+            <h1>You're all set!</h1>
+            <p>Welcome aboard, <span id="display-name"></span>!</p>
+            <button onclick="location.reload()">Finish</button>
+        </div>
+    </div>
+
+    <script>
+    function nextStep(stepNumber) {
+    // 1. Hide all steps
+    const steps = document.querySelectorAll('.step');
+    steps.forEach(step => step.classList.remove('active'));
+
+    // 2. Show the target step
+    const targetStep = document.getElementById(`step${stepNumber}`);
+    targetStep.classList.add('active');
+
+    // 3. Update Progress Bar
+    const progress = document.getElementById('progress');
+    const percentage = (stepNumber / 3) * 100;
+    progress.style.width = `${percentage}%`;
+
+    // 4. Custom Logic: Capture name for the final screen
+    if (stepNumber === 3) {
+        const name = document.getElementById('userName').value;
+        document.getElementById('display-name').innerText = name || "Guest";
+    }
+}
+
+    </script>
+    <h1>49.Build a Client-Side Routing App.</h1>
+    <nav>
+        <a href="#/">Home</a>
+        <a href="#/about">About</a>
+        <a href="#/contact">Contact</a>
+    </nav>
+    
+    <main id="app-container"></main>
+
+    <script src="router.js"></script>
+    <h1>50.Create a Complete Interview-Ready Mini Application combining form, dashboard, storage, and validation.</h1>
+    <h1>User Registration</h1>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2>TaskMaster</h2>
+            <ul>
+                <li onclick="showPage('dashboard')" class="nav-item active">Dashboard</li>
+                <li onclick="showPage('form')" class="nav-item">Add New Task</li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Dashboard View -->
+            <section id="dashboard-page">
+                <h1>Dashboard</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">Total: <span id="total-count">0</span></div>
+                    <div class="stat-card">Pending: <span id="pending-count">0</span></div>
+                </div>
+                <table id="task-table">
+                    <thead>
+                        <tr>
+                            <th>Task Name</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="task-list"></tbody>
+                </table>
+            </section>
+
+            <!-- Form View -->
+            <section id="form-page" style="display:none;">
+                <h1>Create Task</h1>
+                <form id="task-form" novalidate>
+                    <div class="form-group">
+                        <label>Task Title</label>
+                        <input type="text" id="task-title" placeholder="Enter task name...">
+                        <small class="error" id="title-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select id="task-priority">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit">Save Task</button>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script>
+        // State Management
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+// View Toggler
+function showPage(pageId) {
+    document.getElementById('dashboard-page').style.display = pageId === 'dashboard' ? 'block' : 'none';
+    document.getElementById('form-page').style.display = pageId === 'form' ? 'block' : 'none';
+    renderTasks();
+}
+
+// Form Validation and Submission
+document.getElementById('task-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('task-title').value;
+    const priority = document.getElementById('task-priority').value;
+    const errorEl = document.getElementById('title-error');
+
+    // Validation logic
+    if (title.length < 3) {
+        errorEl.textContent = "Title must be at least 3 characters long.";
+        return;
+    }
+    errorEl.textContent = "";
+
+    // Storage logic
+    const newTask = { id: Date.now(), title, priority, status: 'Pending' };
+    tasks.push(newTask);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    
+    e.target.reset();
+    showPage('dashboard');
+});
+
+// Render Dashboard Data
+function renderTasks() {
+    const list = document.getElementById('task-list');
+    list.innerHTML = '';
+    
+    tasks.forEach(task => {
+        const row = `
+            <tr>
+                <td>${task.title}</td>
+                <td>${task.priority}</td>
+                <td><span class="status-pill">${task.status}</span></td>
+                <td><button onclick="deleteTask(${task.id})" style="color:red">Delete</button></td>
+            </tr>
+        `;
+        list.innerHTML += row;
+    });
+
+    // Update Stats
+    document.getElementById('total-count').textContent = tasks.length;
+    document.getElementById('pending-count').textContent = tasks.filter(t => t.status === 'Pending').length;
+}
+
+// Delete Logic
+function deleteTask(id) {
+    tasks = tasks.filter(task => task.id !== id);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks();
+}
+
+// Initial Load
+renderTasks();
+
+    </script>
+    </body>
+</html>
