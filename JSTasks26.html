@@ -1,0 +1,3997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks- Day 26</title>
+    <style>
+        .container { max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        input { width: 300px; padding: 10px; margin-bottom: 10px; box-sizing: border-box; }
+        button { width: 200px; padding: 10px; background-color: #007BFF; color: white; border: none; cursor: pointer; }
+        #message { color: red; margin-bottom: 10px; }
+        #welcome-container { display: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .form-container { margin-bottom: 20px; }
+        .hidden { display: none; }
+        .filters { margin-top: 15px; text-align: center; }
+        .filters button { padding: 8px 12px; margin: 0 5px; cursor: pointer; }
+        .filters button.active { background-color: #007bff; color: white; }
+        ul { list-style-type: none; padding: 0; margin-top: 20px; }
+        li { padding: 10px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
+        li.completed span { text-decoration: line-through; color: gray; }
+        li button { background-color: #dc3545; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
+        input[type="checkbox"] { margin-right: 10px; cursor: pointer; }
+        .form-container {
+    background: white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+.form-step {
+    display: flex;
+    flex-direction: column;
+}
+root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --header-bg: #f0f0f0;
+}
+
+/* Dark Theme Variables applied when the 'dark-theme' class is present on the body */
+body.dark-theme {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --header-bg: #333333;
+}
+
+/* General Styling */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--header-bg);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main {
+    padding: 20px;
+}
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+/* Modal Overlay (Hidden by default) */
+.modal-overlay {
+    display: none; /* Hide the modal by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+    justify-content: center; /* Center modal horizontally */
+    align-items: center; /* Center modal vertically */
+}
+#extendButton {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+        }
+
+        #logoutButton {
+            background-color: #f44336; /* Red */
+            color: white;
+            border: none;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px;
+            text-align: center;
+        }
+
+/* Modal Content Box */
+.modal {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be responsive */
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modal-body {
+    padding: 10px 0;
+}
+
+.modal-footer {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    text-align: right;
+}
+
+/* Close Button */
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Class to display the modal using JS */
+.show-modal {
+    display: flex; 
+}
+.dashboard-container { display: flex; min-height: 100vh; }
+        .sidebar { width: 250px; background-color: #333; color: white; padding-top: 20px; transition: margin-left 0.3s; }
+        .sidebar.collapsed { margin-left: -250px; }
+        .sidebar a { display: block; color: white; padding: 10px 15px; text-decoration: none; }
+        .sidebar a:hover { background-color: #575757; }
+        .main-content-container { flex-grow: 1; display: flex; flex-direction: column; }
+        .top-navbar { background-color: #eee; padding: 10px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd; }
+        .menu-toggle { cursor: pointer; font-size: 24px; margin-right: 20px; }
+        .main-content { padding: 20px; }
+        .container { display: flex; flex-direction: column; }
+        input { padding: 10px; margin-bottom: 10px; font-size: 16px; }
+#strength-indicator { font-weight: bold; padding: 5px; text-align: center; }
+        .weak { color: #D9534F; background-color: #F2DEDE; } /* Red */
+        .medium { color: #F0AD4E; background-color: #FCF8E3; } /* Orange */
+        .strong { color: #5CB85C; background-color: #DFF0D8; } /* Green */
+        .very-strong { color: #337AB7; background-color: #D9EDF7; } /* Blue */
+   table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #04AA6D;
+    color: white;
+    cursor: pointer; /* Makes headers look clickable */
+}
+
+th:hover {
+    background-color: #069b61;
+}
+
+#searchInput {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.conditional-field {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+body {
+    font-family: sans-serif;
+}
+
+/* Container for all toasts (fixed position in bottom right) */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+/* Individual toast styling */
+.toast {
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: white;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    min-width: 250px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Classes to show/hide the toast */
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* Specific styling for different toast types */
+.toast.success {
+    background-color: #4CAF50; /* Green */
+}
+
+.toast.error {
+    background-color: #F44336; /* Red */
+}
+
+.toast.info {
+    background-color: #2196F3; /* Blue */
+}
+#previewArea {
+            margin-top: 15px;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            min-height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            max-width: 500px;
+        }
+        #previewArea img {
+            max-width: 100%;
+            max-height: 300px;
+            display: none; /* Initially hidden */
+        }
+        .placeholder-text {
+            color: #888;
+        }
+.list-item {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+            list-style-type: none;
+        }
+        .pagination-container button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .pagination-container button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .tab-button {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 5px;
+        }
+
+        .tab-button:hover {
+            background-color: #ddd;
+        }
+
+        .tab-button.active {
+            background-color: #ccc;
+            border-bottom: 2px solid #333;
+        }
+
+        /* CSS for the content sections */
+        .tab-content {
+            display: none; /* Hide all content by default */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none; /* Make content appear connected to the tabs */
+        }
+
+        .tab-content.active {
+            display: block; /* Show active content */
+        }
+        .hidden { display: none; }
+        .container { border: 1px solid #ccc; padding: 15px; margin-top: 10px; }
+        #roleSelector { padding: 8px; }
+        .product-list, .cart-list { list-style: none; padding: 0; }
+        .product-item, .cart-item { padding: 10px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
+        .add-btn, .remove-btn { background-color: #007bff; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
+        .remove-btn { background-color: #dc3545; }
+        .total-price { font-size: 1.2em; font-weight: bold; margin-top: 15px; }
+   .editor, .preview { border: 1px solid #ccc; padding: 15px; width: 45%; }
+        .editor div { margin-bottom: 10px; }
+        input[type="text"], textarea { width: 95%; padding: 8px; }
+        #profileImage { max-width: 100px; border-radius: 50%;}
+        .preview-card { border: 1px solid #eee; padding: 20px; text-align: center; }
+  .clear-btn { background: #ff4d4d; color: white; border: none; }
+#activity-log { list-style: none; padding: 0; margin-top: 20px; border-top: 1px solid #eee; }
+#activity-log li { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+
+.search-container {
+    position: relative;
+}
+dialog {
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 300px;
+}
+.task-input {display: flex; gap: 10px; margin-bottom: 20px;}
+
+#taskList {list-style: none; padding: 0;}
+#taskList li {display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee;}
+#taskList li span {flex-grow: 1; margin-right: 10px; cursor: pointer;}
+#taskList li.completed span {text-decoration: line-through; color: #888;}
+.delete-btn {background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding doesn't increase width */
+}
+
+#suggestionsList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    background: white;
+    display: none; /* Hide the list initially */
+}
+
+#suggestionsList li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#suggestionsList li:hover {
+    background-color: #f1f1f1;
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.value { font-size: 2rem; font-weight: bold; }
+.nav-container { position: relative; }
+
+.notification-icon { cursor: pointer; font-size: 24px; position: relative; }
+.badge { background-color: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; position: absolute; top: -8px; right: -10px; }
+
+.notification-center {
+    position: absolute;
+    top: 60px; /* Below header */
+    right: 20px;
+    width: 300px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none; /* Hidden by default */
+}
+.notification-center h3 { padding: 10px; margin: 0; border-bottom: 1px solid #eee; }
+#notificationList { max-height: 300px; overflow-y: auto; }
+.notification-item { padding: 10px 15px; border-bottom: 1px solid #eee; }
+.notification-item:last-child { border-bottom: none; }
+.notification-item:hover { background-color: #f9f9f9; }
+
+.content { padding: 20px; }
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 9999;
+}
+
+.notification {
+    background: #fff;
+    color: #333;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-left: 5px solid #ccc;
+    cursor: pointer;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.notification.success { border-left-color: #2ecc71; }
+.notification.error { border-left-color: #e74c3c; }
+.notification.info { border-left-color: #3498db; }
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+#content-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .item { border: 1px solid #ccc; padding: 15px; border-radius: 8px; background: #f9f9f9; }
+        .item h3 { margin-top: 0; color: #007BFF; }
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+.nav-links li a:hover {
+    background-color: #575757;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8em;
+    cursor: pointer;
+    display: none; /* Hide by default on desktop */
+}
+
+/* JavaScript class for showing the menu */
+.nav-links.active {
+    display: flex !important;
+}
+
+/* Responsive Styles (Mobile View) */
+@media (max-width: 768px) {
+    .toggle-button {
+        display: block; /* Show button on mobile */
+    }
+
+    .nav-links {
+        display: none; /* Hide links on mobile initially */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 50px; /* Adjust based on navbar height */
+        left: 0;
+        background-color: #333;
+    }
+
+    .nav-links li a {
+        padding: 15px;
+        text-align: center;
+    }
+}
+main{
+    padding: 20px;
+}.login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .login-container button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+        #message-area {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            min-height: 1em; /* Prevents layout shift when message appears */
+        }
+        .error {
+            color: #dc3545;
+        }
+        .success {
+            color: #28a745;
+        }
+#submissionForm { margin-bottom: 30px; padding: 15px; border: 1px solid #ccc; }
+#historyContainer div { padding: 8px; border-bottom: 1px dotted #eee; }
+body {
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+#searchInput {
+    padding: 10px;
+    width: 90%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.highlight {
+    background-color: yellow; /* Highlight color */
+    font-weight: bold;
+}
+sidebar {
+            width: 200px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .toggle-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+        .card-container {
+            display: flex;
+            gap: 20px;
+        }
+        .card {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+        .onboarding-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    width: 350px;
+}
+
+.step { display: none; }
+.step.active { display: block; animation: fadeIn 0.4s; }
+
+.progress-container {
+    background: #e0e0e0;
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+.btn-secondary { background: #95a5a6; margin-right: 10px; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.progress-bar {
+    background: #4a90e2;
+    height: 100%;
+    width: 33%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+:root {
+    --primary-color: #3498db;
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: sans-serif;
+    margin: 0;
+}
+
+
+#sidebar {
+    width: 250px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+}
+
+#main-content { flex: 1; padding: 20px; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.hidden { display: none; }
+
+#customizer {
+    position: fixed;
+    right: 20px;
+    top: 60px;
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+}
+
+   </style>
+   
+    <script src="https://cdn.jsdelivr.net"></script>
+</head>
+<body>
+ <h1>1.Build a login app with validation and saved login state.</h1>
+    <div class="container" id="login-container">
+        <h2>Login</h2>
+        <div id="message"></div>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+
+    <div class="container" id="welcome-container">
+        <h2 id="welcome-message"></h2>
+        <p>You are logged in.</p>
+        <button id="logout-button">Log Out</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const loginContainer = document.getElementById('login-container');
+    const welcomeContainer = document.getElementById('welcome-container');
+    const welcomeMessage = document.getElementById('welcome-message');
+    const loginForm = document.getElementById('login-form');
+    const logoutButton = document.getElementById('logout-button');
+    const messageArea = document.getElementById('message');
+
+    // Simulated user data (in a real app, this would be on a server)
+    const VALID_USERNAME = 'user@example.com';
+    const VALID_PASSWORD = 'password123';
+
+    // Function to show the correct view based on login status
+    function updateView() {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (loggedInUser) {
+            loginContainer.style.display = 'none';
+            welcomeContainer.style.display = 'block';
+            welcomeMessage.textContent = `Welcome, ${loggedInUser}!`;
+        } else {
+            loginContainer.style.display = 'block';
+            welcomeContainer.style.display = 'none';
+        }
+    }
+
+    // Handle login form submission
+    loginForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+
+        // Basic validation and authentication simulation
+        if (username === '' || password === '') {
+            messageArea.textContent = 'Please enter both username and password.';
+            return;
+        }
+
+        if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+            messageArea.textContent = '';
+            // Save login state to localStorage
+            localStorage.setItem('loggedInUser', username);
+            updateView();
+        } else {
+            messageArea.textContent = 'Invalid username or password.';
+        }
+
+        // Clear password field after submission
+        passwordInput.value = '';
+    });
+
+    // Handle logout
+    logoutButton.addEventListener('click', () => {
+        // Clear login state from localStorage
+        localStorage.removeItem('loggedInUser');
+        updateView();
+    });
+
+    // Initialize view on page load
+    updateView();
+});
+
+    </script> 
+    <h1>2.Create a user management app with add, edit, delete.</h1>
+    <h1>User Management</h1>
+
+    <div class="form-container">
+        <h2>Add/Edit User</h2>
+        <form id="userForm">
+            <input type="hidden" id="userId">
+            <input type="text" id="userName" placeholder="Enter Name" required>
+            <input type="email" id="userEmail" placeholder="Enter Email" required>
+            <button type="submit" id="submitBtn">Add User</button>
+        </form>
+    </div>
+
+    <h2>User List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody">
+            <!-- User rows will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+     document.addEventListener('DOMContentLoaded', () => {
+    const userForm = document.getElementById('userForm');
+    const userTableBody = document.getElementById('userTableBody');
+    const userIdInput = document.getElementById('userId');
+    const userNameInput = document.getElementById('userName');
+    const userEmailInput = document.getElementById('userEmail');
+    const submitBtn = document.getElementById('submitBtn');
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Function to render users in the table
+    function renderUsers() {
+        userTableBody.innerHTML = '';
+        users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>
+                    <button onclick="editUser('${user.id}')">Edit</button>
+                    <button onclick="deleteUser('${user.id}')">Delete</button>
+                </td>
+            `;
+            userTableBody.appendChild(row);
+        });
+    }
+
+    // Function to handle form submission (Add/Edit)
+    userForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = userNameInput.value;
+        const email = userEmailInput.value;
+        const id = userIdInput.value;
+
+        if (id) {
+            // Edit existing user
+            const index = users.findIndex(u => u.id === id);
+            if (index !== -1) {
+                users[index].name = name;
+                users[index].email = email;
+            }
+            userIdInput.value = '';
+            submitBtn.textContent = 'Add User';
+        } else {
+            // Add new user
+            const newUser = {
+                id: Date.now().toString(), // Simple unique ID
+                name,
+                email
+            };
+            users.push(newUser);
+        }
+
+        localStorage.setItem('users', JSON.stringify(users));
+        renderUsers();
+        userForm.reset();
+    });
+
+    // Function to populate the form for editing
+    window.editUser = (id) => {
+        const user = users.find(u => u.id === id);
+        if (user) {
+            userIdInput.value = user.id;
+            userNameInput.value = user.name;
+            userEmailInput.value = user.email;
+            submitBtn.textContent = 'Update User';
+        }
+    };
+
+    // Function to delete a user
+    window.deleteUser = (id) => {
+        users = users.filter(u => u.id !== id);
+        localStorage.setItem('users', JSON.stringify(users));
+        renderUsers();
+    };
+
+    // Initial render
+    renderUsers();
+});
+
+    </script>
+    <h1>3.Build a to-do app with completed and pending filters.</h1>
+    <div class="container">
+        <h1>Simple To-Do App</h1>
+        <input type="text" id="new-task-input" placeholder="Enter a new task...">
+        <button id="add-task">Add</button>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="pending">Pending</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <ul id="task-list">
+            <!-- Tasks will be added here by JavaScript -->
+        </ul>
+    </div>
+
+    <script>
+        // JavaScript logic goes here
+        document.addEventListener('DOMContentLoaded', () => {
+            const newTaskInput = document.getElementById('new-task-input');
+            const addTaskButton = document.getElementById('add-task');
+            const taskList = document.getElementById('task-list');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+
+            let tasks = [];
+            let currentFilter = 'all'; // 'all', 'pending', 'completed'
+
+            // Function to render tasks based on the current filter
+            function renderTasks() {
+                taskList.innerHTML = '';
+                const filteredTasks = tasks.filter(task => {
+                    if (currentFilter === 'pending') return !task.completed;
+                    if (currentFilter === 'completed') return task.completed;
+                    return true; // 'all' filter
+                });
+
+                filteredTasks.forEach((task, index) => {
+                    const li = document.createElement('li');
+                    li.className = task.completed ? 'completed' : '';
+                    li.innerHTML = `
+                        <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTaskStatus(${index})">
+                        <span>${task.text}</span>
+                        <button onclick="deleteTask(${index})">Delete</button>
+                    `;
+                    taskList.appendChild(li);
+                });
+            }
+
+            // Function to add a new task
+            function addTask() {
+                const taskText = newTaskInput.value.trim();
+                if (taskText !== '') {
+                    tasks.push({ text: taskText, completed: false });
+                    newTaskInput.value = '';
+                    renderTasks();
+                }
+            }
+
+            // Function to toggle task status (global scope for inline onclick)
+            window.toggleTaskStatus = function(index) {
+                // Adjust the index to match the actual position in the original tasks array
+                const originalIndex = tasks.findIndex(t => t.text === tasks[index].text && t.completed === tasks[index].completed);
+                if (originalIndex !== -1) {
+                    tasks[originalIndex].completed = !tasks[originalIndex].completed;
+                    renderTasks();
+                }
+            };
+
+            // Function to delete a task (global scope for inline onclick)
+            window.deleteTask = function(index) {
+                // Adjust the index to match the actual position in the original tasks array
+                const originalIndex = tasks.findIndex(t => t.text === tasks[index].text && t.completed === tasks[index].completed);
+                if (originalIndex !== -1) {
+                    tasks.splice(originalIndex, 1);
+                    renderTasks();
+                }
+            };
+
+            // Event listener for the Add Task button
+            addTaskButton.addEventListener('click', addTask);
+
+            // Event listener for Enter key on the input field
+            newTaskInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
+
+            // Event listeners for filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentFilter = button.getAttribute('data-filter');
+                    renderTasks();
+                });
+            });
+
+            // Initial render
+            renderTasks();
+        });
+    </script>
+    <h1>4.Create a dynamic table from form input.</h1>
+    <h1>Create a Dynamic Table</h1>
+
+    <!-- Input Form -->
+    <form id="dataForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" required>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" required>
+
+        <button type="submit">Add Row</button>
+    </form>
+
+    <hr>
+
+    <!-- Table Structure -->
+    <h2>Data Table</h2>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <!-- Table body where new rows will be added -->
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <!-- Link to external JavaScript file -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Get references to the form and the table body
+    const dataForm = document.getElementById('dataForm');
+    const tableBody = document.getElementById('tableBody');
+
+    // Add an event listener for the form submission
+    dataForm.addEventListener('submit', function(event) {
+        // Prevent the default form submission behavior (which would refresh the page)
+        event.preventDefault();
+
+        // Get the values from the input fields
+        const name = document.getElementById('name').value;
+        const age = document.getElementById('age').value;
+        const city = document.getElementById('city').value;
+
+        // Call the function to add the new row to the table
+        addRow(name, age, city);
+
+        // Reset the form fields for the next entry
+        dataForm.reset();
+    });
+
+    function addRow(name, age, city) {
+        // Create a new table row element
+        const newRow = document.createElement('tr');
+
+        // Create individual cell elements (td)
+        const nameCell = document.createElement('td');
+        const ageCell = document.createElement('td');
+        const cityCell = document.createElement('td');
+
+        // Set the text content of the cells to the input values
+        nameCell.textContent = name;
+        ageCell.textContent = age;
+        cityCell.textContent = city;
+
+        // Append the cells to the new row
+        newRow.appendChild(nameCell);
+        newRow.appendChild(ageCell);
+        newRow.appendChild(cityCell);
+
+        // Append the completed new row to the table body
+        tableBody.appendChild(newRow);
+    }
+});
+
+    </script>
+    <h1>5.Build a multi-step registration form.</h1>
+    <div class="form-container">
+        <!-- Step 1: Account Information -->
+        <form id="step1" class="form-step">
+            <h2>Step 1: Account Information</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <button type="button" onclick="nextStep(2)">Next</button>
+        </form>
+
+        <!-- Step 2: Personal Information -->
+        <form id="step2" class="form-step" style="display: none;">
+            <h2>Step 2: Personal Information</h2>
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <button type="button" onclick="prevStep(1)">Previous</button>
+            <button type="button" onclick="nextStep(3)">Next</button>
+        </form>
+
+        <!-- Step 3: Confirmation -->
+        <form id="step3" class="form-step" style="display: none;">
+            <h2>Step 3: Confirmation</h2>
+            <p>Review your information before submitting.</p>
+            <p>Username: <strong id="confirmUsername"></strong></p>
+            <p>Full Name: <strong id="confirmFullname"></strong></p>
+            <p>Email: <strong id="confirmEmail"></strong></p>
+            <button type="button" onclick="prevStep(2)">Previous</button>
+            <button type="submit" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to hide all steps and show the current one
+function showStep(stepNumber) {
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'none';
+    document.getElementById('step3').style.display = 'none';
+    document.getElementById('step' + stepNumber).style.display = 'flex';
+}
+
+// Function to move to the next step
+function nextStep(stepNumber) {
+    // Optional: Add validation logic here before moving on
+
+    if (stepNumber === 3) {
+        // Collect data for confirmation step
+        document.getElementById('confirmUsername').textContent = document.getElementById('username').value;
+        document.getElementById('confirmFullname').textContent = document.getElementById('fullname').value;
+        document.getElementById('confirmEmail').textContent = document.getElementById('email').value;
+    }
+    showStep(stepNumber);
+}
+
+// Function to move to the previous step
+function prevStep(stepNumber) {
+    showStep(stepNumber);
+}
+
+// Function to handle form submission
+function submitForm() {
+    alert("Form Submitted Successfully!");
+    // Here you would typically send the data to a server using an API call (e.g., fetch())
+    console.log("Username:", document.getElementById('username').value);
+    console.log("Full Name:", document.getElementById('fullname').value);
+    console.log("Email:", document.getElementById('email').value);
+}
+
+// Initialize the form to show step 1 on load
+showStep(1);
+
+    </script>
+    <h1>6.Create a theme switcher and save preference.</h1>
+    <header>
+        <h1>Theme Switcher</h1>
+        <!-- The button to trigger the theme change -->
+        <button id="theme-toggle">Switch Theme</button>
+    </header>
+
+    <main>
+        <p>
+            This page uses local storage to remember your preferred theme. Try switching the theme and refreshing the page.
+        </p>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+    const DARK_THEME_CLASS = 'dark-theme';
+    const THEME_STORAGE_KEY = 'user-theme';
+
+    // --- Function to apply the stored theme on page load ---
+    function applyStoredTheme() {
+        // Check local storage for a saved theme preference
+        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+        
+        if (savedTheme === 'dark') {
+            // If the saved preference is 'dark', add the dark-theme class
+            body.classList.add(DARK_THEME_CLASS);
+        } else {
+            // Otherwise, ensure the light theme is active (or default)
+            body.classList.remove(DARK_THEME_CLASS);
+        }
+    }
+
+    // --- Function to toggle the theme and save the preference ---
+    function toggleTheme() {
+        // Toggle the dark-theme class on the body
+        body.classList.toggle(DARK_THEME_CLASS);
+        
+        // Determine the current theme after the toggle
+        const currentTheme = body.classList.contains(DARK_THEME_CLASS) ? 'dark' : 'light';
+        
+        // Save the new preference to local storage
+        localStorage.setItem(THEME_STORAGE_KEY, currentTheme);
+    }
+
+    // --- Event Listeners and Initialization ---
+    // Apply the theme immediately when the script runs/DOM loads
+    applyStoredTheme();
+
+    // Add click listener to the button to allow user interaction
+    themeToggleBtn.addEventListener('click', toggleTheme);
+});
+
+    </script>
+    <h1>7.Build a search and filter app for a list.</h1>
+    <h2>My Filterable List</h2>
+
+    <!-- Input field for search -->
+    <input type="text" id="searchInput" onkeyup="filterList()" placeholder="Search for items...">
+
+    <!-- The list we will filter -->
+    <ul id="myList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Cherry</li>
+        <li>Date</li>
+        <li>Elderberry</li>
+        <li>Fig</li>
+        <li>Grape</li>
+        <li>Honeydew</li>
+    </ul>
+
+    <!-- Link to the JavaScript file -->
+    <script>
+        function filterList() {
+    // Declare variables
+    let input, filter, ul, li, i, txtValue;
+    
+    // Get the input element and the value entered by the user, converted to uppercase for case-insensitive comparison
+    input = document.getElementById('searchInput');
+    filter = input.value.toUpperCase();
+    
+    // Get the list element and all list items
+    ul = document.getElementById("myList");
+    li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who do not match the search query
+    for (i = 0; i < li.length; i++) {
+        txtValue = li[i].textContent || li[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = ""; // Show the item
+        } else {
+            li[i].style.display = "none"; // Hide the item
+        }
+    }
+}
+
+    </script>
+    <h1>8.Create a modal popup system.</h1>
+    <button id="openModalBtn">Open Modal</button>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        
+        <!-- Modal Content -->
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Modal Title</h2>
+                <span class="close-btn" id="closeModalBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>This is the content of the modal popup.</p>
+                <p>You can put forms, messages, or other elements here.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="closeModalBtnFooter">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// Get references to the elements
+const openModalBtn = document.getElementById('openModalBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const closeModalBtnFooter = document.getElementById('closeModalBtnFooter');
+const modalOverlay = document.getElementById('modalOverlay');
+
+// Function to open the modal
+function openModal() {
+    modalOverlay.classList.add('show-modal');
+}
+
+// Function to close the modal
+function closeModal() {
+    modalOverlay.classList.remove('show-modal');
+}
+
+// Event listeners
+openModalBtn.addEventListener('click', openModal);
+closeModalBtn.addEventListener('click', closeModal);
+closeModalBtnFooter.addEventListener('click', closeModal);
+
+// Optional: Close the modal if the user clicks outside of the modal content
+window.addEventListener('click', (event) => {
+    if (event.target === modalOverlay) {
+        closeModal();
+    }
+});
+
+    </script>
+    <h1>9.Build a dashboard layout with sidebar navigation.</h1>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <h2>Dashboard</h2>
+            <nav>
+                <a href="#dashboard">Dashboard Overview</a>
+                <a href="#profile">Profile</a>
+                <a href="#settings">Settings</a>
+                <a href="#logout">Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-content-container">
+            <!-- Top Navigation Bar -->
+            <header class="top-navbar">
+                <span class="menu-toggle" id="menu-toggle">&#9776;</span>
+                <h1>Welcome User</h1>
+            </header>
+
+            <!-- Main Page Content -->
+            <main class="main-content">
+                <h2>Content Area</h2>
+                <p>This is the main area where your data, charts, and tables will go.</p>
+                <div class="card">
+                    <h3>Card 1</h3>
+                    <p>Some data here.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // script.js file
+document.addEventListener('DOMContentLoaded', () => {
+    // Get references to the sidebar and the toggle button
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menu-toggle');
+
+    // Add an event listener to the menu toggle button
+    menuToggle.addEventListener('click', () => {
+        // Toggle the 'collapsed' class on the sidebar element
+        // The CSS handles the actual animation/movement
+        sidebar.classList.toggle('collapsed');
+    });
+});
+
+    </script>
+    <h1>10.Create a password strength checker.</h1>
+    <h1>Password Strength Checker</h1>
+    <div class="container">
+        <label for="password">Enter Password:</label>
+        <input type="password" id="password" placeholder="Password">
+        <div id="strength-indicator">Type to check strength</div>
+    </div>
+
+    <!-- Link to your JavaScript file -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('password');
+    const strengthIndicator = document.getElementById('strength-indicator');
+
+    passwordInput.addEventListener('input', updatePasswordStrength);
+
+    function updatePasswordStrength() {
+        const password = passwordInput.value;
+        let strength = 0;
+        let feedback = "Weak";
+        let className = "weak";
+
+        // Criteria checks
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasNumbers = /[0-9]/.test(password);
+        const hasSymbols = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+
+        // Score Calculation
+        if (password.length >= 8) strength++;
+        if (hasLowerCase) strength++;
+        if (hasUpperCase) strength++;
+        if (hasNumbers) strength++;
+        if (hasSymbols) strength++;
+
+        // Determine strength level
+        if (password.length === 0) {
+            feedback = "Type to check strength";
+            className = "";
+        } else if (strength >= 4 && password.length >= 10) {
+            feedback = "Very Strong";
+            className = "very-strong";
+        } else if (strength >= 3 && password.length >= 8) {
+            feedback = "Strong";
+            className = "strong";
+        } else if (strength >= 2) {
+            feedback = "Medium";
+            className = "medium";
+        } else {
+            feedback = "Weak";
+            className = "weak";
+        }
+
+        // Update the UI
+        strengthIndicator.textContent = feedback;
+        strengthIndicator.className = ''; // Reset class
+        if (className) {
+            strengthIndicator.classList.add(className);
+        }
+    }
+});
+
+    </script>
+    <h1>11.Build a CRUD app using localStorage.</h1>
+    <h1>Local Storage CRUD App</h1>
+
+    <!-- Form for creating/updating items -->
+    <form id="itemForm">
+        <input type="text" id="itemInput" placeholder="Enter an item" required>
+        <button type="submit">Save Item</button>
+    </form>
+
+    <!-- List to display items -->
+    <ul id="itemList">
+        <!-- Items will be dynamically added here -->
+    </ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const itemForm = document.getElementById('itemForm');
+    const itemInput = document.getElementById('itemInput');
+    const itemList = document.getElementById('itemList');
+    let items = JSON.parse(localStorage.getItem('crudItems')) || [];
+
+    // Function to render items
+    function renderItems() {
+        itemList.innerHTML = ''; // Clear the list before re-rendering
+        items.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                ${item}
+                <button onclick="editItem(${index})">Edit</button>
+                <button onclick="deleteItem(${index})">Delete</button>
+            `;
+            itemList.appendChild(li);
+        });
+    }
+
+    // Function to save items to localStorage
+    function saveItems() {
+        localStorage.setItem('crudItems', JSON.stringify(items));
+        renderItems();
+    }
+
+    // CREATE operation
+    itemForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newItem = itemInput.value.trim();
+        if (newItem) {
+            items.push(newItem);
+            itemInput.value = '';
+            saveItems();
+        }
+    });
+
+    // READ operation (initial render)
+    renderItems();
+
+    // UPDATE operation
+    window.editItem = function(index) {
+        const updatedItem = prompt('Edit item:', items[index]);
+        if (updatedItem !== null && updatedItem.trim() !== '') {
+            items[index] = updatedItem.trim();
+            saveItems();
+        }
+    };
+
+    // DELETE operation
+    window.deleteItem = function(index) {
+        if (confirm('Are you sure you want to delete this item?')) {
+            items.splice(index, 1);
+            saveItems();
+        }
+    };
+});
+
+    </script>
+    <h1>12.Create a sortable and searchable table.</h1>
+    <h2>Sortable and Searchable Table</h2>
+
+    <!-- Search Input Field -->
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for names or cities...">
+
+    <!-- The Sortable Table -->
+    <table id="myTable">
+        <thead>
+            <tr>
+                <!-- Add onclick handlers to the headers to call the sort function -->
+                <th onclick="sortTable(0)">Name</th>
+                <th onclick="sortTable(1)">City</th>
+                <th onclick="sortTable(2)">Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Alfred</td><td>Berlin</td><td>Germany</td></tr>
+            <tr><td>Maria</td><td>México D.F.</td><td>Mexico</td></tr>
+            <tr><td>Alfredo</td><td>Mexico City</td><td>Mexico</td></tr>
+            <tr><td>Francisco</td><td>Seattle</td><td>USA</td></tr>
+            <tr><td>Helen</td><td>London</td><td>UK</td></tr>
+            <tr><td>Alfreds</td><td>Berlin</td><td>Germany</td></tr>
+            <tr><td>Alfred</td><td>Berlin</td><td>Germany</td></tr>
+            <tr><td>Maria</td><td>México D.F.</td><td>Mexico</td></tr>
+            <tr><td>Alfredo</td><td>Mexico City</td><td>Mexico</td></tr>
+            <tr><td>Francisco</td><td>Seattle</td><td>USA</td></tr>
+            <tr><td>Helen</td><td>London</td><td>UK</td></tr>
+            <tr><td>Alfreds</td><td>Berlin</td><td>Germany</td></tr>
+            <!-- Add more rows here -->
+        </tbody>
+    </table>
+
+    <script>
+        // --- Sorting Function ---
+function sortTable(n) {
+    let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("myTable");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc";
+    
+    while (switching) {
+        // Start by saying no switching is done yet:
+        switching = false;
+        rows = table.rows;
+        // Loop through all table rows (except the first, which contains table headers):
+        for (i = 1; i < (rows.length - 1); i++) {
+            // Start by saying there should be no switch:
+            shouldSwitch = false;
+            // Get the two elements you want to compare, one from current row and one from the next:
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            
+            // Check if the two rows should switch place, based on the direction (asc/desc):
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            // If a switch has been marked, make the switch and mark that a switch has been done:
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            // Each time a switch is done, increase this count by 1:
+            switchcount ++;
+        } else {
+            // If no switching has been done AND the direction is "asc", set the direction to "desc" and run the while loop again.
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+
+// --- Searching Function ---
+function searchTable() {
+    // Declare variables
+    let input, filter, table, tr, td, i, j, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, starting from index 1 to skip the header row
+    for (i = 1; i < tr.length; i++) {
+        // Start by hiding the row
+        tr[i].style.display = "none";
+
+        // Loop through all cells (columns) in the current row
+        // You can optimize this to only check specific columns if needed
+        for (j = 0; j < tr[i].cells.length; j++) {
+            td = tr[i].cells[j];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                // Check if the current cell's text matches the filter
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    // If a match is found in any cell, display the row and break the inner loop
+                    tr[i].style.display = "";
+                    break; 
+                }
+            }
+        }
+    }
+}
+
+    </script>
+    <h1>13.Build a form with conditional fields.</h1>
+    <h2>Build a Form with Conditional Fields</h2>
+
+    <form id="myForm">
+        <div class="form-group">
+            <label for="formType">Choose a form type:</label>
+            <select id="formType" onchange="showConditionalFields()">
+                <option value="">-- Select an option --</option>
+                <option value="personal">Personal Details</option>
+                <option value="business">Business Details</option>
+            </select>
+        </div>
+
+        <!-- Conditional field for "Personal Details" -->
+        <div id="personalFields" class="conditional-field">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName">
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age">
+        </div>
+
+        <!-- Conditional field for "Business Details" -->
+        <div id="businessFields" class="conditional-field">
+            <label for="companyName">Company Name:</label>
+            <input type="text" id="companyName" name="companyName">
+
+            <label for="taxId">Tax ID:</label>
+            <input type="text" id="taxId" name="taxId">
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function showConditionalFields() {
+    // Get the value of the dropdown
+    const selectElement = document.getElementById('formType');
+    const selectedValue = selectElement.value;
+
+    // Get the conditional field divs
+    const personalFields = document.getElementById('personalFields');
+    const businessFields = document.getElementById('businessFields');
+
+    // Hide all conditional fields first
+    personalFields.style.display = 'none';
+    businessFields.style.display = 'none';
+
+    // Show the selected conditional field
+    if (selectedValue === 'personal') {
+        personalFields.style.display = 'block';
+    } else if (selectedValue === 'business') {
+        businessFields.style.display = 'block';
+    }
+}
+
+    </script>
+    <h1>14.Create a notification toast system.</h1>
+    <button onclick="createToast('This is a success message!', 'success')">Show Success Toast</button>
+    <button onclick="createToast('An error occurred.', 'error')">Show Error Toast</button>
+
+    <!-- Notification Container -->
+    <div id="toast-container"></div>
+
+    <script>
+        const toastContainer = document.getElementById('toast-container');
+
+function createToast(message, type = 'info', duration = 3000) {
+    // 1. Create the new toast element
+    const toast = document.createElement('div');
+    toast.classList.add('toast', type);
+    toast.textContent = message;
+
+    // 2. Add it to the container
+    toastContainer.appendChild(toast);
+
+    // 3. Trigger the 'show' animation after a brief delay
+    // (needed to ensure CSS transition runs)
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+
+    // 4. Set a timer to hide and remove the toast
+    setTimeout(() => {
+        // Start the 'hide' animation
+        toast.classList.remove('show');
+        toast.classList.add('hide');
+
+        // Remove the element from the DOM after the animation finishes (0.5s)
+        setTimeout(() => {
+            toast.remove();
+        }, 500); 
+
+    }, duration);
+}
+
+    </script>
+    <h1>15.Build an image upload and preview app.</h1>
+    <h2>Upload and Preview Your Image</h2>
+    <input type="file" id="imageInput" accept="image/*">
+    <div id="previewArea">
+        <img id="imagePreview" src="VTS logo.jpg" alt="Image Preview">
+        <p class="placeholder-text">Your image preview will appear here</p>
+    </div>
+
+    <!-- Link to the JavaScript file -->
+    <script>
+        // Get references to the HTML elements
+const imageInput = document.getElementById('imageInput');
+const imagePreview = document.getElementById('imagePreview');
+const previewArea = document.getElementById('previewArea');
+const placeholderText = document.querySelector('.placeholder-text');
+
+// Add an event listener to the file input
+imageInput.addEventListener('change', function(event) {
+    // Get the selected file
+    const file = event.target.files[0];
+
+    if (file && file.type.startsWith('image/')) {
+        // Use the FileReader API to read the file content
+        const reader = new FileReader();
+
+        // Set up the function to run when the file is done loading
+        reader.onload = function(e) {
+            // Set the source of the image tag to the result of the reader (data URL)
+            imagePreview.src = e.target.result;
+
+            // Make the image visible and hide the placeholder text
+            imagePreview.style.display = 'block';
+            placeholderText.style.display = 'none';
+        };
+
+        // Read the file as a Data URL (Base64 encoded string)
+        reader.readAsDataURL(file);
+
+    } else {
+        // Handle cases where a non-image or no file is selected
+        imagePreview.style.display = 'none';
+        placeholderText.style.display = 'block';
+        imagePreview.src = '#'; // Clear previous source
+        alert("Please select a valid image file.");
+    }
+});
+
+    </script>
+    <h1>16.Create a pagination system for a list.</h1>
+    <h1>Pagination System</h1>
+
+    <!-- List Container -->
+    <ul id="list">
+        <!-- List items will be generated by JavaScript for simplicity -->
+    </ul>
+
+    <!-- Pagination Controls -->
+    <div id="pagination-wrapper" class="pagination-container"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const list_element = document.getElementById('list');
+    const pagination_wrapper = document.getElementById('pagination-wrapper');
+
+    // Dummy Data Array (replace with data from your backend if needed)
+    const data = Array.from({length: 100}, (_, i) => `Item ${i + 1}`);
+
+    const state = {
+        'itemsPerPage': 10, // Number of items per page
+        'currentPage': 1,
+    };
+
+    function displayList(items, wrapper, itemsPerPage, page) {
+        wrapper.innerHTML = ""; // Clear the list for the new page
+        page--; // Adjust for 0-based indexing for array slicing
+
+        const start = itemsPerPage * page;
+        const end = start + itemsPerPage;
+        const paginatedItems = items.slice(start, end);
+
+        paginatedItems.forEach(item => {
+            const item_element = document.createElement('li');
+            item_element.classList.add('list-item');
+            item_element.innerText = item;
+            list_element.appendChild(item_element);
+        });
+    }
+
+    function setupPagination(items, wrapper, itemsPerPage) {
+        wrapper.innerHTML = ""; // Clear previous pagination buttons
+
+        const pageCount = Math.ceil(items.length / itemsPerPage);
+
+        for (let i = 1; i < pageCount + 1; i++) {
+            let btn = paginationButton(i, items);
+            wrapper.appendChild(btn);
+        }
+    }
+
+    function paginationButton(page, items) {
+        let button = document.createElement('button');
+        button.innerText = page;
+
+        if (state.currentPage == page) button.classList.add('active');
+
+        button.addEventListener('click', () => {
+            state.currentPage = page;
+            displayList(items, list_element, state.itemsPerPage, state.currentPage);
+
+            // Update active button status
+            let currentActive = document.querySelector('.pagination-container button.active');
+            if (currentActive) {
+                currentActive.classList.remove('active');
+            }
+            button.classList.add('active');
+        });
+
+        return button;
+    }
+
+    // Initial load
+    displayList(data, list_element, state.itemsPerPage, state.currentPage);
+    setupPagination(data, pagination_wrapper, state.itemsPerPage);
+});
+
+    </script>
+    <h1>17.Build a form auto-save feature.</h1>
+    <h2>Auto-Save Form</h2>
+    <form id="autoSaveForm">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <br>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <br>
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+        <br>
+        <button type="submit">Submit Form</button>
+        <button type="button" onclick="clearSavedData()">Clear Saved Data</button>
+    </form>
+
+    <script>
+        // Function to save form data to localStorage
+function saveFormData() {
+    const form = document.getElementById('autoSaveForm');
+    const formData = new FormData(form);
+    const dataObject = {};
+
+    formData.forEach((value, key) => {
+        dataObject[key] = value;
+    });
+
+    // Save the object as a JSON string in localStorage under a specific key
+    localStorage.setItem('savedFormData', JSON.stringify(dataObject));
+    console.log('Form data saved.');
+}
+
+// Function to load data from localStorage and populate the form
+function loadFormData() {
+    const savedData = localStorage.getItem('savedFormData');
+
+    if (savedData) {
+        const dataObject = JSON.parse(savedData);
+        const form = document.getElementById('autoSaveForm');
+
+        // Iterate over saved data and set form element values
+        for (const key in dataObject) {
+            if (Object.hasOwnProperty.call(dataObject, key)) {
+                const element = form.elements[key];
+                if (element) {
+                    element.value = dataObject[key];
+                }
+            }
+        }
+        console.log('Form data loaded.');
+    }
+}
+
+// Function to clear saved data from localStorage and reset the form
+function clearSavedData() {
+    localStorage.removeItem('savedFormData');
+    document.getElementById('autoSaveForm').reset();
+    console.log('Saved data cleared.');
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Load data when the page loads
+    loadFormData();
+
+    // Save data whenever the input or change event occurs on the form elements
+    const formElements = document.getElementById('autoSaveForm').elements;
+    for (const element of formElements) {
+        // Use 'input' for real-time updates in text/textarea, 'change' for others
+        element.addEventListener('input', saveFormData);
+    }
+});
+
+// Optional: Clear data upon successful form submission
+document.getElementById('autoSaveForm').addEventListener('submit', (event) => {
+    // event.preventDefault(); // Uncomment to prevent actual form submission for testing
+    localStorage.removeItem('savedFormData');
+    alert('Form submitted and saved data cleared!');
+});
+
+    </script>
+    <h1>18.Create a tab switching system.</h1>
+<h2>Simple Tab Switching System</h2>
+
+    <!-- Tab Buttons (Navigation) -->
+    <div class="tab-container">
+        <button class="tab-button active" onclick="openTab(event, 'Tab1')">Tab 1</button>
+        <button class="tab-button" onclick="openTab(event, 'Tab2')">Tab 2</button>
+        <button class="tab-button" onclick="openTab(event, 'Tab3')">Tab 3</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="Tab1" class="tab-content active">
+        <h3>Content of Tab 1</h3>
+        <p>This is the first tab's content. It is visible by default.</p>
+    </div>
+
+    <div id="Tab2" class="tab-content">
+        <h3>Content of Tab 2</h3>
+        <p>This is the second tab's content.</p>
+    </div>
+
+    <div id="Tab3" class="tab-content">
+        <h3>Content of Tab 3</h3>
+        <p>This is the third tab's content.</p>
+    </div>
+
+    <script>
+        // JavaScript function to handle the tab switching
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+
+            // 1. Hide all elements with the class="tab-content"
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            // 2. Deactivate all elements with the class="tab-button"
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // 3. Show the current tab, and add an "active" class to the button that opened the tab [1]
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+    <h1>19.Build a role-based UI rendering app.</h1>
+<h1>Role-Based UI Rendering</h1>
+
+    <label for="roleSelector">Select Role:</label>
+    <select id="roleSelector" onchange="handleRoleChange()">
+        <option value="guest">Guest</option>
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+    </select>
+
+    <hr>
+
+    <!-- UI Elements for Different Roles -->
+    <div id="guestContent" class="container role-specific hidden">
+        <h2>Welcome, Guest!</h2>
+        <p>You can view public information.</p>
+    </div>
+
+    <div id="userContent" class="container role-specific hidden">
+        <h2>Welcome, User!</h2>
+        <p>You have access to basic features and can update your profile.</p>
+        <button>Update Profile</button>
+    </div>
+
+    <div id="adminContent" class="container role-specific hidden">
+        <h2>Welcome, Admin!</h2>
+        <p>You have full administrative control.</p>
+        <button>Manage Users</button>
+        <button>System Settings</button>
+    </div>
+
+    <script>
+        // Function to update the UI based on the selected role
+function updateUI(role) {
+    // 1. Get all elements that are role-specific
+    const roleElements = document.querySelectorAll('.role-specific');
+
+    // 2. Hide all role-specific elements first
+    roleElements.forEach(element => {
+        element.classList.add('hidden');
+    });
+
+    // 3. Determine which specific content container to show
+    let contentToShowId = '';
+    if (role === 'guest') {
+        contentToShowId = 'guestContent';
+    } else if (role === 'user') {
+        contentToShowId = 'userContent';
+    } else if (role === 'admin') {
+        contentToShowId = 'adminContent';
+    }
+
+    // 4. Show the relevant content container
+    if (contentToShowId) {
+        const contentElement = document.getElementById(contentToShowId);
+        if (contentElement) {
+            contentElement.classList.remove('hidden');
+        }
+    }
+}
+
+// Function called when the dropdown selection changes
+function handleRoleChange() {
+    const roleSelector = document.getElementById('roleSelector');
+    const selectedRole = roleSelector.value;
+    updateUI(selectedRole);
+}
+
+// Initialize the UI when the page loads (default to 'guest')
+document.addEventListener('DOMContentLoaded', () => {
+    // This calls updateUI with the default selected value (which is 'guest' in the HTML)
+    handleRoleChange();
+});
+
+    </script>
+    <h1>20.Create a cart logic app (UI only).</h1>
+<div class="container">
+        <h1>Products</h1>
+        <ul class="product-list" id="productList">
+            <!-- Products will be generated here by JS -->
+        </ul>
+    </div>
+
+    <!-- Cart UI Section -->
+    <div class="container">
+        <h1>Your Cart</h1>
+        <ul class="cart-list" id="cartList">
+            <!-- Cart items will be added here by JS -->
+        </ul>
+        <div class="total-price">
+            Total: $<span id="cartTotal">0.00</span>
+        </div>
+    </div>
+
+    <script>
+        // Data Store (Mock Products)
+        const products = [
+            { id: 1, name: 'Laptop', price: 999.99 },
+            { id: 2, name: 'Mouse', price: 25.50 },
+            { id: 3, name: 'Keyboard', price: 49.99 },
+            { id: 4, name: 'Monitor', price: 199.00 }
+        ];
+
+        let cart = []; // The state of our cart
+
+        const productListEl = document.getElementById('productList');
+        const cartListEl = document.getElementById('cartList');
+        const cartTotalEl = document.getElementById('cartTotal');
+
+        // --- UI Rendering Functions ---
+
+        function renderProducts() {
+            products.forEach(product => {
+                const li = document.createElement('li');
+                li.className = 'product-item';
+                li.innerHTML = `
+                    <span>${product.name} - $${product.price.toFixed(2)}</span>
+                    <button class="add-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+                `;
+                productListEl.appendChild(li);
+            });
+        }
+
+        function renderCart() {
+            cartListEl.innerHTML = ''; // Clear current cart UI
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                const li = document.createElement('li');
+                li.className = 'cart-item';
+                li.innerHTML = `
+                    <span>${item.name} (${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</span>
+                    <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                `;
+                cartListEl.appendChild(li);
+            });
+
+            cartTotalEl.textContent = total.toFixed(2);
+        }
+
+        // --- Cart Logic Functions ---
+
+        function addToCart(productId) {
+            const productToAdd = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...productToAdd, quantity: 1 });
+            }
+            renderCart(); // Update the UI
+        }
+
+        function removeFromCart(productId) {
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem.quantity > 1) {
+                existingItem.quantity--;
+            } else {
+                // Filter out the item if quantity is 1 or less
+                cart = cart.filter(item => item.id !== productId);
+            }
+            renderCart(); // Update the UI
+        }
+
+        // Initialize the view when the page loads
+        renderProducts();
+
+    </script>
+    <h1>21.Build a session timeout warning app.</h1>
+    <h2>Session Timeout Demo</h2>
+    <p>Interact with the page (move your mouse, click, type) to reset the timer.</p>
+    <p>Your session status: <strong id="status">Active</strong></p>
+
+    <!-- The Modal -->
+    <div id="timeoutModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Session Expiring Soon!</h3>
+            <p>You will be logged out in <span id="countdown"></span> seconds due to inactivity.</p>
+            <button id="extendButton" class="button">Stay Logged In</button>
+            <button id="logoutButton" class="button">Log Out Now</button>
+        </div>
+    </div>
+
+    <script>
+        // --- Configuration ---
+        const totalSessionDuration = 60000; // 60 seconds of inactivity before warning
+        const warningDuration = 10000;     // 10 seconds warning before actual logout
+
+        let timeoutId;
+        let warningTimeoutId;
+        let countdownIntervalId;
+        const modal = document.getElementById('timeoutModal');
+        const countdownElement = document.getElementById('countdown');
+        const statusElement = document.getElementById('status');
+
+        // --- Core Functions ---
+
+        function startSessionTimer() {
+            // Clear any existing timers
+            clearTimeout(timeoutId);
+            clearTimeout(warningTimeoutId);
+            clearInterval(countdownIntervalId);
+            statusElement.textContent = 'Active';
+
+            // Set a timer to show the warning modal after the main duration
+            timeoutId = setTimeout(showWarningModal, totalSessionDuration - warningDuration);
+        }
+
+        function showWarningModal() {
+            modal.style.display = 'block';
+            let secondsRemaining = warningDuration / 1000;
+            countdownElement.textContent = secondsRemaining;
+            statusElement.textContent = 'Expiring';
+
+            // Start the countdown timer
+            countdownIntervalId = setInterval(() => {
+                secondsRemaining--;
+                countdownElement.textContent = secondsRemaining;
+                if (secondsRemaining <= 0) {
+                    clearInterval(countdownIntervalId);
+                    logoutUser();
+                }
+            }, 1000);
+
+            // Set a final timeout for automatic logout if no action is taken
+            warningTimeoutId = setTimeout(logoutUser, warningDuration);
+        }
+
+        function logoutUser() {
+            // In a real app, this is where you would redirect to a logout page or call an API
+            console.log("User logged out due to inactivity.");
+            alert("You have been logged out due to inactivity.");
+            closeModal();
+            // Reset status for demo purposes
+            statusElement.textContent = 'Logged Out';
+            clearInterval(countdownIntervalId);
+            clearTimeout(timeoutId);
+            clearTimeout(warningTimeoutId);
+        }
+
+        function extendSession() {
+            closeModal();
+            // In a real app, you'd make an AJAX call to the server to extend the session on the backend too.
+            console.log("Session extended by user interaction.");
+            startSessionTimer(); // Restart the inactivity timer
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            clearInterval(countdownIntervalId);
+            clearTimeout(warningTimeoutId);
+        }
+
+        // --- Event Listeners for User Activity ---
+
+        // Events to listen for to detect user activity
+        const activityEvents = ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'];
+
+        activityEvents.forEach(event => {
+            document.addEventListener(event, startSessionTimer);
+        });
+
+        // Event listeners for modal buttons
+        document.getElementById('extendButton').addEventListener('click', extendSession);
+        document.getElementById('logoutButton').addEventListener('click', logoutUser);
+
+        // --- Initialization ---
+        // Start the timer when the page loads
+        document.addEventListener('DOMContentLoaded', (event) => {
+            startSessionTimer();
+        });
+
+    </script>
+    <h1>22.Create a profile edit and preview app.</h1>
+    <div class="editor">
+        <h2>Edit Profile</h2>
+        <div>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name1" placeholder="Your Name">
+        </div>
+        <div>
+            <label for="bio">Bio:</label><br>
+            <textarea id="bio" placeholder="A short bio"></textarea>
+        </div>
+        <div>
+            <label for="imageUrl">Profile Image URL:</label><br>
+            <input type="text" id="imageUrl" placeholder="https://example.com/image.jpg">
+        </div>
+    </div>
+
+    <div class="preview">
+        <h2>Live Preview</h2>
+        <div id="profilePreview" class="preview-card">
+            <img id="previewImage" src="" alt="Profile Pic" style="display:none;"><br>
+            <h3 id="previewName">Your Name</h3>
+            <p id="previewBio">Your bio will appear here.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Get elements from HTML
+    const nameInput = document.getElementById('name1');
+    const bioInput = document.getElementById('bio');
+    const imageUrlInput = document.getElementById('imageUrl');
+
+    const previewName = document.getElementById('previewName');
+    const previewBio = document.getElementById('previewBio');
+    const previewImage = document.getElementById('previewImage');
+
+    // Function to update the preview
+    function updatePreview() {
+        previewName.textContent = nameInput.value || "Your Name"; // Use placeholder if empty
+        previewBio.textContent = bioInput.value || "Your bio will appear here.";
+        
+        if (imageUrlInput.value) {
+            previewImage.src = imageUrlInput.value;
+            previewImage.style.display = 'block'; // Show image if URL is present
+        } else {
+            previewImage.style.display = 'none'; // Hide image if no URL
+        }
+    }
+
+    // Add event listeners for real-time updates
+    nameInput.addEventListener('input', updatePreview);
+    bioInput.addEventListener('input', updatePreview);
+    imageUrlInput.addEventListener('input', updatePreview);
+
+    // Initial update when page loads (in case defaults are set)
+    updatePreview();
+});
+
+    </script>
+    <h1>23.Build a search suggestion app.</h1>
+    <div class="container">
+        <h1>Search Suggestions</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Start typing...">
+            <ul id="suggestionsList">
+                <!-- Suggestions will be added here by JavaScript -->
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const suggestionsList = document.getElementById('suggestionsList');
+
+    // Sample data for suggestions (can be fetched from an API in a real app)
+    const suggestions = [
+        'Apple',
+        'Banana',
+        'Cherry',
+        'Date',
+        'Elderberry',
+        'Fig',
+        'Grape',
+        'Honeydew',
+        'Kiwi',
+        'Lemon',
+        'Mango',
+        'Nectarine',
+        'Orange',
+        'Peach',
+        'Quince'
+    ];
+
+    // Event listener for input changes
+    searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        suggestionsList.innerHTML = ''; // Clear previous suggestions
+
+        if (query === '') {
+            suggestionsList.style.display = 'none';
+            return;
+        }
+
+        const filteredSuggestions = suggestions.filter(item => {
+            return item.toLowerCase().includes(query);
+        });
+
+        // Display filtered suggestions
+        filteredSuggestions.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            li.addEventListener('click', () => {
+                searchInput.value = item; // Select the suggestion
+                suggestionsList.style.display = 'none'; // Hide list after selection
+            });
+            suggestionsList.appendChild(li);
+        });
+
+        // Show the list if there are suggestions
+        if (filteredSuggestions.length > 0) {
+            suggestionsList.style.display = 'block';
+        } else {
+            suggestionsList.style.display = 'none';
+        }
+    });
+
+    // Hide suggestions when clicking outside the input/list
+    document.addEventListener('click', (event) => {
+        if (!searchInput.contains(event.target) && !suggestionsList.contains(event.target)) {
+            suggestionsList.style.display = 'none';
+        }
+    });
+});
+
+    </script>
+    <h1>24.Create a dynamic dropdown dependency app.</h1>
+    <h1>Select Your Location</h1>
+
+    <div class="container">
+        <div>
+            <label for="country">Choose a Country:</label>
+            <select name="country" id="country">
+                <option value="">-- Select Country --</option>
+                <!-- Options populated by JavaScript -->
+            </select>
+        </div>
+
+        <div>
+            <label for="city">Choose a City:</label>
+            <select name="city" id="city1" disabled>
+                <option value="">-- Select City --</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        // Data structure for the dropdowns
+        const locations = {
+            USA: ["New York", "Los Angeles", "Chicago"],
+            Canada: ["Toronto", "Vancouver", "Montreal"],
+            India: ["Mumbai", "Delhi", "Bangalore"]
+        };
+
+        // Get references to the select elements
+        const countrySelect = document.getElementById('country');
+        const citySelect = document.getElementById('city1');
+
+        // Function to populate the initial (country) dropdown
+        function populateCountries() {
+            // Iterate over the keys (countries) in the locations object
+            for (const country in locations) {
+                const option = document.createElement('option');
+                option.value = country;
+                option.textContent = country;
+                countrySelect.appendChild(option);
+            }
+        }
+
+        // Function to handle the change in the country dropdown
+        function handleCountryChange() {
+            const selectedCountry = countrySelect.value;
+
+            // Clear previous city options
+            citySelect.innerHTML = '<option value="">-- Select City --</option>';
+
+            if (selectedCountry) {
+                // Enable the city dropdown
+                citySelect.disabled = false;
+                const cities = locations[selectedCountry];
+
+                // Populate the city dropdown with relevant options
+                cities.forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            } else {
+                // Disable the city dropdown if no country is selected
+                citySelect.disabled = true;
+            }
+        }
+
+        // Event listener for the country dropdown
+        countrySelect.addEventListener('change', handleCountryChange);
+
+        // Initial call to populate the country dropdown on page load
+        populateCountries();
+
+    </script>
+<h1>25.Build a dashboard summary cards app.</h1>
+<div class="dashboard-grid">
+    <div class="card" id="card-users">
+        <h3>Total Users</h3>
+        <p class="value">0</p>
+        <span class="trend">↑ 12%</span>
+    </div>
+    <div class="card" id="card-revenue">
+        <h3>Revenue</h3>
+        <p class="value">$0</p>
+        <span class="trend">↑ 5%</span>
+    </div>
+</div>
+
+    <script>
+        const stats = { users: 1250, revenue: 45200 };
+
+function updateDashboard() {
+    document.querySelector('#card-users .value').innerText = stats.users.toLocaleString();
+    document.querySelector('#card-revenue .value').innerText = `$${stats.revenue.toLocaleString()}`;
+}
+
+window.onload = updateDashboard;
+
+    </script>
+    <h1>26.Create a reusable form validation system.</h1>
+    <form id="registrationForm">
+  <div class="form-group">
+    <input type="text" name="username" placeholder="Username" data-rules="required|min:3">
+    <span class="error"></span>
+  </div>
+  
+  <div class="form-group">
+    <input type="email" name="email" placeholder="Email" data-rules="required|email">
+    <span class="error"></span>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+<script>
+    class FormValidator {
+  constructor(formId) {
+    this.form = document.getElementById(formId);
+    this.rules = {
+      required: (val) => val.trim() !== "" || "This field is required",
+      email: (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) || "Invalid email address",
+      min: (val, length) => val.length >= length || `Minimum ${length} characters required`,
+    };
+
+    this.form.addEventListener("submit", (e) => {
+      if (!this.validate()) e.preventDefault();
+    });
+  }
+
+  validate() {
+    let isValid = true;
+    const inputs = this.form.querySelectorAll("[data-rules]");
+
+    inputs.forEach((input) => {
+      const errorSpan = input.parentElement.querySelector(".error");
+      const rules = input.dataset.rules.split("|");
+      let errorMessage = "";
+
+      for (let rule of rules) {
+        const [ruleName, ruleValue] = rule.split(":");
+        const result = this.rules[ruleName](input.value, ruleValue);
+        
+        if (result !== true) {
+          errorMessage = result;
+          break; // Stop at first error for this field
+        }
+      }
+
+      if (errorMessage) {
+        errorSpan.textContent = errorMessage;
+        input.classList.add("invalid");
+        isValid = false;
+      } else {
+        errorSpan.textContent = "";
+        input.classList.remove("invalid");
+      }
+    });
+
+    return isValid;
+  }
+}
+
+// Initialize for any form
+new FormValidator("registrationForm");
+
+</script>
+<h1>27.Build a client-side routing app.</h1>
+<nav>
+        <!-- Use data-route attribute to identify links for our JS handler -->
+        <a href="/" data-route="/">Home</a>
+        <a href="/about" data-route="/about">About</a>
+        <a href="/contact" data-route="/contact">Contact</a>
+    </nav>
+    
+    <div id="app-container" class="container">
+        <!-- Content will be loaded here -->
+    </div>
+
+    <script>
+        // Define the routes and their corresponding content/functions
+const routes = {
+    '/': '<h1>Welcome Home!</h1><p>This is the home page content.</p>',
+    '/about': '<h1>About Us</h1><p>Learn more about our simple app.</p>',
+    '/contact': '<h1>Contact Page</h1><p>Get in touch with us.</p>',
+    '404': '<h1>404 - Page Not Found</h1><p>Sorry, that page does not exist.</p>'
+};
+
+// Function to handle routing and update content
+const handleRouting = () => {
+    // Get the current path from the window location
+    const path = window.location.pathname;
+    
+    // Get the content based on the path, or use the 404 content
+    const content = routes[path] || routes['404'];
+    
+    // Update the DOM with the new content
+    document.getElementById('app-container').innerHTML = content;
+    
+    // Optional: Update active link styling
+    updateNavLinks(path);
+};
+
+// Function to handle navigation clicks
+const navigate = (event) => {
+    // Prevent the default link behavior (full page reload)
+    event.preventDefault();
+    
+    // Get the new path from the link's href
+    const href = event.target.getAttribute('href');
+    
+    // Use the History API to change the URL and add a history entry
+    window.history.pushState({}, '', href);
+    
+    // Call the routing handler to update the content for the new path
+    handleRouting();
+};
+
+// Function to update active navigation links
+const updateNavLinks = (currentPath) => {
+    document.querySelectorAll('nav a').forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+};
+
+// --- Event Listeners and Initialization ---
+
+// 1. Add event listener to all navigation links
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('nav a[data-route]').forEach(link => {
+        link.addEventListener('click', navigate);
+    });
+    
+    // Initial handling of the route when the page first loads
+    handleRouting();
+});
+
+// 2. Listen for 'popstate' events (when user uses browser back/forward buttons)
+window.addEventListener('popstate', handleRouting);
+
+    </script>
+    <h1>28.Create an admin panel UI with restrictions.</h1>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+
+        <!-- Login Simulation Section -->
+        <div id="login-section">
+            <p>Simulate Login Role:</p>
+            <button onclick="login('admin')">Log in as Admin</button>
+            <button onclick="login('user')">Log in as Standard User</button>
+            <button onclick="logout()">Log out</button>
+        </div>
+        
+        <hr>
+
+        <!-- Dashboard Content -->
+        <div id="dashboard-content" class="hidden">
+            <p>Welcome, <strong id="user-role-display"></strong>. Content below is restricted by role.</p>
+
+            <div class="card">
+                <h2>General Statistics (Visible to All)</h2>
+                <p>Total users: 1500 | Active sessions: 450</p>
+            </div>
+
+            <!-- Admin-Only Section -->
+            <div id="admin-section" class="card hidden">
+                <h2>Admin Management (Admin Only)</h2>
+                <p>You can manage system settings and delete accounts here.</p>
+                <button>Manage Settings</button>
+                <button>Delete User Database</button>
+            </div>
+
+            <!-- User-Only Section (or visible to all, but admin has more) -->
+            <div id="user-section" class="card hidden">
+                <h2>Profile Management (User View)</h2>
+                <p>You can update your personal profile information here.</p>
+                <button>Update Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to simulate user login and role assignment
+function login(role) {
+    // In a real application, you would verify credentials on a server
+    // and receive the role securely.
+    sessionStorage.setItem('userRole', role);
+    updateUI();
+}
+
+// Function to simulate user logout
+function logout() {
+    sessionStorage.removeItem('userRole');
+    updateUI();
+}
+
+// Function to update the UI based on the current role
+function updateUI() {
+    const userRole = sessionStorage.getItem('userRole');
+    const dashboard = document.getElementById('dashboard-content');
+    const loginSection = document.getElementById('login-section');
+    const adminSection = document.getElementById('admin-section');
+    const userSection = document.getElementById('user-section');
+    const roleDisplay = document.getElementById('user-role-display');
+
+    // Hide everything first
+    dashboard.classList.add('hidden');
+    adminSection.classList.add('hidden');
+    userSection.classList.add('hidden');
+
+    if (userRole) {
+        // User is logged in
+        dashboard.classList.remove('hidden');
+        roleDisplay.textContent = userRole;
+        loginSection.style.display = 'none';
+
+        if (userRole === 'admin') {
+            // Show admin specific controls
+            adminSection.classList.remove('hidden');
+            userSection.classList.remove('hidden'); // Admins can see user section too
+        } else if (userRole === 'user') {
+            // Show standard user controls
+            userSection.classList.remove('hidden');
+        }
+    } else {
+        // User is logged out
+        loginSection.style.display = 'block';
+    }
+}
+
+// Initialize the UI on page load
+document.addEventListener('DOMContentLoaded', updateUI);
+
+
+    </script>
+    <h1>29.Build an offline-first form app.</h1>
+    <h1>Offline-First Contact Form</h1>
+    <div id="status-message" class="status offline">Status: Offline</div>
+
+    <form id="contact-form">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+        <button type="submit">Submit Form</button>
+    </form>
+    <p>Pending Submissions: <span id="pending-count">0</span></p>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        const statusMessage = document.getElementById('status-message');
+        const pendingCountSpan = document.getElementById('pending-count');
+        const STORAGE_KEY = 'offlineSubmissions';
+        const API_ENDPOINT = 'https://jsonplaceholder.typicode.com'; // Placeholder API endpoint
+
+        // Function to check network status
+        function updateOnlineStatus() {
+            const isOnline = navigator.onLine;
+            if (isOnline) {
+                statusMessage.textContent = 'Status: Online';
+                statusMessage.className = 'status online';
+                syncData(); // Try to sync data when connectivity is restored
+            } else {
+                statusMessage.textContent = 'Status: Offline';
+                statusMessage.className = 'status offline';
+            }
+        }
+
+        // Function to get pending data from localStorage
+        function getPendingSubmissions() {
+            const submissions = localStorage.getItem(STORAGE_KEY);
+            return submissions ? JSON.parse(submissions) : [];
+        }
+
+        // Function to save data to localStorage
+        function saveSubmission(data) {
+            const submissions = getPendingSubmissions();
+            submissions.push(data);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(submissions));
+            updatePendingCount();
+        }
+
+        // Function to sync data with the server
+        async function syncData() {
+            let submissions = getPendingSubmissions();
+            if (submissions.length === 0) return;
+
+            console.log(`Syncing ${submissions.length} pending submissions...`);
+
+            // Use Promise.all to handle multiple requests
+            const syncPromises = submissions.map(data =>
+                fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Submission synced successfully:', data);
+                        return true;
+                    } else {
+                        console.error('Failed to sync data:', response.statusText);
+                        return false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Network error during sync:', error);
+                    return false;
+                })
+            );
+
+            const results = await Promise.all(syncPromises);
+
+            // If all succeeded, clear storage; otherwise, only keep the failed ones (simple approach: clear all for this example)
+            // A more robust app would filter out successful ones.
+            const allSynced = results.every(result => result);
+            if (allSynced) {
+                localStorage.removeItem(STORAGE_KEY);
+                updatePendingCount();
+                alert('All pending submissions synced successfully!');
+            }
+        }
+
+        // Function to update the UI count
+        function updatePendingCount() {
+            const submissions = getPendingSubmissions();
+            pendingCountSpan.textContent = submissions.length;
+        }
+
+        // Handle form submission
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // 1. Save data locally
+            saveSubmission(data);
+            alert('Form data saved locally. Will sync when online.');
+            form.reset(); // Clear form
+
+            // 2. Try to sync immediately if online
+            if (navigator.onLine) {
+                syncData();
+            }
+        });
+
+        // Event listeners for online/offline status changes
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+
+        // Initial status check and count update
+        updateOnlineStatus();
+        updatePendingCount();
+    </script>
+    <h1>30.Create a keyboard-accessible modal system.</h1>
+    <button id="openModalBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+        <h2 id="modalTitle">My Accessible Modal</h2>
+        <p>This is the modal content. Press ESC to close.</p>
+        <a href="#" id="firstFocusable">First Link</a>
+        <button id="closeModalBtn">Close</button>
+    </div>
+</div>
+
+<!-- Background overlay (optional but recommended) -->
+<div id="modalOverlay" class="modal-overlay"></div>
+<script>
+    const openBtn = document.getElementById('openModalBtn');
+const closeBtn = document.getElementById('closeModalBtn');
+const modal1 = document.getElementById('myModal');
+const overlay = document.getElementById('modalOverlay');
+const firstFocusable = document.getElementById('firstFocusable'); // For focus trap
+const allFocusable = modal.querySelectorAll('button, a, input, select, textarea'); // Get all focusable items
+
+let prevFocus = null; // To store the element that opened the modal
+
+// --- Open Modal ---
+function openModal() {
+    prevFocus = document.activeElement; // Save current focus
+    modal1.style.display = 'block';
+    overlay.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+
+    // Move focus into the modal
+    firstFocusable.focus(); // Focus the first interactive element
+}
+
+// --- Close Modal ---
+function closeModal() {
+    modal1.style.display = 'none';
+    overlay.style.display = 'none';
+    document.body.style.overflow = ''; // Restore scroll
+
+    // Return focus to the trigger button
+    if (prevFocus) {
+        prevFocus.focus();
+    }
+}
+
+// --- Keyboard Accessibility ---
+function handleKeyDown(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+        return;
+    }
+
+    // Focus Trap: Tab & Shift+Tab
+    if (e.key === 'Tab') {
+        let first = allFocusable[0];
+        let last = allFocusable[allFocusable.length - 1];
+
+        if (e.shiftKey) { // Shift + Tab: Move to previous
+            if (document.activeElement === first) {
+                last.focus();
+                e.preventDefault(); // Stop focus from leaving modal
+            }
+        } else { // Tab: Move to next
+            if (document.activeElement === last) {
+                first.focus();
+                e.preventDefault(); // Stop focus from leaving modal
+            }
+        }
+    }
+}
+
+// Event Listeners
+openBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal); // Close on overlay
+
+</script>
+<h1>31.Build a user activity log app.</h1>
+<div class="container">
+        <h1>Activity Tracker</h1>
+        
+        <div class="controls">
+            <button onclick="logActivity('Clicked Button A')">Button A</button>
+            <button onclick="logActivity('Clicked Button B')">Button B</button>
+            <button onclick="clearLog()" class="clear-btn">Clear Log</button>
+        </div>
+
+        <ul id="activity-log">
+            <!-- Activities will appear here -->
+        </ul>
+    </div>
+    <script>
+        // script.js
+function logActivity(action) {
+    const logList = document.getElementById('activity-log');
+    const timestamp = new Date().toLocaleTimeString();
+    
+    // Create a new list item
+    const entry = document.createElement('li');
+    entry.innerHTML = `<strong>[${timestamp}]</strong> ${action}`;
+    
+    // Add to the top of the list
+    logList.prepend(entry);
+}
+
+function clearLog() {
+    document.getElementById('activity-log').innerHTML = '';
+}
+
+    </script>
+    <h1>32.Create a dashboard notification center.</h1>
+   <div class="dashboard-controls">
+        <button onclick="notifier.push('New message received!', 'info')">Info</button>
+        <button onclick="notifier.push('Settings saved successfully.', 'success')">Success</button>
+        <button onclick="notifier.push('Failed to sync data.', 'error')">Error</button>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-center" class="notification-container"></div>
+
+    <script>
+class NotificationCenter {
+    constructor(containerId) {
+        this.container = document.getElementById(containerId);
+    }
+
+    push(message, type = 'info', duration = 4000) {
+        const toast = document.createElement('div');
+        toast.className = `notification ${type}`;
+        toast.innerText = message;
+
+        // Manual click to dismiss
+        toast.onclick = () => toast.remove();
+
+        this.container.appendChild(toast);
+
+        // Auto-remove after duration
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300); // Fade out then remove
+            }
+        }, duration);
+    }
+}
+
+// Initialize the center
+const notifier = new NotificationCenter('notification-center');
+
+    </script>
+    <h1>33.Build a state management mini-app (pure JS).</h1>
+    <div class="container">
+        <h1>Counter App</h1>
+        <p>Current Count: <span id="count-display">0</span></p>
+        <button id="decrement-btn">Decrement</button>
+        <button id="increment-btn">Increment</button>
+    </div>
+
+    <script>
+        // --- 1. The Global State Object ---
+let state = {
+    count: 0
+};
+
+// --- 2. Select DOM Elements ---
+const countDisplay = document.getElementById('count-display');
+const incrementBtn = document.getElementById('increment-btn');
+const decrementBtn = document.getElementById('decrement-btn');
+
+// --- 3. The Render Function (Updates the UI based on state) ---
+function render() {
+    // This is the only place we touch the DOM directly
+    countDisplay.textContent = state.count;
+    console.log('State rendered:', state.count);
+}
+
+// --- 4. The State Management Function (The "setState" concept) ---
+function updateState(newStatePartial) {
+    // Merge the new state changes into the existing state
+    state = { ...state, ...newStatePartial };
+    
+    // Always call render() after the state changes
+    render();
+}
+
+// --- 5. Event Handlers (Trigger state updates) ---
+
+incrementBtn.addEventListener('click', () => {
+    // Event handlers call updateState, not render() directly
+    updateState({ count: state.count + 1 });
+});
+
+decrementBtn.addEventListener('click', () => {
+    updateState({ count: state.count - 1 });
+});
+
+// --- 6. Initial Render ---
+// Call render() once when the script loads to show the initial state
+render();
+
+    </script>
+    <h1>34.Create a responsive navbar with toggle.</h1>
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">Logo</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="toggle-button" id="toggleButton">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Responsive Navbar Example</h1>
+        <p>Resize your browser window to see the responsive effect.</p>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('toggleButton');
+    const navLinks = document.getElementById('navLinks');
+
+    toggleButton.addEventListener('click', () => {
+        // Toggles the 'active' class on the nav-links element
+        // The 'active' class is defined in the CSS to display the links
+        navLinks.classList.toggle('active');
+    });
+});
+
+    </script>
+    <h1>35.Build a form submission history app.</h1>
+    <h1>My Form Submission History</h1>
+    
+    <form id="submissionForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>History:</h2>
+    <div id="historyContainer">
+        <!-- Submissions will appear here -->
+    </div>
+
+    <script>
+        document.getElementById('submissionForm').addEventListener('submit', function(event) {
+    // 1. Prevent default form submission (page reload)
+    event.preventDefault();
+
+    // 2. Get input values
+    const nameInput = document.getElementById('name').value;
+    const emailInput = document.getElementById('email').value;
+
+    // 3. Get the history container
+    const historyContainer = document.getElementById('historyContainer');
+
+    // 4. Create a new element to display the submission
+    const submissionEntry = document.createElement('div');
+    submissionEntry.textContent = `Name: ${nameInput}, Email: ${emailInput}`;
+    
+    // 5. Add the new entry to the history
+    historyContainer.appendChild(submissionEntry);
+
+    // 6. Clear the form fields after submission
+    document.getElementById('submissionForm').reset();
+});
+
+    </script>
+    <h1>36.Create a settings dashboard with auto-save.</h1>
+    <div class="dashboard-container">
+        <h1>Dashboard Settings</h1>
+        <div class="settings-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username">
+        </div>
+        <div class="settings-group">
+            <label for="theme">Theme:</label>
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="blue">Blue</option>
+            </select>
+        </div>
+        <div class="settings-group">
+            <label for="notifications">Enable Notifications:</label>
+            <input type="checkbox" id="notifications">
+        </div>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const usernameInput = document.getElementById('username');
+    const themeSelect = document.getElementById('theme');
+    const notificationsCheckbox = document.getElementById('notifications');
+    const statusDiv = document.getElementById('status');
+
+    // Function to load settings from Local Storage
+    function loadSettings() {
+        const savedUsername = localStorage.getItem('username');
+        const savedTheme = localStorage.getItem('theme');
+        const savedNotifications = localStorage.getItem('notifications');
+
+        if (savedUsername !== null) usernameInput.value = savedUsername;
+        if (savedTheme !== null) themeSelect.value = savedTheme;
+        if (savedNotifications !== null) notificationsCheckbox.checked = JSON.parse(savedNotifications);
+        statusDiv.textContent = 'Settings loaded!';
+    }
+
+    // Function to save settings to Local Storage
+    function saveSettings(key, value) {
+        localStorage.setItem(key, value);
+        statusDiv.textContent = `${key} saved!`;
+        // Clear status after a short delay
+        setTimeout(() => { statusDiv.textContent = ''; }, 2000);
+    }
+
+    // Event Listeners for Auto-Save
+    usernameInput.addEventListener('input', () => {
+        saveSettings('username')});
+    });
+
+    </script>
+    <h1>37.Build a dynamic content loader app.</h1>
+    <h1>My Dynamic App</h1>
+    <button id="load-btn">Load More Items</button>
+    <div id="content-container">
+        <!-- Dynamic content will load here -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const loadButton = document.getElementById('load-btn');
+    const container = document.getElementById('content-container');
+    let currentItemIndex = 0;
+    const itemsPerPage = 3; // How many to load at once
+
+    // Sample data (replace with real API call if needed)
+    const allData = [
+        { title: 'Product 1', description: 'This is the first amazing product.' },
+        { title: 'Product 2', description: 'Discover the features of our second product.' },
+        { title: 'Product 3', description: 'A detailed look at what product three offers.' },
+        { title: 'Product 4', description: 'Get more details about the fourth product.' },
+        { title: 'Product 5', description: 'The final product in our sample list.' }
+    ];
+
+    function loadContent() {
+        // Get the next set of items
+        const itemsToLoad = allData.slice(currentItemIndex, currentItemIndex + itemsPerPage);
+
+        itemsToLoad.forEach(data => {
+            // 1. Create the main card div
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('item'); // Add a class for styling
+
+            // 2. Create title (h3)
+            const titleElement = document.createElement('h3');
+            titleElement.textContent = data.title; // Set text content
+
+            // 3. Create description (p)
+            const descriptionElement = document.createElement('p');
+            descriptionElement.textContent = data.description;
+
+            // 4. Append elements to the card
+            itemDiv.appendChild(titleElement);
+            itemDiv.appendChild(descriptionElement);
+
+            // 5. Append the card to the main container
+            container.appendChild(itemDiv);
+        });
+
+        currentItemIndex += itemsPerPage; // Move index forward
+
+        // Hide button if all items are loaded
+        if (currentItemIndex >= allData.length) {
+            loadButton.style.display = 'none';
+        }
+    }
+
+    // Event listener for the button
+    loadButton.addEventListener('click', loadContent);
+
+    // Load initial content on page load
+    loadContent();
+});
+
+    </script>
+    <h1>38.Create a progress tracking app.</h1>
+    <div class="container">
+        <h1>Progress Tracker</h1>
+        <div>
+            <input type="text" id="new-task-input" placeholder="Enter a new task...">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <ul id="task-list">
+            <!-- Tasks will be dynamically added here by JavaScript -->
+        </ul>
+    </div>
+
+    <script>
+        // Function to add a new task
+function addTask() {
+    const taskInput = document.getElementById('new-task-input');
+    const taskText = taskInput.value.trim();
+
+    if (taskText === '') {
+        alert('Please enter a task.');
+        return;
+    }
+
+    const taskList = document.getElementById('task-list');
+    
+    // Create new list item (li) for the task
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `
+        <span>${taskText}</span>
+        <button class="status-btn" onclick="toggleComplete(this)">Complete</button>
+    `;
+
+    taskList.appendChild(listItem);
+    taskInput.value = ''; // Clear the input field
+}
+
+// Function to toggle task completion status
+function toggleComplete(buttonElement) {
+    const listItem = buttonElement.parentElement;
+    
+    // Toggle the 'completed' class for styling
+    listItem.classList.toggle('completed');
+
+    // Change button text based on status
+    if (listItem.classList.contains('completed')) {
+        buttonElement.textContent = 'Undo';
+        buttonElement.style.background = '#ffc107'; // Optional: change color
+    } else {
+        buttonElement.textContent = 'Complete';
+        buttonElement.style.background = '#28a745'; // Optional: change color
+    }
+}
+
+    </script>
+    <h1>39.Build a form rules engine app.</h1>
+    <form id="ruleForm">
+  <label>Role: 
+    <select id="role">
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+  </label>
+
+  <!-- This field will only show if Role is 'Admin' -->
+  <div id="adminSection" style="display:none;">
+    <label>Admin Access Code: <input type="text" id="accessCode"></label>
+  </div>
+</form>
+<script>
+    const formRules = [
+  {
+    fieldId: 'role',
+    condition: (val) => val === 'admin',
+    action: () => document.getElementById('adminSection').style.display = 'block',
+    elseAction: () => document.getElementById('adminSection').style.display = 'none'
+  }
+];
+function runEngine() {
+  formRules.forEach(rule => {
+    const field = document.getElementById(rule.fieldId);
+    if (rule.condition(field.value)) {
+      rule.action();
+    } else {
+      rule.elseAction();
+    }
+  });
+}
+
+// Add an event listener to the form to run the engine on any input change
+document.getElementById('ruleForm').addEventListener('input', runEngine);
+
+</script>
+<h1>40.Create a search and highlight app.</h1>
+<h1>Simple Search & Highlight</h1>
+    <input type="text" id="searchInput" placeholder="Type to search..." onkeyup="highlightText()">
+    <p id="content">
+        This is some sample text to demonstrate the search and highlight functionality.
+        When you type in the search box above, matching words in this paragraph will be highlighted in real-time.
+        JavaScript makes this easy by finding and replacing text with a special span.
+    </p>
+    <script>
+        function highlightText() {
+    const searchInput = document.getElementById('searchInput');
+    const content = document.getElementById('content');
+    const searchTerm = searchInput.value.trim(); // Get search term, remove whitespace
+
+    // Reset content if search term is empty
+    if (searchTerm === "") {
+        content.innerHTML = "This is some sample text to demonstrate the search and highlight functionality. When you type in the search box above, matching words in this paragraph will be highlighted in real-time. JavaScript makes this easy by finding and replacing text with a special span.";
+        return;
+    }
+
+    // Get original text
+    let originalText = content.innerText; // Use innerText to get plain text
+
+    // Create a regular expression for global, case-insensitive search
+    const regex = new RegExp(searchTerm, 'gi');
+
+    // Replace matches with highlighted span
+    // We use innerHTML to inject the span tags
+    let newContent = originalText.replace(regex, match =>
+        `<span class="highlight">${match}</span>`
+    );
+
+    content.innerHTML = newContent;
+}
+
+    </script>
+    <h1>41.Build a mini admin dashboard app.</h1>
+    <aside class="sidebar" id="sidebar">
+        <h2>Dashboard</h2>
+        <nav>
+            <ul>
+                <li>Dashboard</li>
+                <li>Users</li>
+                <li>Settings</li>
+                <li>Reports</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content (HTML) -->
+    <div class="main-content">
+        <header>
+            <h1>Welcome Admin!</h1>
+            <button class="toggle-btn" onclick="toggleSidebar()">Toggle Menu</button>
+        </header>
+
+        <div class="card-container">
+            <div class="card">
+                <h3>Users Online</h3>
+                <p>150</p>
+            </div>
+            <div class="card">
+                <h3>Revenue Today</h3>
+                <p>$1,200</p>
+            </div>
+            <div class="card">
+                <h3>New Orders</h3>
+                <p>45</p>
+            </div>
+        </div>
+
+        <section style="margin-top: 20px;">
+            <h2>Recent Activity</h2>
+            <p>User "JohnDoe" logged in.</p>
+            <p>Report "Monthly Sales" generated.</p>
+        </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        }
+    </script>
+    <h1>42.Create a user onboarding flow app.</h1>
+    <div class="onboarding-card">
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+
+    <form id="onboardingForm">
+        <!-- Step 1: Welcome -->
+        <div class="step active" data-step="1">
+            <h1>Welcome! 👋</h1>
+            <p>Let's get your account set up. What should we call you?</p>
+            <input type="text" id="userName" placeholder="Enter your name" required>
+            <div class="btn-group">
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
+        </div>
+         <div class="step" data-step="2">
+            <h1>Your Interests 🎨</h1>
+            <p>Select your primary area of focus:</p>
+            <select id="interest">
+                <option value="design">Design</option>
+                <option value="development">Development</option>
+                <option value="marketing">Marketing</option>
+            </select>
+            <div class="btn-group">
+                <button type="button" class="btn-secondary" onclick="prevStep()">Back</button>
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Confirmation -->
+        <div class="step" data-step="3">
+            <h1>Ready to go? 🚀</h1>
+            <p>Click finish to complete your profile.</p>
+            <div id="summary"></div>
+            <div class="btn-group">
+                <button type="button" class="btn-secondary" onclick="prevStep()">Back</button>
+                <button type="submit">Finish</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    
+let currentStep = 1;
+const totalSteps = 3;
+
+function updateUI() {
+    // Toggle Step Visibility
+    document.querySelectorAll('.step').forEach(step => {
+        step.classList.remove('active');
+        if (parseInt(step.dataset.step) === currentStep) {
+            step.classList.add('active');
+        }
+    });
+
+    // Update Progress Bar
+    const progress = (currentStep / totalSteps) * 100;
+    document.getElementById('progress').style.width = `${progress}%`;
+
+    // Update Summary on Last Step
+    if (currentStep === 3) {
+        const name = document.getElementById('userName').value;
+        const interest = document.getElementById('interest').value;
+        document.getElementById('summary').innerHTML = 
+            `<strong>Name:</strong> ${name}<br><strong>Focus:</strong> ${interest}`;
+    }
+}
+
+function nextStep() {
+    const currentInput = document.querySelector(`.step[data-step="${currentStep}"] input`);
+    // Simple validation: check if input is filled
+    if (currentInput && !currentInput.value) {
+        alert("Please fill out the field");
+        return;
+    }
+    if (currentStep < totalSteps) {
+        currentStep++;
+        updateUI();
+    }
+}
+
+function prevStep() {
+    if (currentStep > 1) {
+        currentStep--;
+        updateUI();
+    }
+}
+
+document.getElementById('onboardingForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert("Onboarding Complete! Redirecting...");
+    console.log("Form Submitted Successfully");
+});
+
+</script>
+<h1>43.Build a reporting dashboard app (static data).</h1>
+ <div class="flex">
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <header class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Sales Reporting Dashboard</h1>
+                <p class="text-gray-600">Static Data Overview for Q1 2026</p>
+            </header>
+
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                    <p class="text-sm text-gray-500 uppercase font-bold">Total Revenue</p>
+                    <p class="text-2xl font-bold text-gray-800">$45,231.89</p>
+                    <p class="text-green-500 text-sm">↑ 12% from last month</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-purple-500">
+                    <p class="text-sm text-gray-500 uppercase font-bold">Active Users</p>
+                    <p class="text-2xl font-bold text-gray-800">2,405</p>
+                    <p class="text-green-500 text-sm">↑ 5.4% growth</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-orange-500">
+                    <p class="text-sm text-gray-500 uppercase font-bold">Conversion Rate</p>
+                    <p class="text-2xl font-bold text-gray-800">3.24%</p>
+                    <p class="text-red-500 text-sm">↓ 0.8% decrease</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h2 class="text-lg font-semibold mb-4">Monthly Sales Performance</h2>
+                    <canvas id="salesChart"></canvas>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h2 class="text-lg font-semibold mb-4">Traffic Sources</h2>
+                    <canvas id="trafficChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-gray-100">
+                    <h2 class="text-lg font-semibold">Recent Transactions</h2>
+                </div>
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Customer</th>
+                            <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Status</th>
+                            <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Date</th>
+                            <th class="px-6 py-3 text-sm font-medium text-gray-500 uppercase">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 font-medium text-gray-900">John Doe</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">Completed</span></td>
+                            <td class="px-6 py-4 text-gray-600">Jan 12, 2026</td>
+                            <td class="px-6 py-4 font-semibold">$350.00</td>
+                        </tr> <tr>
+                            <td class="px-6 py-4 font-medium text-gray-900">Sarah Smith</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded-full">Pending</span></td>
+                            <td class="px-6 py-4 text-gray-600">Jan 15, 2026</td>
+                            <td class="px-6 py-4 font-semibold">$1,200.50</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script>
+ const salesCtx = document.getElementById('salesChart').getContext('2d');
+        new Chart(salesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sales ($)',
+                    data: [12000, 19000, 15000, 22000, 24000, 21000],
+                    backgroundColor: 'rgba(59, 130, 246, 0.8)'
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        // Traffic Doughnut Chart
+        const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+        new Chart(trafficCtx, {
+            type: 'doughnut',
+             data: {
+                labels: ['Direct', 'Social Media', 'Referral', 'Organic Search'],
+                datasets: [{
+                    data: [35, 20, 15, 30],
+                    backgroundColor: ['#3b82f6', '#8b5cf6', '#f59e0b', '#10b981']
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+    <h1>44.Create a component-based UI using JS functions.</h1>
+    <h1>My Component App</h1>
+    <div id="root"></div>
+    <button>Click</button>
+    <script src="app.js"></script>
+    <h1>45.Build a performance-optimized list app.
+</h1>
+<div id="app-container">
+    <h1>My Optimized List</h1>
+    <input type="text" id="new-item-input" placeholder="Add new item...">
+    <button id="add-btn">Add</button>
+    <ul id="item-list"></ul>
+</div>
+    <script>
+       const input = document.getElementById('new-item-input');
+const addBtn = document.getElementById('add-btn');
+const listContainer = document.getElementById('item-list');
+let items = []; // Store data in JS array, not directly in DOM initially
+listContainer.addEventListener('click', function(e) {
+    if (e.target.tagName === 'LI') {
+        // Handle click (e.g., toggle 'completed', delete)
+        console.log('Item clicked:', e.target.textContent);
+        e.target.classList.toggle('completed'); // Example for styling
+    }
+});
+
+addBtn.addEventListener('click', addItem);
+input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') addItem();
+});
+
+    </script>
+    <h1>46.Create a login attempt limit app.</h1>
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button id="login-button" onclick="handleLogin()">Log In</button>
+        <div id="message-area"></div>
+    </div>
+
+    <script>
+        // Define variables for limits and tracking
+        const MAX_ATTEMPTS = 3;
+        let attemptsLeft = MAX_ATTEMPTS;
+
+        // Get references to DOM elements
+        const loginButton = document.getElementById('login-button');
+        const messageArea = document.getElementById('message-area');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+
+        function handleLogin() {
+            // In a real application, you would send this to a server for validation
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+
+            // Simple client-side validation (replace with actual logic)
+            if (username === 'user' && password === 'password123') {
+                showMessage('Login successful! Redirecting...', 'success');
+                // You would typically redirect the user here
+                // window.location.href = 'dashboard.html';
+            } else {
+                attemptsLeft--;
+                if (attemptsLeft > 0) {
+                    showMessage(`Invalid credentials. ${attemptsLeft} attempts remaining.`, 'error');
+                } else {
+                    // Disable the button if attempts are exhausted
+                    showMessage('Too many failed attempts. Login disabled.', 'error');
+                    loginButton.disabled = true;
+                }
+            }
+            // Clear inputs for better user experience
+            passwordInput.value = '';
+        }
+
+        function showMessage(message, type) {
+            messageArea.textContent = message;
+            messageArea.className = type;
+        }
+    </script>
+    <h1>47.Build a user preference management app.</h1>
+    <h1>User Preference Management</h1>
+    <form id="prefForm">
+        <label>Theme:
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </label><br>
+
+        <label>Font Size (px):
+            <input type="number" id="fontSize" value="16">
+        </label><br>
+
+        <button type="submit">Save Preferences</button>
+    </form>
+    <script>
+        const prefForm = document.getElementById('prefForm');
+
+// Load preferences on page startup
+window.onload = () => {
+    const savedPrefs = JSON.parse(localStorage.getItem('userPrefs'));
+    if (savedPrefs) {
+        document.getElementById('theme').value = savedPrefs.theme;
+        document.getElementById('fontSize').value = savedPrefs.fontSize;
+        applyPreferences(savedPrefs);
+    }
+};
+
+// Handle form submission
+prefForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Stop page reload
+    
+    const preferences = {
+        theme: document.getElementById('theme').value,
+        fontSize: document.getElementById('fontSize').value
+    };
+
+    // Save to Local Storage
+    localStorage.setItem('userPrefs', JSON.stringify(preferences));
+    applyPreferences(preferences);
+    alert('Preferences Saved!');
+});
+
+// Apply styles immediately
+function applyPreferences(prefs) {
+    document.body.className = prefs.theme;
+    document.body.style.fontSize = prefs.fontSize + 'px';
+}
+
+    </script>
+    <h1>48.Create a dashboard theme customizer app.</h1>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar">
+            <h2>Dashboard</h2>
+            <nav>
+                <ul>
+                    <li>Overview</li>
+                    <li>Analytics</li>
+                    <li>Settings</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content">
+            <header>
+                <h1>Welcome Back</h1>
+                <div class="theme-controls">
+                    <button id="customizer-toggle">Customize Theme</button>
+                    </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="card">Total Users: 1,200</div>
+                <div class="card">Revenue: $45,000</div>
+                <div class="card">Active Now: 85</div>
+            </div>
+
+            <!-- Customizer Panel -->
+            <div id="customizer" class="hidden">
+                <h3>Customize Theme</h3>
+                <label>Primary Color: <input type="color" id="primary-color" value="#3498db"></label>
+                <label>Background: <input type="color" id="bg-color" value="#f4f4f4"></label>
+                <button id="reset-btn">Reset</button>
+            </div>
+        </main>
+    </div>
+    <script>
+const primaryInput = document.getElementById('primary-color');
+const bgInput = document.getElementById('bg-color');
+const toggleBtn = document.getElementById('customizer-toggle');
+const customizer = document.getElementById('customizer');
+const resetBtn = document.getElementById('reset-btn');
+
+// Toggle the customizer panel
+toggleBtn.addEventListener('click', () => {
+    customizer.classList.toggle('hidden');
+});
+
+// Update theme colors in real-time
+primaryInput.addEventListener('input', (e) => {
+    document.documentElement.style.setProperty('--primary-color', e.target.value);
+});
+
+bgInput.addEventListener('input', (e) => {
+    document.documentElement.style.setProperty('--bg-color', e.target.value);
+});
+
+// Reset to default
+resetBtn.addEventListener('click', () => {
+    document.documentElement.style.setProperty('--primary-color', '#3498db');
+    document.documentElement.style.setProperty('--bg-color', '#f4f4f4');
+});
+
+    </script>
+    <h1>49.Build a reusable confirmation dialog system.</h1>
+    <h1>Reusable Confirmation Dialog Example</h1>
+    <!-- Reusable Dialog Structure -->
+<dialog id="confirm-dialog">
+  <form method="dialog">
+    <h3 id="confirm-title">Confirm Action</h3>
+    <p id="confirm-message">Are you sure you want to proceed?</p>
+    <div class="dialog-actions">
+      <button type="button" id="confirm-cancel">Cancel</button>
+      <button type="button" id="confirm-ok">Confirm</button>
+    </div>
+  </form>
+</dialog>
+<button>Cancel</button>
+<button>Confirm</button>
+
+
+    <script>
+const confirmSystem = {
+  dialog: document.getElementById('confirm-dialog'),
+  title: document.getElementById('confirm-title'),
+  message: document.getElementById('confirm-message'),
+  btnOk: document.getElementById('confirm-ok'),
+  btnCancel: document.getElementById('confirm-cancel'),
+
+  ask(title, message) {
+    this.title.innerText = title;
+    this.message.innerText = message;
+    this.dialog.showModal();
+
+    return new Promise((resolve) => {
+      const handleClose = (result) => {
+        this.dialog.close();
+        // Remove listeners to prevent memory leaks
+        this.btnOk.onclick = null;
+        this.btnCancel.onclick = null;
+        resolve(result);
+      };
+
+      this.btnOk.onclick = () => handleClose(true);
+      this.btnCancel.onclick = () => handleClose(false);
+    });
+  }
+};
+
+    </script>
+    <h1>50.Create a complete interview-ready frontend mini-application.</h1>
+     <div class="app-container">
+        <header>
+            <h1>TaskFlow</h1>
+            <div class="input-group">
+                <input type="text" id="taskInput" placeholder="Add a new task...">
+                <button id="addBtns">Add</button>
+            </div>
+        </header>
+
+        <nav class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+        </nav>
+
+        <ul id="taskList"></ul>
+    </div>
+    
+    <script>
+// State Management
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let currentFilter = 'all';
+
+// DOM Elements
+const taskInput = document.getElementById('taskInput');
+const addBtns = document.getElementById('addBtns');
+const taskList = document.getElementById('taskList');
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+// Add Task
+function addTask() {
+    const text = taskInput.value.trim();
+    if (!text) return;
+
+    const newTask = { id: Date.now(), text, completed: false };
+    tasks.push(newTask);
+    saveAndRender();
+    taskInput.value = '';
+}
+
+// Toggle Task
+function toggleTask(id) {
+    tasks = tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
+    saveAndRender();
+}
+
+// Delete Task
+function deleteTask(id) {
+    tasks = tasks.filter(t => t.id !== id);
+    saveAndRender();
+}
+
+// Save to LocalStorage and Update UI
+function saveAndRender() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    
+    const filteredTasks = tasks.filter(t => {
+        if (currentFilter === 'active') return !t.completed;
+        if (currentFilter === 'completed') return t.completed;
+        return true;
+    });
+
+    taskList.innerHTML = filteredTasks.map(t => `
+        <li class="task-item ${t.completed ? 'completed' : ''}">
+            <span onclick="toggleTask(${t.id})">${t.text}</span>
+            <button class="delete-btn" onclick="deleteTask(${t.id})">✕</button>
+        </li>
+    `).join('');
+}
+
+// Event Listeners
+addBtns.addEventListener('click', addTask);
+taskInput.addEventListener('keypress', (e) => e.key === 'Enter' && addTask());
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelector('.active').classList.remove('active');
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        saveAndRender();
+    });
+});
+
+// Initial Render
+saveAndRender();
+
+    </script>
+</body>
+</html>
