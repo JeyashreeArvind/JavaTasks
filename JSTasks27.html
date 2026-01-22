@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks - Day 27</title>
+    <style>
+        container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        input{ display: block; width: 300px; padding: 10px; margin-bottom: 10px; }
+        button{display: block; width:200px;border-radius: 4px;background-color: green;color: black;height: 40px;}
+        #result { margin-top: 15px; font-weight: bold; color: green; }
+        #result1 { margin-top: 15px; font-weight: bold; color: green; }
+    </style>
+</head>
+<body>
+<h1>1.A user enters a number. Display whether it is even or odd.</h1>   
+<h2>Even or Odd Number Checker</h2>
+
+    <label for="numberInput">Enter a number:</label>
+    <input type="number" id="numberInput" placeholder="Enter a number">
+    <button onclick="checkNumber()">Check</button>
+
+    <!-- This div will display the result -->
+    <p>Result: <strong id="result"></strong></p>
+
+    <script>
+        function checkNumber() {
+            // Get the value entered by the user
+            const numberInput = document.getElementById('numberInput').value;
+            const resultElement = document.getElementById('result');
+            
+            // Convert the input string to an integer
+            const number = parseInt(numberInput);
+
+            // Check if the input is a valid number
+            if (isNaN(number)) {
+                resultElement.textContent = "Please enter a valid number.";
+                resultElement.style.color = "red";
+                return;
+            }
+
+            // Check if the number is even or odd
+            // The modulo operator (%) returns the remainder of a division.
+            // If the remainder when divided by 2 is 0, the number is even.
+            if (number % 2 === 0) {
+                resultElement.textContent = number + " is an EVEN number.";
+                resultElement.style.color = "green";
+            } else {
+                resultElement.textContent = number + " is an ODD number.";
+                resultElement.style.color = "blue";
+            }
+        }
+    </script>
+    <h1></h1>
+    <div class="container">
+        <h2>Compare Two Numbers</h2>
+        <label for="value1">Value 1:</label>
+        <input type="number" id="value1" placeholder="Enter first number">
+
+        <label for="value2">Value 2:</label>
+        <input type="number" id="value2" placeholder="Enter second number">
+
+        <button onclick="compareValues()">Compare</button>
+
+        <p id="result1"></p>
+    </div>
+
+    <script>
+        function compareValues() {
+            // Get values from the input fields and convert them to floating-point numbers
+            const val1 = parseFloat(document.getElementById('value1').value);
+            const val2 = parseFloat(document.getElementById('value2').value);
+            const resultElement = document.getElementById('result1');
+
+            // Check if inputs are valid numbers
+            if (isNaN(val1) || isNaN(val2)) {
+                resultElement.textContent = "Please enter valid numbers in both fields.";
+                resultElement.style.color = "red";
+                return;
+            }
+
+            // Perform the comparison
+            if (val1 > val2) {
+                resultElement.textContent = `Value 1 (${val1}) is greater than Value 2 (${val2}).`;
+                resultElement.style.color = "green";
+            } else if (val2 > val1) {
+                resultElement.textContent = `Value 2 (${val2}) is greater than Value 1 (${val1}).`;
+                resultElement.style.color = "green";
+            } else {
+                resultElement.textContent = `Value 1 (${val1}) and Value 2 (${val2}) are equal.`;
+                resultElement.style.color = "blue";
+            }
+        }
+    </script>
+    <h1>3.Three marks are entered. Display the highest mark.</h1>
+    <h1>Find the Highest Mark</h1>
+
+<label for="mark1">Mark 1:</label>
+<input type="number" id="mark1" value="0"><br>
+
+<label for="mark2">Mark 2:</label>
+<input type="number" id="mark2" value="0"><br>
+
+<label for="mark3">Mark 3:</label>
+<input type="number" id="mark3" value="0"><br>
+
+<button onclick="displayHighestMark()">Find Highest</button>
+
+<p id="result2"></p>
+
+<script>
+function displayHighestMark() {
+  // Get values from input fields and convert to numbers
+  const mark1 = parseFloat(document.getElementById('mark1').value);
+  const mark2 = parseFloat(document.getElementById('mark2').value);
+  const mark3 = parseFloat(document.getElementById('mark3').value);
+
+  // Use Math.max() to find the largest among the three
+  const highest = Math.max(mark1, mark2, mark3);
+
+  // Display the result in the <p> tag with id="result"
+  document.getElementById('result2').innerText = "The highest mark is: " + highest;
+}
+</script>
+<h1>4.A number is provided. Show whether it is positive, negative, or zero.</h1>
+<h2>Check if a Number is Positive, Negative, or Zero</h2>
+    
+    <label for="numberInput1">Enter a number:</label>
+    <input type="number" id="numberInput1" placeholder="Enter a number">
+    
+    <button onclick="checkNumber()">Check Sign</button>
+    
+    <div id="result3"></div>
+
+    <script>
+        function checkNumber() {
+            // Get the value from the input field
+            const numberInputs = document.getElementById('numberInput1');
+            const resultDiv = document.getElementById('result3');
+            
+            // Convert the input value to a floating-point number
+            const num = parseFloat(numberInputs.value);
+
+            // Check if the input is a valid number
+            if (isNaN(num)) {
+                resultDiv.textContent = "Please enter a valid number.";
+                resultDiv.className = ""; // Clear existing classes
+                return;
+            }
+
+            // Determine the sign using if-else if-else logic
+            if (num > 0) {
+                resultDiv.textContent = "The number is positive.";
+                resultDiv.className = "positive";
+            } else if (num < 0) {
+                resultDiv.textContent = "The number is negative.";
+                resultDiv.className = "negative";
+            } else {
+                // This condition covers num === 0 and num === -0
+                resultDiv.textContent = "The number is zero.";
+                resultDiv.className = "zero";
+            }
+        }
+    </script>
+    <h1>5.Given a number N, display the total from 1 to N.</h1>
+    <h2>Calculate Sum from 1 to N</h2>
+
+    <label for="numberInput2">Enter a number (N):</label>
+    <input type="number" id="numberInput2" min="1" step="1">
+    <button onclick="calculateSum()">Calculate</button>
+
+    <p>The total sum from 1 to <span id="displayN">...</span> is: <strong id="result4">0</strong></p>
+
+    <script>
+        function calculateSum() {
+            // Get the value entered by the user
+            const nInput = document.getElementById('numberInput2');
+            const N = parseInt(nInput.value);
+
+            // Get elements to display the result
+            const displayN = document.getElementById('displayN');
+            const resultElement = document.getElementById('result4');
+
+            // Validate input
+            if (isNaN(N) || N < 1) {
+                resultElement.textContent = 'Invalid input. Please enter a number greater than 0.';
+                displayN.textContent = '...';
+                return;
+            }
+
+            // Calculate the sum using a simple loop
+            let sum = 0;
+            for (let i = 1; i <= N; i++) {
+                sum += i;
+            }
+
+            // Display the result
+            displayN.textContent = N;
+            resultElement.textContent = sum;
+
+            // Optional: A more efficient formula-based approach
+            // const sumFormula = (N * (N + 1)) / 2;
+            // resultElement.textContent = sumFormula;
+        }
+    </script>
+
+<h1>6.A number is entered. Display it in reverse order.</h1>
+<div class="container">
+        <h2>Reverse Number Display</h2>
+        <label for="numberInput3">Enter a number:</label>
+        <input type="number" id="numberInput3" placeholder="Enter a number">
+        <button onclick="reverseNumber()">Reverse and Display</button>
+        <div id="result5"></div>
+    </div>
+
+    <script>
+        function reverseNumber() {
+            // Get the input value
+            let inputElement = document.getElementById('numberInput3');
+            let number = inputElement.value;
+
+            // Check if the input is empty or not a valid number
+            if (!number || isNaN(number)) {
+                document.getElementById('result5').textContent = 'Please enter a valid number.';
+                return;
+            }
+
+            // Convert the number to a string, split into an array of characters,
+            // reverse the array, and join back into a string.
+            let reversedNumberString = String(number).split('').reverse().join('');
+
+            // Display the result
+            document.getElementById('result5').textContent = 'Reversed number: ' + reversedNumberString;
+        }
+    </script>
+    <h1>7.A word is given. Display the word reversed.</h1>
+    <h2>Word Reverser</h2>
+
+    <label for="wordInput">Enter a word:</label>
+    <input type="text" id="wordInput">
+    <button onclick="reverseWord()">Reverse Word</button>
+
+    <p>Reversed word: <strong id="reversedOutput"></strong></p>
+
+    <script>
+        function reverseWord() {
+            // Get the value from the input field
+            const originalWord = document.getElementById('wordInput').value;
+            
+            // Check if the input is not empty
+            if (originalWord === "") {
+                alert("Please enter a word.");
+                return;
+            }
+
+            // Reverse the word
+            // 1. Split the string into an array of characters
+            // 2. Reverse the array
+            // 3. Join the characters back into a string
+            const reversedWord = originalWord.split('').reverse().join('');
+            
+            // Display the reversed word in the output element
+            document.getElementById('reversedOutput').textContent = reversedWord;
+        }
+    </script>
+    <h1>8.A word is entered. Show whether it reads the same backward.</h1>
+     <h2>Palindrome Checker</h2>
+    
+    <input type="text" id="wordInputs" placeholder="Enter a word">
+    <button onclick="checkPalindrome()">Check</button>
+    
+    <p id="result6"></p>
+
+    <script>
+        function checkPalindrome() {
+            // Get the input value and convert to lowercase
+            const words = document.getElementById("wordInputs").value.toLowerCase();
+            
+            // Reverse the word
+            const reversedWord = words.split('').reverse().join('');
+            
+            // Compare and show result
+            if (words === "") {
+                document.getElementById("result6").innerText = "Please enter a word.";
+            } else if (words === reversedWord) {
+                document.getElementById("result6").innerText = "Yes! It reads the same backward.";
+            } else {
+                document.getElementById("result6").innerText = "No, it is not the same backward.";
+            }
+        }
+    </script>
+    <h1>9.A sentence is entered. Display total vowel count.</h1>
+    <h2>Vowel Counter</h2>
+    <input type="text" id="sentence" placeholder="Enter a sentence">
+    <button onclick="countVowels()">Count Vowels</button>
+    <p id="result7"></p>
+
+    <script>
+        function countVowels() {
+            const str = document.getElementById("sentence").value;
+            // Match all vowels (global 'g') and ignore case (case-insensitive 'i')
+            const vowelMatch = str.match(/[aeiou]/gi);
+            const count = vowelMatch ? vowelMatch.length : 0;
+            
+            document.getElementById("result7").innerHTML = "Total Vowels: " + count;
+        }
+    </script>
+    <h1>10.A number is given. Display its factorial value.</h1>
+    <h2>Factorial Value Calculator</h2>
+    
+    <input type="number" id="numInput7" placeholder="Enter a number">
+    <button onclick="calculateFactorial()">Calculate</button>
+
+    <div id="result8"></div>
+
+    <script>
+        function calculateFactorial() {
+            // Get input value
+            let n = document.getElementById("numInput7").value;
+            let resultDiv = document.getElementById("result8");
+
+            // Convert to integer
+            n = parseInt(n);
+             // Validation: Factorials are for non-negative integers
+            if (isNaN(n) || n < 0) {
+                resultDiv.innerHTML = "Please enter a valid non-negative integer.";
+                return;
+            }
+
+            let factorial = 1;
+            // Loop to calculate factorial
+            for (let i = 1; i <= n; i++) {
+                factorial *= i;
+            }
+
+            resultDiv.innerHTML = "The factorial of " + n + " is: " + factorial;
+        }
+    </script>
+    <h1>11.A value N is given. Display first N Fibonacci numbers.</h1>
+    <h2>Generate First N Fibonacci Numbers</h2>
+
+    <label for="numberInput9">Enter a number (N):</label>
+    <input type="number" id="numberInput9" min="1" step="1" value="10">
+    <button onclick="generateFibonacci()">Generate</button>
+
+    <h3>Results:</h3>
+    <div id="output"></div>
+
+    <script>
+        function generateFibonacci() {
+            const inputElement = document.getElementById('numberInput9');
+            const outputElement = document.getElementById('output');
+            const N = parseInt(inputElement.value);
+
+            // Clear previous results
+            outputElement.textContent = '';
+
+            // Validate input
+            if (isNaN(N) || N < 1) {
+                outputElement.textContent = 'Please enter a valid positive number.';
+                return;
+            }
+
+            const fibSequence = [];
+            let a = 0, b = 1;
+
+            for (let i = 0; i < N; i++) {
+                fibSequence.push(a);
+                const temp = a;
+                a = b;
+                b = temp + b;
+            }
+
+            // Display the sequence in the output div
+            outputElement.textContent = fibSequence.join(', ');
+        }
+    </script>
+<h1>
+12.A number is entered. Show whether it is prime.
+</h1>
+<div class="container">
+        <h2>Prime Number Checker</h2>
+        <label for="numberInput10">Enter a number:</label>
+        <input type="number" id="numberInput10" placeholder="Enter an integer">
+        <button onclick="checkPrime()">Check</button>
+        <p id="result10">Enter a number to check.</p>
+    </div>
+
+    <script>
+        function checkPrime() {
+            // Get the input value and convert it to an integer
+            const numberInput = document.getElementById('numberInput10');
+            const resultElement = document.getElementById('result10');
+            const num = parseInt(numberInput.value);
+
+            // Clear previous result styling
+            resultElement.className = '';
+
+            // Validate input
+            if (isNaN(num) || num === null || numberInput.value === '') {
+                resultElement.textContent = "Please enter a valid number.";
+                resultElement.classList.add('not-prime');
+                return;
+            }
+
+            if (num <= 1) {
+                resultElement.textContent = `${num} is not a prime number.`;
+                resultElement.classList.add('not-prime');
+                return;
+            }
+
+            let isPrime = true;
+
+            // Check for factors up to the square root of the number
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    isPrime = false;
+                    break; // Exit the loop as soon as a factor is found
+                }
+            }
+
+            // Display the result
+            if (isPrime) {
+                resultElement.textContent = `${num} is a prime number.`;
+                resultElement.classList.add('prime');
+            } else {
+                resultElement.textContent = `${num} is not a prime number.`;
+                resultElement.classList.add('not-prime');
+            }
+        }
+    </script>
+    <h1>13.A number is provided. Display total digit count.</h1>
+    <div class="container">
+        <h2>Digit Counter</h2>
+        <label for="numberInput11">Enter a number:</label><br>
+        <input type="number" id="numberInput11" placeholder="Enter a number">
+        <button onclick="countDigits()">Count Digits</button>
+        <p>Total digits: <span id="result11">0</span></p>
+    </div>
+
+    <script>
+        function countDigits() {
+            // Get the value from the input field
+            const numberInput = document.getElementById('numberInput11').value;
+
+            // Convert the number (which is a string from the input) to an absolute value 
+            // to handle negative signs, then convert to a string to count characters.
+            // Using a regular expression to ensure only digits are counted.
+            const digitsOnly = numberInput.replace(/[^0-9]/g, '');
+
+            // Get the length of the resulting string
+            const digitCount = digitsOnly.length;
+
+            // Display the result in the 'result' span
+            document.getElementById('result11').textContent = digitCount;
+        }
+    </script>
+    <h1>14.A number is given. Display sum of its digits.</h1>
+    <div class="container">
+        <h2>Calculate Sum of Digits</h2>
+        <label for="numberInput12">Enter a number:</label>
+        <input type="number" id="numberInput12" placeholder="E.g., 12345">
+        <button onclick="calculateSum()">Calculate Sum</button>
+        <div id="result12"></div>
+    </div>
+
+    <script>
+        function calculateSum() {
+            // Get the input value as a string
+            const numberString = document.getElementById('numberInput12').value;
+
+            // Check if the input is empty or not a valid number (e.g., negative numbers with '-')
+            if (!numberString || isNaN(numberString) || numberString.includes('-')) {
+                document.getElementById('result12').textContent = 'Please enter a valid positive number.';
+                return;
+            }
+
+            let sum = 0;
+
+            // Iterate over each character (digit) in the string
+            for (let i = 0; i < numberString.length; i++) {
+                // Convert the character to an integer and add to the sum
+                // The unary plus operator (+) or parseInt() can be used for conversion
+                sum += parseInt(numberString[i], 10);
+            }
+
+            // Display the result
+            document.getElementById('result12').textContent = 'The sum of the digits is: ' + sum;
+        }
+    </script>
+    <h1>
+15.Temperature in Celsius is entered. Display Fahrenheit value.
+    </h1>
+    <div class="container">
+        <h2>Temperature Converter</h2>
+        <label for="celsius">Enter Celsius temperature:</label>
+        <input type="number" id="celsius" placeholder="Enter temp in Celsius">
+        <button onclick="convertToFahrenheit()">Convert</button>
+        <div id="result13"></div>
+    </div>
+
+    <script>
+        function convertToFahrenheit() {
+            // Get the value from the input field
+            const celsiusInput = document.getElementById('celsius');
+            const celsiusValue = parseFloat(celsiusInput.value);
+
+            // Get the result element
+            const resultElement = document.getElementById('result13');
+
+            // Check if the input is a valid number
+            if (!isNaN(celsiusValue)) {
+                // Calculate Fahrenheit: (C * 9/5) + 32
+                const fahrenheitValue = (celsiusValue * 9/5) + 32;
+                // Display the result, rounded to two decimal places
+                resultElement.textContent = `${celsiusValue}°C is ${fahrenheitValue.toFixed(2)}°F`;
+            } else {
+                // Display an error message if the input is not a number
+                resultElement.textContent = 'Please enter a valid number.';
+            }
+        }
+    </script>
+    <h1>16.An array of numbers is given. Display the average.</h1>
+     <h2>Array Average Calculator</h2>
+    
+    <p><strong>Input Array:</strong> [10, 20, 30, 40, 50]</p>
+    <p class="result" id="display"></p>
+
+    <script>
+        // 1. Define the array
+        const numbers = [10, 20, 30, 40, 50];
+
+        // 2. Calculate the sum using the reduce method
+        const sum = numbers.reduce((accumulator, current) => accumulator + current, 0);
+
+        // 3. Calculate the average
+        const average = sum / numbers.length;
+
+        // 4. Display the result in the HTML
+        document.getElementById('display').innerHTML = `The average is: ${average}`;
+    </script>
+    <h1>17.A list of numbers is provided. Display the highest value.</h1>
+    <h2>Find Highest Value</h2>
+    
+    <p>Numbers: <span id="number-list"></span></p>
+    <p><strong>Highest Value:</strong> <span id="result14"></span></p>
+
+    <script>
+        // 1. Provided list of numbers
+        const numbers1 = [24, 67, 12, 89, 43, 5, 91, 32];
+
+        // 2. Display the list on the page
+        document.getElementById("number-list").innerHTML = numbers1.join(", ");
+
+        // 3. Find the highest value using Math.max
+        const highest = Math.max(...numbers1);
+
+        // 4. Display the result
+        document.getElementById("result14").innerHTML = highest;
+    </script>
+    <h1>18.A list of numbers is provided. Display the lowest value.</h1>
+    <h2>Lowest Value in a List</h2>
+
+    <p>The list of numbers is: <span id="numberList"></span></p>
+    <p>The lowest value is: <strong id="lowestValue"></strong></p>
+
+    <script>
+        // The list of numbers
+        const numbers2 = [18, 5, 42, 3, 9, 21, 1, 50];
+
+        // Function to find the lowest value
+        function findLowestValue(arr) {
+            // Use Math.min() with the spread operator (...) to find the minimum value in the array
+            return Math.min(...arr);
+        }
+
+        // Get the lowest value
+        const lowest = findLowestValue(numbers2);
+
+        // Display the list of numbers and the lowest value in the HTML
+        document.getElementById('numberList').textContent = numbers2.join(', ');
+        document.getElementById('lowestValue').textContent = lowest;
+    </script>
+    <h1>19.An array is given. Display how many even numbers it contains.</h1>
+    <h2>Count Even Numbers in an Array</h2>
+    <p>Enter numbers separated by commas (e.g., 1, 2, 3, 4, 5, 6):</p>
+    
+    <input type="text" id="numberInput15" value="5, 8, 12, 1, 4, 9, 20">
+    <button onclick="countEvenNumbers()">Count Evens</button>
+    
+    <p id="result15">The count will appear here.</p>
+
+    <script>
+        function countEvenNumbers() {
+            // 1. Get the input string from the text box
+            const inputString = document.getElementById('numberInput15').value;
+
+            // 2. Split the string by commas into an array of strings
+            const stringArray = inputString.split(',');
+
+            // 3. Filter the array to count only valid even numbers
+            const evenNumbers = stringArray.filter(item => {
+                // Convert string item to an integer
+                const number = parseInt(item.trim(), 10);
+                
+                // Check if it is a valid number AND if it is even
+                // The isNaN() function checks if the value is "Not a Number"
+                return !isNaN(number) && number % 2 === 0;
+            });
+
+            // 4. Get the count (the length of the filtered array)
+            const count = evenNumbers.length;
+
+            // 5. Display the result in the HTML paragraph element
+            document.getElementById('result15').textContent = `The array contains ${count} even numbers.`;
+        }
+    </script>
+    <h1>20.A list contains duplicate values. Display unique values only.</h1>
+    <h2>Original List (with duplicates):</h2>
+    <!-- The original list will be displayed here -->
+    <p id="original-list-display"></p>
+
+    <button onclick="displayUniqueValues()">Display Unique Values Only</button>
+
+    <h2>Unique Values:</h2>
+    <!-- Unique values will be injected into this unordered list -->
+    <ul id="unique-list">
+        <!-- List items will be added dynamically by JavaScript -->
+    </ul>
+
+    <script>
+        // 1. Define the list with duplicate values
+        const dataWithDuplicates = ['apple', 'banana', 'orange', 'apple', 'mango', 'banana', 'grape', 'apple'];
+
+        // Function to display the original list on load
+        function displayOriginalList() {
+            document.getElementById('original-list-display').textContent = dataWithDuplicates.join(', ');
+        }
+
+        // 2. Function to find and display unique values
+        function displayUniqueValues() {
+            // Use the Set object to automatically filter out duplicates
+            // The spread operator (...) converts the Set back into an array
+            const uniqueValues = [...new Set(dataWithDuplicates)];
+
+            // Get the HTML element where we want to display the results
+            const uniqueListElement = document.getElementById('unique-list');
+
+            // Clear previous results before adding new ones
+            uniqueListElement.innerHTML = '';
+
+            // 3. Loop through the unique values array and create list items (li)
+            uniqueValues.forEach(item => {
+                const li = document.createElement('li'); // Create a new list item element
+                li.textContent = item; // Set the text content of the list item
+                uniqueListElement.appendChild(li); // Add the list item to the unordered list (ul)
+            });
+        }
+
+        // Call this function when the page loads to show the initial data
+        window.onload = displayOriginalList;
+    </script>
+    <h1>21.A year is entered. Display whether it is a leap year.</h1>
+    <h2>Leap Year Checker</h2>
+    
+    <label for="yearInput">Enter a year:</label>
+    <input type="number" id="yearInput" placeholder="e.g., 2024">
+    
+    <button onclick="checkLeapYear()">Check</button>
+    
+    <div id="result16"></div>
+
+    <script>
+        /**
+         * Checks if a given year is a leap year and displays the result.
+         */
+        function checkLeapYear() {
+            // Get the value entered by the user
+            const yearInput = document.getElementById('yearInput');
+            const year = parseInt(yearInput.value);
+            const resultDiv = document.getElementById('result16');
+
+            // Clear previous results and handle invalid input
+            resultDiv.textContent = '';
+            if (isNaN(year) || year < 1) {
+                resultDiv.textContent = 'Please enter a valid year.';
+                resultDiv.style.color = 'red';
+                return;
+            }
+
+            let message = '';
+            let isLeap = false;
+
+            // Leap year logic:
+            // A year is a leap year if it is divisible by 4, 
+            // BUT not divisible by 100, UNLESS it is also divisible by 400.
+            if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+                isLeap = true;
+                message = `${year} is a leap year.`;
+                resultDiv.style.color = 'green';
+            } else {
+                message = `${year} is NOT a leap year.`;
+                resultDiv.style.color = 'black';
+            }
+            
+            resultDiv.textContent = message;
+        }
+    </script>
+    <h1>22.A list of numbers is given. Display them in ascending order.</h1>
+    <div class="container">
+    <h2>Sort Numbers</h2>
+    <p>Enter numbers separated by commas (e.g., 5, 2, 8, 1, 9):</p>
+    <input type="text" id="numberInput17" placeholder="Enter numbers...">
+    <button onclick="sortNumbers()">Sort Ascending</button>
+    <h3>Sorted List:</h3>
+    <div id="outputs"></div>
+</div>
+
+<script>
+    function sortNumbers() {
+        // Get the input value from the text box
+        const inputString = document.getElementById('numberInput17').value;
+
+        // Split the string by commas, trim whitespace, and convert to numbers
+        const numbers = inputString.split(',')
+                                    .map(item => parseInt(item.trim(), 10))
+                                    .filter(item => !isNaN(item)); // Filter out invalid numbers
+
+        // Sort the numbers in ascending order
+        // The comparison function (a, b) => a - b ensures numerical sorting
+        numbers.sort((a, b) => a - b);
+
+        // Get the output div element
+        const outputDiv = document.getElementById('outputs');
+
+        // Display the sorted numbers, joined back with commas
+        if (numbers.length > 0) {
+            outputDiv.textContent = numbers.join(', ');
+        } else {
+            outputDiv.textContent = "No valid numbers entered or list is empty.";
+        }
+    }
+</script>
+<h1>23.Two numbers are given. Swap their values without using extra variable.</h1>
+<h2>Swap Two Numbers</h2>
+
+    <div>
+        <label for="num1">Number 1:</label>
+        <input type="number" id="num1" value="10">
+    </div>
+    <br>
+    <div>
+        <label for="num2">Number 2:</label>
+        <input type="number" id="num2" value="20">
+    </div>
+    <br>
+    <div id="swaps"></div>
+    <button onclick="swapNumbers()">Swap Values</button>
+
+    <script>
+        function swapNumbers() {
+            // Get input elements
+            const input1 = document.getElementById('num1');
+            const input2 = document.getElementById('num2');
+            const swapElement = document.getElementById('swaps');
+
+
+            // Get current values and convert to numbers
+            let a = Number(input1.value);
+            let b = Number(input2.value);
+
+            // Swap using arithmetic operations
+            a = a + b; // a now holds the sum of original a and b
+            b = a - b; // b now holds the value of original a (sum - original b)
+            a = a - b; // a now holds the value of original b (sum - new b/original a)
+
+            // Update the input fields with the swapped values
+            input1.value = a;
+            input2.value = b;
+            message = "Values swapped! Number 1 is now ${a}, Number 2 is now ${b}.";
+            // Optional: Alert the user
+           // document.write(`Values swapped! Number 1 is now ${a}, Number 2 is now ${b}.`);
+        }
+    </script>
+    <h1>24.A string is given. Display its length without using built-in length.</h1>
+    <h2>Calculate String Length Manually</h2>
+
+    <label for="inputString">Enter a string:</label><br>
+    <input type="text" id="inputString" placeholder="Type here...">
+    <button onclick="calculateLength()">Calculate Length</button>
+
+    <div id="result17"></div>
+
+    <script>
+        function calculateLength() {
+            // Get the string from the input field
+            const str = document.getElementById('inputString').value;
+            let count = 0;
+
+            // Iterate through the string character by character
+            // The loop continues as long as a character at the current index exists
+            while (str[count] !== undefined) {
+                count++;
+            }
+
+            // Display the final count (length) in the result div
+            document.getElementById('result17').textContent = 'The length of the string is: ' + count;
+        }
+    </script>
+    <h1>25.A sentence is entered. Display total word count.</h1>
+    <h2>Word Counter</h2>
+    <textarea id="inputField" rows="4" cols="50" placeholder="Enter your sentence here..."></textarea>
+    <br>
+    <button onclick="countWords()">Count Words</button>
+    
+    <p>Total Word Count: <span id="displayCount">0</span></p>
+
+    <script>
+        function countWords() {
+            // Get the text from the textarea
+            const text = document.getElementById("inputField").value.trim();
+            
+            // If empty, count is 0. Otherwise, split by spaces/whitespace.
+            const wordCount = text === "" ? 0 : text.split(/\s+/).length;
+            
+            // Display the result
+            document.getElementById("displayCount").innerText = wordCount;
+        }
+    </script>
+    <h1>26.Two words are entered. Display whether they are anagrams.</h1>
+     <title>Anagram Checker</title>
+</head>
+<body>
+    <h2>Anagram Checker</h2>
+    <input type="text" id="word1" placeholder="Enter first word">
+    <input type="text" id="word2" placeholder="Enter second word">
+    <button onclick="checkAnagram()">Check</button>
+    <p id="result18"></p>
+
+    <script>
+        function checkAnagram() {
+            // Get values and convert to lowercase
+            const str1 = document.getElementById('word1').value.toLowerCase();
+            const str2 = document.getElementById('word2').value.toLowerCase();
+            const resultElement = document.getElementById('result18');
+
+            // Basic validation
+            if (!str1 || !str2) {
+                resultElement.innerText = "Please enter both words.";
+                 return;
+            }
+
+            // Sort characters and compare
+            const sorted1 = str1.split('').sort().join('');
+            const sorted2 = str2.split('').sort().join('');
+
+            if (sorted1 === sorted2) {
+                resultElement.innerText = "Result: These are anagrams!";
+                resultElement.style.color = "green";
+            } else {
+                resultElement.innerText = "Result: These are not anagrams.";
+                resultElement.style.color = "red";
+            }
+        }
+    </script>
+    <h1>27.A list of numbers is given. Display the second largest number.</h1>
+    <h2>Find the Second Largest Number</h2>
+    <p>Enter a list of numbers, separated by commas:</p>
+    
+    <input type="text" id="numberInput19" placeholder="e.g., 10, 5, 20, 8, 15">
+    <button onclick="displaySecondLargest()">Find Second Largest</button>
+    
+    <div id="result19"></div>
+
+    <script>
+        function displaySecondLargest() {
+            // Get the input value from the text box
+            const inputString = document.getElementById('numberInput19').value;
+            const resultDiv = document.getElementById('result19');
+            
+            // Clear previous results/errors
+            resultDiv.textContent = '';
+            resultDiv.classList.remove('error');
+
+            // Split the string by commas and trim whitespace
+            const numbersArray = inputString.split(',').map(num => num.trim());
+            
+            // Convert to actual numbers and filter out invalid entries (e.g., empty strings or non-numeric)
+            const validNumbers = numbersArray
+                .map(Number)
+                .filter(num => !isNaN(num));
+
+            // Check if there are enough unique numbers
+            if (validNumbers.length < 2) {
+                resultDiv.textContent = 'Please enter at least two distinct numbers.';
+                resultDiv.classList.add('error');
+                return;
+            }
+
+            // Remove duplicates using a Set and convert back to an array
+            const uniqueNumbers = [...new Set(validNumbers)];
+
+            // Check again for enough unique numbers after removing duplicates
+            if (uniqueNumbers.length < 2) {
+                resultDiv.textContent = 'Please enter at least two distinct numbers to find a second largest.';
+                resultDiv.classList.add('error');
+                return;
+            }
+            
+            // Sort the unique numbers in ascending order
+            uniqueNumbers.sort((a, b) => a - b);
+
+            // The second largest number is the second to last element in the sorted array
+            const secondLargest = uniqueNumbers[uniqueNumbers.length - 2];
+            
+            resultDiv.textContent = `The second largest number is: ${secondLargest}`;
+        }
+    </script>
+    <h1>28.Two arrays are given. Display merged array without duplicates.</h1>
+    <h2>Merged Array without Duplicates</h2>
+    
+    <p>Array 1: <span id="array1">[1, 2, 3, 4, 5]</span></p>
+    <p>Array 2: <span id="array2">[4, 5, 6, 7, 8]</span></p>
+
+    <button onclick="displayMergedArray()">Merge and Display</button>
+
+    <p>Merged Array (no duplicates):</p>
+    <div id="output5"></div>
+
+    <script>
+        function displayMergedArray() {
+            const arr1 = [1, 2, 3, 4, 5];
+            const arr2 = [4, 5, 6, 7, 8];
+
+            // 1. Concatenate the two arrays
+            const mergedArray = arr1.concat(arr2);
+            
+            // 2. Use a Set to remove duplicates
+            // A Set automatically stores only unique values
+            const uniqueArray = [...new Set(mergedArray)];
+
+            // 3. Display the result in the HTML
+            document.getElementById('output5').textContent = JSON.stringify(uniqueArray);
+        }
+    </script>
+    <h1>29.A list of values is given. Display count of each value.</h1>
+    <h1>Count Occurrences of Values</h1>
+
+    <p>Enter a list of values separated by commas (e.g., apple,banana,apple,orange,banana):</p>
+    
+    <input type="text" id="valueInput" placeholder="Enter values here">
+    <button onclick="countValues()">Count Values</button>
+
+    <h2>Results:</h2>
+    <div id="results1">
+        <!-- Results will be displayed here -->
+    </div>
+
+    <script>
+        function countValues() {
+            // Get the input value and trim whitespace
+            const inputString = document.getElementById('valueInput').value.trim();
+            const resultsDiv = document.getElementById('results1');
+
+            if (inputString === "") {
+                resultsDiv.textContent = "Please enter some values.";
+                return;
+            }
+
+            // Split the string by commas and trim whitespace from each item
+            const valuesList = inputString.split(',').map(item => item.trim());
+
+            // Use an object (map) to store the counts
+            const counts = {};
+
+            // Iterate over the list of values
+            valuesList.forEach(value => {
+                if (value !== "") { // Ensure empty strings from extra commas are ignored
+                    if (counts[value]) {
+                        counts[value]++;
+                    } else {
+                        counts[value] = 1;
+                    }
+                }
+            });
+
+            // Format the results for display
+            let output = "Value : Count\n------------------\n";
+            for (const value in counts) {
+                output += `${value} : ${counts[value]}\n`;
+            }
+
+            // Display the results in the results div
+            resultsDiv.textContent = output;
+        }
+    </script>
+    <h1>30.A word is entered. Display the first character that does not repeat.</h1>
+    <h2>Find the First Non-Repeating Character</h2>
+
+    <label for="wordInput20">Enter a word:</label><br>
+    <input type="text" id="wordInput20" placeholder="Type a word...">
+    <button onclick="findFirstNonRepeatingChar()">Find Character</button>
+
+    <div id="result20"></div>
+
+    <script>
+        function findFirstNonRepeatingChar() {
+            // Get the value from the input field
+            const word = document.getElementById('wordInput20').value.toLowerCase();
+            const resultElement = document.getElementById('result20');
+            resultElement.textContent = ''; // Clear previous result
+
+            if (word.length === 0) {
+                resultElement.textContent = "Please enter a word.";
+                return;
+            }
+
+            // Use a frequency map (object) to count character occurrences
+            const charCount = {};
+
+            // First pass: populate the frequency map
+            for (let i = 0; i < word.length; i++) {
+                const char = word[i];
+                charCount[char] = (charCount[char] || 0) + 1;
+            }
+
+            // Second pass: iterate through the string again to find the first character with a count of 1
+            for (let i = 0; i < word.length; i++) {
+                const char = word[i];
+                if (charCount[char] === 1) {
+                    resultElement.textContent = `The first non-repeating character is: "${char}"`;
+                    return; // Return the first one found
+                }
+            }
+
+            // If no non-repeating character is found
+            resultElement.textContent = "No non-repeating character found in the word.";
+        }
+    </script>
+    <h1>31.A nested array is provided. Display a flattened array (one level).</h1>
+    <h2>Original Nested Array:</h2>
+    <p id="originalArrayDisplay"></p>
+
+    <h2>Flattened Array:</h2>
+    <p id="flattenedArrayDisplay"></p>
+
+    <script>
+        // 1. Define the nested array
+        const nestedArray = [1, [2, 3], [4, [5, 6]], 7];
+
+        // 2. Flatten the array
+        // Use flat(Infinity) to handle deeply nested arrays
+        const flattenedArray = nestedArray.flat(Infinity);
+
+        // 3. Display the arrays in the HTML
+        document.getElementById('originalArrayDisplay').textContent = 
+            JSON.stringify(nestedArray);
+        document.getElementById('flattenedArrayDisplay').textContent = 
+            JSON.stringify(flattenedArray);
+    </script>
+    <h1>32.An array contains mixed values. Display only truthy values.</h1>
+    <h1>Truthy Values from Array</h1>
+    <div id="output6"></div>
+
+    <script>
+        // 1. The mixed array with truthy & falsy values
+const mixedArray = [0, 1, 'hello', '', null, 'false', undefined, NaN, true, false, [], {}, 42];
+
+// 2. Filter out only the truthy values
+// `Boolean` constructor acts as a function to test truthiness for each item
+const truthyValues = mixedArray.filter(Boolean);
+
+// 3. Get the HTML element to display results
+const outputDiv = document.getElementById('output6');
+
+// 4. Display the results
+// Option 1: Join into a string
+// outputDiv.innerHTML = 'Truthy values: ' + truthyValues.join(', ');
+
+// Option 2: Display as a list (more readable)
+let listHTML = '<ul>';
+truthyValues.forEach(value => {
+    // Special handling for objects and arrays to show content
+    let displayValue = (typeof value === 'object' && value !== null) ? JSON.stringify(value) : value;
+    listHTML += `<li>${displayValue}</li>`;
+});
+listHTML += '</ul>';
+outputDiv.innerHTML = listHTML;
+
+console.log("Original Array:", mixedArray);
+console.log("Truthy Values:", truthyValues);
+
+    </script>
+    <h1>33.Two arrays are given. Display common values.</h1>
+    <h1>Find Common Elements</h1>
+<p>Array 1: [1, 2, 3, 4, 5]</p>
+<p>Array 2: [3, 5, 7, 9, 1]</p>
+<button onclick="displayCommon()">Show Common Values</button>
+<div id="result21"></div>
+
+<script>
+function displayCommon() {
+  const arr1 = [1, 2, 3, 4, 5]; // Your first array
+  const arr2 = [3, 5, 7, 9, 1]; // Your second array
+
+  // Find common elements using filter and includes
+  const commonElements = arr1.filter(element => arr2.includes(element));
+
+  // Get the HTML element to display results
+  const resultDiv = document.getElementById('result21');
+
+  if (commonElements.length > 0) {
+    resultDiv.textContent = 'Common values: ' + commonElements.join(', '); // Display as comma-separated string
+  } else {
+    resultDiv.textContent = 'No common values found.';
+  }
+}
+</script>
+<h1>34.An array and a number K are given. Rotate the array by K positions.</h1>
+<div class="container">
+        <h2>Array Rotator</h2>
+        <div>
+            <label for="arrayInput">Enter array elements (comma-separated):</label>
+            <input type="text" id="arrayInput" value="1, 2, 3, 4, 5">
+        </div>
+        <div>
+            <label for="kInput">Enter K (number of positions):</label>
+            <input type="number" id="kInput" value="2" min="0">
+        </div>
+        <div>
+            <label for="directionSelect">Select rotation direction:</label>
+            <select id="directionSelect">
+                <option value="right">Right (Clockwise)</option>
+                <option value="left">Left (Counter-clockwise)</option>
+            </select>
+        </div>
+        <button onclick="rotateArray()">Rotate Array</button>
+        <div>
+            <label>Rotated Array:</label>
+            <div id="output10"></div>
+        </div>
+    </div>
+
+    <script>
+        function rotateArray() {
+            const arrayInput = document.getElementById('arrayInput').value;
+            const kInput = document.getElementById('kInput').value;
+            const direction = document.getElementById('directionSelect').value;
+            const outputDiv = document.getElementById('output10');
+
+            // 1. Parse the input array and K value
+            let arr = arrayInput.split(',').map(item => item.trim());
+            let k = parseInt(kInput, 10);
+            
+            // Handle non-numeric K or invalid array input
+            if (isNaN(k) || !arr.length) {
+                outputDiv.textContent = 'Invalid input.';
+                return;
+            }
+
+            // 2. Normalize K (handle K > array length)
+            k = k % arr.length;
+            if (k < 0) k += arr.length; // Handle negative K for flexibility
+
+            let rotatedArr;
+
+            // 3. Perform the rotation using slice and concat
+            if (direction === 'right') {
+                // Right rotation is equivalent to left rotation by (array.length - k)
+                const leftK = arr.length - k;
+                rotatedArr = [...arr.slice(leftK), ...arr.slice(0, leftK)];
+            } else {
+                // Left rotation: take first K elements and put them at the end
+                rotatedArr = [...arr.slice(k), ...arr.slice(0, k)];
+            }
+
+            // 4. Display the result
+            outputDiv.textContent = '[' + rotatedArr.join(', ') + ']';
+        }
+    </script>
+    <h1>35.A sentence is entered. Display the longest word.</h1>
+     <h2>Find the Longest Word</h2>
+    <input type="text" id="sentenceInput" placeholder="Enter a sentence">
+    <button onclick="findLongestWord()">Find</button>
+    
+    <p>Longest Word: <strong id="result22"></strong></p>
+
+    <script>
+        function findLongestWord() {
+            // Get the input value
+            const sentence = document.getElementById("sentenceInput").value;
+            
+            // Remove punctuation and split into an array of words
+            const words = sentence.replace(/[^a-zA-Z ]/g, "").split(" ");
+            
+            // Use reduce to find the longest string in the array
+            const longest = words.reduce((a, b) => a.length >= b.length ? a : b, "");
+             // Display the result
+            document.getElementById("result22").innerText = longest;
+        }
+    </script>
+    <h1>36.A sentence is given. Display it in title case format.</h1>
+    <h2>Title Case Converter</h2>
+
+    <label for="inputSentence">Enter a sentence:</label><br>
+    <input type="text" id="inputSentence" size="50"><br><br>
+    <button onclick="convertToTitleCase()">Convert</button>
+
+    <h3>Result:</h3>
+    <p id="outputAreas"></p>
+
+    <script>
+        function convertToTitleCase() {
+            // Get the value from the input field
+            const input = document.getElementById('inputSentence').value;
+            // Get the output area element
+            const outputArea = document.getElementById('outputAreas');
+
+            if (input.trim() === "") {
+                outputArea.textContent = "Please enter a sentence.";
+                return;
+            }
+
+            // Convert to title case:
+            // 1. Convert the entire string to lowercase.
+            // 2. Split the string into an array of words.
+            // 3. Map over the array, capitalizing the first letter of each word
+            //    and adding the rest of the word.
+            // 4. Join the words back into a single string with spaces.
+            const titleCaseSentence = input
+                .toLowerCase()
+                .split(' ')
+                .map(word => {
+                    if (word.length === 0) return word;
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                })
+                .join(' ');
+
+            // Display the result
+            outputArea.textContent = titleCaseSentence;
+        }
+    </script>
+    <h1>37.A string is entered. Display whether all characters are unique.</h1>
+    <h2>Check for Unique Characters</h2>
+
+    <label for="inputString5">Enter a string:</label><br>
+    <input type="text" id="inputString5" placeholder="Type here...">
+    <button onclick="checkUniqueness()">Check</button>
+
+    <div id="result23"></div>
+
+    <script>
+        function checkUniqueness() {
+            // Get the value from the input field
+            const str = document.getElementById('inputString5').value;
+            const resultDiv = document.getElementById('result23');
+
+            if (str.length === 0) {
+                resultDiv.textContent = 'Please enter a string.';
+                resultDiv.className = '';
+                return;
+            }
+
+            // Create a Set from the string characters
+            // Sets only store unique values, automatically handling duplicates
+            const charSet = new Set(str);
+
+            // Compare the size of the Set to the length of the original string
+            if (charSet.size === str.length) {
+                resultDiv.textContent = `"${str}" has all unique characters.`;
+                resultDiv.className = 'unique';
+            } else {
+                resultDiv.textContent = `"${str}" does NOT have all unique characters.`;
+                resultDiv.className = 'not-unique';
+            }
+        }
+    </script>
+    <h1>38.An array with mixed data types is given. Group values by type.</h1>
+    <h1>Group Array Elements by Data Type</h1>
+    <p><strong>Original Array:</strong> <code id="original-array-display"></code></p>
+
+    <div class="container">
+        <div class="group">
+            <h3>Strings</h3>
+            <ul id="string-list"></ul>
+        </div>
+        <div class="group">
+            <h3>Numbers</h3>
+            <ul id="number-list"></ul>
+        </div>
+        <div class="group">
+            <h3>Booleans</h3>
+            <ul id="boolean-list"></ul>
+        </div>
+        <div class="group">
+            <h3>Objects/Others</h3>
+            <ul id="object-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        // 1. Define the input array with mixed data types
+        const mixedArrays = [
+            'apple', 123, true, 'banana', 45.6, false, {name: 'object1'}, 
+            null, undefined, 'cherry', 99, ['array', 'in', 'object']
+        ];
+
+        // 2. Function to group the array elements
+        function groupByElementType(arr) {
+            const groups = {
+                string: [],
+                number: [],
+                boolean: [],
+                object: [], // Includes null (which is a special case of object typeof)
+                undefined: []
+            };
+
+            arr.forEach(item => {
+                const type = typeof item;
+                if (groups[type]) {
+                    groups[type].push(item);
+                } else {
+                    // Fallback for types not explicitly listed if needed
+                    groups.object.push(item); 
+                }
+            });
+
+            return groups;
+        }
+
+        // 3. Function to display results in the HTML
+        function displayGroups(groups) {
+            document.getElementById('original-array-display').textContent = JSON.stringify(mixedArrays);
+
+            const stringList = document.getElementById('string-list');
+            groups.string.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                stringList.appendChild(li);
+            });
+
+            const numberList = document.getElementById('number-list');
+            groups.number.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                numberList.appendChild(li);
+            });
+
+            const booleanList = document.getElementById('boolean-list');
+            groups.boolean.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                booleanList.appendChild(li);
+            });
+
+            // Handle objects, arrays, null, undefined in a combined list for simplicity
+            const objectList = document.getElementById('object-list');
+            [...groups.object, ...groups.undefined].forEach(item => {
+                const li = document.createElement('li');
+                // Use JSON.stringify for complex types for readable output
+                li.textContent = JSON.stringify(item); 
+                objectList.appendChild(li);
+            });
+        }
+
+        // 4. Run the functions when the script loads
+        const groupedResults = groupByElementType(mixedArrays);
+        displayGroups(groupedResults);
+
+    </script>
+    <h1>39.A number sequence is given with one missing number. Display the missing</h1>
+    <h1>Find the Missing Number</h1>
+<p>Enter numbers (e.g., 1,2,4,5):</p>
+<input type="text" id="numSequence" value="1,2,3,5,6">
+<button onclick="findMissing()">Find Missing</button>
+<div id="result24"></div>
+
+<script>
+function findMissing() {
+  const input = document.getElementById('numSequence').value;
+  const arr = input.split(',').map(num => parseInt(num.trim())).filter(n => !isNaN(n));
+  const n = arr.length + 1; // Total expected numbers
+
+  // Method 1: Using Summation (for consecutive numbers 1 to N)
+  const expectedSum = (n * (n + 1)) / 2;
+  const actualSum = arr.reduce((sum, current) => sum + current, 0);
+  const missingNumber = expectedSum - actualSum;
+
+  /*
+  // Method 2: Using XOR (more efficient)
+  let xor_all = 0;
+  for (let i = 1; i <= n; i++) {
+      xor_all ^= i;
+  }
+  let xor_arr = arr.reduce((xor, current) => xor ^ current, 0);
+  const missingNumber = xor_all ^ xor_arr;
+  */
+
+  document.getElementById('result24').innerText = `The missing number is: ${missingNumber}`;
+}
+</script>
+<h1>40.A string is given. Display frequency of each character.</h1>
+<h1>Character Frequency and Missing Characters</h1>
+    <p>Enter a string below to analyze:</p>
+    <textarea id="inputString24" placeholder="Type your string here..."></textarea><br>
+    <button onclick="analyzeString()">Analyze String</button>
+    
+    <h2>Results:</h2>
+    <div id="output24"></div>
+
+    <script>
+        function analyzeString() {
+            const input = document.getElementById('inputString24').value;
+            const outputDiv = document.getElementById('output24');
+            
+            // Use the standard English alphabet for comparison
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+            const frequencies = {};
+            const presentChars = new Set();
+            
+            // Process the input string to count characters and track presence
+            const processedInput = input.toLowerCase().replace(/[^a-z]/g, '');
+
+            for (const char of processedInput) {
+                frequencies[char] = (frequencies[char] || 0) + 1;
+                presentChars.add(char);
+            }
+
+            let frequencyOutput = "--- Character Frequencies ---\n";
+            let missingOutput = "--- Missing Characters (A-Z) ---\n";
+            const missingChars = [];
+
+            // Sort and display frequencies
+            const sortedChars = Array.from(presentChars).sort();
+            for (const char of sortedChars) {
+                frequencyOutput += `"${char}": ${frequencies[char]}\n`;
+            }
+
+            // Identify missing characters from the alphabet
+            for (const char of alphabet) {
+                if (!presentChars.has(char)) {
+                    missingChars.push(char);
+                }
+            }
+            
+            if (missingChars.length > 0) {
+                missingOutput += missingChars.join(', ');
+            } else {
+                missingOutput += "None! All characters (A-Z) are present.";
+            }
+
+            outputDiv.textContent = frequencyOutput + "\n" + missingOutput;
+        }
+    </script>
+    <h1>41.A list of words is given. Display all values in uppercase.</h1>
+     <h3>Original List (Uppercase):</h3>
+    <div id="uppercaseList"></div>
+
+    <h3>Missing Values:</h3>
+    <div id="missingValues"></div>
+
+    <script>
+        // 1. The given list of words/values
+        const givenList = ["a", "b", "d"];
+        
+        // 2. Define the full expected sequence for comparison
+        const fullSequence = ["a", "b", "c", "d", "e"];
+
+        // 3. Display given values in Uppercase
+        const upperCaseItems = givenList.map(word => word.toUpperCase());
+        document.getElementById("uppercaseList").innerText = upperCaseItems.join(", ");
+
+        // 4. Identify and display missing values
+        const missing = fullSequence.filter(item => !givenList.includes(item));
+        document.getElementById("missingValues").innerText = missing.join(", ").toUpperCase();
+        </script>
+        <h1>42.A numeric array is given. Display whether it is already sorted.</h1>
+        <h1>Array Analyzer</h1>
+<p>Enter a comma-separated list of numbers (e.g., 1,3,4,6):</p>
+<input type="text" id="numericArrayInputs" value="1,3,4,6,7,9">
+<button onclick="analyzeArray()">Analyze Array</button>
+
+<div id="results5" class="result"></div>
+
+<script>
+function analyzeArray() {
+    const input = document.getElementById('numericArrayInputs').value;
+    const strArray = input.split(',');
+    const numbers = strArray.map(s => parseInt(s.trim())).filter(n => !isNaN(n)); // Convert to numbers, remove non-numbers
+
+    let isSorted = true;
+    let missingNumbers = [];
+
+    if (numbers.length === 0) {
+        document.getElementById('results5').innerHTML = '<p>Please enter valid numbers.</p>';
+        return;
+    }
+
+    // Check if sorted & find missing numbers
+    for (let i = 1; i < numbers.length; i++) {
+        // Check for sorted (ascending)
+        if (numbers[i] < numbers[i-1]) {
+            isSorted = false;
+        }
+        // Check for missing numbers (gaps > 1)
+        if (numbers[i] - numbers[i-1] > 1) {
+            for (let j = numbers[i-1] + 1; j < numbers[i]; j++) {
+                missingNumbers.push(j);
+            }
+        }
+    }
+
+    let resultsHTML = '';
+
+    // Display Sorted Status
+    if (isSorted) {
+        resultsHTML += '<p class="sorted">The array is already sorted.</p>';
+    } else {
+        resultsHTML += '<p class="unsorted">The array is NOT sorted.</p>';
+    }
+
+    // Display Missing Numbers
+    if (missingNumbers.length > 0) {
+        resultsHTML += '<p>Missing numbers: ' + missingNumbers.join(', ') + '</p>';
+    } else {
+        resultsHTML += '<p>No numbers are missing in the sequence.</p>';
+    }
+
+    document.getElementById('results5').innerHTML = resultsHTML;
+}
+</script>
+<h1>43.An array and size value are given. Split array into smaller chunks.</h1>
+<h2>Split Array into Chunks</h2>
+    
+    <p>Original Array: <span id="originalArray">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]</span></p>
+    <p>Chunk Size: <span id="chunkSize">4</span></p>
+    
+    <div id="output25"></div>
+
+    <script>
+        // Function to split an array into chunks
+        function chunkArray(arr, size) {
+            const chunkedArray = [];
+            for (let i = 0; i < arr.length; i += size) {
+                chunkedArray.push(arr.slice(i, i + size));
+            }
+            return chunkedArray;
+        }
+
+        // Function to display the chunks and any "missing" elements
+        function displayChunksAndMissing(originalArr, size) {
+            const chunks = chunkArray(originalArr, size);
+            const outputDiv = document.getElementById('output25');
+            outputDiv.innerHTML = '<h3>Chunks:</h3>';
+
+            chunks.forEach((chunk, index) => {
+                const chunkDiv = document.createElement('div');
+                chunkDiv.classList.add('chunk');
+                let content = `<strong>Chunk ${index + 1}:</strong> [${chunk.join(', ')}]`;
+
+                // Check for "missing" elements in the last chunk
+                if (index === chunks.length - 1 && chunk.length < size) {
+                    const missingCount = size - chunk.length;
+                    const missingText = `<span class="missing"> (Missing ${missingCount} element${missingCount > 1 ? 's' : ''} to reach full size)</span>`;
+                    content += missingText;
+                }
+                
+                chunkDiv.innerHTML = content;
+                outputDiv.appendChild(chunkDiv);
+            });
+        }
+
+        // Initial data
+        const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+        const sizeValue = 4;
+
+        // Display initial information
+        document.getElementById('originalArray').textContent = JSON.stringify(myArray);
+        document.getElementById('chunkSize').textContent = sizeValue;
+
+        // Run the function
+        displayChunksAndMissing(myArray, sizeValue);
+
+    </script>
+    <h1>44.An array and a value are given. Remove that value from array.</h1>
+    <h1>Remove Value from Array</h1>
+
+    <p>Original Array: <strong id="originalArrayDisplay"></strong></p>
+    <label for="valueToRemoveInput">Value to Remove:</label>
+    <input type="text" id="valueToRemoveInput" placeholder="e.g., Apple">
+    <button onclick="removeValue()">Remove Value</button>
+
+    <h2>Result</h2>
+    <div class="output-box">
+        <p>Filtered Array: <strong id="filteredArrayDisplay"></strong></p>
+        <p>Missing (Removed) Value: <strong id="removedValueDisplay"></strong></p>
+    </div>
+
+    <script>
+        // 1. Define the initial array
+        let fruits = ['Apple', 'Banana', 'Orange', 'Apple', 'Mango'];
+        
+        // Function to display array content
+        function displayArrays() {
+            document.getElementById('originalArrayDisplay').textContent = JSON.stringify(fruits);
+            document.getElementById('filteredArrayDisplay').textContent = 'N/A (Click "Remove Value")';
+            document.getElementById('removedValueDisplay').textContent = 'N/A';
+        }
+
+        // 2. The core logic function
+        function removeValue() {
+            const valueToRemove = document.getElementById('valueToRemoveInput').value;
+
+            // Use the filter method to create a new array without the specified value(s)
+            const filteredFruits = fruits.filter(fruit => fruit !== valueToRemove);
+
+            // Determine if the value was actually present and thus "missing" from the new array
+            const valueWasRemoved = filteredFruits.length < fruits.length;
+            const missingValueText = valueWasRemoved ? valueToRemove : 'Not found in original array';
+
+            // 3. Display the results
+            document.getElementById('filteredArrayDisplay').textContent = JSON.stringify(filteredFruits);
+            document.getElementById('removedValueDisplay').textContent = missingValueText;
+            
+            // Note: The original 'fruits' array remains unchanged if you only use 'filter'.
+        }
+
+        // Initialize display on load
+        window.onload = displayArrays;
+    </script>
+    <h1>45.Multiple arrays are given. Display common elements from all.</h1>
+    <h1>Common & Missing Elements Finder</h1>
+    <div id="output26"></div>
+    <script>
+        // Define your multiple arrays
+const arrays = [
+    [1, 2, 3, 4, 5, 6],
+    [4, 5, 6, 7, 8, 9],
+    [3, 5, 6, 10, 11]
+];
+
+function findCommonAndMissing(arrs) {
+    if (arrs.length === 0) return { common: [], missing: [] };
+
+    // --- Find Common Elements ---
+    // Start with elements from the first array
+    let commonElements = arrs[0].filter(element => {
+        // Check if this element exists in *every* other array
+        return arrs.slice(1).every(otherArr => otherArr.includes(element));
+    });
+
+    // --- Find Missing (Unique to each array relative to others) ---
+    let missingElements = [];
+    // Get all unique numbers across all arrays for reference
+    let allNumbers = new Set();
+    arrs.forEach(arr => arr.forEach(num => allNumbers.add(num)));
+
+    // For each array, find elements not in the *common* set
+    arrs.forEach((currentArr, index) => {
+        currentArr.forEach(element => {
+            // If an element isn't in the common list AND hasn't been added as missing yet
+            if (!commonElements.includes(element) && !missingElements.includes(element)) {
+                missingElements.push(element);
+            }
+        });
+    });
+
+    return { common: commonElements, missing: missingElements };
+}
+
+function displayResults(common, missing) {
+    const outputDiv = document.getElementById('output26');
+    let html = '';
+
+    // Display Common Elements
+    html += '<div class="result-container"><h3>Common Elements (in ALL arrays)</h3>';
+    if (common.length > 0) {
+        html += '<ul>';
+        common.forEach(item => { html += `<li>${item}</li>`; });
+        html += '</ul>';
+    } else {
+        html += '<p>No common elements found.</p>';
+    }
+    html += '</div>';
+
+    // Display Missing Elements (Unique to at least one array)
+    html += '<div class="result-container"><h3>Missing/Unique Elements (in some, not all)</h3>';
+    if (missing.length > 0) {
+        html += '<ul>';
+        missing.forEach(item => { html += `<li>${item}</li>`; });
+        html += '</ul>';
+    } else {
+        html += '<p>No unique elements found across arrays.</p>';
+    }
+    html += '</div>';
+
+    outputDiv.innerHTML = html;
+}
+
+const results = findCommonAndMissing(arrays);
+displayResults(results.common, results.missing);
+
+    </script>
+    <h1>46.A range is provided. Display a random number within that range.</h1>
+    <h1>Random Number in Range</h1>
+
+<div>
+  <label for="minVal">Min:</label>
+  <input type="number" id="minVal" value="1">
+  <label for="maxVal">Max:</label>
+  <input type="number" id="maxVal" value="100">
+</div>
+
+<button onclick="generateRandom()">Generate Number</button>
+
+<div id="result27"></div>
+
+<script>
+function generateRandom() {
+  // Get min and max values from input fields
+  const min = parseInt(document.getElementById('minVal').value);
+  const max = parseInt(document.getElementById('maxVal').value);
+
+  // Check if inputs are valid numbers and min <= max
+  if (isNaN(min) || isNaN(max) || min > max) {
+    document.getElementById('result27').textContent = "Please enter valid numbers (Min <= Max)";
+    return;
+  }
+
+  // Generate random integer within the range (inclusive)
+  // Math.random() gives [0, 1)
+  // (max - min + 1) scales it to range size
+  // Math.floor() makes it an integer
+  // + min shifts it to the desired start
+  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  // Display the result
+  document.getElementById('result27').textContent = `Random Number: ${randomNumber}`;
+}
+</script>
+<h1>47.An email input is given. Display whether it is valid (logic only).</h1>
+<h1>Email Validation</h1>
+
+<label for="email">Enter Email:</label>
+<input type="email" id="emails" placeholder="example@domain.com">
+<button onclick="validateEmail()">Check</button>
+
+<p id="message"></p>
+
+<script>
+function validateEmail() {
+    const emailInput = document.getElementById('emails');
+    const messageElement = document.getElementById('message');
+    const email = emailInput.value.trim(); // Get value and remove whitespace
+
+    // Simple regex: checks for something@something.something (no spaces)
+    // For more robust validation, use /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+    if (email === "") {
+        messageElement.textContent = "Email is missing!";
+        messageElement.className = 'invalid';
+    } else if (emailRegex.test(email)) {
+        messageElement.textContent = "Valid Email!";
+        messageElement.className = 'valid';
+    } else {
+        messageElement.textContent = "Invalid Email Format!";
+        messageElement.className = 'invalid';
+    }
+}
+</script>
+<h1>48.A list of student marks is given. Display total and average.</h1>
+<h2>Enter Student Marks (comma-separated, e.g., 60,75,80)</h2>
+    <input type="text" id="marksInput" placeholder="Enter marks">
+    <button onclick="calculateResults()">Calculate</button>
+
+    <h3>Results:</h3>
+    <p><strong>Total Marks:</strong> <span id="totalMarks">0</span></p>
+    <p><strong>Average Marks:</strong> <span id="averageMarks">0</span></p>
+    <p><strong>Missing Marks:</strong> <span id="missingMarks">None</span></p>
+
+    <script>
+        function calculateResults() {
+            const inputString = document.getElementById('marksInput').value;
+            const marksArray = inputString.split(',').map(mark => parseInt(mark.trim())).filter(mark => !isNaN(mark));
+            
+            if (marksArray.length === 0) {
+                document.getElementById('totalMarks').textContent = 0;
+                document.getElementById('averageMarks').textContent = 0;
+                document.getElementById('missingMarks').textContent = 'None';
+                return;
+            }
+
+            // Calculate Total and Average
+            const total = marksArray.reduce((sum, current) => sum + current, 0);
+            const average = total / marksArray.length;
+
+            document.getElementById('totalMarks').textContent = total;
+            document.getElementById('averageMarks').textContent = average.toFixed(2);
+
+            // Find Missing Marks (assuming a potential sequence from 1 to 100)
+            const sortedMarks = marksArray.sort((a, b) => a - b);
+            const missing = [];
+            const minMark = 1; // Assuming minimum possible mark is 1
+            const maxMark = 100; // Assuming maximum possible mark is 100
+            const uniqueMarks = [...new Set(sortedMarks)]; // Handle duplicate entries
+
+            for (let i = minMark; i <= maxMark; i++) {
+                if (!uniqueMarks.includes(i)) {
+                    missing.push(i);
+                }
+            }
+
+            if (missing.length > 0) {
+                document.getElementById('missingMarks').textContent = missing.join(', ');
+            } else {
+                document.getElementById('missingMarks').textContent = 'None';
+            }
+        }
+    </script>
+<h1>49.A list of objects is given. Sort them based on a given property.</h1>
+<h1>Sort Objects by Property</h1>
+    <button onclick="sortList('name')">Sort by Name</button>
+    <button onclick="sortList('age')">Sort by Age</button>
+    <button onclick="sortList('city')">Sort by City</button>
+    
+    <table id="objectTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- Data will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // 1. The list of objects
+let people = [
+    { name: 'Ezhil', age: 30, city: 'New York' },
+    { name: 'Deepa', age: 25, city: 'Los Angeles' },
+    { name: 'Chithra', age: 35, city: 'Chicago' },
+    { name: 'Bhargavi', age: 28, city: 'New York' },
+    { name: 'Anandhi', age: 22, city: 'Los Angeles' }
+];
+
+// 2. Function to display the data in the table
+function displayList() {
+    const tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = ''; // Clear existing rows
+
+    people.forEach(person => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${person.name}</td>
+            <td>${person.age}</td>
+            <td>${person.city}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// 3. Function to sort the list by a given property
+function sortList(property) {
+    people.sort((a, b) => {
+        // Handle string properties (case-insensitive for better sorting)
+        if (typeof a[property] === 'string') {
+            const nameA = a[property].toUpperCase(); // ignore upper and lowercase
+            const nameB = b[property].toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            return 0; // names must be equal
+        }
+        
+        // Handle number properties
+        if (typeof a[property] === 'number') {
+            return a[property] - b[property];
+        }
+    });
+
+    // Re-display the sorted list
+    displayList();
+}
+
+// 4. Initial display when the page loads
+document.addEventListener('DOMContentLoaded', (event) => {
+    displayList();
+});
+
+    </script>
+    <h1>50.An array is given. Create a copy without sharing reference.</h1>
+    <h1>Array Copy Demonstration</h1>
+    <p>Original Array: <strong id="originalArrays"></strong></p>
+    <p>Copied Array: <strong id="copiedArrays"></strong></p>
+    <p>After modification (Original): <strong id="originalAfterModification"></strong></p>
+    <p>After modification (Copied): <strong id="copiedAfterModification"></strong></p>
+
+    <script>
+        // 1. Define the original array
+        const originalArray = [10, 20, 30, 40];
+
+        // 2. Create a shallow copy using the spread syntax (...)
+        const copiedArray = [...originalArray];
+        // Alternative method: const copiedArray = Array.from(originalArray);
+
+        // 3. Display initial arrays
+        document.getElementById('originalArrays').textContent = originalArray;
+        document.getElementById('copiedArrays').textContent = copiedArray;
+
+        // 4. Modify one of the arrays to prove they don't share reference
+        copiedArray.push(50);
+        originalArray[0] = 999;
+
+        // 5. Display arrays after modification
+        document.getElementById('originalAfterModification').textContent = originalArray;
+        document.getElementById('copiedAfterModification').textContent = copiedArray;
+
+        // 6. Verify they are different objects
+        console.log('Do they share the same reference? (Should be false):', originalArray === copiedArray);
+    </script>
+
+</body>
+</html>
